@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67cd36ce0f75234b9c308bae7b2e739, type: 3}
+  m_Name: Experiement
+  m_EditorClassIdentifier: 
+  useFalloffMap: 1
+  falloffCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: -0.93120515
+      outSlope: -0.93120515
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.098456696
+    - serializedVersion: 3
+      time: 0.7339839
+      value: 0.0573102
+      inSlope: -0.3416976
+      outSlope: -0.3416976
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14582166
+      outWeight: 0.19970782
+    - serializedVersion: 3
+      time: 1
+      value: -0.1
+      inSlope: -0.02065239
+      outSlope: -0.02065239
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.59726834
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  finalAmplitude: 0.3
+  noiseProfiles:
+  - active: 0
+    noiseType: 1
+    blendMode: 0
+    a_noiseScale: 150
+    a_amplitude: 1
+    a_frequency: 0.7
+    lacunarity: 0.5
+    persistence: 3
+    displacement: 5
+    octaves: 6
+    quality: 2
+  - active: 1
+    noiseType: 0
+    blendMode: 0
+    a_noiseScale: 150
+    a_amplitude: 0.41
+    a_frequency: 1.3
+    lacunarity: 0.5
+    persistence: 3
+    displacement: 5
+    octaves: 6
+    quality: 2
