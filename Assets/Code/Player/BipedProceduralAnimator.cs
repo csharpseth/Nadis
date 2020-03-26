@@ -11,8 +11,9 @@ public class BipedProceduralAnimator : MonoBehaviour
     public Transform leftFoot;
 
     public Vector3 nextRight;
-
+    private Vector3 defaultRight;
     public Vector3 nextLeft;
+    private Vector3 defaultLeft;
 
 
     public LerpData rightFootLerp;
@@ -21,95 +22,147 @@ public class BipedProceduralAnimator : MonoBehaviour
     public float maxDistBeforeNextStep = 1f;
 
     public bool right = true;
+    public bool left = false;
 
-    public bool rightLerping = false;
+    private Vector3 lastPos;
+    private MovementController moveController;
+    public bool moving = false;
 
     private void Awake()
     {
         nextRight = rightFoot.position;
-        nextLeft = leftFoot.position + transform.forward * stepSize;
+        nextLeft = leftFoot.position;
+
+        defaultRight = rightFoot.localPosition;
+        defaultLeft = leftFoot.localPosition;
+
         rightFootLerp = null;
         leftFootLerp = null;
+
+        moveController = GetComponent<MovementController>();
 
     }
 
     private void Update()
     {
-        float rightDist = (transform.position - nextRight).sqrMagnitude;
-        float leftDist = (transform.position - leftFoot.position).sqrMagnitude;
-        float sqrDist = (maxDistBeforeNextStep * maxDistBeforeNextStep);
-
-        //Debug.LogFormat("DistToNext:{0}", Vector3.Distance(rightFoot.localPosition, nextRightLocal));
-        //Debug.LogFormat("Done:{0}",rightFootLerp.done);
-
-        if (rightFootLerp == null || rightDist >= sqrDist || rightFootLerp.done == false)
+        if(moving)
         {
-            
+            float rightDist = (transform.position - rightFoot.position).sqrMagnitude;
+            float leftDist = (transform.position - leftFoot.position).sqrMagnitude;
+            float sqrDist = (maxDistBeforeNextStep * maxDistBeforeNextStep);
 
-            if(rightFootLerp == null)
-            {
-                rightFootLerp = new LerpData();
-                rightFootLerp.done = true;
-            }else
-            {
-                rightFootLerp.done = false;
-                rightFoot.localPosition = rightFootLerp.DoLerpFrom(rightFoot.localPosition);
-            }
-            
-            if(rightFootLerp.done == true)
-            {
-                Vector3 origin = transform.position + (transform.forward * stepSize) + transform.up;
+            //Debug.LogFormat("DistToNext:{0}", Vector3.Distance(rightFoot.localPosition, nextRightLocal));
+            //Debug.LogFormat("Done:{0}",rightFootLerp.done);
 
-                RaycastHit rightHit;
-                Physics.Raycast(origin, -transform.up, out rightHit, 1.5f);
-                if (rightHit.transform != null)
+            if (right == true)
+            {
+                if (rightFootLerp == null || rightDist >= sqrDist || rightFootLerp.done == false)
                 {
-                    nextRight = rightHit.point;
-                    rightFootLerp = new LerpData(transform.InverseTransformVector(nextRight), rightFoot.localPosition, footMoveSpeed, 0.8f, stepSize);
+                    if (rightFootLerp == null)
+                    {
+                        rightFootLerp = new LerpData();
+                        rightFootLerp.done = true;
+                    }
+                    else
+                    {
+                        rightFootLerp.done = false;
+                        rightFoot.localPosition = rightFootLerp.DoLerpFrom(rightFoot.localPosition);
+                    }
+
+                    if (rightFootLerp.done == true)
+                    {
+                        Vector3 origin = transform.position + (transform.forward * stepSize) + transform.up;
+
+                        RaycastHit rightHit;
+                        Physics.Raycast(origin, -transform.up, out rightHit, 1.5f);
+                        if (rightHit.transform != null)
+                        {
+                            nextRight = rightHit.point;
+                            rightFootLerp = new LerpData(WorldToLocal(nextRight, transform), rightFoot.localPosition, footMoveSpeed, 0.8f, stepSize);
+                            right = false;
+                            left = true;
+                        }
+                    }
                 }
             }
-        }else
-        {
-            rightFoot.position = nextRight;
-        }
 
-        /*if (leftDist >= sqrDist || leftFootLerp != null)
-        {
-            Vector3 origin = transform.position + (transform.forward * stepSize) + transform.up;
-
-            RaycastHit leftHit;
-            Physics.Raycast(origin, -transform.up, out leftHit, 1.5f);
-            if (leftHit.transform != null)
+            if (left == true)
             {
-                nextLeft = leftHit.point;
+                if (leftFootLerp == null || leftDist >= sqrDist || leftFootLerp.done == false)
+                {
+                    if (leftFootLerp == null)
+                    {
+                        leftFootLerp = new LerpData();
+                        leftFootLerp.done = true;
+                    }
+                    else
+                    {
+                        leftFootLerp.done = false;
+                        leftFoot.localPosition = leftFootLerp.DoLerpFrom(leftFoot.localPosition);
+                    }
+
+                    if (leftFootLerp.done == true)
+                    {
+                        Vector3 origin = transform.position + (transform.forward * stepSize) + transform.up;
+
+                        RaycastHit leftHit;
+                        Physics.Raycast(origin, -transform.up, out leftHit, 1.5f);
+                        if (leftHit.transform != null)
+                        {
+                            nextLeft = leftHit.point;
+                            leftFootLerp = new LerpData(WorldToLocal(nextLeft, transform), leftFoot.localPosition, footMoveSpeed, 0.8f, stepSize);
+                            left = false;
+                            right = true;
+                        }
+                    }
+                }
             }
 
-            if (leftFootLerp == null)
-                leftFootLerp = new LerpData(leftFoot.InverseTransformVector(nextLeft), leftFoot.localPosition, footMoveSpeed, 0.8f, stepSize);
-
-            leftFoot.localPosition = leftFootLerp.DoLerpFrom(leftFoot.localPosition);
-
-            if (leftFootLerp.done)
+            if (right == false)
             {
-                leftFootLerp = null;
-                right = true;
+                rightFoot.position = nextRight;
+            }
+
+            if (left == false)
+            {
+                leftFoot.position = nextLeft;
             }
         }
+        else
+        {
+            rightFoot.localPosition = defaultRight;
+            leftFoot.localPosition = defaultLeft;
+        }
+
+        //DebugUIController.ins.AppendNewLine("Right Done:" + rightFootLerp.done + "RightLerp:" + rightFootLerp + "Dist Percent:" + (rightDist / sqrDist) + "\n");
+        //DebugUIController.ins.AppendNewLine("Left Done:" + leftFootLerp.done + "LeftLerp:" + leftFootLerp + "Dist Percent:" + (leftDist / sqrDist) + "\n");
+
         
-        if(leftDist < sqrDist && leftFootLerp == null)
-        {
-            leftFoot.position = nextLeft;
-        }
-        if(right == true)
-        {
-            leftFoot.position = nextLeft;
-        }*/
 
+    }
+
+    private Vector3 WorldToLocal(Vector3 world, Transform t)
+    {
+        Transform temp = new GameObject("temp").transform;
+        temp.SetParent(t);
+        temp.position = world;
+        Vector3 local = temp.localPosition;
+
+        Destroy(temp.gameObject);
+
+        return local;
     }
 
     private void LateUpdate()
     {
         //rightRayWheel.Rotate(Vector3.right, Time.time * rayWheelSpeed, Space.Self);
+        if(moveController.MoveState != PlayerMoveState.None)
+        {
+            moving = true;
+        }else
+        {
+            moving = false;
+        }
     }
 
     private void OnDrawGizmos()
@@ -124,7 +177,9 @@ public class BipedProceduralAnimator : MonoBehaviour
         }
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(nextRight, 0.3f);
+        Gizmos.DrawWireSphere(nextRight, 0.1f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(nextLeft, 0.1f);
     }
 }
 
@@ -170,7 +225,7 @@ public class LerpData
             done = true;
         }
 
-        /*if (midReached == false)
+        if (midReached == false)
         {
             Vector3 newPos = Vector3.Lerp(target, Mid, speed * Time.deltaTime);
 
@@ -180,8 +235,8 @@ public class LerpData
             }
 
             return newPos;
-        }*/
-        return Vector3.Lerp(target, destination, 1f);
+        }
+        return Vector3.Lerp(target, destination, speed * Time.deltaTime);
 
     }
 

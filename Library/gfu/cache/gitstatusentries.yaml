@@ -1,0 +1,3395 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 995438498, guid: 68c7e4565cde54155bb78d8e935f1ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 6
+  lastUpdatedAtString: 2020-03-25T22:22:24.784-05:00
+  initializedAtString: 2020-03-25T19:21:41.691-05:00
+  entries:
+  - path: .vs\TimeDrivenSurvival_New\v15\.suo
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\.vs\TimeDrivenSurvival_New\v15\.suo
+    projectPath: .vs\TimeDrivenSurvival_New\v15\.suo
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
+    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
+    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
+    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assembly-CSharp.csproj
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assembly-CSharp.csproj
+    projectPath: Assembly-CSharp.csproj
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assembly-CSharp-Editor.csproj
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assembly-CSharp-Editor.csproj
+    projectPath: Assembly-CSharp-Editor.csproj
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assembly-CSharp-Editor-firstpass.csproj
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assembly-CSharp-Editor-firstpass.csproj
+    projectPath: Assembly-CSharp-Editor-firstpass.csproj
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Code\DebugUIController.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Code\DebugUIController.cs
+    projectPath: Assets\Code\DebugUIController.cs
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Code\DebugUIController.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Code\DebugUIController.cs.meta
+    projectPath: Assets\Code\DebugUIController.cs.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Code\Player\BipedProceduralAnimator.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Code\Player\BipedProceduralAnimator.cs
+    projectPath: Assets\Code\Player\BipedProceduralAnimator.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\FastIK\Materials.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials.meta
+    projectPath: Assets\FastIK\Materials.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Blue.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Blue.mat
+    projectPath: Assets\FastIK\Materials\Blue.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Blue.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Blue.mat.meta
+    projectPath: Assets\FastIK\Materials\Blue.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Green.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Green.mat
+    projectPath: Assets\FastIK\Materials\Green.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Green.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Green.mat.meta
+    projectPath: Assets\FastIK\Materials\Green.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Man.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Man.mat
+    projectPath: Assets\FastIK\Materials\Man.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Man.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Man.mat.meta
+    projectPath: Assets\FastIK\Materials\Man.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Red.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Red.mat
+    projectPath: Assets\FastIK\Materials\Red.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Red.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Red.mat.meta
+    projectPath: Assets\FastIK\Materials\Red.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\White.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\White.mat
+    projectPath: Assets\FastIK\Materials\White.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\White.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\White.mat.meta
+    projectPath: Assets\FastIK\Materials\White.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Yellow.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Yellow.mat
+    projectPath: Assets\FastIK\Materials\Yellow.mat
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Materials\Yellow.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Materials\Yellow.mat.meta
+    projectPath: Assets\FastIK\Materials\Yellow.mat.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models.meta
+    projectPath: Assets\FastIK\Models.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure.meta
+    projectPath: Assets\FastIK\Models\Figure.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Man.controller
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Man.controller
+    projectPath: Assets\FastIK\Models\Figure\Man.controller
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Man.controller.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Man.controller.meta
+    projectPath: Assets\FastIK\Models\Figure\Man.controller.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Walk.anim
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Walk.anim
+    projectPath: Assets\FastIK\Models\Figure\Walk.anim
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Walk.anim.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Walk.anim.meta
+    projectPath: Assets\FastIK\Models\Figure\Walk.anim.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Wood.controller
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Wood.controller
+    projectPath: Assets\FastIK\Models\Figure\Wood.controller
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Wood.controller.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Wood.controller.meta
+    projectPath: Assets\FastIK\Models\Figure\Wood.controller.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Wood.fbx
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Wood.fbx
+    projectPath: Assets\FastIK\Models\Figure\Wood.fbx
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\Figure\Wood.fbx.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\Figure\Wood.fbx.meta
+    projectPath: Assets\FastIK\Models\Figure\Wood.fbx.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\tentacle.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\tentacle.meta
+    projectPath: Assets\FastIK\Models\tentacle.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\tentacle\tentacle.fbx
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\tentacle\tentacle.fbx
+    projectPath: Assets\FastIK\Models\tentacle\tentacle.fbx
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Models\tentacle\tentacle.fbx.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Models\tentacle\tentacle.fbx.meta
+    projectPath: Assets\FastIK\Models\tentacle\tentacle.fbx.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scenes.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scenes.meta
+    projectPath: Assets\FastIK\Scenes.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scenes\FastIKSample.unity
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scenes\FastIKSample.unity
+    projectPath: Assets\FastIK\Scenes\FastIKSample.unity
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scenes\FastIKSample.unity.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scenes\FastIKSample.unity.meta
+    projectPath: Assets\FastIK\Scenes\FastIKSample.unity.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample.meta
+    projectPath: Assets\FastIK\Scripts\Sample.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs
+    projectPath: Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs.meta
+    projectPath: Assets\FastIK\Scripts\Sample\SampleProcedualAnimation.cs.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleRotator.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleRotator.cs
+    projectPath: Assets\FastIK\Scripts\Sample\SampleRotator.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleRotator.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleRotator.cs.meta
+    projectPath: Assets\FastIK\Scripts\Sample\SampleRotator.cs.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleSinMover.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleSinMover.cs
+    projectPath: Assets\FastIK\Scripts\Sample\SampleSinMover.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\FastIK\Scripts\Sample\SampleSinMover.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\FastIK\Scripts\Sample\SampleSinMover.cs.meta
+    projectPath: Assets\FastIK\Scripts\Sample\SampleSinMover.cs.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\Plugins\GitHub.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub.meta
+    projectPath: Assets\Plugins\GitHub.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor.meta
+    projectPath: Assets\Plugins\GitHub\Editor.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+    projectPath: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\AsyncBridge.Net35.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\big-logo@2x.png
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\big-logo@2x.png
+    projectPath: Assets\Plugins\GitHub\Editor\big-logo@2x.png
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+    projectPath: Assets\Plugins\GitHub\Editor\big-logo@2x.png.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\credits.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\credits.txt
+    projectPath: Assets\Plugins\GitHub\Editor\credits.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\credits.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\credits.txt.meta
+    projectPath: Assets\Plugins\GitHub\Editor\credits.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\eula.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\eula.txt
+    projectPath: Assets\Plugins\GitHub\Editor\eula.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\eula.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\eula.txt.meta
+    projectPath: Assets\Plugins\GitHub\Editor\eula.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+    projectPath: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+    projectPath: Assets\Plugins\GitHub\Editor\ExtensionLoader.cs.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.45.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Api.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Api.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Api.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Logging.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.45.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.Unity.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.dll.mdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb.meta
+    projectPath: Assets\Plugins\GitHub\Editor\GitHub.UnityShim.pdb.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\libsfw.bundle
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\libsfw.bundle
+    projectPath: Assets\Plugins\GitHub\Editor\libsfw.bundle
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+    projectPath: Assets\Plugins\GitHub\Editor\libsfw.bundle.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\libsfw.so
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\libsfw.so
+    projectPath: Assets\Plugins\GitHub\Editor\libsfw.so
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\libsfw.so.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\libsfw.so.meta
+    projectPath: Assets\Plugins\GitHub\Editor\libsfw.so.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+    projectPath: Assets\Plugins\GitHub\Editor\Mono.Posix.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\Mono.Posix.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+    projectPath: Assets\Plugins\GitHub\Editor\QuickGuide.pdf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+    projectPath: Assets\Plugins\GitHub\Editor\QuickGuide.pdf.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+    projectPath: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\ReadOnlyCollectionsInterfaces.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\sfw.net.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\sfw.net.dll
+    projectPath: Assets\Plugins\GitHub\Editor\sfw.net.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\sfw.net.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\System.Threading.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\System.Threading.dll
+    projectPath: Assets\Plugins\GitHub\Editor\System.Threading.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\System.Threading.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs
+    projectPath: Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs.meta
+    projectPath: Assets\Plugins\GitHub\Editor\UnityAPIWrapper.cs.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x64.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x64.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x64.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+    projectPath: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x64\pthreadVC2.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+    projectPath: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x64\sfw_x64.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x86.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x86.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x86.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+    projectPath: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x86\pthreadVC2.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+    projectPath: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+    projectPath: Assets\Plugins\GitHub\Editor\x86\sfw_x86.dll.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\Scenes\Player Testing.unity
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\Scenes\Player Testing.unity
+    projectPath: Assets\Scenes\Player Testing.unity
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\TextMesh Pro.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro.meta
+    projectPath: Assets\TextMesh Pro.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Documentation.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Documentation.meta
+    projectPath: Assets\TextMesh Pro\Documentation.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Documentation\TextMesh Pro User Guide 2016.pdf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Documentation\TextMesh
+      Pro User Guide 2016.pdf
+    projectPath: Assets\TextMesh Pro\Documentation\TextMesh Pro User Guide 2016.pdf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Documentation\TextMesh Pro User Guide 2016.pdf.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Documentation\TextMesh
+      Pro User Guide 2016.pdf.meta
+    projectPath: Assets\TextMesh Pro\Documentation\TextMesh Pro User Guide 2016.pdf.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Fonts.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Fonts.meta
+    projectPath: Assets\TextMesh Pro\Fonts.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Fonts\LiberationSans
+      - OFL.txt
+    projectPath: Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Fonts\LiberationSans
+      - OFL.txt.meta
+    projectPath: Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Fonts\LiberationSans.ttf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Fonts\LiberationSans.ttf
+    projectPath: Assets\TextMesh Pro\Fonts\LiberationSans.ttf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Fonts\LiberationSans.ttf.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Fonts\LiberationSans.ttf.meta
+    projectPath: Assets\TextMesh Pro\Fonts\LiberationSans.ttf.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources.meta
+    projectPath: Assets\TextMesh Pro\Resources.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials.meta
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Drop
+      Shadow.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Drop Shadow.mat
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Drop Shadow.mat
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Drop
+      Shadow.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Drop Shadow.mat.meta
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Drop Shadow.mat.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Fallback.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Fallback.asset
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Fallback.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Fallback.asset.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Fallback.asset.meta
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Fallback.asset.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Outline.mat
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Outline.mat
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Outline.mat
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF - Outline.mat.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF - Outline.mat.meta
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+      - Outline.mat.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF.asset
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Fonts
+      & Materials\LiberationSans SDF.asset.meta
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\LineBreaking
+      Following Characters.txt
+    projectPath: Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\LineBreaking
+      Following Characters.txt.meta
+    projectPath: Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\LineBreaking
+      Leading Characters.txt
+    projectPath: Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\LineBreaking
+      Leading Characters.txt.meta
+    projectPath: Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF
+      Overlay.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF
+      Overlay.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile
+      Masking.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile
+      Masking.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile
+      Overlay.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile
+      Overlay.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc.meta
+    projectPath: Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Sprite Assets.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Sprite
+      Assets.meta
+    projectPath: Assets\TextMesh Pro\Resources\Sprite Assets.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Sprite Assets\EmojiOne.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Sprite
+      Assets\EmojiOne.asset
+    projectPath: Assets\TextMesh Pro\Resources\Sprite Assets\EmojiOne.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Sprite Assets\EmojiOne.asset.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Sprite
+      Assets\EmojiOne.asset.meta
+    projectPath: Assets\TextMesh Pro\Resources\Sprite Assets\EmojiOne.asset.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Style Sheets.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Style
+      Sheets.meta
+    projectPath: Assets\TextMesh Pro\Resources\Style Sheets.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Style Sheets\Default Style Sheet.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Style
+      Sheets\Default Style Sheet.asset
+    projectPath: Assets\TextMesh Pro\Resources\Style Sheets\Default Style Sheet.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\Style Sheets\Default Style Sheet.asset.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\Style
+      Sheets\Default Style Sheet.asset.meta
+    projectPath: Assets\TextMesh Pro\Resources\Style Sheets\Default Style Sheet.asset.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\TMP Settings.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\TMP
+      Settings.asset
+    projectPath: Assets\TextMesh Pro\Resources\TMP Settings.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Resources\TMP Settings.asset.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Resources\TMP
+      Settings.asset.meta
+    projectPath: Assets\TextMesh Pro\Resources\TMP Settings.asset.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites.meta
+    projectPath: Assets\TextMesh Pro\Sprites.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne
+      Attribution.txt
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne
+      Attribution.txt.meta
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne.json
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne.json
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne.json
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne.json.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne.json.meta
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne.json.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne.png
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne.png
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne.png
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TextMesh Pro\Sprites\EmojiOne.png.meta
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Assets\TextMesh Pro\Sprites\EmojiOne.png.meta
+    projectPath: Assets\TextMesh Pro\Sprites\EmojiOne.png.meta
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\APIUpdater\project-dependencies.graph
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\APIUpdater\project-dependencies.graph
+    projectPath: Library\APIUpdater\project-dependencies.graph
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ArtifactDB
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ArtifactDB
+    projectPath: Library\ArtifactDB
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\Artifacts\09\0923e8a25769e8a6815b139d24cd9b08
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\09\0923e8a25769e8a6815b139d24cd9b08
+    projectPath: Library\Artifacts\09\0923e8a25769e8a6815b139d24cd9b08
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\0a\0a44f7e6a4ac58817de109b3ab52d2e1
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\0a\0a44f7e6a4ac58817de109b3ab52d2e1
+    projectPath: Library\Artifacts\0a\0a44f7e6a4ac58817de109b3ab52d2e1
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\0a\0afcabdd66278399a353f1dd85c2f49d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\0a\0afcabdd66278399a353f1dd85c2f49d
+    projectPath: Library\Artifacts\0a\0afcabdd66278399a353f1dd85c2f49d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\0f\0fe1a013307a87973e022d749d8066fe
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\0f\0fe1a013307a87973e022d749d8066fe
+    projectPath: Library\Artifacts\0f\0fe1a013307a87973e022d749d8066fe
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\10\1037a225fb14aa1b549c2da2d9a2eefb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\10\1037a225fb14aa1b549c2da2d9a2eefb
+    projectPath: Library\Artifacts\10\1037a225fb14aa1b549c2da2d9a2eefb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\17\1716117f3ae5e2f29c4738bc59450ceb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\17\1716117f3ae5e2f29c4738bc59450ceb
+    projectPath: Library\Artifacts\17\1716117f3ae5e2f29c4738bc59450ceb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\19\192c7b43b5fab360a23dba9ca9b7aaaf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\19\192c7b43b5fab360a23dba9ca9b7aaaf
+    projectPath: Library\Artifacts\19\192c7b43b5fab360a23dba9ca9b7aaaf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\1e\1e5cd9290addcc9628d5661096dbdcfb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\1e\1e5cd9290addcc9628d5661096dbdcfb
+    projectPath: Library\Artifacts\1e\1e5cd9290addcc9628d5661096dbdcfb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\20\20bca72f75830b2546a5c31396dcb8b2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\20\20bca72f75830b2546a5c31396dcb8b2
+    projectPath: Library\Artifacts\20\20bca72f75830b2546a5c31396dcb8b2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\21\21cf47b558ffd15b65de3dacfda3deca
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\21\21cf47b558ffd15b65de3dacfda3deca
+    projectPath: Library\Artifacts\21\21cf47b558ffd15b65de3dacfda3deca
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\23\239ad7e9dcda1fdc2b0b484066bb0a74
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\23\239ad7e9dcda1fdc2b0b484066bb0a74
+    projectPath: Library\Artifacts\23\239ad7e9dcda1fdc2b0b484066bb0a74
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\25\2512d2517160b6327de56be1683b5a82
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\25\2512d2517160b6327de56be1683b5a82
+    projectPath: Library\Artifacts\25\2512d2517160b6327de56be1683b5a82
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\26\268ea19b2866376706e893ae4acd1e1b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\26\268ea19b2866376706e893ae4acd1e1b
+    projectPath: Library\Artifacts\26\268ea19b2866376706e893ae4acd1e1b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\27\27404143801616d84802b463f67f6dcb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\27\27404143801616d84802b463f67f6dcb
+    projectPath: Library\Artifacts\27\27404143801616d84802b463f67f6dcb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\2c\2cb3035a4777380efbeb6ad1a380350c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\2c\2cb3035a4777380efbeb6ad1a380350c
+    projectPath: Library\Artifacts\2c\2cb3035a4777380efbeb6ad1a380350c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\31\312bb0a51626264731e09f4a7bab2f05
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\31\312bb0a51626264731e09f4a7bab2f05
+    projectPath: Library\Artifacts\31\312bb0a51626264731e09f4a7bab2f05
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\31\312d9623bd4bca4212602f5695f5ba6f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\31\312d9623bd4bca4212602f5695f5ba6f
+    projectPath: Library\Artifacts\31\312d9623bd4bca4212602f5695f5ba6f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\31\31c955c876212ad95b952a336a824cd1
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\31\31c955c876212ad95b952a336a824cd1
+    projectPath: Library\Artifacts\31\31c955c876212ad95b952a336a824cd1
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\32\32e39fcf08eab12586e195d3d050f8d5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\32\32e39fcf08eab12586e195d3d050f8d5
+    projectPath: Library\Artifacts\32\32e39fcf08eab12586e195d3d050f8d5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\36\363ec5dd21c1042027107065215a5d7d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\36\363ec5dd21c1042027107065215a5d7d
+    projectPath: Library\Artifacts\36\363ec5dd21c1042027107065215a5d7d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\38\3812cf3f65e9937a6a00fd3ca955c5cf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\38\3812cf3f65e9937a6a00fd3ca955c5cf
+    projectPath: Library\Artifacts\38\3812cf3f65e9937a6a00fd3ca955c5cf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\38\386ee9506972879fbdf13c2a49d49a2f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\38\386ee9506972879fbdf13c2a49d49a2f
+    projectPath: Library\Artifacts\38\386ee9506972879fbdf13c2a49d49a2f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\38\387d2a15d3368a272ae2c51b3763a884
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\38\387d2a15d3368a272ae2c51b3763a884
+    projectPath: Library\Artifacts\38\387d2a15d3368a272ae2c51b3763a884
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\38\38e19666a4aaecc66a39980411b06c3f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\38\38e19666a4aaecc66a39980411b06c3f
+    projectPath: Library\Artifacts\38\38e19666a4aaecc66a39980411b06c3f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\3b\3b9f0deef50673a662b3dabf1aeda305
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\3b\3b9f0deef50673a662b3dabf1aeda305
+    projectPath: Library\Artifacts\3b\3b9f0deef50673a662b3dabf1aeda305
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\3b\3bac63f3873f917cac71d801d1190f81
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\3b\3bac63f3873f917cac71d801d1190f81
+    projectPath: Library\Artifacts\3b\3bac63f3873f917cac71d801d1190f81
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\3e\3ebf921dd82afe2188d35478cf43f809
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\3e\3ebf921dd82afe2188d35478cf43f809
+    projectPath: Library\Artifacts\3e\3ebf921dd82afe2188d35478cf43f809
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\44\44fa9b9e61cf21a2a431b0bb7bbc9c59
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\44\44fa9b9e61cf21a2a431b0bb7bbc9c59
+    projectPath: Library\Artifacts\44\44fa9b9e61cf21a2a431b0bb7bbc9c59
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\47\470fa43b72585c7362b172a9623cf81e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\47\470fa43b72585c7362b172a9623cf81e
+    projectPath: Library\Artifacts\47\470fa43b72585c7362b172a9623cf81e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\48\48766a3c906915d0fca1dae61570d769
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\48\48766a3c906915d0fca1dae61570d769
+    projectPath: Library\Artifacts\48\48766a3c906915d0fca1dae61570d769
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\4c\4cc2e605d0dae26b17d186a7c3da2846
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\4c\4cc2e605d0dae26b17d186a7c3da2846
+    projectPath: Library\Artifacts\4c\4cc2e605d0dae26b17d186a7c3da2846
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\4d\4d1e9c7779c7f776e33da21b5457c9d2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\4d\4d1e9c7779c7f776e33da21b5457c9d2
+    projectPath: Library\Artifacts\4d\4d1e9c7779c7f776e33da21b5457c9d2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\51\517dc242e3d358839c9717e99f443567
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\51\517dc242e3d358839c9717e99f443567
+    projectPath: Library\Artifacts\51\517dc242e3d358839c9717e99f443567
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\52\52cb4a8ea48aeaa7e004073c1aa99363
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\52\52cb4a8ea48aeaa7e004073c1aa99363
+    projectPath: Library\Artifacts\52\52cb4a8ea48aeaa7e004073c1aa99363
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\55\5508fed72d3eb7426c9d8ab491d509bc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\55\5508fed72d3eb7426c9d8ab491d509bc
+    projectPath: Library\Artifacts\55\5508fed72d3eb7426c9d8ab491d509bc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\5c\5cab8e0b6a92d8c32c71804ae564d1ca
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\5c\5cab8e0b6a92d8c32c71804ae564d1ca
+    projectPath: Library\Artifacts\5c\5cab8e0b6a92d8c32c71804ae564d1ca
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\5f\5f89137c65dfc9f1993eab6005a3d7c6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\5f\5f89137c65dfc9f1993eab6005a3d7c6
+    projectPath: Library\Artifacts\5f\5f89137c65dfc9f1993eab6005a3d7c6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\60\60e324217200ee69406226dd272dcec4
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\60\60e324217200ee69406226dd272dcec4
+    projectPath: Library\Artifacts\60\60e324217200ee69406226dd272dcec4
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\62\62637e4f12b49a4b4a44b699546394d9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\62\62637e4f12b49a4b4a44b699546394d9
+    projectPath: Library\Artifacts\62\62637e4f12b49a4b4a44b699546394d9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\63\63ffe362f3257b703ad4753ffff2b215
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\63\63ffe362f3257b703ad4753ffff2b215
+    projectPath: Library\Artifacts\63\63ffe362f3257b703ad4753ffff2b215
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\64\64245135b9f86d39dcdbe1dbcc1f1215
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\64\64245135b9f86d39dcdbe1dbcc1f1215
+    projectPath: Library\Artifacts\64\64245135b9f86d39dcdbe1dbcc1f1215
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\67\6723b59f52dab8cb7dc2d064373ea1d2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\67\6723b59f52dab8cb7dc2d064373ea1d2
+    projectPath: Library\Artifacts\67\6723b59f52dab8cb7dc2d064373ea1d2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\67\678c80c901510f9cbfab93a50ba638e2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\67\678c80c901510f9cbfab93a50ba638e2
+    projectPath: Library\Artifacts\67\678c80c901510f9cbfab93a50ba638e2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\68\6883ad40e8df3f7065e7b2389242d687
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\68\6883ad40e8df3f7065e7b2389242d687
+    projectPath: Library\Artifacts\68\6883ad40e8df3f7065e7b2389242d687
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\68\68d1c7c4f76353db064dac8243b1e98f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\68\68d1c7c4f76353db064dac8243b1e98f
+    projectPath: Library\Artifacts\68\68d1c7c4f76353db064dac8243b1e98f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\69\69ebd7adc26e746041a2b865b66763e3
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\69\69ebd7adc26e746041a2b865b66763e3
+    projectPath: Library\Artifacts\69\69ebd7adc26e746041a2b865b66763e3
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\6f\6f8c88622a3b6d7676e48e9d233e76ca
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\6f\6f8c88622a3b6d7676e48e9d233e76ca
+    projectPath: Library\Artifacts\6f\6f8c88622a3b6d7676e48e9d233e76ca
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\72\72319252a053c04aa8cc9f36fcd986db
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\72\72319252a053c04aa8cc9f36fcd986db
+    projectPath: Library\Artifacts\72\72319252a053c04aa8cc9f36fcd986db
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\72\72eefe6cabc69f6dd29511e6f0cee06a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\72\72eefe6cabc69f6dd29511e6f0cee06a
+    projectPath: Library\Artifacts\72\72eefe6cabc69f6dd29511e6f0cee06a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\73\73db9594150b28604eb08cb3f6d68257
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\73\73db9594150b28604eb08cb3f6d68257
+    projectPath: Library\Artifacts\73\73db9594150b28604eb08cb3f6d68257
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\74\747f4cc18a4cbeb503eba2417fe612f7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\74\747f4cc18a4cbeb503eba2417fe612f7
+    projectPath: Library\Artifacts\74\747f4cc18a4cbeb503eba2417fe612f7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\74\749149c6353d84fc2cae0c08b5f7f0a6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\74\749149c6353d84fc2cae0c08b5f7f0a6
+    projectPath: Library\Artifacts\74\749149c6353d84fc2cae0c08b5f7f0a6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\74\74cc931108f9c552c8948a7787a97710
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\74\74cc931108f9c552c8948a7787a97710
+    projectPath: Library\Artifacts\74\74cc931108f9c552c8948a7787a97710
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\76\76c512c28f431d8399c758572f329a51
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\76\76c512c28f431d8399c758572f329a51
+    projectPath: Library\Artifacts\76\76c512c28f431d8399c758572f329a51
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\77\771305a77847eaf2e37c4bbbe1ec1721
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\77\771305a77847eaf2e37c4bbbe1ec1721
+    projectPath: Library\Artifacts\77\771305a77847eaf2e37c4bbbe1ec1721
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\79\79b5814493c032c10cf4efd9b1ff1364
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\79\79b5814493c032c10cf4efd9b1ff1364
+    projectPath: Library\Artifacts\79\79b5814493c032c10cf4efd9b1ff1364
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\7c\7c7e51dba16da187151d441477524763
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\7c\7c7e51dba16da187151d441477524763
+    projectPath: Library\Artifacts\7c\7c7e51dba16da187151d441477524763
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\81\817ee6ab6815c441a63f72584ac285f5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\81\817ee6ab6815c441a63f72584ac285f5
+    projectPath: Library\Artifacts\81\817ee6ab6815c441a63f72584ac285f5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\86\860776a6eee1cb244958ef7883116aa9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\86\860776a6eee1cb244958ef7883116aa9
+    projectPath: Library\Artifacts\86\860776a6eee1cb244958ef7883116aa9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\86\8609d759a7dcfacbb5cbe6494a0d4c76
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\86\8609d759a7dcfacbb5cbe6494a0d4c76
+    projectPath: Library\Artifacts\86\8609d759a7dcfacbb5cbe6494a0d4c76
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\87\87f84d4f7ad214ae8369a89cad6fe0d5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\87\87f84d4f7ad214ae8369a89cad6fe0d5
+    projectPath: Library\Artifacts\87\87f84d4f7ad214ae8369a89cad6fe0d5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\8a\8a6f79f539bc5b979114f5648be023d2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\8a\8a6f79f539bc5b979114f5648be023d2
+    projectPath: Library\Artifacts\8a\8a6f79f539bc5b979114f5648be023d2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\8e\8ea463724c28424c673aa296ef4508b9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\8e\8ea463724c28424c673aa296ef4508b9
+    projectPath: Library\Artifacts\8e\8ea463724c28424c673aa296ef4508b9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\94\947936b4996d5809f47199319f79869e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\94\947936b4996d5809f47199319f79869e
+    projectPath: Library\Artifacts\94\947936b4996d5809f47199319f79869e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\94\949e3dd314b488fffdf032a815c878dd
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\94\949e3dd314b488fffdf032a815c878dd
+    projectPath: Library\Artifacts\94\949e3dd314b488fffdf032a815c878dd
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\96\9659aa02cf6e05a904ec815e93492bc9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\96\9659aa02cf6e05a904ec815e93492bc9
+    projectPath: Library\Artifacts\96\9659aa02cf6e05a904ec815e93492bc9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\97\97091067d1cd2f14a482f15767ad66c6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\97\97091067d1cd2f14a482f15767ad66c6
+    projectPath: Library\Artifacts\97\97091067d1cd2f14a482f15767ad66c6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9a\9ab066767bc230a1018ba2924616f35a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9a\9ab066767bc230a1018ba2924616f35a
+    projectPath: Library\Artifacts\9a\9ab066767bc230a1018ba2924616f35a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9b\9ba8d4630e2ad4da3dc791e6c1e5ef20
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9b\9ba8d4630e2ad4da3dc791e6c1e5ef20
+    projectPath: Library\Artifacts\9b\9ba8d4630e2ad4da3dc791e6c1e5ef20
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9c\9c0efb19969ccfeacda397b5a60937e8
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9c\9c0efb19969ccfeacda397b5a60937e8
+    projectPath: Library\Artifacts\9c\9c0efb19969ccfeacda397b5a60937e8
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9d\9de56f916ebfc78ad1ab2c48838a34d9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9d\9de56f916ebfc78ad1ab2c48838a34d9
+    projectPath: Library\Artifacts\9d\9de56f916ebfc78ad1ab2c48838a34d9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9d\9df294102229f4776cec0664ed073ab2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9d\9df294102229f4776cec0664ed073ab2
+    projectPath: Library\Artifacts\9d\9df294102229f4776cec0664ed073ab2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\9f\9f4ac3b950a38d7dd2e7ae25e81167f7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\9f\9f4ac3b950a38d7dd2e7ae25e81167f7
+    projectPath: Library\Artifacts\9f\9f4ac3b950a38d7dd2e7ae25e81167f7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\a0\a0185dbaa4425ffe240cb42dc52c6f23
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\a0\a0185dbaa4425ffe240cb42dc52c6f23
+    projectPath: Library\Artifacts\a0\a0185dbaa4425ffe240cb42dc52c6f23
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\a1\a11612be5680cd0b9bf36e9e32c81882
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\a1\a11612be5680cd0b9bf36e9e32c81882
+    projectPath: Library\Artifacts\a1\a11612be5680cd0b9bf36e9e32c81882
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\a1\a1b6cea13f49ba5f9a347367a2a65d79
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\a1\a1b6cea13f49ba5f9a347367a2a65d79
+    projectPath: Library\Artifacts\a1\a1b6cea13f49ba5f9a347367a2a65d79
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\a6\a685f28ad4025d87a77ce565b6178008
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\a6\a685f28ad4025d87a77ce565b6178008
+    projectPath: Library\Artifacts\a6\a685f28ad4025d87a77ce565b6178008
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ae\aee4ae3b58f6292fbc662bef7a2314a2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ae\aee4ae3b58f6292fbc662bef7a2314a2
+    projectPath: Library\Artifacts\ae\aee4ae3b58f6292fbc662bef7a2314a2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b2\b225298d9448f1c67910a0c6bb08f155
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b2\b225298d9448f1c67910a0c6bb08f155
+    projectPath: Library\Artifacts\b2\b225298d9448f1c67910a0c6bb08f155
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b2\b2e0c2904cffe3997c42a303caf8b9dc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b2\b2e0c2904cffe3997c42a303caf8b9dc
+    projectPath: Library\Artifacts\b2\b2e0c2904cffe3997c42a303caf8b9dc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b5\b556ccfe802fd576236c45c832d16534
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b5\b556ccfe802fd576236c45c832d16534
+    projectPath: Library\Artifacts\b5\b556ccfe802fd576236c45c832d16534
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b7\b7122a32e8f4f63c7d192953a31116b2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b7\b7122a32e8f4f63c7d192953a31116b2
+    projectPath: Library\Artifacts\b7\b7122a32e8f4f63c7d192953a31116b2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b8\b81a3d5eea15a1db8b8548121639915f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b8\b81a3d5eea15a1db8b8548121639915f
+    projectPath: Library\Artifacts\b8\b81a3d5eea15a1db8b8548121639915f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b9\b9051a3cdb686d507052afa0301626c2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b9\b9051a3cdb686d507052afa0301626c2
+    projectPath: Library\Artifacts\b9\b9051a3cdb686d507052afa0301626c2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b9\b97281d92a1335dacb2137cdd06946af
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b9\b97281d92a1335dacb2137cdd06946af
+    projectPath: Library\Artifacts\b9\b97281d92a1335dacb2137cdd06946af
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\b9\b9a78d11483883cece8d415408506684
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\b9\b9a78d11483883cece8d415408506684
+    projectPath: Library\Artifacts\b9\b9a78d11483883cece8d415408506684
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ba\ba46901aad522598c691fd8cfc07d139
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ba\ba46901aad522598c691fd8cfc07d139
+    projectPath: Library\Artifacts\ba\ba46901aad522598c691fd8cfc07d139
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\bb\bb9c9857b74343ae27d4f08ec8ac6e54
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\bb\bb9c9857b74343ae27d4f08ec8ac6e54
+    projectPath: Library\Artifacts\bb\bb9c9857b74343ae27d4f08ec8ac6e54
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\bd\bd61c477697509187dc2934a968edf5a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\bd\bd61c477697509187dc2934a968edf5a
+    projectPath: Library\Artifacts\bd\bd61c477697509187dc2934a968edf5a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\bd\bd88a4ecc66607b96b2e388195dd96cc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\bd\bd88a4ecc66607b96b2e388195dd96cc
+    projectPath: Library\Artifacts\bd\bd88a4ecc66607b96b2e388195dd96cc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\be\be4a152b559276ab541438a638e93349
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\be\be4a152b559276ab541438a638e93349
+    projectPath: Library\Artifacts\be\be4a152b559276ab541438a638e93349
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c1\c17292bdfc607becaf341778630bcd15
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c1\c17292bdfc607becaf341778630bcd15
+    projectPath: Library\Artifacts\c1\c17292bdfc607becaf341778630bcd15
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c3\c37d843eebc56d409af9439c55a96286
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c3\c37d843eebc56d409af9439c55a96286
+    projectPath: Library\Artifacts\c3\c37d843eebc56d409af9439c55a96286
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c4\c4cbb90d0feacbcb7275d3cf4bf3aa34
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c4\c4cbb90d0feacbcb7275d3cf4bf3aa34
+    projectPath: Library\Artifacts\c4\c4cbb90d0feacbcb7275d3cf4bf3aa34
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c5\c5d0726e3da443db51e3a1c3afdcae6c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c5\c5d0726e3da443db51e3a1c3afdcae6c
+    projectPath: Library\Artifacts\c5\c5d0726e3da443db51e3a1c3afdcae6c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c6\c6c4f5d7eedb22efd538bc5e76a45e11
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c6\c6c4f5d7eedb22efd538bc5e76a45e11
+    projectPath: Library\Artifacts\c6\c6c4f5d7eedb22efd538bc5e76a45e11
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\c8\c8a5b2b8f0ade2b3a990ed1f9714815f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\c8\c8a5b2b8f0ade2b3a990ed1f9714815f
+    projectPath: Library\Artifacts\c8\c8a5b2b8f0ade2b3a990ed1f9714815f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ca\ca2e84ca1787453a67c547f65c7253c8
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ca\ca2e84ca1787453a67c547f65c7253c8
+    projectPath: Library\Artifacts\ca\ca2e84ca1787453a67c547f65c7253c8
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\cd\cd624513cd50d6ff6398fb589b52e3ab
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\cd\cd624513cd50d6ff6398fb589b52e3ab
+    projectPath: Library\Artifacts\cd\cd624513cd50d6ff6398fb589b52e3ab
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\d0\d05e67f30150260ec44e39bacdfd61e6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\d0\d05e67f30150260ec44e39bacdfd61e6
+    projectPath: Library\Artifacts\d0\d05e67f30150260ec44e39bacdfd61e6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\d2\d235e659dcaf9803b47b80d396b347b2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\d2\d235e659dcaf9803b47b80d396b347b2
+    projectPath: Library\Artifacts\d2\d235e659dcaf9803b47b80d396b347b2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\da\dafcdba26945cbd60a3433838565c38c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\da\dafcdba26945cbd60a3433838565c38c
+    projectPath: Library\Artifacts\da\dafcdba26945cbd60a3433838565c38c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\db\db7e2b4ca9a4f6722603b9b0e59de4c7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\db\db7e2b4ca9a4f6722603b9b0e59de4c7
+    projectPath: Library\Artifacts\db\db7e2b4ca9a4f6722603b9b0e59de4c7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\dc\dceb2f4184df42ba20a6633570630e51
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\dc\dceb2f4184df42ba20a6633570630e51
+    projectPath: Library\Artifacts\dc\dceb2f4184df42ba20a6633570630e51
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\dd\dd4bfc20fa1e46adf81f2f7a85202eb2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\dd\dd4bfc20fa1e46adf81f2f7a85202eb2
+    projectPath: Library\Artifacts\dd\dd4bfc20fa1e46adf81f2f7a85202eb2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\e0\e008f145e3ed5446248bc21ef5f84d2f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\e0\e008f145e3ed5446248bc21ef5f84d2f
+    projectPath: Library\Artifacts\e0\e008f145e3ed5446248bc21ef5f84d2f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\e2\e2a4ef6db4fd142fafbcd8104e331d4d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\e2\e2a4ef6db4fd142fafbcd8104e331d4d
+    projectPath: Library\Artifacts\e2\e2a4ef6db4fd142fafbcd8104e331d4d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\e3\e37cc9c677d58ed7ecfb7b23673996d5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\e3\e37cc9c677d58ed7ecfb7b23673996d5
+    projectPath: Library\Artifacts\e3\e37cc9c677d58ed7ecfb7b23673996d5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\e5\e50d09888971b285a56900c604f73f6c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\e5\e50d09888971b285a56900c604f73f6c
+    projectPath: Library\Artifacts\e5\e50d09888971b285a56900c604f73f6c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ea\ea1385f7b5cd4054f8390c2728739094
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ea\ea1385f7b5cd4054f8390c2728739094
+    projectPath: Library\Artifacts\ea\ea1385f7b5cd4054f8390c2728739094
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ec\ec0711deebf12ca5a999d0f0e6457538
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ec\ec0711deebf12ca5a999d0f0e6457538
+    projectPath: Library\Artifacts\ec\ec0711deebf12ca5a999d0f0e6457538
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ec\ecbed2496574e3f228170898c08c6d60
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ec\ecbed2496574e3f228170898c08c6d60
+    projectPath: Library\Artifacts\ec\ecbed2496574e3f228170898c08c6d60
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\ec\ecc764ef0508478d4a1e7c772ddf844b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\ec\ecc764ef0508478d4a1e7c772ddf844b
+    projectPath: Library\Artifacts\ec\ecc764ef0508478d4a1e7c772ddf844b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f0\f0dd0b544f64b9769a3c272e003f6c87
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f0\f0dd0b544f64b9769a3c272e003f6c87
+    projectPath: Library\Artifacts\f0\f0dd0b544f64b9769a3c272e003f6c87
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f1\f12955bbe858fa9772c45e5a4009faf0
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f1\f12955bbe858fa9772c45e5a4009faf0
+    projectPath: Library\Artifacts\f1\f12955bbe858fa9772c45e5a4009faf0
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f2\f2fcd3e236f213a961d0371e64a6ddb9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f2\f2fcd3e236f213a961d0371e64a6ddb9
+    projectPath: Library\Artifacts\f2\f2fcd3e236f213a961d0371e64a6ddb9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f4\f46c08887b053ea8f3979214f6ab516b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f4\f46c08887b053ea8f3979214f6ab516b
+    projectPath: Library\Artifacts\f4\f46c08887b053ea8f3979214f6ab516b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f5\f57d38dd4050275c3c8f3b66fc1e363e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f5\f57d38dd4050275c3c8f3b66fc1e363e
+    projectPath: Library\Artifacts\f5\f57d38dd4050275c3c8f3b66fc1e363e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f6\f67143a690c5499bbace151740da2bab
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f6\f67143a690c5499bbace151740da2bab
+    projectPath: Library\Artifacts\f6\f67143a690c5499bbace151740da2bab
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f6\f6bd3d35a9cf1d6feaf19777999784d7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f6\f6bd3d35a9cf1d6feaf19777999784d7
+    projectPath: Library\Artifacts\f6\f6bd3d35a9cf1d6feaf19777999784d7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\f7\f75a98f77fff904e26397f8eb0ef5ac6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\f7\f75a98f77fff904e26397f8eb0ef5ac6
+    projectPath: Library\Artifacts\f7\f75a98f77fff904e26397f8eb0ef5ac6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\fa\fa7c1ea356318ab0166a323a8e8c65d2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\Artifacts\fa\fa7c1ea356318ab0166a323a8e8c65d2
+    projectPath: Library\Artifacts\fa\fa7c1ea356318ab0166a323a8e8c65d2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\EditorInstance.json
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\EditorInstance.json
+    projectPath: Library\EditorInstance.json
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\branches.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\branches.yaml
+    projectPath: Library\gfu\cache\branches.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\gitlocks.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\gitlocks.yaml
+    projectPath: Library\gfu\cache\gitlocks.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\gitlog.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\gitlog.yaml
+    projectPath: Library\gfu\cache\gitlog.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\gitstatusentries.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\gitstatusentries.yaml
+    projectPath: Library\gfu\cache\gitstatusentries.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\gittrackingstatus.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\gittrackingstatus.yaml
+    projectPath: Library\gfu\cache\gittrackingstatus.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\gituser.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\gituser.yaml
+    projectPath: Library\gfu\cache\gituser.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\gfu\cache\repoinfo.yaml
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\gfu\cache\repoinfo.yaml
+    projectPath: Library\gfu\cache\repoinfo.yaml
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\InspectorExpandedItems.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\InspectorExpandedItems.asset
+    projectPath: Library\InspectorExpandedItems.asset
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\SceneVisibilityState.asset
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\SceneVisibilityState.asset
+    projectPath: Library\SceneVisibilityState.asset
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Assembly-CSharp.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Assembly-CSharp.dll
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Assembly-CSharp.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Assembly-CSharp.pdb
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Assembly-CSharp-Editor.dll
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.Timeline.dll
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    projectPath: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEditor.UI.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\UnityEditor.UI.dll
+    projectPath: Library\ScriptAssemblies\UnityEditor.UI.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    projectPath: Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEngine.UI.dll
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptAssemblies\UnityEngine.UI.dll
+    projectPath: Library\ScriptAssemblies\UnityEngine.UI.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptMapper
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ScriptMapper
+    projectPath: Library\ScriptMapper
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ShaderCache\0\0765ebfc7a1f010ca50b813038b75c71.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\0\0765ebfc7a1f010ca50b813038b75c71.bin
+    projectPath: Library\ShaderCache\0\0765ebfc7a1f010ca50b813038b75c71.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\1\1ca818a8be61cf9cded013510a87cc55.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\1\1ca818a8be61cf9cded013510a87cc55.bin
+    projectPath: Library\ShaderCache\1\1ca818a8be61cf9cded013510a87cc55.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\2\2d7e72b88a3ecf745435aeb08cff5597.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\2\2d7e72b88a3ecf745435aeb08cff5597.bin
+    projectPath: Library\ShaderCache\2\2d7e72b88a3ecf745435aeb08cff5597.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\2\2ee6a83be64a451e3e8d4792ff970162.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\2\2ee6a83be64a451e3e8d4792ff970162.bin
+    projectPath: Library\ShaderCache\2\2ee6a83be64a451e3e8d4792ff970162.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\3\30dbe3311864e96505ea0553f44680f6.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\3\30dbe3311864e96505ea0553f44680f6.bin
+    projectPath: Library\ShaderCache\3\30dbe3311864e96505ea0553f44680f6.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\3\3afe8638abffea5b1818f0e48d1e3ad0.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\3\3afe8638abffea5b1818f0e48d1e3ad0.bin
+    projectPath: Library\ShaderCache\3\3afe8638abffea5b1818f0e48d1e3ad0.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\3\3c0f74fa66d40fb93bba4de5c1efc81d.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\3\3c0f74fa66d40fb93bba4de5c1efc81d.bin
+    projectPath: Library\ShaderCache\3\3c0f74fa66d40fb93bba4de5c1efc81d.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\4\403012574fe73909dcd2c95596bf000c.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\4\403012574fe73909dcd2c95596bf000c.bin
+    projectPath: Library\ShaderCache\4\403012574fe73909dcd2c95596bf000c.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\4\4bd6202acf20c78de2aea5b75cde750c.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\4\4bd6202acf20c78de2aea5b75cde750c.bin
+    projectPath: Library\ShaderCache\4\4bd6202acf20c78de2aea5b75cde750c.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\5\5620dedd7826625854d16ffaa1469617.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\5\5620dedd7826625854d16ffaa1469617.bin
+    projectPath: Library\ShaderCache\5\5620dedd7826625854d16ffaa1469617.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\5\5d3c39e213fd2ffd86ffca37f41a691c.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\5\5d3c39e213fd2ffd86ffca37f41a691c.bin
+    projectPath: Library\ShaderCache\5\5d3c39e213fd2ffd86ffca37f41a691c.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\6\6cedb3b3cf06e22a066c3c00016ac900.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\6\6cedb3b3cf06e22a066c3c00016ac900.bin
+    projectPath: Library\ShaderCache\6\6cedb3b3cf06e22a066c3c00016ac900.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\7\76825f42db5a8df5c921d9ac54b4759d.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\7\76825f42db5a8df5c921d9ac54b4759d.bin
+    projectPath: Library\ShaderCache\7\76825f42db5a8df5c921d9ac54b4759d.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\7\7a2e033964d677e8c03b16076203ff71.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\7\7a2e033964d677e8c03b16076203ff71.bin
+    projectPath: Library\ShaderCache\7\7a2e033964d677e8c03b16076203ff71.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\7\7decc2d9c4a6161d33680837de038c58.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\7\7decc2d9c4a6161d33680837de038c58.bin
+    projectPath: Library\ShaderCache\7\7decc2d9c4a6161d33680837de038c58.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\7\7e519313ff8676e16e30333d9dc036e9.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\7\7e519313ff8676e16e30333d9dc036e9.bin
+    projectPath: Library\ShaderCache\7\7e519313ff8676e16e30333d9dc036e9.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\8\8511f16342050820d6e8dc443933eedb.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\8\8511f16342050820d6e8dc443933eedb.bin
+    projectPath: Library\ShaderCache\8\8511f16342050820d6e8dc443933eedb.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\8\8b9e2ae45b3c151846f8af05bb1fb7f6.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\8\8b9e2ae45b3c151846f8af05bb1fb7f6.bin
+    projectPath: Library\ShaderCache\8\8b9e2ae45b3c151846f8af05bb1fb7f6.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\8\8c8e458f5f01d1ebcbee11191ce30033.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\8\8c8e458f5f01d1ebcbee11191ce30033.bin
+    projectPath: Library\ShaderCache\8\8c8e458f5f01d1ebcbee11191ce30033.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\8\8ecb9f8841662988ab347a8c8c4931f9.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\8\8ecb9f8841662988ab347a8c8c4931f9.bin
+    projectPath: Library\ShaderCache\8\8ecb9f8841662988ab347a8c8c4931f9.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\9\91a8151bbcaff75b7628d6d8e918036b.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\9\91a8151bbcaff75b7628d6d8e918036b.bin
+    projectPath: Library\ShaderCache\9\91a8151bbcaff75b7628d6d8e918036b.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\9\948479e5e813844642f7d44fba8b8e39.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\9\948479e5e813844642f7d44fba8b8e39.bin
+    projectPath: Library\ShaderCache\9\948479e5e813844642f7d44fba8b8e39.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\9\9806fbb86615ca5bde83d8133732a41e.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\9\9806fbb86615ca5bde83d8133732a41e.bin
+    projectPath: Library\ShaderCache\9\9806fbb86615ca5bde83d8133732a41e.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\9\99d86c3f6e5ec2cb225724fbce2127a4.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\9\99d86c3f6e5ec2cb225724fbce2127a4.bin
+    projectPath: Library\ShaderCache\9\99d86c3f6e5ec2cb225724fbce2127a4.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\9\9a0c9d672fc3e51beca1ae23a6086aa3.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\9\9a0c9d672fc3e51beca1ae23a6086aa3.bin
+    projectPath: Library\ShaderCache\9\9a0c9d672fc3e51beca1ae23a6086aa3.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\a\a1647ddcfadbcd31c19eb51e48fd32f5.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\a\a1647ddcfadbcd31c19eb51e48fd32f5.bin
+    projectPath: Library\ShaderCache\a\a1647ddcfadbcd31c19eb51e48fd32f5.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\a\a2c0e3faaabb830d6ebac3ed7e8f107b.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\a\a2c0e3faaabb830d6ebac3ed7e8f107b.bin
+    projectPath: Library\ShaderCache\a\a2c0e3faaabb830d6ebac3ed7e8f107b.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\a\aba5cafba651ea60502b4c4a88c0df6e.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\a\aba5cafba651ea60502b4c4a88c0df6e.bin
+    projectPath: Library\ShaderCache\a\aba5cafba651ea60502b4c4a88c0df6e.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\b\b5307004aaceddbba273c94c2e74cda4.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\b\b5307004aaceddbba273c94c2e74cda4.bin
+    projectPath: Library\ShaderCache\b\b5307004aaceddbba273c94c2e74cda4.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\c4123a60fdc6af194c5faedc8ee592c1.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\c4123a60fdc6af194c5faedc8ee592c1.bin
+    projectPath: Library\ShaderCache\c\c4123a60fdc6af194c5faedc8ee592c1.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\c5b63c7b28c2f81c4b78274fc004ceea.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\c5b63c7b28c2f81c4b78274fc004ceea.bin
+    projectPath: Library\ShaderCache\c\c5b63c7b28c2f81c4b78274fc004ceea.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\c88b4b2c8b8be81e0c194f0e17651ce8.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\c88b4b2c8b8be81e0c194f0e17651ce8.bin
+    projectPath: Library\ShaderCache\c\c88b4b2c8b8be81e0c194f0e17651ce8.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\cb207d4f2660d37842362b8112b2b014.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\cb207d4f2660d37842362b8112b2b014.bin
+    projectPath: Library\ShaderCache\c\cb207d4f2660d37842362b8112b2b014.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\ce373c0149c0d538a032d853291b357e.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\ce373c0149c0d538a032d853291b357e.bin
+    projectPath: Library\ShaderCache\c\ce373c0149c0d538a032d853291b357e.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\c\cfd24b4670811c5f62996235c4b62970.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\c\cfd24b4670811c5f62996235c4b62970.bin
+    projectPath: Library\ShaderCache\c\cfd24b4670811c5f62996235c4b62970.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\d\d0001e820e16958fb27bb8f67102f9d2.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\d\d0001e820e16958fb27bb8f67102f9d2.bin
+    projectPath: Library\ShaderCache\d\d0001e820e16958fb27bb8f67102f9d2.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\d\d28bc3a9e4c39509081cf6a47d9930cf.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\d\d28bc3a9e4c39509081cf6a47d9930cf.bin
+    projectPath: Library\ShaderCache\d\d28bc3a9e4c39509081cf6a47d9930cf.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\d\dbed905ab666a0e9844bc3ddb2db7922.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\d\dbed905ab666a0e9844bc3ddb2db7922.bin
+    projectPath: Library\ShaderCache\d\dbed905ab666a0e9844bc3ddb2db7922.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\d\dc17d0bf396b0fedfa56c82d282bb5e4.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\d\dc17d0bf396b0fedfa56c82d282bb5e4.bin
+    projectPath: Library\ShaderCache\d\dc17d0bf396b0fedfa56c82d282bb5e4.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\e\e11c7af6e8761a646e59822ae09cf35f.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\e\e11c7af6e8761a646e59822ae09cf35f.bin
+    projectPath: Library\ShaderCache\e\e11c7af6e8761a646e59822ae09cf35f.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\e\ec821309a4dad78cabe111d08f3aed98.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\e\ec821309a4dad78cabe111d08f3aed98.bin
+    projectPath: Library\ShaderCache\e\ec821309a4dad78cabe111d08f3aed98.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\e\eee991ec31e82a9ebe9af6100f7dd57d.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\e\eee991ec31e82a9ebe9af6100f7dd57d.bin
+    projectPath: Library\ShaderCache\e\eee991ec31e82a9ebe9af6100f7dd57d.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\EditorEncounteredVariants
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\EditorEncounteredVariants
+    projectPath: Library\ShaderCache\EditorEncounteredVariants
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ShaderCache\f\fa0f833946544c3f308ae8d05846915c.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\f\fa0f833946544c3f308ae8d05846915c.bin
+    projectPath: Library\ShaderCache\f\fa0f833946544c3f308ae8d05846915c.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\f\faf21fb24071fdf117ff2731fbd9188d.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\f\faf21fb24071fdf117ff2731fbd9188d.bin
+    projectPath: Library\ShaderCache\f\faf21fb24071fdf117ff2731fbd9188d.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\f\fce272b4d6d534910b468b844f8023d6.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\f\fce272b4d6d534910b468b844f8023d6.bin
+    projectPath: Library\ShaderCache\f\fce272b4d6d534910b468b844f8023d6.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\ShaderCache\f\fd5bd9b7984e117b76cdebda7061cb3a.bin
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\ShaderCache\f\fd5bd9b7984e117b76cdebda7061cb3a.bin
+    projectPath: Library\ShaderCache\f\fd5bd9b7984e117b76cdebda7061cb3a.bin
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\shadercompiler-UnityShaderCompiler.exe0.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\shadercompiler-UnityShaderCompiler.exe1.log
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\shadercompiler-UnityShaderCompiler.exe1.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe1.log
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\shadercompiler-UnityShaderCompiler.exe2.log
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\shadercompiler-UnityShaderCompiler.exe2.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe2.log
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\shadercompiler-UnityShaderCompiler.exe3.log
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\shadercompiler-UnityShaderCompiler.exe3.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe3.log
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\SourceAssetDB
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\SourceAssetDB
+    projectPath: Library\SourceAssetDB
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\Hierarchy\5f8f24-mainStage.json
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\StateCache\Hierarchy\5f8f24-mainStage.json
+    projectPath: Library\StateCache\Hierarchy\5f8f24-mainStage.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\SceneView\444c4c-mainStage.json
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Library\StateCache\SceneView\444c4c-mainStage.json
+    projectPath: Library\StateCache\SceneView\444c4c-mainStage.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+    projectPath: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    projectPath: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+    projectPath: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+    projectPath: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
+    projectPath: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
+    projectPath: obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+    projectPath: obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Temp\__Backupscenes\0.backup
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\__Backupscenes\0.backup
+    projectPath: Temp\__Backupscenes\0.backup
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\ProcessJobs\bf674db4b078ca42ac384142495b561d.bakert
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\ProcessJobs\bf674db4b078ca42ac384142495b561d.bakert
+    projectPath: Temp\ProcessJobs\bf674db4b078ca42ac384142495b561d.bakert
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityLockfile
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityLockfile
+    projectPath: Temp\UnityLockfile
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0075855435ab0dc48a5589079d4c78a2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0075855435ab0dc48a5589079d4c78a2
+    projectPath: Temp\UnityTempFile-0075855435ab0dc48a5589079d4c78a2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-034abd311d0d5c941ac09a7437760cd1
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-034abd311d0d5c941ac09a7437760cd1
+    projectPath: Temp\UnityTempFile-034abd311d0d5c941ac09a7437760cd1
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0795e8646124697489b25a00af701a17
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0795e8646124697489b25a00af701a17
+    projectPath: Temp\UnityTempFile-0795e8646124697489b25a00af701a17
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-088d5fc9aa2d5334598e1a8d7e9bc60f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-088d5fc9aa2d5334598e1a8d7e9bc60f
+    projectPath: Temp\UnityTempFile-088d5fc9aa2d5334598e1a8d7e9bc60f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0aa2a939b6693cd41ac4d8eb6ab8f0ea
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0aa2a939b6693cd41ac4d8eb6ab8f0ea
+    projectPath: Temp\UnityTempFile-0aa2a939b6693cd41ac4d8eb6ab8f0ea
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0c46fd1b64519c84eb2818a0e51f8683
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0c46fd1b64519c84eb2818a0e51f8683
+    projectPath: Temp\UnityTempFile-0c46fd1b64519c84eb2818a0e51f8683
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0e36ef8db5dde6840b192143c8d046d6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0e36ef8db5dde6840b192143c8d046d6
+    projectPath: Temp\UnityTempFile-0e36ef8db5dde6840b192143c8d046d6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-0eea545b14b50a64d9e6fe63fe11538e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-0eea545b14b50a64d9e6fe63fe11538e
+    projectPath: Temp\UnityTempFile-0eea545b14b50a64d9e6fe63fe11538e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-104c095aa52a1884b8f3a5fbcf4f1f71
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-104c095aa52a1884b8f3a5fbcf4f1f71
+    projectPath: Temp\UnityTempFile-104c095aa52a1884b8f3a5fbcf4f1f71
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-10cc882be6a1b71428fa3956cbd3218a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-10cc882be6a1b71428fa3956cbd3218a
+    projectPath: Temp\UnityTempFile-10cc882be6a1b71428fa3956cbd3218a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-11121fdb919651a41bf816425864ab82
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-11121fdb919651a41bf816425864ab82
+    projectPath: Temp\UnityTempFile-11121fdb919651a41bf816425864ab82
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-117adf81175d81d47a500e02598ef36c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-117adf81175d81d47a500e02598ef36c
+    projectPath: Temp\UnityTempFile-117adf81175d81d47a500e02598ef36c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-125223eef9fb4d245a59c1d28bd28cff
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-125223eef9fb4d245a59c1d28bd28cff
+    projectPath: Temp\UnityTempFile-125223eef9fb4d245a59c1d28bd28cff
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-15ee27c13835b7041bc6c81947867616
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-15ee27c13835b7041bc6c81947867616
+    projectPath: Temp\UnityTempFile-15ee27c13835b7041bc6c81947867616
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1900915e3fb6d3c41b9509eaf63e845d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1900915e3fb6d3c41b9509eaf63e845d
+    projectPath: Temp\UnityTempFile-1900915e3fb6d3c41b9509eaf63e845d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1987f47547a0e9944893d8833abbc60f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1987f47547a0e9944893d8833abbc60f
+    projectPath: Temp\UnityTempFile-1987f47547a0e9944893d8833abbc60f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1a76075a18dd6af4e9a1c4f58d0331df
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1a76075a18dd6af4e9a1c4f58d0331df
+    projectPath: Temp\UnityTempFile-1a76075a18dd6af4e9a1c4f58d0331df
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1cb87ba4e5449f743bde5cd684a043d7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1cb87ba4e5449f743bde5cd684a043d7
+    projectPath: Temp\UnityTempFile-1cb87ba4e5449f743bde5cd684a043d7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1cb946b79d548fd49b9df539079e5f92
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1cb946b79d548fd49b9df539079e5f92
+    projectPath: Temp\UnityTempFile-1cb946b79d548fd49b9df539079e5f92
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1d9c468590ef403409dbf923c55bc486
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1d9c468590ef403409dbf923c55bc486
+    projectPath: Temp\UnityTempFile-1d9c468590ef403409dbf923c55bc486
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1ec0681000c76f54a8774603539bdb53
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1ec0681000c76f54a8774603539bdb53
+    projectPath: Temp\UnityTempFile-1ec0681000c76f54a8774603539bdb53
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1f1cc776bf48d0046a6a13cbced92b2d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1f1cc776bf48d0046a6a13cbced92b2d
+    projectPath: Temp\UnityTempFile-1f1cc776bf48d0046a6a13cbced92b2d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-1f3c90f32626dc045955030cebee5a10
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-1f3c90f32626dc045955030cebee5a10
+    projectPath: Temp\UnityTempFile-1f3c90f32626dc045955030cebee5a10
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-220a5cda8ea24c54da248e4fc7de17cd
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-220a5cda8ea24c54da248e4fc7de17cd
+    projectPath: Temp\UnityTempFile-220a5cda8ea24c54da248e4fc7de17cd
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-2395761fab17c1b46bd95eb636c577b3
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-2395761fab17c1b46bd95eb636c577b3
+    projectPath: Temp\UnityTempFile-2395761fab17c1b46bd95eb636c577b3
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-23f98eb9e39a3264c9e9653f6ea75b52
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-23f98eb9e39a3264c9e9653f6ea75b52
+    projectPath: Temp\UnityTempFile-23f98eb9e39a3264c9e9653f6ea75b52
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-2411f359834178741b13312fb2891608
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-2411f359834178741b13312fb2891608
+    projectPath: Temp\UnityTempFile-2411f359834178741b13312fb2891608
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-26f4c7d9917c9a34ca218c0cba865cd1
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-26f4c7d9917c9a34ca218c0cba865cd1
+    projectPath: Temp\UnityTempFile-26f4c7d9917c9a34ca218c0cba865cd1
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-27587939d71026d419c735d9aa76a95b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-27587939d71026d419c735d9aa76a95b
+    projectPath: Temp\UnityTempFile-27587939d71026d419c735d9aa76a95b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-28ec497577d03964992b032e3429771e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-28ec497577d03964992b032e3429771e
+    projectPath: Temp\UnityTempFile-28ec497577d03964992b032e3429771e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-2c8f07ebc96d41e40a4f302a11196996
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-2c8f07ebc96d41e40a4f302a11196996
+    projectPath: Temp\UnityTempFile-2c8f07ebc96d41e40a4f302a11196996
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-30fb9e5bd5203c344bc1e33a7a82ab1b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-30fb9e5bd5203c344bc1e33a7a82ab1b
+    projectPath: Temp\UnityTempFile-30fb9e5bd5203c344bc1e33a7a82ab1b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3154b00c9be85964aaa6af2c0ab0e975
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3154b00c9be85964aaa6af2c0ab0e975
+    projectPath: Temp\UnityTempFile-3154b00c9be85964aaa6af2c0ab0e975
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-32a1deeeb331273499f56991f9f900de
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-32a1deeeb331273499f56991f9f900de
+    projectPath: Temp\UnityTempFile-32a1deeeb331273499f56991f9f900de
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-33f462e6c01309040bd309bf607fdff5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-33f462e6c01309040bd309bf607fdff5
+    projectPath: Temp\UnityTempFile-33f462e6c01309040bd309bf607fdff5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3a20b33d2dbf89942978539bd9fea282
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3a20b33d2dbf89942978539bd9fea282
+    projectPath: Temp\UnityTempFile-3a20b33d2dbf89942978539bd9fea282
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3a99a85662e4e0a46beb47f3123d90bf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3a99a85662e4e0a46beb47f3123d90bf
+    projectPath: Temp\UnityTempFile-3a99a85662e4e0a46beb47f3123d90bf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3a9a259db90420b488aaae86b62d3ae2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3a9a259db90420b488aaae86b62d3ae2
+    projectPath: Temp\UnityTempFile-3a9a259db90420b488aaae86b62d3ae2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3aee00f28252c3a42acdd692f2d80012
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3aee00f28252c3a42acdd692f2d80012
+    projectPath: Temp\UnityTempFile-3aee00f28252c3a42acdd692f2d80012
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3bd19ee6c6aa26748a9227a8a257a3aa
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3bd19ee6c6aa26748a9227a8a257a3aa
+    projectPath: Temp\UnityTempFile-3bd19ee6c6aa26748a9227a8a257a3aa
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-3d0659e1c8c28664a8bd4958b03a5307
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-3d0659e1c8c28664a8bd4958b03a5307
+    projectPath: Temp\UnityTempFile-3d0659e1c8c28664a8bd4958b03a5307
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-42a6f2c8b806ce54993acbcfc6243188
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-42a6f2c8b806ce54993acbcfc6243188
+    projectPath: Temp\UnityTempFile-42a6f2c8b806ce54993acbcfc6243188
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-438d8dcda31dfbc4b99ec128d291fc5f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-438d8dcda31dfbc4b99ec128d291fc5f
+    projectPath: Temp\UnityTempFile-438d8dcda31dfbc4b99ec128d291fc5f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-43a35e812904c7842a02fae20e3d8988
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-43a35e812904c7842a02fae20e3d8988
+    projectPath: Temp\UnityTempFile-43a35e812904c7842a02fae20e3d8988
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-44c42d7705cf32748925c932b8b4ce80
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-44c42d7705cf32748925c932b8b4ce80
+    projectPath: Temp\UnityTempFile-44c42d7705cf32748925c932b8b4ce80
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-450ffceaa65e2a44b85699b7113c8613
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-450ffceaa65e2a44b85699b7113c8613
+    projectPath: Temp\UnityTempFile-450ffceaa65e2a44b85699b7113c8613
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-454321eb6d657cf40ac348c783c240ff
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-454321eb6d657cf40ac348c783c240ff
+    projectPath: Temp\UnityTempFile-454321eb6d657cf40ac348c783c240ff
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-46fff03551fa4c74b828b061b3154d0a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-46fff03551fa4c74b828b061b3154d0a
+    projectPath: Temp\UnityTempFile-46fff03551fa4c74b828b061b3154d0a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-47a0cd33341cfa542b02225d59602d0b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-47a0cd33341cfa542b02225d59602d0b
+    projectPath: Temp\UnityTempFile-47a0cd33341cfa542b02225d59602d0b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-49384bd9a98d67d4cac76850362a706d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-49384bd9a98d67d4cac76850362a706d
+    projectPath: Temp\UnityTempFile-49384bd9a98d67d4cac76850362a706d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-4ca7fd34dd22a2f4ea21a87233b2536f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-4ca7fd34dd22a2f4ea21a87233b2536f
+    projectPath: Temp\UnityTempFile-4ca7fd34dd22a2f4ea21a87233b2536f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-4d477432d269b9045a9d62c8c012dfc5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-4d477432d269b9045a9d62c8c012dfc5
+    projectPath: Temp\UnityTempFile-4d477432d269b9045a9d62c8c012dfc5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-5544050fe52f06d4eb5a89d26c141ca7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-5544050fe52f06d4eb5a89d26c141ca7
+    projectPath: Temp\UnityTempFile-5544050fe52f06d4eb5a89d26c141ca7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-57ed3907a5f4e554c9f8aa23b2d30c65
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-57ed3907a5f4e554c9f8aa23b2d30c65
+    projectPath: Temp\UnityTempFile-57ed3907a5f4e554c9f8aa23b2d30c65
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-5af0edf524f5268408ff258146ba1010
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-5af0edf524f5268408ff258146ba1010
+    projectPath: Temp\UnityTempFile-5af0edf524f5268408ff258146ba1010
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-60c416886c466a0498000d0109647207
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-60c416886c466a0498000d0109647207
+    projectPath: Temp\UnityTempFile-60c416886c466a0498000d0109647207
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-63fb486c583849e48be095f29bb10bfd
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-63fb486c583849e48be095f29bb10bfd
+    projectPath: Temp\UnityTempFile-63fb486c583849e48be095f29bb10bfd
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-65a730c276bf8294683960822492eb53
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-65a730c276bf8294683960822492eb53
+    projectPath: Temp\UnityTempFile-65a730c276bf8294683960822492eb53
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-66bde1f2c75ced2488ff254a49510c3c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-66bde1f2c75ced2488ff254a49510c3c
+    projectPath: Temp\UnityTempFile-66bde1f2c75ced2488ff254a49510c3c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-68a221b938a2e85478aa3604ffb0026a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-68a221b938a2e85478aa3604ffb0026a
+    projectPath: Temp\UnityTempFile-68a221b938a2e85478aa3604ffb0026a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-721d1fe8c98c29048b531b93e25ff559
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-721d1fe8c98c29048b531b93e25ff559
+    projectPath: Temp\UnityTempFile-721d1fe8c98c29048b531b93e25ff559
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-725048df131b5b14c9757ffae1451ee9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-725048df131b5b14c9757ffae1451ee9
+    projectPath: Temp\UnityTempFile-725048df131b5b14c9757ffae1451ee9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-75859f675d22c624a82ff87531b9efbf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-75859f675d22c624a82ff87531b9efbf
+    projectPath: Temp\UnityTempFile-75859f675d22c624a82ff87531b9efbf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-76bb64525d2244d439413bae4983ea92
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-76bb64525d2244d439413bae4983ea92
+    projectPath: Temp\UnityTempFile-76bb64525d2244d439413bae4983ea92
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-76e54bc59fa2e174983d0348f1885216
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-76e54bc59fa2e174983d0348f1885216
+    projectPath: Temp\UnityTempFile-76e54bc59fa2e174983d0348f1885216
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-79b15a055b8047146936af2be2ba83cb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-79b15a055b8047146936af2be2ba83cb
+    projectPath: Temp\UnityTempFile-79b15a055b8047146936af2be2ba83cb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-7a6d5fc3608b7fb4e82d7b7abe53c5f5
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-7a6d5fc3608b7fb4e82d7b7abe53c5f5
+    projectPath: Temp\UnityTempFile-7a6d5fc3608b7fb4e82d7b7abe53c5f5
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-7d8e98e7b12a66047af4f8da45b1d999
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-7d8e98e7b12a66047af4f8da45b1d999
+    projectPath: Temp\UnityTempFile-7d8e98e7b12a66047af4f8da45b1d999
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-7df6a60d4d36eaa4cb0ba011370e6d60
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-7df6a60d4d36eaa4cb0ba011370e6d60
+    projectPath: Temp\UnityTempFile-7df6a60d4d36eaa4cb0ba011370e6d60
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-7fdb3ed138924f54f95f55d9a017fedf
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-7fdb3ed138924f54f95f55d9a017fedf
+    projectPath: Temp\UnityTempFile-7fdb3ed138924f54f95f55d9a017fedf
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-7ff762b6e4983894c8613e2d29c386e6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-7ff762b6e4983894c8613e2d29c386e6
+    projectPath: Temp\UnityTempFile-7ff762b6e4983894c8613e2d29c386e6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-80d6c9803c6fbbc4e8b0e50c088961e7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-80d6c9803c6fbbc4e8b0e50c088961e7
+    projectPath: Temp\UnityTempFile-80d6c9803c6fbbc4e8b0e50c088961e7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8166006818004ec47a26d2094dfe5f5e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8166006818004ec47a26d2094dfe5f5e
+    projectPath: Temp\UnityTempFile-8166006818004ec47a26d2094dfe5f5e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-82e2adf8bb462d9408222897b7c13036
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-82e2adf8bb462d9408222897b7c13036
+    projectPath: Temp\UnityTempFile-82e2adf8bb462d9408222897b7c13036
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-830474e53f511894eba4ec81d2bf0f35
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-830474e53f511894eba4ec81d2bf0f35
+    projectPath: Temp\UnityTempFile-830474e53f511894eba4ec81d2bf0f35
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8375e9df297688a4aae7e2469221068b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8375e9df297688a4aae7e2469221068b
+    projectPath: Temp\UnityTempFile-8375e9df297688a4aae7e2469221068b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8561832687b7c3e428219f5d1101aa37
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8561832687b7c3e428219f5d1101aa37
+    projectPath: Temp\UnityTempFile-8561832687b7c3e428219f5d1101aa37
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-85dd8f8de4db84b4d9ac8730018b8a03
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-85dd8f8de4db84b4d9ac8730018b8a03
+    projectPath: Temp\UnityTempFile-85dd8f8de4db84b4d9ac8730018b8a03
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-865abd7e6671ff94eb9abfb3ea2669d2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-865abd7e6671ff94eb9abfb3ea2669d2
+    projectPath: Temp\UnityTempFile-865abd7e6671ff94eb9abfb3ea2669d2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8a40701bc811028458d596ad7db0d295
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8a40701bc811028458d596ad7db0d295
+    projectPath: Temp\UnityTempFile-8a40701bc811028458d596ad7db0d295
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8c455d8ed39b7d248ba23fa958c03da7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8c455d8ed39b7d248ba23fa958c03da7
+    projectPath: Temp\UnityTempFile-8c455d8ed39b7d248ba23fa958c03da7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8cea2499396934249b3fd2282e8f5c1c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8cea2499396934249b3fd2282e8f5c1c
+    projectPath: Temp\UnityTempFile-8cea2499396934249b3fd2282e8f5c1c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8d066bdd35fbe6447841e859b3625c2e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8d066bdd35fbe6447841e859b3625c2e
+    projectPath: Temp\UnityTempFile-8d066bdd35fbe6447841e859b3625c2e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8d748ae509e0db14b91e1bd5bf3506f9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8d748ae509e0db14b91e1bd5bf3506f9
+    projectPath: Temp\UnityTempFile-8d748ae509e0db14b91e1bd5bf3506f9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8d76e078aafea2847afa99c6d5296d57
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8d76e078aafea2847afa99c6d5296d57
+    projectPath: Temp\UnityTempFile-8d76e078aafea2847afa99c6d5296d57
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-8e773b488f41eaf4e9c4f1573cb82ebe
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-8e773b488f41eaf4e9c4f1573cb82ebe
+    projectPath: Temp\UnityTempFile-8e773b488f41eaf4e9c4f1573cb82ebe
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-9069a664e75b88a418f8ef0faa9fd786
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-9069a664e75b88a418f8ef0faa9fd786
+    projectPath: Temp\UnityTempFile-9069a664e75b88a418f8ef0faa9fd786
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-924b8a65fcc4e274caef384139116c26
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-924b8a65fcc4e274caef384139116c26
+    projectPath: Temp\UnityTempFile-924b8a65fcc4e274caef384139116c26
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-942b61369ba811944949cbf8a47cc0ba
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-942b61369ba811944949cbf8a47cc0ba
+    projectPath: Temp\UnityTempFile-942b61369ba811944949cbf8a47cc0ba
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-9528b64dde3e6e0408899bc3f58e14f9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-9528b64dde3e6e0408899bc3f58e14f9
+    projectPath: Temp\UnityTempFile-9528b64dde3e6e0408899bc3f58e14f9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-95b312609e006c24d97b3446d042e962
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-95b312609e006c24d97b3446d042e962
+    projectPath: Temp\UnityTempFile-95b312609e006c24d97b3446d042e962
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-999ab09e9ae5a98428eec8c277f34e47
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-999ab09e9ae5a98428eec8c277f34e47
+    projectPath: Temp\UnityTempFile-999ab09e9ae5a98428eec8c277f34e47
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-99cb32cf49797c74a99830937b6953a7
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-99cb32cf49797c74a99830937b6953a7
+    projectPath: Temp\UnityTempFile-99cb32cf49797c74a99830937b6953a7
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-9cf3354a785c76a439dac2042c021411
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-9cf3354a785c76a439dac2042c021411
+    projectPath: Temp\UnityTempFile-9cf3354a785c76a439dac2042c021411
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a03c01fd0a881d242b8c1d81ff43f316
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a03c01fd0a881d242b8c1d81ff43f316
+    projectPath: Temp\UnityTempFile-a03c01fd0a881d242b8c1d81ff43f316
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a410ac07073a9f54881c7c6f85418e36
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a410ac07073a9f54881c7c6f85418e36
+    projectPath: Temp\UnityTempFile-a410ac07073a9f54881c7c6f85418e36
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a53320a54795a604091ecd4074fa9d4c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a53320a54795a604091ecd4074fa9d4c
+    projectPath: Temp\UnityTempFile-a53320a54795a604091ecd4074fa9d4c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a69ec5ff28bf6b240bde8bbea988dfff
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a69ec5ff28bf6b240bde8bbea988dfff
+    projectPath: Temp\UnityTempFile-a69ec5ff28bf6b240bde8bbea988dfff
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a7ac41ce61211b74ba77e79702326f61
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a7ac41ce61211b74ba77e79702326f61
+    projectPath: Temp\UnityTempFile-a7ac41ce61211b74ba77e79702326f61
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-a7b0ce2253e8f2f42a1560eaac9b3f8a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-a7b0ce2253e8f2f42a1560eaac9b3f8a
+    projectPath: Temp\UnityTempFile-a7b0ce2253e8f2f42a1560eaac9b3f8a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-ab61a5837cda0c149950a148bc9c99f2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-ab61a5837cda0c149950a148bc9c99f2
+    projectPath: Temp\UnityTempFile-ab61a5837cda0c149950a148bc9c99f2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-ab99d0b5b84c04e4e994a6e1b5d2d4bc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-ab99d0b5b84c04e4e994a6e1b5d2d4bc
+    projectPath: Temp\UnityTempFile-ab99d0b5b84c04e4e994a6e1b5d2d4bc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-abbac6ba0b2fae24390c2b556846f6c3
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-abbac6ba0b2fae24390c2b556846f6c3
+    projectPath: Temp\UnityTempFile-abbac6ba0b2fae24390c2b556846f6c3
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-ae166d40266a5a94ca1fc357182fbf8c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-ae166d40266a5a94ca1fc357182fbf8c
+    projectPath: Temp\UnityTempFile-ae166d40266a5a94ca1fc357182fbf8c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-afabe2f2d28cc5c45b216b3a7d7c023b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-afabe2f2d28cc5c45b216b3a7d7c023b
+    projectPath: Temp\UnityTempFile-afabe2f2d28cc5c45b216b3a7d7c023b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-b0028f5c54e76e2489b0916ad60fa79b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-b0028f5c54e76e2489b0916ad60fa79b
+    projectPath: Temp\UnityTempFile-b0028f5c54e76e2489b0916ad60fa79b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-b176620096e587d4f84316d821fcd0ac
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-b176620096e587d4f84316d821fcd0ac
+    projectPath: Temp\UnityTempFile-b176620096e587d4f84316d821fcd0ac
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-b2e0546c0ce935147bb41847d904c7c4
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-b2e0546c0ce935147bb41847d904c7c4
+    projectPath: Temp\UnityTempFile-b2e0546c0ce935147bb41847d904c7c4
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-b6f31f5dd9ce5ce44a97966baeed96e8
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-b6f31f5dd9ce5ce44a97966baeed96e8
+    projectPath: Temp\UnityTempFile-b6f31f5dd9ce5ce44a97966baeed96e8
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-ba42bfc066f87064bb5e09b19ec47d42
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-ba42bfc066f87064bb5e09b19ec47d42
+    projectPath: Temp\UnityTempFile-ba42bfc066f87064bb5e09b19ec47d42
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-bb2f508a89741c54ba656b37bc4b29f9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-bb2f508a89741c54ba656b37bc4b29f9
+    projectPath: Temp\UnityTempFile-bb2f508a89741c54ba656b37bc4b29f9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-bc6c6399692a09240b860ec8cdbd7a7b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-bc6c6399692a09240b860ec8cdbd7a7b
+    projectPath: Temp\UnityTempFile-bc6c6399692a09240b860ec8cdbd7a7b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-bc748efb630a86f4496b95843dc9ec30
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-bc748efb630a86f4496b95843dc9ec30
+    projectPath: Temp\UnityTempFile-bc748efb630a86f4496b95843dc9ec30
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-bcd59b522b9af3d44a4cebbb31d368ba
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-bcd59b522b9af3d44a4cebbb31d368ba
+    projectPath: Temp\UnityTempFile-bcd59b522b9af3d44a4cebbb31d368ba
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c07c154d0c6ec77409185e6abb106f27
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c07c154d0c6ec77409185e6abb106f27
+    projectPath: Temp\UnityTempFile-c07c154d0c6ec77409185e6abb106f27
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c0bcf90ebdbc53f4cb5b538f6c07300e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c0bcf90ebdbc53f4cb5b538f6c07300e
+    projectPath: Temp\UnityTempFile-c0bcf90ebdbc53f4cb5b538f6c07300e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c1819f11da9b9874291e6c63b8f5eb68
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c1819f11da9b9874291e6c63b8f5eb68
+    projectPath: Temp\UnityTempFile-c1819f11da9b9874291e6c63b8f5eb68
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c2e5e31b123f9fe479a3c78350e3d62f
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c2e5e31b123f9fe479a3c78350e3d62f
+    projectPath: Temp\UnityTempFile-c2e5e31b123f9fe479a3c78350e3d62f
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c4eb8ae05784f2e4499f21c0de63f57e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c4eb8ae05784f2e4499f21c0de63f57e
+    projectPath: Temp\UnityTempFile-c4eb8ae05784f2e4499f21c0de63f57e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-c8a62b47b2a6ef54789cb862ba464efc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-c8a62b47b2a6ef54789cb862ba464efc
+    projectPath: Temp\UnityTempFile-c8a62b47b2a6ef54789cb862ba464efc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-ca5e3bf9fca710048a0ee170eb27a89a
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-ca5e3bf9fca710048a0ee170eb27a89a
+    projectPath: Temp\UnityTempFile-ca5e3bf9fca710048a0ee170eb27a89a
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d0900d3a55dead44b8711d5371266ad1
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d0900d3a55dead44b8711d5371266ad1
+    projectPath: Temp\UnityTempFile-d0900d3a55dead44b8711d5371266ad1
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d1fba291d413b8d489cfc694ab2123f8
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d1fba291d413b8d489cfc694ab2123f8
+    projectPath: Temp\UnityTempFile-d1fba291d413b8d489cfc694ab2123f8
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d28461e17ecf74d4692b9bfd49b5be7b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d28461e17ecf74d4692b9bfd49b5be7b
+    projectPath: Temp\UnityTempFile-d28461e17ecf74d4692b9bfd49b5be7b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d74e2613456d31545b97925b90d733a2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d74e2613456d31545b97925b90d733a2
+    projectPath: Temp\UnityTempFile-d74e2613456d31545b97925b90d733a2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d81c964baf28caa4789ed4edd75ee5e9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d81c964baf28caa4789ed4edd75ee5e9
+    projectPath: Temp\UnityTempFile-d81c964baf28caa4789ed4edd75ee5e9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d910c7a9060165e48930dec11cb9ae41
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d910c7a9060165e48930dec11cb9ae41
+    projectPath: Temp\UnityTempFile-d910c7a9060165e48930dec11cb9ae41
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-d9cdd1c75dcd88442bbf7f5f1487c0a2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-d9cdd1c75dcd88442bbf7f5f1487c0a2
+    projectPath: Temp\UnityTempFile-d9cdd1c75dcd88442bbf7f5f1487c0a2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-daf936ac31055d047bc8f094765db3e6
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-daf936ac31055d047bc8f094765db3e6
+    projectPath: Temp\UnityTempFile-daf936ac31055d047bc8f094765db3e6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-db2e8a987d7a0cd43a9be7ad8abde89d
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-db2e8a987d7a0cd43a9be7ad8abde89d
+    projectPath: Temp\UnityTempFile-db2e8a987d7a0cd43a9be7ad8abde89d
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-dc3df99ec9f178b4e9ac73df82b5f14b
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-dc3df99ec9f178b4e9ac73df82b5f14b
+    projectPath: Temp\UnityTempFile-dc3df99ec9f178b4e9ac73df82b5f14b
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e2d50767843bb934690693f7ada8cc3e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-e2d50767843bb934690693f7ada8cc3e
+    projectPath: Temp\UnityTempFile-e2d50767843bb934690693f7ada8cc3e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e4f3e470ca669cc4f86215a711778b3e
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-e4f3e470ca669cc4f86215a711778b3e
+    projectPath: Temp\UnityTempFile-e4f3e470ca669cc4f86215a711778b3e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e537b7dae9736e34f8914beacc7aaebb
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-e537b7dae9736e34f8914beacc7aaebb
+    projectPath: Temp\UnityTempFile-e537b7dae9736e34f8914beacc7aaebb
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e691aa08cd1226248baca53cb64acabc
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-e691aa08cd1226248baca53cb64acabc
+    projectPath: Temp\UnityTempFile-e691aa08cd1226248baca53cb64acabc
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-edde04258f20d1f468e6b6bbd2e0f560
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-edde04258f20d1f468e6b6bbd2e0f560
+    projectPath: Temp\UnityTempFile-edde04258f20d1f468e6b6bbd2e0f560
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-f0397bf8a2b8ab548b04fdd00caf6325
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-f0397bf8a2b8ab548b04fdd00caf6325
+    projectPath: Temp\UnityTempFile-f0397bf8a2b8ab548b04fdd00caf6325
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-f2941153215da75478aecb36d3869e00
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-f2941153215da75478aecb36d3869e00
+    projectPath: Temp\UnityTempFile-f2941153215da75478aecb36d3869e00
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-f3c0c4d4397553a4fadc724ce3c562a9
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-f3c0c4d4397553a4fadc724ce3c562a9
+    projectPath: Temp\UnityTempFile-f3c0c4d4397553a4fadc724ce3c562a9
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-f7072ade70d50aa4db032cb48eba403c
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-f7072ade70d50aa4db032cb48eba403c
+    projectPath: Temp\UnityTempFile-f7072ade70d50aa4db032cb48eba403c
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-f828e9d7f6937364fa02338e262f42e2
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-f828e9d7f6937364fa02338e262f42e2
+    projectPath: Temp\UnityTempFile-f828e9d7f6937364fa02338e262f42e2
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-fdc9dfbf4aab21d4f98aa5d450095550
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\Temp\UnityTempFile-fdc9dfbf4aab21d4f98aa5d450095550
+    projectPath: Temp\UnityTempFile-fdc9dfbf4aab21d4f98aa5d450095550
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: TimeDrivenSurvival_New.sln
+    fullPath: D:\Unity-Projects\TimeDrivenSurvival_New\TimeDrivenSurvival_New.sln
+    projectPath: TimeDrivenSurvival_New.sln
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
