@@ -79,8 +79,8 @@ public class BipedProceduralAnimator : MonoBehaviour
         defaultRight =  rightFoot.localPosition;
         defaultLeft =  leftFoot.localPosition;
 
-        defaultRightHip =  rightHip.localPosition;
-        defaultLeftHip =  leftHip.localPosition;
+        //defaultRightHip =  rightHip.localPosition;
+        //defaultLeftHip =  leftHip.localPosition;
 
         defaultHead =  head.localPosition;
         defaultChest =  chest.localPosition;
@@ -173,17 +173,17 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                 Vector3 newHead = defaultHead;
                 Vector3 newChest = defaultChest;
-                Vector3 newRightHip =  rightHip.localPosition;
-                Vector3 newLeftHip =  leftHip.localPosition;
+                //Vector3 newRightHip =  rightHip.localPosition;
+                //Vector3 newLeftHip =  leftHip.localPosition;
 
-                newRightHip.y = (defaultRightHip.y + bobModifier);
-                newLeftHip.y = (defaultLeftHip.y + bobModifier);
+                //newRightHip.y = (defaultRightHip.y + bobModifier);
+                //newLeftHip.y = (defaultLeftHip.y + bobModifier);
 
                 newHead.y += bobModifier;
                 newChest.y += bobModifier;
 
-                 rightHip.localPosition = newRightHip;
-                 leftHip.localPosition = newLeftHip;
+                 //rightHip.localPosition = newRightHip;
+                 //leftHip.localPosition = newLeftHip;
 
                  head.localPosition = newHead;
                  chest.localPosition = newChest;

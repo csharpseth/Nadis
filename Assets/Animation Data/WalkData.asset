@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WalkData
   m_EditorClassIdentifier: Assembly-CSharp::ProceduralAnimationData
   stepData:
-    footMoveSpeed: 8
-    stepSize: 0.6
+    footMoveSpeed: 12
+    stepSize: 0.5
     sideStepSize: 0.4
-    stepHeight: 0.5
-    maxDistBeforeNextStep: 0.8
+    stepHeight: 0.6
+    maxDistBeforeNextStep: 0.6
   moveData:
     handFootMatchStrength: 0.6
     bobCurve:
@@ -26,17 +26,17 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: -0.25
-        outSlope: -0.25
+        inSlope: -0.01
+        outSlope: -0.01
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: -0.25
-        inSlope: -0.25
-        outSlope: -0.25
+        value: -0.01
+        inSlope: -0.01
+        outSlope: -0.01
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
