@@ -21,6 +21,13 @@ public class BipedProceduralAnimator : MonoBehaviour
     private Vector3 nextLeft;
     private Vector3 defaultLeft;
 
+    private Vector3 nextRightHand;
+    private Vector3 nextLeftHand;
+    private Vector3 defaultRightHand;
+    private Vector3 defaultLeftHand;
+    public bool handTargetPersistent = false;
+    public bool overrideNormalHandCondition = false;
+
     private Vector3 defaultHead;
     private Vector3 defaultChest;
     private Vector3 defaultRightHip;
@@ -30,18 +37,24 @@ public class BipedProceduralAnimator : MonoBehaviour
     private LerpData rightFootLerp;
     private LerpData leftFootLerp;
 
+    private Rigidbody rightHandRB;
+    private Rigidbody leftHandRB;
+    private Joint rightHandJoint;
+    private Joint leftHandJoint;
     
-    public bool handsFollowFeet = true;
     public float maxHandTargetDistFromHand = 0.1f;
 
     private bool right = true;
     private bool left = false;
 
     private Vector3 lastPos;
-    private MovementController moveController;
 
     public Transform RightHand { get { return rightHand; } }
     public Transform LeftHand { get { return leftHand; } }
+
+    public bool grounded = true;
+    public Vector2 inputDir;
+    public PlayerMoveState moveState;
     
 
     public bool moving = false;
@@ -55,12 +68,12 @@ public class BipedProceduralAnimator : MonoBehaviour
     private void Update()
     {
         RootMomentum();
-        if(handsFollowFeet)
+        if(overrideNormalHandCondition == false)
         {
-            Hands();
+            DefaultHandAction();
         }
         
-        if(moveController.IsGrounded == false)
+        if(grounded == false)
         {
             rightFootLerp = null;
             leftFootLerp = null;
@@ -88,7 +101,11 @@ public class BipedProceduralAnimator : MonoBehaviour
         rightFootLerp = null;
         leftFootLerp = null;
 
-        moveController = GetComponent<MovementController>();
+        defaultRightHand = rightHand.localPosition;
+        defaultLeftHand = leftHand.localPosition;
+
+        rightHandRB = rightHand.GetComponent<Rigidbody>();
+        leftHandRB = leftHand.GetComponent<Rigidbody>();
     }
 
     public void FootStepping()
@@ -119,14 +136,14 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (rightFootLerp.done == true)
                     {
-                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * moveController.InputDir.y)) + transform.up + (transform.right * moveController.InputDir.x * data.stepData.sideStepSize);
+                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
 
                         RaycastHit rightHit;
                         Physics.Raycast(origin, -transform.up, out rightHit, 1.5f);
                         if (rightHit.transform != null)
                         {
                             nextRight = rightHit.point;
-                            rightFootLerp = new LerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * moveController.InputDir.y));
+                            rightFootLerp = new LerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             right = false;
                             left = true;
                         }
@@ -151,14 +168,14 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (leftFootLerp.done == true)
                     {
-                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * moveController.InputDir.y)) + transform.up + (transform.right * moveController.InputDir.x * data.stepData.sideStepSize);
+                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
 
                         RaycastHit leftHit;
                         Physics.Raycast(origin, -transform.up, out leftHit, 1.5f);
                         if (leftHit.transform != null)
                         {
                             nextLeft = leftHit.point;
-                            leftFootLerp = new LerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * moveController.InputDir.y));
+                            leftFootLerp = new LerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             left = false;
                             right = true;
                         }
@@ -222,8 +239,13 @@ public class BipedProceduralAnimator : MonoBehaviour
         }
     }
 
-    public void Hands()
+    public void DefaultHandAction()
     {
+        if (rightHandRB != null)
+            rightHandRB.isKinematic = true;
+        if (leftHandRB != null)
+            leftHandRB.isKinematic = true;
+
         Vector3 lPos =  leftHand.localPosition;
         Vector3 rPos =  rightHand.localPosition;
 
@@ -234,14 +256,106 @@ public class BipedProceduralAnimator : MonoBehaviour
          rightHand.localPosition = rPos;
     }
 
+    public void LerpHandTargetPosition()
+    {
+        bool rightDone = true;
+        bool leftDone = true;
+
+        if(nextRightHand != Vector3.zero)
+        {
+            Vector3 tempRight = rightHand.localPosition;
+            tempRight = Vector3.Lerp(tempRight, nextRightHand, data.moveData.handMoveSpeed * Time.deltaTime);
+            rightHand.localPosition = tempRight;
+            if((nextRightHand - tempRight).sqrMagnitude > (0.1f * 0.1f))
+            {
+                rightDone = false;
+            }else
+            {
+                nextRightHand = Vector3.zero;
+
+            }
+        }
+
+        if (nextLeftHand != Vector3.zero)
+        {
+            Vector3 tempLeft = LeftHand.localPosition;
+            tempLeft = Vector3.Lerp(tempLeft, nextLeftHand, data.moveData.handMoveSpeed * Time.deltaTime);
+            leftHand.localPosition = tempLeft;
+            if ((nextLeftHand - tempLeft).sqrMagnitude > (0.1f * 0.1f))
+            {
+                leftDone = false;
+            }else
+            {
+                nextLeftHand = Vector3.zero;
+            }
+        }
+
+        overrideNormalHandCondition = !(rightDone == true && leftDone == true && handTargetPersistent == false);
+
+    }
+
+    public void SetHandTargetPosition(Vector3 position, Side side, bool persistent = false)
+    {
+        handTargetPersistent = persistent;
+
+        if(side == Side.Right || side == Side.Both)
+        {
+            nextRightHand = position;
+            overrideNormalHandCondition = true;
+        }
+
+        if (side == Side.Left || side == Side.Both)
+        {
+            nextLeftHand = position;
+            overrideNormalHandCondition = true;
+        }
+    }
+
+    public void SetHandTarget(Rigidbody rb, Side side)
+    {
+        overrideNormalHandCondition = true;
+
+        if(side == Side.Right || side == Side.Both)
+        {
+            rightHand.position = rb.transform.position;
+            rightHandRB.isKinematic = false;
+            rightHandJoint = rightHand.gameObject.AddComponent<FixedJoint>();
+            rightHandJoint.connectedBody = rb;
+        }
+
+        if(side == Side.Left || side == Side.Both)
+        {
+            leftHand.position = rb.transform.position;
+            leftHandRB.isKinematic = false;
+            leftHandJoint = leftHand.gameObject.AddComponent<FixedJoint>();
+            leftHandJoint.connectedBody = rb;
+        }
+    }
+
+    public void EndCurrentHandTarget()
+    {
+        if (rightHandJoint != null) Destroy(rightHandJoint);
+        if (leftHandJoint != null) Destroy(leftHandJoint);
+        overrideNormalHandCondition = false;
+        rightHand.localPosition = defaultRightHand;
+        leftHand.localPosition = defaultLeftHand;
+    }
+
     public void RootMomentum()
     {
         Vector3 rootRot =  root.localEulerAngles;
-        float forward = Mathf.LerpAngle(rootRot.x, moveController.InputDir.y * data.moveData.maxRootForwardAngle, 5f * Time.deltaTime);
-        float side = Mathf.LerpAngle(rootRot.y, moveController.InputDir.x * data.moveData.maxRootSideAngle, 5f * Time.deltaTime);
+        float forward = Mathf.LerpAngle(rootRot.x, inputDir.y * data.moveData.maxRootForwardAngle, 5f * Time.deltaTime);
+        float side = Mathf.LerpAngle(rootRot.y, inputDir.x * data.moveData.maxRootSideAngle, 5f * Time.deltaTime);
 
         Vector3 newRot = new Vector3(forward,  root.localEulerAngles.y, side);
          root.localEulerAngles = newRot;
+    }
+
+    public void SetMoveData(bool grounded, Vector2 inputDir, PlayerMoveState moveState)
+    {
+        this.grounded = grounded;
+        this.inputDir = inputDir;
+        this.moveState = moveState;
     }
 
     private float GroundHeight()
@@ -268,7 +382,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     private void LateUpdate()
     {
         //rightRayWheel.Rotate(Vector3.right, Time.time * rayWheelSpeed, Space.Self);
-        if(moveController.MoveState != PlayerMoveState.None)
+        if(moveState != PlayerMoveState.None)
         {
             moving = true;
         }else
@@ -376,6 +490,7 @@ public struct ProceduralStepData
 public struct ProceduralMoveData
 {
     public float handFootMatchStrength;
+    public float handMoveSpeed;
     public AnimationCurve bobCurve;
     public float maxRootForwardAngle;
     public float maxRootSideAngle;
@@ -386,4 +501,11 @@ public class ProceduralAnimationData : ScriptableObject
 {
     public ProceduralStepData stepData;
     public ProceduralMoveData moveData;
+}
+
+public enum Side
+{
+    Right,
+    Left,
+    Both
 }

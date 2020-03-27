@@ -20,6 +20,7 @@ MonoBehaviour:
     maxDistBeforeNextStep: 0.6
   moveData:
     handFootMatchStrength: 0.6
+    handMoveSpeed: 10
     bobCurve:
       serializedVersion: 2
       m_Curve:

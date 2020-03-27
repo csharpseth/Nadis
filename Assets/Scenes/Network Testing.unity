@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 1097076448}
   - component: {fileID: 1097076447}
   - component: {fileID: 1097076446}
+  - component: {fileID: 1097076449}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -386,7 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb7725c287eccc45b9f132be8e4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionSize: {x: 1000, y: 600, z: 1000}
+  regionSize: {x: 400, y: 250, z: 400}
+  stepSize: 0.2
+  offset: 0.2
 --- !u!114 &1097076447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,10 +404,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: c16508d76b53f304198cdcb9c5aec772, type: 2}
   spawnPointsData:
+    name: 
+    enabled: 0
     minHeight: 0.2
     maxHeight: 0.4
     density: 0.3
-    maximumPoints: 1
+    maxNormalAngle: 40
+    maxPrefabAngle: 20
+    maximumPoints: 2
+    prefabs: []
   useTerraform: 0
   terraformData:
     towns: 0
@@ -425,6 +433,19 @@ MonoBehaviour:
   terrain: {fileID: 855658938}
   beachHeight: 0.1
   beachBlend: 0.1
+  applyDecorations: 1
+  decorationLayers:
+  - name: Grass & Trees
+    enabled: 1
+    minHeight: 0.15
+    maxHeight: 0.95
+    density: 0.4
+    maxNormalAngle: 30
+    maxPrefabAngle: 20
+    maximumPoints: 2000
+    prefabs:
+    - {fileID: 8002321573796704496, guid: 268a834495812a8478be4a10cdde8c72, type: 3}
+  networked: 1
 --- !u!4 &1097076448
 Transform:
   m_ObjectHideFlags: 0
@@ -439,3 +460,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1097076449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097076445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91064a78a618c3f4e8816d5d1ec36ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 200, y: 15, z: 200}
+  xSize: 20
+  ySize: 20
+  prefabScale: 0
+  prefab: {fileID: 1917598329768694069, guid: 3eee2a844113e724fa8b301ea8d99f9c, type: 3}
+  generateOnAwake: 1

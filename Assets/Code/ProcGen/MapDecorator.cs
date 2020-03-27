@@ -112,7 +112,7 @@ public class MapDecorator : MonoBehaviour
             Transform parent = new GameObject(groupName).transform;
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                Instantiate(prefabs[Random.Range(0, prefabs.Length - 1)], spawnPoints[i].pos, Quaternion.Euler(spawnPoints[i].rot), parent);
+                Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPoints[i].pos, Quaternion.Euler(spawnPoints[i].rot), parent);
             }
 
             return parent.gameObject;

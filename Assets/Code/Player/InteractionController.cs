@@ -6,11 +6,12 @@ using UnityEngine;
 public class InteractionController : MonoBehaviour
 {
     public static InteractionController ins;
-
-
-    public Camera camera;
+    
+    [SerializeField]
+    private new Camera camera;
     public float interactionReach = 6f;
     public LayerMask interactionMask;
+    public ItemDatabase itemDB;
 
     public Vector2 CenterScreen
     {
@@ -26,6 +27,7 @@ public class InteractionController : MonoBehaviour
             return camera.ScreenPointToRay(CenterScreen);
         }
     }
+    public Camera Cam { get { return camera; } }
 
     private BipedProceduralAnimator animator;
 
@@ -37,6 +39,9 @@ public class InteractionController : MonoBehaviour
     public Action<PhysicalItem, int> OnInventoryAdd;
     public Action<int> OnInventoryRemove;
     public Action<int> OnInventorySelect;
+    public Action<Vector3, Side, bool> SetHandTargetPosition;
+    public Action<Rigidbody, Side> SetHandTarget;
+    public Action EndCurrentHandTarget;
 
     private void Awake()
     {
@@ -44,6 +49,13 @@ public class InteractionController : MonoBehaviour
             ins = this;
 
         animator = GetComponent<BipedProceduralAnimator>();
+        if(animator != null)
+        {
+            SetHandTarget += animator.SetHandTarget;
+            SetHandTargetPosition += animator.SetHandTargetPosition;
+            EndCurrentHandTarget += animator.EndCurrentHandTarget;
+        }
+
         InitInventory();
     }
 
@@ -54,15 +66,41 @@ public class InteractionController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
             index++;
             if (index > (items.Length - 1))
                 index = 0;
             OnInventorySelect?.Invoke(index);
+        }else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        {
+            index--;
+            if (index < 0)
+                index = (items.Length - 1);
+            OnInventorySelect?.Invoke(index);
         }
 
         if(Input.GetButtonDown("Fire1"))
+        {
+            if (CurrentItem != null)
+                CurrentItem.PrimaryUse();
+            else
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(CenterScreenRay, out hit))
+                {
+                    itemDB.SpawnRandomItem(hit.point);
+                }
+            }
+        }
+
+        if(Input.GetButtonDown("Fire2"))
+        {
+            if (CurrentItem != null)
+                CurrentItem.SecondaryUse();
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
         {
             Interact();
         }
@@ -75,23 +113,17 @@ public class InteractionController : MonoBehaviour
 
     private void Interact()
     {
-        if(CurrentItem != null)
-        {
-            CurrentItem.PrimaryUse();
-        }else
-        {
-            Ray r = camera.ScreenPointToRay(CenterScreen);
-            RaycastHit hit;
+        Ray r = camera.ScreenPointToRay(CenterScreen);
+        RaycastHit hit;
 
-            if (Physics.Raycast(r, out hit, interactionReach, interactionMask))
+        if (Physics.Raycast(r, out hit, interactionReach, interactionMask))
+        {
+            PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
+            if (item != null)
             {
-                PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
-                if (item != null)
+                if (animator != null)
                 {
-                    if (animator != null)
-                    {
-                        PickupItem(item);
-                    }
+                    PickupItem(item);
                 }
             }
         }

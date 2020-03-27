@@ -26,14 +26,15 @@ public class MovementController : MonoBehaviour
     Vector3 climbDestination;
     Vector2 inputDir;
 
+    BipedProceduralAnimator animator;
+
     public Vector2 InputDir { get { return inputDir; } }
 
     float prevHeight;
 
     float time = 0f;
     Vector3 prevPosition;
-
-    [SerializeField]
+    
     private PlayerMoveState moveState;
 
     public bool CanCrouch
@@ -75,6 +76,7 @@ public class MovementController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<BipedProceduralAnimator>();
         physicsCollider = GetComponent<CapsuleCollider>();
     }
 
@@ -267,6 +269,11 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (animator != null)
+            animator.SetMoveData(grounded, inputDir, moveState);
+    }
 
     private void FixedUpdate()
     {

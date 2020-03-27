@@ -8,8 +8,8 @@ public class PhysicalItem : MonoBehaviour
     public float grabSpeed = 5f;
     public float grabbedThreshold = 0.1f;
     public Vector3 heldEulerOffset;
-
-    private Rigidbody rb;
+    
+    internal Rigidbody rb;
     private Collider col;
     private Transform parent;
 
@@ -26,6 +26,11 @@ public class PhysicalItem : MonoBehaviour
     public virtual void PrimaryUse()
     {
         Debug.Log(meta.name + " Primary Use");
+    }
+
+    public virtual void SecondaryUse()
+    {
+        Debug.Log(meta.name + " Secondary Use");
     }
 
     public void Interact(Transform hand)

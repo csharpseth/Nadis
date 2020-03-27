@@ -1,5 +1,4 @@
 *.meta
-.vs\
-.vs/TimeDrivenSurvival_New/v15/Server/sqlite3/storage.ide-shm
-.vs/TimeDrivenSurvival_New/v15/Server/sqlite3/storage.ide-shm
-.vs/TimeDrivenSurvival_New/v15/Server/sqlite3/storage.ide-wal
+*.vs/
+*.backup
+*Temp/

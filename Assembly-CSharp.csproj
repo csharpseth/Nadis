@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\DebugUIController.cs" />
+    <Compile Include="Assets\Code\ItemDatabase.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkConfig.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkManager.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkObject.cs" />
