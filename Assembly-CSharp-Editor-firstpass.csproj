@@ -318,23 +318,23 @@
     <Reference Include="KaymakNetwork">
       <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/KaymakNetwork.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Library/PackageCache/com.unity.render-pipelines.core@7.1.8/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
     <Reference Include="GitHub.Api.45">
       <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Logging">
+      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
     </Reference>
     <Reference Include="GitHub.Unity.45">
       <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll</HintPath>
     </Reference>
-    <Reference Include="sfw.net">
-      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
-    </Reference>
     <Reference Include="GitHub.UnityShim">
       <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll</HintPath>
     </Reference>
-    <Reference Include="GitHub.Logging">
-      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+    <Reference Include="sfw.net">
+      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Library/PackageCache/com.unity.render-pipelines.core@7.1.8/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/Unity-Projects/TimeDrivenSurvival_New/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>

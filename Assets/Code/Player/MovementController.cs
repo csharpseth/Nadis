@@ -24,6 +24,9 @@ public class MovementController : MonoBehaviour
     Rigidbody rb;
     CapsuleCollider physicsCollider;
     Vector3 climbDestination;
+    Vector2 inputDir;
+
+    public Vector2 InputDir { get { return inputDir; } }
 
     float prevHeight;
 
@@ -77,9 +80,10 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
+        inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         dir = Vector3.zero;
-        dir += transform.forward * Input.GetAxisRaw("Vertical");
-        dir += transform.right * Input.GetAxisRaw("Horizontal");
+        dir += transform.forward * inputDir.y;
+        dir += transform.right * inputDir.x;
 
         Collider[] cols = Physics.OverlapSphere(transform.position, groundedRadius, groundedMask);
         grounded = (cols.Length > 0);
