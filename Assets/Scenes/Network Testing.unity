@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_Sun: {fileID: 208705095}
+  m_IndirectSpecularColor: {r: 0.18220598, g: 0.22790791, b: 0.30735958, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: ca111b0e852c8f44498c410e5d2d7abd,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -133,7 +134,7 @@ GameObject:
   - component: {fileID: 204002003}
   - component: {fileID: 204002002}
   m_Layer: 0
-  m_Name: Network Manager
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,9 +171,9 @@ MonoBehaviour:
   heightRangeMin: 0.3
   heightRangeMax: 0.45
   maxSpawnPoints: 30
-  nonLocalPlayerPrefab: {fileID: 3700945631246633665, guid: fd77093b59fb57e45bff6206671f729a,
+  nonLocalPlayerPrefab: {fileID: 5306550393391481251, guid: d4f35833671aef246a4010054a6d2c61,
     type: 3}
-  localPlayerPrefab: {fileID: 4024912870864186539, guid: 621492ffa51601a4bb5826c2adeb9021,
+  localPlayerPrefab: {fileID: 1032715391471015123, guid: 7a4343643166d524bb707aab8ed2c41f,
     type: 3}
 --- !u!4 &204002004
 Transform:
@@ -273,13 +274,107 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208705094}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.34694365, y: -0.24154733, z: 0.09296325, w: 0.9014671}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.1, y: -30, z: 0}
+--- !u!1 &211219466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211219470}
+  - component: {fileID: 211219469}
+  - component: {fileID: 211219468}
+  - component: {fileID: 211219467}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &211219467
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211219466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &211219468
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211219466}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 71ab749c2e1235847882e44b93afefcd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &211219469
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211219466}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &211219470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211219466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855658936
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &855658937
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -328,7 +423,7 @@ Terrain:
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
@@ -374,7 +469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1097076446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb7725c287eccc45b9f132be8e4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionSize: {x: 400, y: 250, z: 400}
+  regionSize: {x: 256, y: 100, z: 256}
   stepSize: 0.2
   offset: 0.2
 --- !u!114 &1097076447
@@ -433,16 +528,16 @@ MonoBehaviour:
   terrain: {fileID: 855658938}
   beachHeight: 0.1
   beachBlend: 0.1
-  applyDecorations: 1
+  applyDecorations: 0
   decorationLayers:
-  - name: Grass & Trees
+  - name: Grass
     enabled: 1
-    minHeight: 0.15
-    maxHeight: 0.95
-    density: 0.4
-    maxNormalAngle: 30
-    maxPrefabAngle: 20
-    maximumPoints: 2000
+    minHeight: 0.05
+    maxHeight: 1
+    density: 0.5
+    maxNormalAngle: 40
+    maxPrefabAngle: 30
+    maximumPoints: 4000
     prefabs:
     - {fileID: 8002321573796704496, guid: 268a834495812a8478be4a10cdde8c72, type: 3}
   networked: 1
@@ -472,7 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91064a78a618c3f4e8816d5d1ec36ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 200, y: 15, z: 200}
+  offset: {x: 128, y: 15, z: 128}
   xSize: 20
   ySize: 20
   prefabScale: 0

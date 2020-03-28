@@ -53,15 +53,14 @@ public class NetworkManager : MonoBehaviour
     {
         if (localPlayer != null) return;
 
-        if(spawnPoints.Count == 0)
+        Vector3 spawnPoint = Vector3.zero;
+        if(spawnPoints.Count > 0)
         {
-            localPlayerID = connID;
-
-            return;
+            spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
         }
 
         localPlayer = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
-        localPlayer.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count - 1)];
+        localPlayer.transform.position = spawnPoint;
 
         if (localPlayer.Local == false)
             Debug.LogError("Spawned Local Player is Not Set as 'Local'!");
@@ -137,6 +136,17 @@ public class NetworkManager : MonoBehaviour
         {
             mapGenerator.Generate(seed);
         }
+    }
+
+    public void SetPlayerMoveData(int playerID, bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
+    {
+        if(connectedPlayers.ContainsKey(playerID) == false)
+        {
+            Debug.Log("Error No Player w/ ID:" + playerID + " was found to apply MoveData!");
+            return;
+        }
+
+        connectedPlayers[playerID].SetProceduralMoveData(grounded, inputDir, moveState, moveSpeed);
     }
 
     private void OnDrawGizmos()

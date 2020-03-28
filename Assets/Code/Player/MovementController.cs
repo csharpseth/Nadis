@@ -14,64 +14,56 @@ public class MovementController : MonoBehaviour
     public float groundedRadius = 0.5f;
     public LayerMask groundedMask;
     public float yDistToStopGrabbing = 0.5f;
-    bool falling;
-    bool climbing;
-    bool grounded;
-    bool crouching;
-
-    float speed;
     Vector3 dir;
     Rigidbody rb;
     CapsuleCollider physicsCollider;
     Vector3 climbDestination;
-    Vector2 inputDir;
-
     BipedProceduralAnimator animator;
 
-    public Vector2 InputDir { get { return inputDir; } }
+    public Vector2 InputDir { get; private set; }
 
     float prevHeight;
 
     float time = 0f;
     Vector3 prevPosition;
-    
-    private PlayerMoveState moveState;
 
     public bool CanCrouch
     {
         get
         {
-            return (grounded == true && moveState != PlayerMoveState.Running);
+            return (IsGrounded == true && MoveState != PlayerMoveState.Running);
         }
     }
     public bool CanWalk
     {
         get
         {
-            return (grounded == true && climbing == false);
+            return (IsGrounded == true && IsClimbing == false);
         }
     }
     public bool CanRun
     {
         get
         {
-            return (climbing == false && grounded == true && moveState != PlayerMoveState.Crouching);
+            return (IsClimbing == false && IsGrounded == true && MoveState != PlayerMoveState.Crouching);
         }
     }
     public bool CanClimb
     {
         get
         {
-            return (moveState != PlayerMoveState.Crouching);
+            return (MoveState != PlayerMoveState.Crouching);
         }
     }
 
-    public bool IsCrouching { get { return crouching; } }
-    public bool IsGrounded { get { return grounded; } }
-    public bool IsClimbing { get { return climbing; } }
-    public bool IsFalling { get { return falling; } }
+    public bool IsCrouching { get; private set; }
+    public bool IsGrounded { get; private set; }
+    public bool IsClimbing { get; private set; }
+    public bool IsFalling { get; private set; }
 
-    public PlayerMoveState MoveState { get { return moveState; } }
+    public float Speed { get; private set; }
+
+    public PlayerMoveState MoveState { get; private set; }
 
     private void Awake()
     {
@@ -82,13 +74,13 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        InputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         dir = Vector3.zero;
-        dir += transform.forward * inputDir.y;
-        dir += transform.right * inputDir.x;
+        dir += transform.forward * InputDir.y;
+        dir += transform.right * InputDir.x;
 
         Collider[] cols = Physics.OverlapSphere(transform.position, groundedRadius, groundedMask);
-        grounded = (cols.Length > 0);
+        IsGrounded = (cols.Length > 0);
 
 
         if (Input.GetButtonDown("Jump"))
@@ -102,7 +94,7 @@ public class MovementController : MonoBehaviour
         
         physicsCollider.center = new Vector3(0f, (physicsCollider.height / 2f), 0f);
 
-        if (Input.GetButton("Sprint"))
+        if (Input.GetButton("Sprint") && dir != Vector3.zero)
         {
             Running();
         }else if(dir != Vector3.zero)
@@ -110,9 +102,9 @@ public class MovementController : MonoBehaviour
             Walking();
         }
 
-        if(dir == Vector3.zero && moveState != PlayerMoveState.Crouching)
+        if(dir == Vector3.zero && MoveState != PlayerMoveState.Crouching)
         {
-            moveState = PlayerMoveState.None;
+            MoveState = PlayerMoveState.None;
         }
 
         //rbController.SetSpeed(speed);
@@ -126,7 +118,7 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        if (climbing == false)
+        if (IsClimbing == false)
         {
             RaycastHit hit;
             if (Physics.Raycast((climbInfo.checkOrigin.position), Vector3.down, out hit, climbInfo.rayDist))
@@ -142,24 +134,24 @@ public class MovementController : MonoBehaviour
 
     private void Jump()
     {
-        if (climbing == true)
+        if (IsClimbing == true)
             return;
         
         if (transform.position.y != prevHeight)
         {
             if (prevHeight > transform.position.y)
             {
-                if (!grounded) falling = true;
-                else falling = false;
+                if (!IsGrounded) IsFalling = true;
+                else IsFalling = false;
             }
             prevHeight = transform.position.y;
         }
 
 
-        if (grounded)
+        if (IsGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            rb.velocity = (dir * speed * 0.8f);
+            rb.velocity = (dir * Speed * 0.8f);
         }
     }
 
@@ -167,9 +159,9 @@ public class MovementController : MonoBehaviour
     {
         if (CanWalk == false)
             return;
-        if(moveState != PlayerMoveState.Crouching)
-            moveState = PlayerMoveState.Walking;
-        speed = Mathf.Lerp(speed, moveInfo.walkSpeed, moveInfo.smoothedLerpSpeed * Time.deltaTime);
+        if(MoveState != PlayerMoveState.Crouching)
+            MoveState = PlayerMoveState.Walking;
+        Speed = moveInfo.walkSpeed;
     }
 
     private void Running()
@@ -177,16 +169,16 @@ public class MovementController : MonoBehaviour
         if (CanRun == false)
             return;
         
-        moveState = PlayerMoveState.Running;
-        speed = Mathf.Lerp(speed, moveInfo.runSpeed, moveInfo.smoothedLerpSpeed * Time.deltaTime);
+        MoveState = PlayerMoveState.Running;
+        Speed = moveInfo.runSpeed;
     }
 
     private void Crouching()
     {
         if (Input.GetButton("Crouch") && CanCrouch)
         {
-            moveState = PlayerMoveState.Crouching;
-            crouching = true;
+            MoveState = PlayerMoveState.Crouching;
+            IsCrouching = true;
         }
 
         if (CanCrouch == false)
@@ -197,7 +189,7 @@ public class MovementController : MonoBehaviour
 
         
 
-        if (moveState != PlayerMoveState.Crouching)
+        if (MoveState != PlayerMoveState.Crouching)
         {
             physicsCollider.height = Mathf.Lerp(physicsCollider.height, sizeInfo.normalHeight, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
             if (sizeInfo.camera != null)
@@ -209,15 +201,14 @@ public class MovementController : MonoBehaviour
 
         if(!Input.GetButton("Crouch"))
         {
-            moveState = PlayerMoveState.None;
-            crouching = false;
+            MoveState = PlayerMoveState.None;
+            IsCrouching = false;
             return;
         }
 
 
-        speed = Mathf.Lerp(speed, moveInfo.crouchSpeed, moveInfo.smoothedLerpSpeed * Time.deltaTime);
+        Speed = moveInfo.crouchSpeed;
         physicsCollider.height = Mathf.Lerp(physicsCollider.height, sizeInfo.crouchHeight, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
-        speed = Mathf.Lerp(speed, moveInfo.crouchSpeed, moveInfo.smoothedLerpSpeed * Time.deltaTime);
         if (sizeInfo.camera != null)
         {
             sizeInfo.camera.transform.localPosition = Vector3.Lerp(sizeInfo.camera.transform.localPosition, sizeInfo.cameraCrouchOffset, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
@@ -226,14 +217,14 @@ public class MovementController : MonoBehaviour
 
     private void Climbing()
     {
-        climbing = (climbDestination != Vector3.zero);
+        IsClimbing = (climbDestination != Vector3.zero);
 
-        if (climbing && climbDestination != Vector3.zero)
+        if (IsClimbing && climbDestination != Vector3.zero)
         {
             Vector3 temp = transform.position;
             if((climbDestination - temp).sqrMagnitude > (climbInfo.distToEnd * climbInfo.distToEnd))
             {
-                climbing = false;
+                IsClimbing = false;
                 transform.position = climbDestination;
                 climbDestination = Vector3.zero;
                 rb.isKinematic = false;
@@ -261,7 +252,7 @@ public class MovementController : MonoBehaviour
 
             if (sqrDist <= (climbInfo.finishClimbDistance * climbInfo.finishClimbDistance))
             {
-                climbing = false;
+                IsClimbing = false;
                 transform.position = climbDestination;
                 climbDestination = Vector3.zero;
                 rb.isKinematic = false;
@@ -272,16 +263,16 @@ public class MovementController : MonoBehaviour
     private void LateUpdate()
     {
         if (animator != null)
-            animator.SetMoveData(grounded, inputDir, moveState);
+            animator.SetMoveData(IsGrounded, InputDir, MoveState);
     }
 
     private void FixedUpdate()
     {
-        float determinedSpeed = (grounded ? speed : (speed * fallingMovementModifier));
+        float determinedSpeed = (IsGrounded ? Speed : (Speed * fallingMovementModifier));
         rb.position += (dir * determinedSpeed * Time.fixedDeltaTime);
         
 
-        if(useBetterFall == true && falling == true)
+        if(useBetterFall == true && IsFalling == true)
         {
             rb.AddForce(Vector3.down * betterFallMultiplier, ForceMode.VelocityChange);
         }
@@ -295,7 +286,7 @@ public class MovementController : MonoBehaviour
         if (climbDestination != Vector3.zero)
             Gizmos.DrawCube(climbDestination, Vector3.one * 0.2f);
 
-        if (grounded)
+        if (IsGrounded)
             Gizmos.color = Color.green;
         else
             Gizmos.color = Color.red;
@@ -337,8 +328,9 @@ public struct PlayerClimbingInfo
 
 public enum PlayerMoveState
 {
-    None,
-    Walking,
-    Running,
-    Crouching
+    None = 1,
+    Walking = 2,
+    Running = 3,
+    Crouching = 4,
+    CrouchWalking = 5,
 }

@@ -10,15 +10,22 @@ public class PlayerSync : MonoBehaviour
     public float reachedThreshold = 0.2f;
     public float maxDistance = 5f;
     public int maxQueueSize = 15;
-    public float lerpSpeed = 10f;
+    private float moveDataCheckDelay = 0.25f;
 
     private Vector3 prevPosition;
     private Vector3 prevRotation;
     private int id;
     private bool idSet = false;
+    private float lerpSpeed = 15f;
 
     private Queue<Vector3> positionQueue = new Queue<Vector3>();
     private Vector3 destination;
+    private BipedProceduralAnimator animator;
+    private MovementController moveController;
+
+    private bool grounded;
+    private Vector2 inputDir;
+    private PlayerMoveState moveState;
 
     public int ID { get { return id; } set
         {
@@ -31,6 +38,7 @@ public class PlayerSync : MonoBehaviour
     {
         if (Local && NetworkManager.localPlayer == null)
             NetworkManager.localPlayer = this;
+        animator = GetComponent<BipedProceduralAnimator>();
     }
 
     private void Update()
@@ -71,6 +79,23 @@ public class PlayerSync : MonoBehaviour
             prevRotation = transform.eulerAngles;
             NetworkSend.SendPlayerRotation(id, transform.eulerAngles);
         }
+
+        UpdateMoveData();
+    }
+
+    float moveDataTimer = 0f;
+    private void UpdateMoveData()
+    {
+        if (moveController == null)
+            return;
+        moveDataTimer += Time.deltaTime;
+        if(moveDataTimer >= moveDataCheckDelay)
+        {
+            NetworkSend.SendPlayerMoveData(id, moveController.IsGrounded, moveController.InputDir, moveController.MoveState, moveController.Speed);
+            moveDataTimer = 0f;
+        }
+        
+
     }
 
     public void SetPosition(Vector3 newPosition)
@@ -81,6 +106,16 @@ public class PlayerSync : MonoBehaviour
     public void SetRotation(Vector3 newRotation)
     {
         transform.eulerAngles = newRotation;
+    }
+
+    public void SetProceduralMoveData(bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
+    {
+        Debug.Log(moveSpeed);
+        lerpSpeed = moveSpeed;
+        if(animator != null)
+        {
+            animator.SetMoveData(grounded, inputDir, moveState);
+        }
     }
 
 }

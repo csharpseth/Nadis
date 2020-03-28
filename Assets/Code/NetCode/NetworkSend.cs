@@ -12,6 +12,7 @@ enum ClientPackets
     CDestroyNetObject = 5,
     CMoveNetObject = 6,
     CRotatateNetObject = 7,
+    CPlayerMoveData = 8,
 }
 
 internal static class NetworkSend
@@ -32,9 +33,9 @@ internal static class NetworkSend
         buffer.WriteInt32((int)ClientPackets.CPlayerPosition);
         buffer.WriteInt32(id);
 
-        buffer.WriteString(pos.x.ToString());
-        buffer.WriteString(pos.y.ToString());
-        buffer.WriteString(pos.z.ToString());
+        buffer.WriteDouble(pos.x);
+        buffer.WriteDouble(pos.y);
+        buffer.WriteDouble(pos.z);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 
@@ -47,10 +48,10 @@ internal static class NetworkSend
         ByteBuffer buffer = new ByteBuffer(4);
         buffer.WriteInt32((int)ClientPackets.CPlayerRotation);
         buffer.WriteInt32(id);
-
-        buffer.WriteString(rot.x.ToString());
-        buffer.WriteString(rot.y.ToString());
-        buffer.WriteString(rot.z.ToString());
+        
+        buffer.WriteDouble(rot.x);
+        buffer.WriteDouble(rot.y);
+        buffer.WriteDouble(rot.z);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 
@@ -91,6 +92,22 @@ internal static class NetworkSend
         buffer.WriteDouble(newRot.x);
         buffer.WriteDouble(newRot.y);
         buffer.WriteDouble(newRot.z);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    public static void SendPlayerMoveData(int id, bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
+    {
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CPlayerMoveData);
+        buffer.WriteInt32(id);
+        buffer.WriteBoolean(grounded);
+        buffer.WriteDouble(inputDir.x);
+        buffer.WriteDouble(inputDir.y);
+        buffer.WriteInt32((int)moveState);
+        buffer.WriteDouble(moveSpeed);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 

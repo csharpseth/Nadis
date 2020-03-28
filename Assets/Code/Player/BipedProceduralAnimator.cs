@@ -110,6 +110,21 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     public void FootStepping()
     {
+        if(moving == false)
+        {
+            rightFoot.localPosition = defaultRight;
+            leftFoot.localPosition = defaultLeft;
+
+            Vector3 tempR = rightFoot.position;
+            Vector3 tempL = leftFoot.position;
+
+            tempR.y = GroundHeight();
+            tempL.y = GroundHeight();
+
+            rightFoot.position = tempR;
+            leftFoot.position = tempL;
+        }
+
         if (moving)
         {
             float rightDist = (transform.position -  rightFoot.position).sqrMagnitude;
@@ -220,22 +235,6 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                  leftFoot.position = nextLeft;
             }
-        }
-        else
-        {
-
-
-             rightFoot.localPosition = defaultRight;
-             leftFoot.localPosition = defaultLeft;
-
-            Vector3 tempR =  rightFoot.position;
-            Vector3 tempL =  leftFoot.position;
-
-            tempR.y = GroundHeight();
-            tempL.y = GroundHeight();
-
-             rightFoot.position = tempR;
-             leftFoot.position = tempL;
         }
     }
 

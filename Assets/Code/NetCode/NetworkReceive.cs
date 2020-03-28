@@ -15,8 +15,8 @@ enum ServerPackets
     SSpawnNetObject = 7,
     SDestroyNetObject = 8,
     SMoveNetObject = 9,
-    SRotateNetObject = 10
-
+    SRotateNetObject = 10,
+    SPlayerMoveData = 11,
 }
 
 internal static class NetworkReceive
@@ -31,6 +31,7 @@ internal static class NetworkReceive
         NetworkConfig.socket.PacketId[(int)ServerPackets.SSpawnNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectSpawn);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SMoveNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectMove);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SRotateNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectRotate);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerMoveData] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerMoveData);
     }
 
     private static void Packet_WelcomeMSG(ref byte[] data)
@@ -61,16 +62,15 @@ internal static class NetworkReceive
 
         buffer.Dispose();
     }
-
-    //Player Position
+    
     private static void Packet_PlayerPosition(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
         int id = buffer.ReadInt32();
 
-        float x = float.Parse(buffer.ReadString());
-        float y = float.Parse(buffer.ReadString());
-        float z = float.Parse(buffer.ReadString());
+        float x = (float)buffer.ReadDouble();
+        float y = (float)buffer.ReadDouble();
+        float z = (float)buffer.ReadDouble();
 
         Vector3 newPos = new Vector3(x, y, z);
 
@@ -80,15 +80,14 @@ internal static class NetworkReceive
 
     }
     
-    //Player Rotation
     private static void Packet_PlayerRotation(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
         int id = buffer.ReadInt32();
 
-        float x = float.Parse(buffer.ReadString());
-        float y = float.Parse(buffer.ReadString());
-        float z = float.Parse(buffer.ReadString());
+        float x = (float)buffer.ReadDouble();
+        float y = (float)buffer.ReadDouble();
+        float z = (float)buffer.ReadDouble();
 
         Vector3 newRot = new Vector3(x, y, z);
 
@@ -96,8 +95,7 @@ internal static class NetworkReceive
 
         buffer.Dispose();
     }
-
-
+    
     private static void Packet_PlayerConnected(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
@@ -163,6 +161,22 @@ internal static class NetworkReceive
         Vector3 newRot = new Vector3(x, y, z);
 
         NetworkManager.ins.netObjectsManager.RotateNetObject(spawnID, newRot);
+
+        buffer.Dispose();
+    }
+
+    private static void Packet_PlayerMoveData(ref byte[] data)
+    {
+        Debug.Log("Receive Move Data");
+        ByteBuffer buffer = new ByteBuffer(data);
+        int playerID = buffer.ReadInt32();
+        bool grounded = buffer.ReadBoolean();
+        float x = (float)buffer.ReadDouble();
+        float y = (float)buffer.ReadDouble();
+        int moveState = buffer.ReadInt32();
+        float moveSpeed = (float)buffer.ReadDouble();
+
+        NetworkManager.ins.SetPlayerMoveData(playerID, grounded, new Vector2(x, y), (PlayerMoveState)moveState, moveSpeed);
 
         buffer.Dispose();
     }
