@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 9077269395411195881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 11.25}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,6 +113,10 @@ MonoBehaviour:
   grabSpeed: 5
   grabbedThreshold: 0.1
   heldEulerOffset: {x: 0, y: 0, z: 0}
+  Send: 1
+  Receive: 1
+  positionSendThresholdDist: 0.5
+  positionReachedThreshold: 0.1
 --- !u!54 &9077269395411195882
 Rigidbody:
   m_ObjectHideFlags: 0

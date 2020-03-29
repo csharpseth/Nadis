@@ -9,16 +9,14 @@ public class PlayerSync : MonoBehaviour
     public float moveThreshold = 2f;
     public float reachedThreshold = 0.2f;
     public float maxDistance = 5f;
-    public int maxQueueSize = 15;
     private float moveDataCheckDelay = 0.25f;
 
     private Vector3 prevPosition;
     private Vector3 prevRotation;
     private int id;
     private bool idSet = false;
-    private float lerpSpeed = 15f;
-
-    private Queue<Vector3> positionQueue = new Queue<Vector3>();
+    private float lerpSpeed = 10f;
+    
     private Vector3 destination;
     private BipedProceduralAnimator animator;
     private MovementController moveController;
@@ -26,6 +24,8 @@ public class PlayerSync : MonoBehaviour
     private bool grounded;
     private Vector2 inputDir;
     private PlayerMoveState moveState;
+
+    public int[] Inventory { get; private set; }
 
     public int ID { get { return id; } set
         {
@@ -39,34 +39,29 @@ public class PlayerSync : MonoBehaviour
         if (Local && NetworkManager.localPlayer == null)
             NetworkManager.localPlayer = this;
         animator = GetComponent<BipedProceduralAnimator>();
+        if (Send)
+        {
+            moveController = GetComponent<MovementController>();
+            InteractionController.ins.OnInventoryChange += InventoryChange;
+        }
     }
 
     private void Update()
     {
-        if(positionQueue.Count > 0 || destination != Vector3.zero)
-        {
-            if (positionQueue.Count > maxQueueSize)
-                positionQueue.Dequeue();
-
-            if(destination == Vector3.zero)
-            {
-                destination = positionQueue.Dequeue();
-            }
-
-            transform.position = Vector3.Lerp(transform.position, destination, lerpSpeed * Time.deltaTime);
-            float sqrDist = (destination - transform.position).sqrMagnitude;
-            if (sqrDist >= (maxDistance * maxDistance))
-                transform.position = destination;
-
-            if (sqrDist <= (reachedThreshold * reachedThreshold))
-            {
-                destination = Vector3.zero;
-            }
-
-        }
-
         if (Send == false)
+        {
+            if(destination != Vector3.zero)
+            {
+                transform.position = Vector3.Lerp(transform.position, destination, lerpSpeed * Time.deltaTime);
+                if((destination - transform.position).sqrMagnitude <= (reachedThreshold * reachedThreshold))
+                {
+                    transform.position = destination;
+                    destination = Vector3.zero;
+                }
+            }
+
             return;
+        }
 
         if((transform.position - prevPosition).sqrMagnitude >= (moveThreshold * moveThreshold))
         {
@@ -100,7 +95,7 @@ public class PlayerSync : MonoBehaviour
 
     public void SetPosition(Vector3 newPosition)
     {
-        positionQueue.Enqueue(newPosition);
+        destination = newPosition;
     }
 
     public void SetRotation(Vector3 newRotation)
@@ -110,12 +105,35 @@ public class PlayerSync : MonoBehaviour
 
     public void SetProceduralMoveData(bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
     {
-        Debug.Log(moveSpeed);
         lerpSpeed = moveSpeed;
         if(animator != null)
         {
             animator.SetMoveData(grounded, inputDir, moveState);
         }
+    }
+
+    public void SetInventorySize(int size)
+    {
+        Inventory = new int[size];
+    }
+    public void UpdateInventory(int[] ids)
+    {
+        for (int i = 0; i < ids.Length; i++)
+        {
+            Inventory[i] = ids[i];
+        }
+    }
+    public void InventoryChange(PhysicalItem[] items)
+    {
+        int[] ids = new int[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null)
+                ids[i] = items[i].meta.id;
+            else
+                ids[i] = -1;
+        }
+
     }
 
 }

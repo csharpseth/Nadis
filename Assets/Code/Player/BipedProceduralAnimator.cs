@@ -495,13 +495,6 @@ public struct ProceduralMoveData
     public float maxRootSideAngle;
 }
 
-[CreateAssetMenu(fileName = "New Procedural Animation Data", menuName = "Procedural Data/Procedural Animation Data")]
-public class ProceduralAnimationData : ScriptableObject
-{
-    public ProceduralStepData stepData;
-    public ProceduralMoveData moveData;
-}
-
 public enum Side
 {
     Right,

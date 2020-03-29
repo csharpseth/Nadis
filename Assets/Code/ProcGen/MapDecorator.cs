@@ -52,7 +52,12 @@ public class MapDecorator : MonoBehaviour
         {
             for (float y = 0; y < regionSize.z; y += stepSize)
             {
-                Vector3 origin = new Vector3(x + Random.Range(-offset, offset), regionSize.y, y + Random.Range(-offset, offset));
+
+                System.Random rX = new System.Random(seed + Mathf.RoundToInt(x));
+                System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
+                float offsetX = (float)rX.NextDouble() * offset;
+                float offsetY = (float)rY.NextDouble() * offset;
+                Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
                 RaycastHit hit;
                 if(Physics.Raycast(origin, Vector3.down, out hit))
                 {
@@ -112,7 +117,11 @@ public class MapDecorator : MonoBehaviour
             Transform parent = new GameObject(groupName).transform;
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPoints[i].pos, Quaternion.Euler(spawnPoints[i].rot), parent);
+                Vector3 rot = spawnPoints[i].rot;
+                System.Random r = new System.Random(seed + i);
+                rot.y = (float)r.NextDouble() * 180f;
+
+                Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPoints[i].pos, Quaternion.Euler(rot), parent);
             }
 
             return parent.gameObject;

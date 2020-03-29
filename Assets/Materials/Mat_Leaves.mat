@@ -49,11 +49,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _baseColor:
-        m_Texture: {fileID: 2800000, guid: bb1ddc86dd26c9f4bbe3ef17b5e60d99, type: 3}
+        m_Texture: {fileID: 2800000, guid: 835929a958aee1b449ec17c0107ad7f8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texMaps:
-        m_Texture: {fileID: 2800000, guid: cdca816c35af6f142bb79280b00fac2e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 29c03593884b3a5448ed2a925afe52f2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -78,11 +78,11 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _aoStrength: 0
-    - _metallic: 0
-    - _smoothness: 0
-    - _windDensity: 0.1
-    - _windStrength: 0.01
+    - _aoStrength: 0.143
+    - _metallic: 1
+    - _smoothness: 1
+    - _windDensity: 1
+    - _windStrength: 0.5
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}

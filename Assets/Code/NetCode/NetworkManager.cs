@@ -49,7 +49,7 @@ public class NetworkManager : MonoBehaviour
         NetworkConfig.ConnectToServer();
     }
 
-    public void CreateLocalPlayer(int connID)
+    public void CreateLocalPlayer(int connID, int inventorySize)
     {
         if (localPlayer != null) return;
 
@@ -67,21 +67,10 @@ public class NetworkManager : MonoBehaviour
         else
         {
             localPlayer.ID = connID;
+            InteractionController.ins.InitInventory(inventorySize);
         }
     }
-
-    private void Update()
-    {
-        if(localPlayerID != -1)
-        {
-            if(spawnPoints != null && spawnPoints.Count > 0)
-            {
-                CreateLocalPlayer(localPlayerID);
-                localPlayerID = -1;
-            }
-        }
-    }
-
+    
     public void RegisterSpawnPoint(Vector3 point)
     {
         if (spawnPoints == null)
@@ -90,13 +79,14 @@ public class NetworkManager : MonoBehaviour
         spawnPoints.Add(point);
     }
 
-    public void CreateNonLocalPlayer(int connID)
+    public void CreateNonLocalPlayer(int connID, int inventorySize)
     {
         if (connectedPlayers.ContainsKey(connID))
             return;
 
         PlayerSync ps = Instantiate(nonLocalPlayerPrefab).GetComponent<PlayerSync>();
         ps.ID = connID;
+        ps.SetInventorySize(inventorySize);
 
         connectedPlayers.Add(connID, ps);
 
@@ -147,6 +137,15 @@ public class NetworkManager : MonoBehaviour
         }
 
         connectedPlayers[playerID].SetProceduralMoveData(grounded, inputDir, moveState, moveSpeed);
+    }
+
+    public void UpdateInventory(int playerID, int[] ids)
+    {
+        if (connectedPlayers.ContainsKey(playerID) == false)
+            return;
+
+        PlayerSync ply = connectedPlayers[playerID];
+        ply.UpdateInventory(ids);
     }
 
     private void OnDrawGizmos()

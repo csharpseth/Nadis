@@ -6,12 +6,12 @@ using UnityEngine;
 public class ItemDatabase : ScriptableObject
 {
     public GameObject[] items;
-
-    public PhysicalItem SpawnItem(int id, Vector3 pos = default(Vector3), Vector3 rot = default(Vector3))
+    
+    public PhysicalItem SpawnItem(int id, Vector3 pos, Vector3 rot)
     {
         if (id > (items.Length - 1) || id < 0)
             return null;
-
+        
         PhysicalItem item = Instantiate(items[id], pos, Quaternion.Euler(rot)).GetComponent<PhysicalItem>();
         item.meta.id = id;
         return item;
@@ -20,7 +20,7 @@ public class ItemDatabase : ScriptableObject
 
     public PhysicalItem SpawnRandomItem(Vector3 pos = default(Vector3), Vector3 rot = default(Vector3))
     {
-        int index = Random.Range(0, (items.Length - 1));
+        int index = Random.Range(0, items.Length);
         return SpawnItem(index, pos, rot);
     }
 

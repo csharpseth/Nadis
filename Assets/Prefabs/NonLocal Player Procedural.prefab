@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5306550393391481272}
   - component: {fileID: 5306550393391481273}
   - component: {fileID: 524591619572088825}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NonLocal Player Procedural
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7cc5cca29ae1042a48d2744c67ddea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: d9eede52f4d8e184e958536f1d07c985, type: 2}
+  data:
+    stepData:
+      footMoveSpeed: 12
+      stepSize: 0.5
+      sideStepSize: 0.4
+      stepHeight: 0.6
+      maxDistBeforeNextStep: 0.6
+    moveData:
+      handFootMatchStrength: 0.6
+      handMoveSpeed: 10
+      bobCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: -0.25
+          outSlope: -0.25
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: -0.25
+          inSlope: -0.25
+          outSlope: -0.25
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      maxRootForwardAngle: 5
+      maxRootSideAngle: 3
   root: {fileID: 7033974415529345305}
   head: {fileID: 7033974416404005330}
   chest: {fileID: 7033974416834490094}
@@ -61,7 +96,7 @@ MonoBehaviour:
   maxHandTargetDistFromHand: 0.1
   grounded: 1
   inputDir: {x: 0, y: 0}
-  moveState: 0
+  moveState: 1
   moving: 0
 --- !u!114 &524591619572088825
 MonoBehaviour:
@@ -80,9 +115,6 @@ MonoBehaviour:
   moveThreshold: 0.1
   reachedThreshold: 0.1
   maxDistance: 3
-  maxQueueSize: 10
-  lerpSpeed: 20
-  moveDataCheckDelay: 1
 --- !u!1 &5306550393508754570
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5306550393508754571}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Right-LegPole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5306550393671253943}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Poles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5306550393691441177}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Left-LegPole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7033974415177854383}
   - component: {fileID: 7033974415177854382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Left-HandTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033974415184066531}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Left-FootTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033974415200796106}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Right-FootTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -808,7 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7033974416153721072}
   - component: {fileID: 7033974416153721075}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Right-HandTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033974416208022045}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1212,7 +1244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033974416404005330}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HeadTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033974416834490094}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ChestTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

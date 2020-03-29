@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Code\DebugUIController.cs" />
     <Compile Include="Assets\Code\ItemDatabase.cs" />
+    <Compile Include="Assets\Code\ItemManager.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkConfig.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkManager.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkObject.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Code\Player\InventorySlot.cs" />
     <Compile Include="Assets\Code\Player\InventoryUIManager.cs" />
     <Compile Include="Assets\Code\Player\MovementController.cs" />
+    <Compile Include="Assets\Code\Player\ProceduralAnimationData.cs" />
     <Compile Include="Assets\Code\Player\RotateWithMouse.cs" />
     <Compile Include="Assets\Code\Player\Weapon.cs" />
     <Compile Include="Assets\Code\ProcGen\FalloffGenerator.cs" />
