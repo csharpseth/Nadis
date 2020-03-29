@@ -2,7 +2,5 @@
 *.vs/
 *.backup
 *Temp/
-*Library/
 *Local Builds/
 *Logs/
-*.csproj
