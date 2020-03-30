@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: ca111b0e852c8f44498c410e5d2d7abd,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1028,9 +1028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb7725c287eccc45b9f132be8e4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionSize: {x: 512, y: 250, z: 512}
+  regionSize: {x: 256, y: 150, z: 256}
   stepSize: 0.5
-  offset: 0.5
+  offset: 0.25
 --- !u!114 &1097076447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,13 +1046,13 @@ MonoBehaviour:
   mapData: {fileID: 11400000, guid: c16508d76b53f304198cdcb9c5aec772, type: 2}
   spawnPointsData:
     name: 
-    enabled: 0
-    minHeight: 0.2
-    maxHeight: 0.4
-    density: 0.3
+    enabled: 1
+    minHeight: 0.05
+    maxHeight: 0.15
+    density: 0.1
     maxNormalAngle: 40
     maxPrefabAngle: 20
-    maximumPoints: 2
+    maximumPoints: 1
     prefabs: []
   useTerraform: 0
   terraformData:
@@ -1081,9 +1081,9 @@ MonoBehaviour:
     minHeight: 0.1
     maxHeight: 1
     density: 0.5
-    maxNormalAngle: 40
-    maxPrefabAngle: 30
-    maximumPoints: 3000
+    maxNormalAngle: 50
+    maxPrefabAngle: 35
+    maximumPoints: 2500
     prefabs:
     - {fileID: 8002321573796704496, guid: 268a834495812a8478be4a10cdde8c72, type: 3}
   - name: Pine Small
@@ -1098,32 +1098,32 @@ MonoBehaviour:
     - {fileID: 9103619294380750412, guid: f7571c42012a830479ecd4f8d68e535a, type: 3}
   - name: Pine
     enabled: 1
-    minHeight: 0.25
-    maxHeight: 0.45
-    density: 0.3
-    maxNormalAngle: 20
-    maxPrefabAngle: 10
-    maximumPoints: 1000
+    minHeight: 0.2
+    maxHeight: 0.8
+    density: 0.2
+    maxNormalAngle: 30
+    maxPrefabAngle: 15
+    maximumPoints: 600
     prefabs:
     - {fileID: 4189794481650371142, guid: b350355d8bbe8d04299682a535a2d3c8, type: 3}
   - name: Oak
-    enabled: 1
+    enabled: 0
     minHeight: 0.4
     maxHeight: 0.9
     density: 0.1
     maxNormalAngle: 20
     maxPrefabAngle: 10
-    maximumPoints: 1000
+    maximumPoints: 300
     prefabs:
     - {fileID: 1522042080981654255, guid: f6d749abacfeee7478b74a7f05d73d7b, type: 3}
   - name: Willow Medium
-    enabled: 1
+    enabled: 0
     minHeight: 0.4
     maxHeight: 0.9
     density: 0.03
     maxNormalAngle: 40
     maxPrefabAngle: 10
-    maximumPoints: 600
+    maximumPoints: 200
     prefabs:
     - {fileID: 7460374275592652141, guid: bbc35d535a4392447a4c9af0b028f738, type: 3}
   - name: Willow Small
@@ -1133,7 +1133,7 @@ MonoBehaviour:
     density: 0.01
     maxNormalAngle: 40
     maxPrefabAngle: 10
-    maximumPoints: 700
+    maximumPoints: 200
     prefabs:
     - {fileID: 2030601714921726969, guid: 25937735e1d1d734ba6bef120ae702a5, type: 3}
   networked: 1

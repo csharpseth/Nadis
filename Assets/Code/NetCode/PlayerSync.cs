@@ -46,6 +46,14 @@ public class PlayerSync : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if(Send == false)
+        {
+            InteractionController.ins.InitInventory();
+        }
+    }
+
     private void Update()
     {
         if (Send == false)

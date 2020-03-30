@@ -28,7 +28,7 @@ public class InteractionController : MonoBehaviour
     }
     public Camera Cam { get { return camera; } }
 
-    private BipedProceduralAnimator animator;
+    public BipedProceduralAnimator Animator { get; private set; }
     public int inventorySize = 10;
     public int index = 0;
     public PhysicalItem CurrentItem { get { return Inventory[index]; } }
@@ -48,12 +48,12 @@ public class InteractionController : MonoBehaviour
         if (ins == null)
             ins = this;
 
-        animator = GetComponent<BipedProceduralAnimator>();
-        if(animator != null)
+        Animator = GetComponent<BipedProceduralAnimator>();
+        if(Animator != null)
         {
-            SetHandTarget += animator.SetHandTarget;
-            SetHandTargetPosition += animator.SetHandTargetPosition;
-            EndCurrentHandTarget += animator.EndCurrentHandTarget;
+            SetHandTarget += Animator.SetHandTarget;
+            SetHandTargetPosition += Animator.SetHandTargetPosition;
+            EndCurrentHandTarget += Animator.EndCurrentHandTarget;
         }
     }
 
@@ -139,7 +139,7 @@ public class InteractionController : MonoBehaviour
             PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
             if (item != null)
             {
-                if (animator != null)
+                if (Animator != null)
                 {
                     PickupItem(item);
                 }
@@ -156,7 +156,7 @@ public class InteractionController : MonoBehaviour
                 if(Inventory[i] == null)
                 {
                     Inventory[i] = item;
-                    item.Interact(animator.rightHand);
+                    item.Interact(Animator.rightHand);
                     item.Hide(true);
                     OnInventoryAdd?.Invoke(item, i);
                     break;
@@ -165,7 +165,7 @@ public class InteractionController : MonoBehaviour
         }else
         {
             Inventory[index] = item;
-            item.Interact(animator.rightHand);
+            item.Interact(Animator.rightHand);
             OnInventoryAdd?.Invoke(item, index);
         }
 

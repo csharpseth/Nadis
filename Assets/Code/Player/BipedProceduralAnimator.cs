@@ -125,7 +125,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             leftFoot.position = tempL;
         }
 
-        if (moving)
+        if (moving == true)
         {
             float rightDist = (transform.position -  rightFoot.position).sqrMagnitude;
             float leftDist = (transform.position -  leftFoot.position).sqrMagnitude;

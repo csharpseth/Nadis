@@ -81,14 +81,14 @@ Material:
     - _aoStrength: 0.143
     - _metallic: 1
     - _smoothness: 1
-    - _windDensity: 1
-    - _windStrength: 0.5
+    - _windDensity: 0.1
+    - _windStrength: 0.01
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _windMovement: {r: 1, g: 0, b: 0, a: 0}
+    - _windMovement: {r: 2, g: 0, b: 0, a: 0}
 --- !u!114 &4125395605788989980
 MonoBehaviour:
   m_ObjectHideFlags: 11

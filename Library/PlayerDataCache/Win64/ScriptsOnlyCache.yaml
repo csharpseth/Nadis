@@ -16,20 +16,17 @@ ScriptsOnlyBuild:
     - NetworkObjectsManager
     - PhysicalItem
     - PlayerSync
+    - Readme
     - RotateWithMouse
     - WaterGenerator
     - Weapon
     GitHub.Unity.45.dll:
     - GitHub.Unity.ApplicationCache
-    - GitHub.Unity.BranchesCache
     - GitHub.Unity.EnvironmentCache
     - GitHub.Unity.GitAheadBehindCache
     - GitHub.Unity.GitLocksCache
-    - GitHub.Unity.GitLogCache
     - GitHub.Unity.GitStatusCache
     - GitHub.Unity.RepositoryInfoCache
-    KaymakNetwork.dll:
-    - UnityThread
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -1246,4 +1243,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Network Testing.unity
-  playerPath: D:/Unity-Projects/TimeDrivenSurvival_New/Local Builds/TimeDrivenSurvival_New.exe
+  playerPath: C:/Users/danks/Desktop/Devlog #1/Terrain Testing/Darwins Island.exe

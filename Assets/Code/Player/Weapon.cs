@@ -36,7 +36,7 @@ public class Weapon : PhysicalItem
                 idleParent = transform.parent;
 
             if (aimParent == null)
-                transform.parent = InteractionController.ins.Cam.transform;
+                transform.parent = InteractionController.ins.Animator.head;
             else
                 transform.parent = aimParent;
 

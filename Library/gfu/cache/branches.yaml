@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2020-03-29T02:43:08.278-05:00
-  initializedAtString: 2020-03-28T22:16:42.669-05:00
+  lastUpdatedAtString: 2020-03-29T19:23:38.335-05:00
+  initializedAtString: 2020-03-29T19:23:38.017-05:00
   localBranches:
   - name: master
     tracking: origin/master
+  - name: Server
+    tracking: 
   remoteBranches:
   - name: origin/master
     tracking: '[None]'
@@ -32,12 +34,18 @@ MonoBehaviour:
   localConfigBranches:
     keys:
     - master
+    - Server
     values:
     - name: master
       remote:
         name: origin
         url: https://github.com/danksupercow/DarwinsIsland.git
       trackingBranch: master
+    - name: Server
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
   remoteConfigBranches:
     keys:
     - origin
