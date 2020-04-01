@@ -72,12 +72,15 @@
     <Compile Include="Assets\Code\NetCode\NetworkReceive.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkSend.cs" />
     <Compile Include="Assets\Code\NetCode\PlayerSync.cs" />
+    <Compile Include="Assets\Code\ObjectPool.cs" />
     <Compile Include="Assets\Code\PhysicalItem.cs" />
     <Compile Include="Assets\Code\Player\BipedProceduralAnimator.cs" />
     <Compile Include="Assets\Code\Player\InteractionController.cs" />
     <Compile Include="Assets\Code\Player\InventorySlot.cs" />
     <Compile Include="Assets\Code\Player\InventoryUIManager.cs" />
     <Compile Include="Assets\Code\Player\MovementController.cs" />
+    <Compile Include="Assets\Code\Player\PerspectiveController.cs" />
+    <Compile Include="Assets\Code\Player\PlayerSoundController.cs" />
     <Compile Include="Assets\Code\Player\ProceduralAnimationData.cs" />
     <Compile Include="Assets\Code\Player\RotateWithMouse.cs" />
     <Compile Include="Assets\Code\Player\Weapon.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Assets\Code\ProcGen\WaterGenerator.cs" />
     <Compile Include="Assets\Code\SimpleCameraController.cs" />
     <Compile Include="Assets\Code\SmoothFollow.cs" />
+    <Compile Include="Assets\Code\TestPunch.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKCCD.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKFabric.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKLook.cs" />

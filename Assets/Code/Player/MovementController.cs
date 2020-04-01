@@ -102,7 +102,7 @@ public class MovementController : MonoBehaviour
             Walking();
         }
 
-        if(dir == Vector3.zero && MoveState != PlayerMoveState.Crouching)
+        if(dir == Vector3.zero || IsGrounded == false && MoveState != PlayerMoveState.Crouching)
         {
             MoveState = PlayerMoveState.None;
         }

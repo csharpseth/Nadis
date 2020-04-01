@@ -88,9 +88,4 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public void Foo()
-    {
-        Generate();
-    }
-
 }

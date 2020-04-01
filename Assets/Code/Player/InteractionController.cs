@@ -7,8 +7,6 @@ public class InteractionController : MonoBehaviour
 {
     public static InteractionController ins;
     
-    [SerializeField]
-    private new Camera camera;
     public float interactionReach = 6f;
     public LayerMask interactionMask;
 
@@ -23,10 +21,16 @@ public class InteractionController : MonoBehaviour
     {
         get
         {
-            return camera.ScreenPointToRay(CenterScreen);
+            return Camera.ScreenPointToRay(CenterScreen);
         }
     }
-    public Camera Cam { get { return camera; } }
+    public Camera Camera
+    {
+        get
+        {
+            return PerspectiveController.ins.ActiveCamera;
+        }
+    }
 
     public BipedProceduralAnimator Animator { get; private set; }
     public int inventorySize = 10;
@@ -39,7 +43,7 @@ public class InteractionController : MonoBehaviour
     public Action<int> OnInventorySelect;
     public Action<PhysicalItem[]> OnInventoryChange;
 
-    public Action<Vector3, Side, bool> SetHandTargetPosition;
+    public Action<Vector3, Side, float, bool> SetHandTargetPosition;
     public Action<Rigidbody, Side> SetHandTarget;
     public Action EndCurrentHandTarget;
 
@@ -131,7 +135,7 @@ public class InteractionController : MonoBehaviour
 
     private void Interact()
     {
-        Ray r = camera.ScreenPointToRay(CenterScreen);
+        Ray r = CenterScreenRay;
         RaycastHit hit;
 
         if (Physics.Raycast(r, out hit, interactionReach, interactionMask))

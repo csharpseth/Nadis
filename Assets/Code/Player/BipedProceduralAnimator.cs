@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ public class BipedProceduralAnimator : MonoBehaviour
     private Vector3 nextLeft;
     private Vector3 defaultLeft;
 
+    private float overrideRightHandSpeed = 0f;
+    private float overrideLeftHandSpeed = 0f;
     private Vector3 nextRightHand;
     private Vector3 nextLeftHand;
     private Vector3 defaultRightHand;
@@ -55,6 +58,15 @@ public class BipedProceduralAnimator : MonoBehaviour
     public bool grounded = true;
     public Vector2 inputDir;
     public PlayerMoveState moveState;
+
+    public Action OnRightFootBeginStep;
+    public Action OnLeftFootBeginStep;
+
+    public Action<float> OnRightFootStepping;
+    public Action<float> OnLeftFootStepping;
+
+    public Action OnRightFootFinishStep;
+    public Action OnLeftFootFinishStep;
     
 
     public bool moving = false;
@@ -71,6 +83,9 @@ public class BipedProceduralAnimator : MonoBehaviour
         if(overrideNormalHandCondition == false)
         {
             DefaultHandAction();
+        }else
+        {
+            LerpHandTargetPosition();
         }
         
         if(grounded == false)
@@ -151,6 +166,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (rightFootLerp.done == true)
                     {
+                        OnRightFootFinishStep?.Invoke();
                         Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
 
                         RaycastHit rightHit;
@@ -161,8 +177,13 @@ public class BipedProceduralAnimator : MonoBehaviour
                             rightFootLerp = new LerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             right = false;
                             left = true;
+                            OnLeftFootBeginStep?.Invoke();
                         }
+                    }else
+                    {
+                        OnRightFootStepping?.Invoke(Mathf.Abs(rightHip.localRotation.x));
                     }
+
                 }
             }
 
@@ -183,6 +204,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (leftFootLerp.done == true)
                     {
+                        OnLeftFootFinishStep?.Invoke();
                         Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
 
                         RaycastHit leftHit;
@@ -193,12 +215,16 @@ public class BipedProceduralAnimator : MonoBehaviour
                             leftFootLerp = new LerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             left = false;
                             right = true;
+                            OnRightFootBeginStep?.Invoke();
                         }
+                    }else
+                    {
+                        OnLeftFootStepping?.Invoke(Mathf.Abs(leftHip.localRotation.x));
                     }
                 }
             }
 
-            if (leftFootLerp != null && rightFootLerp != null)
+            if (leftFootLerp != null && rightFootLerp != null && data.doBob == true)
             {
                 float bobPercent = ((rightFootLerp.currentHeight + leftFootLerp.currentHeight) / 2f) / rightFootLerp.height;
                 float bobModifier = data.moveData.bobCurve.Evaluate(bobPercent);
@@ -214,26 +240,24 @@ public class BipedProceduralAnimator : MonoBehaviour
                 newHead.y += bobModifier;
                 newChest.y += bobModifier;
 
-                 //rightHip.localPosition = newRightHip;
-                 //leftHip.localPosition = newLeftHip;
+                //rightHip.localPosition = newRightHip;
+                //leftHip.localPosition = newLeftHip;
 
-                 head.localPosition = newHead;
-                 chest.localPosition = newChest;
+                head.localPosition = newHead;
+                chest.localPosition = newChest;
 
             }
 
             if (right == false)
             {
                 nextRight.y = GroundHeight();
-
-                 rightFoot.position = nextRight;
+                rightFoot.position = nextRight;
             }
 
             if (left == false)
             {
                 nextLeft.y = GroundHeight();
-
-                 leftFoot.position = nextLeft;
+                leftFoot.position = nextLeft;
             }
         }
     }
@@ -245,8 +269,8 @@ public class BipedProceduralAnimator : MonoBehaviour
         if (leftHandRB != null)
             leftHandRB.isKinematic = true;
 
-        Vector3 lPos =  leftHand.localPosition;
-        Vector3 rPos =  rightHand.localPosition;
+        Vector3 lPos =  defaultLeftHand;
+        Vector3 rPos =  defaultRightHand;
 
         lPos.z =  rightFoot.localPosition.z * data.moveData.handFootMatchStrength;
         rPos.z =  leftFoot.localPosition.z * data.moveData.handFootMatchStrength;
@@ -263,29 +287,34 @@ public class BipedProceduralAnimator : MonoBehaviour
         if(nextRightHand != Vector3.zero)
         {
             Vector3 tempRight = rightHand.localPosition;
-            tempRight = Vector3.Lerp(tempRight, nextRightHand, data.moveData.handMoveSpeed * Time.deltaTime);
+            float speed = overrideRightHandSpeed != 0 ? overrideRightHandSpeed : data.moveData.handMoveSpeed;
+            tempRight = Vector3.Lerp(tempRight, nextRightHand, speed * Time.deltaTime);
             rightHand.localPosition = tempRight;
-            if((nextRightHand - tempRight).sqrMagnitude > (0.1f * 0.1f))
+            float dist = (nextRightHand - tempRight).sqrMagnitude;
+            if (dist > (0.1f * 0.1f))
             {
                 rightDone = false;
-            }else
+            }else if(dist <= (0.1f * 0.1f) || dist > (1.5f * 1.5f))
             {
                 nextRightHand = Vector3.zero;
-
+                overrideRightHandSpeed = 0f;
             }
         }
 
         if (nextLeftHand != Vector3.zero)
         {
             Vector3 tempLeft = LeftHand.localPosition;
+            float speed = overrideLeftHandSpeed != 0 ? overrideRightHandSpeed : data.moveData.handMoveSpeed;
             tempLeft = Vector3.Lerp(tempLeft, nextLeftHand, data.moveData.handMoveSpeed * Time.deltaTime);
             leftHand.localPosition = tempLeft;
-            if ((nextLeftHand - tempLeft).sqrMagnitude > (0.1f * 0.1f))
+            float dist = (nextLeftHand - tempLeft).sqrMagnitude;
+            if (dist > (0.1f * 0.1f))
             {
                 leftDone = false;
-            }else
+            }else if(dist <= (0.1f * 0.1f) || dist > (1.5f * 1.5f))
             {
                 nextLeftHand = Vector3.zero;
+                overrideLeftHandSpeed = 0f;
             }
         }
 
@@ -293,19 +322,21 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     }
 
-    public void SetHandTargetPosition(Vector3 position, Side side, bool persistent = false)
+    public void SetHandTargetPosition(Vector3 position, Side side, float overrideSpeed = 0f, bool persistent = false)
     {
         handTargetPersistent = persistent;
 
         if(side == Side.Right || side == Side.Both)
         {
-            nextRightHand = position;
+            nextRightHand = WorldToLocal(position, rightHand.parent);
+            overrideRightHandSpeed = overrideSpeed;
             overrideNormalHandCondition = true;
         }
 
         if (side == Side.Left || side == Side.Both)
         {
-            nextLeftHand = position;
+            nextLeftHand = WorldToLocal(position, leftHand.parent);
+            overrideLeftHandSpeed = overrideSpeed;
             overrideNormalHandCondition = true;
         }
     }

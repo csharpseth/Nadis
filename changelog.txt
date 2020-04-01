@@ -1,13 +1,10 @@
--Create & Implemented a new Player Model Texture
--Implemented PlayerMoveData syncing enabling the non-local player to have procedural animations
--Implemented Items & Inventory Systems
--Added Item & Inventory spawn & add Network Syncing
--Added Item Position & Rotation Syncing
--Created 5 new Tree prefabs
--Improved Decoration Placement
--Improved & Modified Foliage & Tree Shaders ( Foliage will now rise up from the ground at a certain distance )
-
-Fixed:
--Network player move latency
--Decoration seed for random rotation, and offset
+-Improved Trees Meshes Performance
+-Improved Terrain Shader
+    Added Beach & Other Ways to variate terrain
+-Added player sounds when walking(Very early foundation)
+-Model & Textures: 6 Rocks, and 4 Boulders
+-Improved Terrain Generation
+    Removed Empty or Plateaued generations
+-Combined Foliage & Tree Shader & Gave all Trees & Leaves
+the same Material
 

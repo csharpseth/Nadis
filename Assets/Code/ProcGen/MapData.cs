@@ -16,7 +16,7 @@ public class MapData : ScriptableObject
     {
         float[,] falloff = new float[size, size];
         if (useFalloffMap)
-            falloff = FalloffGenerator.Generate(size, falloffCurve);
+            falloff = FalloffGenerator.Generate(size, seed, falloffCurve);
 
         for (int i = 0; i < noiseProfiles.Length; i++)
         {
@@ -70,12 +70,11 @@ public class MapData : ScriptableObject
                         map[x, y] /= noiseProfiles[i].Sample(x, y);
                     }
                 }
-
-
-                if (useFalloffMap)
-                    map[x, y] *= falloff[x, y];
             }
         }
+
+        float min = 500f;
+        float max = -500f;
 
         for (int x = 0; x < size; x++)
         {
@@ -89,12 +88,38 @@ public class MapData : ScriptableObject
                         map[x, y] += noiseProfiles[i].Sample(x, y);
                     }
                 }
-
+                if (useFalloffMap)
+                    map[x, y] *= falloff[x, y];
                 map[x, y] *= finalAmplitude;
+                //map[x, y] = SmoothStep(map[x, y], 0f, 1f);
+                float val = map[x, y];
+                if (val > max)
+                    max = val;
+                if (val < min)
+                    min = val;
             }
         }
 
+        /*for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                float val = map[x, y];
+                float top = (max - min);
+                float bottom = (val - min);
+                map[x, y] = (bottom / (1f - (min / max)));
+            }
+        }*/
+
+        Debug.Log("Min:" + min + "  Max:" + max);
+
         return map;
+    }
+
+    private float SmoothStep(float x, float leftEdge, float rightEdge)
+    {
+        float tempX = Mathf.Clamp((x - leftEdge) / (rightEdge - leftEdge), 0f, 1f);
+        return tempX * tempX * tempX;
     }
 
 }
@@ -120,7 +145,13 @@ public class NoiseProfile
         if (active == false)
             return 0f;
 
-        return heightMap[x, y];
+        return Mathf.Clamp(heightMap[x, y], 0.1f, 1f);
+    }
+
+    private float SmoothStep(float x, float leftEdge, float rightEdge)
+    {
+        float tempX = Mathf.Clamp((x - leftEdge) / (rightEdge - leftEdge), 0f, 1f);
+        return tempX * tempX * tempX;
     }
 
     public void Generate(int size, int seed)
