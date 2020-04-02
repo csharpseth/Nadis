@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: ca111b0e852c8f44498c410e5d2d7abd,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -134,8 +134,9 @@ GameObject:
   - component: {fileID: 204002003}
   - component: {fileID: 204002002}
   - component: {fileID: 204002005}
+  - component: {fileID: 204002006}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Network Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,6 +204,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: ba779f2e557c2b54ba9cd551b7a90abc, type: 2}
+--- !u!114 &204002006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204002001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d995ca0f5569e469f462243748ba28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &208705094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,7 +2361,7 @@ MonoBehaviour:
   terrain: {fileID: 855658938}
   beachHeight: 0.1
   beachBlend: 0.1
-  applyDecorations: 1
+  applyDecorations: 0
   decorationLayers:
   - name: Grass
     enabled: 1

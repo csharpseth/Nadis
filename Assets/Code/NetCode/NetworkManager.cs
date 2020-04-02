@@ -37,8 +37,7 @@ public class NetworkManager : MonoBehaviour
     private int localPlayerID = -1;
 
     
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         DontDestroyOnLoad(this);
@@ -46,7 +45,7 @@ public class NetworkManager : MonoBehaviour
         netObjectsManager = GetComponent<NetworkObjectsManager>();
 
         NetworkConfig.InitNetwork();
-        NetworkConfig.ConnectToServer();
+        SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
     }
 
     public void CreateLocalPlayer(int connID, int inventorySize)
