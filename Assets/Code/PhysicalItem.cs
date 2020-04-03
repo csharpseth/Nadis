@@ -52,7 +52,7 @@ public class PhysicalItem : MonoBehaviour
         Debug.Log(meta.name + " Primary Use");
     }
 
-    public virtual void SecondaryUse()
+    public virtual void SecondaryUse(bool state)
     {
         Debug.Log(meta.name + " Secondary Use");
     }
@@ -82,7 +82,7 @@ public class PhysicalItem : MonoBehaviour
 
     private void Update()
     {
-        if(Send)
+        if(Send && NetworkManager.ins != null)
         {
             if((transform.position - lastPos).sqrMagnitude >= (positionSendThresholdDist * positionSendThresholdDist) && receiving == false)
             {

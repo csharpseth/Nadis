@@ -7,6 +7,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 {
     public ProceduralAnimationData data;
 
+    public Transform targets;
     public Transform root;
     public Transform head;
     public Transform chest;
@@ -21,11 +22,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     private Vector3 defaultRight;
     private Vector3 nextLeft;
     private Vector3 defaultLeft;
-
-    private float overrideRightHandSpeed = 0f;
-    private float overrideLeftHandSpeed = 0f;
-    private Vector3 nextRightHand;
-    private Vector3 nextLeftHand;
+    
     private Vector3 defaultRightHand;
     private Vector3 defaultLeftHand;
     public bool handTargetPersistent = false;
@@ -40,11 +37,9 @@ public class BipedProceduralAnimator : MonoBehaviour
     private LerpData rightFootLerp;
     private LerpData leftFootLerp;
 
-    private Rigidbody rightHandRB;
-    private Rigidbody leftHandRB;
-    private Joint rightHandJoint;
-    private Joint leftHandJoint;
-    
+    private HandLerpData rightHandLerp;
+    private HandLerpData leftHandLerp;
+
     public float maxHandTargetDistFromHand = 0.1f;
 
     private bool right = true;
@@ -80,12 +75,34 @@ public class BipedProceduralAnimator : MonoBehaviour
     private void Update()
     {
         RootMomentum();
-        if(overrideNormalHandCondition == false)
+        if(rightHandLerp == null)
         {
-            DefaultHandAction();
+            RightArmSwing();
         }else
         {
-            LerpHandTargetPosition();
+            if (rightHandLerp.Done == false)
+            {
+                rightHandLerp.DoLerp();
+            }
+            else
+            {
+                rightHandLerp = null;
+                rightHand.localPosition = defaultRightHand;
+            }
+        }
+
+        if(leftHandLerp == null)
+        {
+            LeftArmSwing();
+        }else
+        {
+            if (leftHandLerp.Done == false)
+                leftHandLerp.DoLerp();
+            else
+            {
+                leftHandLerp = null;
+                leftHand.localPosition = defaultLeftHand;
+            }
         }
         
         if(grounded == false)
@@ -118,9 +135,6 @@ public class BipedProceduralAnimator : MonoBehaviour
 
         defaultRightHand = rightHand.localPosition;
         defaultLeftHand = leftHand.localPosition;
-
-        rightHandRB = rightHand.GetComponent<Rigidbody>();
-        leftHandRB = leftHand.GetComponent<Rigidbody>();
     }
 
     public void FootStepping()
@@ -261,112 +275,78 @@ public class BipedProceduralAnimator : MonoBehaviour
             }
         }
     }
-
-    public void DefaultHandAction()
+    
+    private void RightArmSwing()
     {
-        if (rightHandRB != null)
-            rightHandRB.isKinematic = true;
-        if (leftHandRB != null)
-            leftHandRB.isKinematic = true;
+        Vector3 rPos = defaultRightHand;
+        
+        rPos.z = leftFoot.localPosition.z * data.moveData.handFootMatchStrength;
+        rightHand.localPosition = rPos;
+    }
+    private void LeftArmSwing()
+    {
+        Vector3 lPos = defaultLeftHand;
 
-        Vector3 lPos =  defaultLeftHand;
-        Vector3 rPos =  defaultRightHand;
-
-        lPos.z =  rightFoot.localPosition.z * data.moveData.handFootMatchStrength;
-        rPos.z =  leftFoot.localPosition.z * data.moveData.handFootMatchStrength;
-
-         leftHand.localPosition = lPos;
-         rightHand.localPosition = rPos;
+        lPos.z = rightFoot.localPosition.z * data.moveData.handFootMatchStrength;
+        leftHand.localPosition = lPos;
     }
 
-    public void LerpHandTargetPosition()
+    public void SetHandTargetPosition(Vector3 position, Side side, float speed = 0f, Transform parent = null, bool persistent = false)
     {
-        bool rightDone = true;
-        bool leftDone = true;
-
-        if(nextRightHand != Vector3.zero)
+        if(parent != null)
         {
-            Vector3 tempRight = rightHand.localPosition;
-            float speed = overrideRightHandSpeed != 0 ? overrideRightHandSpeed : data.moveData.handMoveSpeed;
-            tempRight = Vector3.Lerp(tempRight, nextRightHand, speed * Time.deltaTime);
-            rightHand.localPosition = tempRight;
-            float dist = (nextRightHand - tempRight).sqrMagnitude;
-            if (dist > (0.1f * 0.1f))
+            if(side == Side.Right || side == Side.Both && rightHandLerp == null)
             {
-                rightDone = false;
-            }else if(dist <= (0.1f * 0.1f) || dist > (1.5f * 1.5f))
+                rightHand.SetParent(parent);
+
+                rightHandLerp = new HandLerpData(rightHand, position, speed, true, targets);
+                
+                rightHand.localRotation = Quaternion.identity;
+            }
+
+            if (side == Side.Left || side == Side.Both && leftHandLerp == null)
             {
-                nextRightHand = Vector3.zero;
-                overrideRightHandSpeed = 0f;
+                leftHand.SetParent(parent);
+
+                leftHandLerp = new HandLerpData(leftHand, position, speed, true, targets);
+
+                leftHand.localRotation = Quaternion.identity;
             }
         }
-
-        if (nextLeftHand != Vector3.zero)
-        {
-            Vector3 tempLeft = LeftHand.localPosition;
-            float speed = overrideLeftHandSpeed != 0 ? overrideRightHandSpeed : data.moveData.handMoveSpeed;
-            tempLeft = Vector3.Lerp(tempLeft, nextLeftHand, data.moveData.handMoveSpeed * Time.deltaTime);
-            leftHand.localPosition = tempLeft;
-            float dist = (nextLeftHand - tempLeft).sqrMagnitude;
-            if (dist > (0.1f * 0.1f))
-            {
-                leftDone = false;
-            }else if(dist <= (0.1f * 0.1f) || dist > (1.5f * 1.5f))
-            {
-                nextLeftHand = Vector3.zero;
-                overrideLeftHandSpeed = 0f;
-            }
-        }
-
-        overrideNormalHandCondition = !(rightDone == true && leftDone == true && handTargetPersistent == false);
-
     }
-
-    public void SetHandTargetPosition(Vector3 position, Side side, float overrideSpeed = 0f, bool persistent = false)
+    
+    public void SetHandTargetPositions(Vector3[] positions, Side side, float speed = 0f, Transform parent = null, bool local = true)
     {
-        handTargetPersistent = persistent;
-
-        if(side == Side.Right || side == Side.Both)
+        if (side == Side.Right || side == Side.Both && rightHandLerp == null)
         {
-            nextRightHand = WorldToLocal(position, rightHand.parent);
-            overrideRightHandSpeed = overrideSpeed;
-            overrideNormalHandCondition = true;
+            if (parent != null)
+                rightHand.SetParent(parent);
+            
+            rightHandLerp = new HandLerpData(rightHand, positions, speed, local, targets);
+            rightHand.localRotation = Quaternion.identity;
         }
 
-        if (side == Side.Left || side == Side.Both)
+        if (side == Side.Left || side == Side.Both && leftHandLerp == null)
         {
-            nextLeftHand = WorldToLocal(position, leftHand.parent);
-            overrideLeftHandSpeed = overrideSpeed;
-            overrideNormalHandCondition = true;
-        }
-    }
+            if (parent != null)
+                leftHand.SetParent(parent);
 
-    public void SetHandTarget(Rigidbody rb, Side side)
-    {
-        overrideNormalHandCondition = true;
-
-        if(side == Side.Right || side == Side.Both)
-        {
-            rightHand.position = rb.transform.position;
-            rightHandRB.isKinematic = false;
-            rightHandJoint = rightHand.gameObject.AddComponent<FixedJoint>();
-            rightHandJoint.connectedBody = rb;
-        }
-
-        if(side == Side.Left || side == Side.Both)
-        {
-            leftHand.position = rb.transform.position;
-            leftHandRB.isKinematic = false;
-            leftHandJoint = leftHand.gameObject.AddComponent<FixedJoint>();
-            leftHandJoint.connectedBody = rb;
+            leftHandLerp = new HandLerpData(leftHand, positions, speed, local, targets);
+            leftHand.localRotation = Quaternion.identity;
         }
     }
 
     public void EndCurrentHandTarget()
     {
-        if (rightHandJoint != null) Destroy(rightHandJoint);
-        if (leftHandJoint != null) Destroy(leftHandJoint);
+        if (overrideNormalHandCondition == false)
+            return;
+        
         overrideNormalHandCondition = false;
+        handTargetPersistent = false;
+
+        rightHand.SetParent(targets);
+        leftHand.SetParent(targets);
+
         rightHand.localPosition = defaultRightHand;
         leftHand.localPosition = defaultLeftHand;
     }
@@ -531,4 +511,104 @@ public enum Side
     Right,
     Left,
     Both
+}
+
+public class HandLerpData
+{
+    private const float FinishThreshold = (0.05f * 0.05f);
+    private Queue<Vector3> posQueue;
+    private Vector3 nextPos;
+    private float speed;
+    private Transform target;
+    private Transform defParent;
+    private bool local;
+    public bool Done { get; private set; }
+
+    public HandLerpData(Transform tar, Vector3 pos, float speed, bool local = true, Transform defParent = null)
+    {
+        target = tar;
+        nextPos = pos;
+        this.speed = speed;
+        this.local = local;
+        this.defParent = defParent;
+    }
+    public HandLerpData(Transform tar, Vector3[] pos, float speed, bool local = true, Transform defParent = null)
+    {
+        target = tar;
+        this.speed = speed;
+        posQueue = new Queue<Vector3>();
+        for (int i = 0; i < pos.Length; i++)
+        {
+            if(pos[i] != Vector3.zero)
+            {
+                posQueue.Enqueue(pos[i]);
+            }
+        }
+        this.local = local;
+        this.defParent = defParent;
+    }
+
+    public void DoLerp()
+    {
+        if(posQueue == null || posQueue.Count == 0)
+        {
+            Debug.Log("Queue Done");
+            if(nextPos == Vector3.zero)
+            {
+                Done = true;
+                if(defParent != null)
+                    target.SetParent(defParent);
+
+                Debug.Log("Done");
+
+                return;
+            }
+        }
+
+        SetNextPosition();
+
+        if (local)
+            LocalLerp();
+        else
+            GlobalLerp();
+    }
+
+    private void SetNextPosition()
+    {
+        if (nextPos != Vector3.zero)
+            return;
+        if (posQueue == null || posQueue.Count == 0)
+            return;
+
+        nextPos = posQueue.Dequeue();
+
+    }
+
+    private void LocalLerp()
+    {
+        if (nextPos == Vector3.zero)
+            return;
+
+        target.localPosition = Vector3.Lerp(target.localPosition, nextPos, speed * Time.deltaTime);
+        float dist = (nextPos - target.localPosition).sqrMagnitude;
+        if(dist <= FinishThreshold)
+        {
+            nextPos = Vector3.zero;
+        }
+
+    }
+
+    private void GlobalLerp()
+    {
+        if (nextPos == Vector3.zero)
+            return;
+
+        target.position = Vector3.Lerp(target.position, nextPos, speed * Time.deltaTime);
+        float dist = (nextPos - target.position).sqrMagnitude;
+        if (dist <= FinishThreshold)
+        {
+            nextPos = Vector3.zero;
+        }
+    }
+
 }

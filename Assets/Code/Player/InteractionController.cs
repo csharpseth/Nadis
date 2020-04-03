@@ -43,7 +43,7 @@ public class InteractionController : MonoBehaviour
     public Action<int> OnInventorySelect;
     public Action<PhysicalItem[]> OnInventoryChange;
 
-    public Action<Vector3, Side, float, bool> SetHandTargetPosition;
+    public Action<Vector3, Side, float, Transform, bool> SetHandTargetPosition;
     public Action<Rigidbody, Side> SetHandTarget;
     public Action EndCurrentHandTarget;
 
@@ -55,7 +55,6 @@ public class InteractionController : MonoBehaviour
         Animator = GetComponent<BipedProceduralAnimator>();
         if(Animator != null)
         {
-            SetHandTarget += Animator.SetHandTarget;
             SetHandTargetPosition += Animator.SetHandTargetPosition;
             EndCurrentHandTarget += Animator.EndCurrentHandTarget;
         }
@@ -87,7 +86,7 @@ public class InteractionController : MonoBehaviour
             OnInventorySelect?.Invoke(index);
         }
 
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
             if (CurrentItem != null)
                 CurrentItem.PrimaryUse();
@@ -104,11 +103,11 @@ public class InteractionController : MonoBehaviour
             }
         }
 
+        if (CurrentItem != null) CurrentItem.SecondaryUse(Input.GetButton("Fire2"));
+
         if(Input.GetButtonDown("Fire2"))
         {
-            if (CurrentItem != null)
-                CurrentItem.SecondaryUse();
-            else
+            if (CurrentItem == null)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(CenterScreenRay, out hit))

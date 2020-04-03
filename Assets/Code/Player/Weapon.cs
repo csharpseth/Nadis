@@ -26,29 +26,14 @@ public class Weapon : PhysicalItem
         }
     }
 
-    public override void SecondaryUse()
+    public override void SecondaryUse(bool state)
     {
-        aimed = !aimed;
-
-        if(aimed)
+        if(state == true)
         {
-            if (idleParent == null)
-                idleParent = transform.parent;
-
-            if (aimParent == null)
-                transform.parent = InteractionController.ins.Animator.head;
-            else
-                transform.parent = aimParent;
-
-            transform.localPosition = aimOffset;
-            transform.localEulerAngles = heldEulerOffset;
-
-            InteractionController.ins.SetHandTarget(rb, Side.Right);
-        }else
+            InteractionController.ins.SetHandTargetPosition(aimOffset, Side.Right, grabSpeed, InteractionController.ins.Camera.transform, true);
+        }
+        else
         {
-            transform.parent = idleParent;
-            transform.localPosition = Vector3.zero;
-            transform.localEulerAngles = heldEulerOffset;
             InteractionController.ins.EndCurrentHandTarget();
         }
     }

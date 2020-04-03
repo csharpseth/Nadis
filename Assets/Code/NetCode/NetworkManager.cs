@@ -45,7 +45,8 @@ public class NetworkManager : MonoBehaviour
         netObjectsManager = GetComponent<NetworkObjectsManager>();
 
         NetworkConfig.InitNetwork();
-        SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
+        //SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
+        NetworkConfig.ConnectToServer(new ServerData("45.79.9.19", 5555));
     }
 
     public void CreateLocalPlayer(int connID, int inventorySize)

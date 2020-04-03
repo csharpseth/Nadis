@@ -122,6 +122,122 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &144783156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1148729593304845479, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_Name
+      value: Coil Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.233
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.933
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8993959403768337808, guid: e5f3931f66ee7ed4eb95b496286c84cb, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: e5f3931f66ee7ed4eb95b496286c84cb, type: 3}
+--- !u!1 &144783157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1148729593304845479, guid: e5f3931f66ee7ed4eb95b496286c84cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 144783156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &144783158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144783157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c7a279b0157ec544b7bbe418ad02942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meta:
+    name: Coil Gun
+    id: -1
+  grabSpeed: 10
+  grabbedThreshold: 0.1
+  heldEulerOffset: {x: 0, y: 0, z: 0}
+  Send: 1
+  Receive: 1
+  positionSendThresholdDist: 0.5
+  positionReachedThreshold: 0.1
+  range: 100
+  force: 75
+  aimOffset: {x: 0.3, y: -0.15, z: 0.4}
 --- !u!1 &224267712
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +1053,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 466222350}
+--- !u!4 &1823249522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2769120224190504813, guid: 7a4343643166d524bb707aab8ed2c41f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2769120225630936065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2114821480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1132,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 619472292, guid: 7a4343643166d524bb707aab8ed2c41f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1032715391471015112, guid: 7a4343643166d524bb707aab8ed2c41f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1065,6 +1191,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1032715391471015113, guid: 7a4343643166d524bb707aab8ed2c41f,
+        type: 3}
+      propertyPath: targets
+      value: 
+      objectReference: {fileID: 1823249522}
     - target: {fileID: 1032715391471015123, guid: 7a4343643166d524bb707aab8ed2c41f,
         type: 3}
       propertyPath: m_Name
@@ -1074,6 +1205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032715391471015125, guid: 7a4343643166d524bb707aab8ed2c41f,
+        type: 3}
+      propertyPath: climbInfo.speed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4663458819396332169, guid: 7a4343643166d524bb707aab8ed2c41f,
         type: 3}

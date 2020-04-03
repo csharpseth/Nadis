@@ -183,7 +183,6 @@ public class MovementController : MonoBehaviour
 
         if (CanCrouch == false)
         {
-            Debug.Log("Cannot Crouch");
             return;
         }
 
@@ -218,16 +217,17 @@ public class MovementController : MonoBehaviour
     private void Climbing()
     {
         IsClimbing = (climbDestination != Vector3.zero);
+        rb.isKinematic = IsClimbing;
 
-        if (IsClimbing && climbDestination != Vector3.zero)
+
+        if (IsClimbing)
         {
             Vector3 temp = transform.position;
             if((climbDestination - temp).sqrMagnitude > (climbInfo.distToEnd * climbInfo.distToEnd))
             {
                 IsClimbing = false;
-                transform.position = climbDestination;
+                temp.y = Mathf.Lerp(temp.y, climbDestination.y, climbInfo.speed * Time.deltaTime);
                 climbDestination = Vector3.zero;
-                rb.isKinematic = false;
                 return;
             }
 
@@ -239,8 +239,7 @@ public class MovementController : MonoBehaviour
             {
                 temp = Vector3.Lerp(temp, climbDestination, climbInfo.speed * Time.deltaTime);
             }
-            //rbController.SetLeftHandPosition(climbDestination);
-            //rbController.SetRightHandPosition(climbDestination);
+
             transform.position = temp;
 
             float sqrDist = (climbDestination - temp).sqrMagnitude;
