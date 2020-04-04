@@ -13,19 +13,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2020-04-03T00:28:26.353-05:00
-  initializedAtString: 2020-04-02T21:12:55.274-05:00
+  lastUpdatedAtString: 2020-04-03T22:30:25.278-05:00
+  initializedAtString: 2020-04-03T19:01:33.258-05:00
   localBranches:
   - name: master
     tracking: origin/master
   - name: Server
     tracking: 
+  - name: Testing
+    tracking: origin/Testing
   remoteBranches:
   - name: origin/master
     tracking: '[None]'
+  - name: origin/Testing
+    tracking: '[None]'
   remotes:
   - name: origin
-    url: https://github.com/danksupercow/DarwinsIsland.git
+    url: https://github.com/danksupercow/Darwin.git
     login: 
     user: 
     host: 
@@ -35,33 +39,45 @@ MonoBehaviour:
     keys:
     - master
     - Server
+    - Testing
     values:
     - name: master
       remote:
         name: origin
-        url: https://github.com/danksupercow/DarwinsIsland.git
+        url: https://github.com/danksupercow/Darwin.git
       trackingBranch: master
     - name: Server
       remote:
         name: 
         url: 
       trackingBranch: 
+    - name: Testing
+      remote:
+        name: origin
+        url: https://github.com/danksupercow/Darwin.git
+      trackingBranch: Testing
   remoteConfigBranches:
     keys:
     - origin
     subKeys:
     - Values:
       - master
+      - Testing
     subKeyValues:
     - Values:
       - name: master
         remote:
           name: origin
-          url: https://github.com/danksupercow/DarwinsIsland.git
+          url: https://github.com/danksupercow/Darwin.git
+        trackingBranch: 
+      - name: Testing
+        remote:
+          name: origin
+          url: https://github.com/danksupercow/Darwin.git
         trackingBranch: 
   configRemotes:
     keys:
     - origin
     values:
     - name: origin
-      url: https://github.com/danksupercow/DarwinsIsland.git
+      url: https://github.com/danksupercow/Darwin.git

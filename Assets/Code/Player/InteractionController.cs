@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
@@ -37,14 +35,8 @@ public class InteractionController : MonoBehaviour
     public int index = 0;
     public PhysicalItem CurrentItem { get { return Inventory[index]; } }
     public PhysicalItem[] Inventory { get; private set; }
-
-    public Action<PhysicalItem, int> OnInventoryAdd;
-    public Action<int> OnInventoryRemove;
-    public Action<int> OnInventorySelect;
-    public Action<PhysicalItem[]> OnInventoryChange;
-
+    
     public Action<Vector3, Side, float, Transform, bool> SetHandTargetPosition;
-    public Action<Rigidbody, Side> SetHandTarget;
     public Action EndCurrentHandTarget;
 
     private void Awake()
@@ -77,16 +69,16 @@ public class InteractionController : MonoBehaviour
             index++;
             if (index > (Inventory.Length - 1))
                 index = 0;
-            OnInventorySelect?.Invoke(index);
+            Events.Inventory.OnInventorySelect?.Invoke(index);
         }else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
         {
             index--;
             if (index < 0)
                 index = (Inventory.Length - 1);
-            OnInventorySelect?.Invoke(index);
+            Events.Inventory.OnInventorySelect?.Invoke(index);
         }
 
-        if(Input.GetButton("Fire1"))
+        if(Input.GetButtonDown("Fire1"))
         {
             if (CurrentItem != null)
                 CurrentItem.PrimaryUse();
@@ -95,10 +87,7 @@ public class InteractionController : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(CenterScreenRay, out hit))
                 {
-                    if(ItemManager.ins != null)
-                    {
-                        ItemManager.ins.RequestSpawnItem(1, hit.point);
-                    }
+                    Events.Item.OnRequestSpawnItem?.Invoke(0, hit.point, Vector3.zero, true);
                 }
             }
         }
@@ -115,7 +104,7 @@ public class InteractionController : MonoBehaviour
                     PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
                     if (item != null && ItemManager.ins != null)
                     {
-                        ItemManager.ins.RequestDestroyItem(item.InstanceID);
+                        Events.Item.OnRequestDestroyItem?.Invoke(item.InstanceID, true);
                     }
                 }
             }
@@ -123,7 +112,7 @@ public class InteractionController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F))
         {
-            Interact();
+            Interact(true);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
@@ -132,21 +121,26 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    private void Interact()
+    private void Interact(bool localRequest = true, int instanceID = -1, int playerID = -1, int side = -1)
     {
-        Ray r = CenterScreenRay;
-        RaycastHit hit;
-
-        if (Physics.Raycast(r, out hit, interactionReach, interactionMask))
+        if(localRequest == true)
         {
-            PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
-            if (item != null)
+            Ray r = CenterScreenRay;
+            RaycastHit hit;
+
+            if (Physics.Raycast(r, out hit, interactionReach, interactionMask))
             {
-                if (Animator != null)
+                PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
+                if (item != null)
                 {
+                    Events.Item.OnItemInteract?.Invoke(item.InstanceID, NetworkManager.LocalPlayer.ID, Side.Right, true);
                     PickupItem(item);
-                }
+
             }
+            }
+        }else
+        {
+            Events.Item.OnItemInteract?.Invoke(instanceID, playerID, (Side)side, false);
         }
     }
 
@@ -159,30 +153,28 @@ public class InteractionController : MonoBehaviour
                 if(Inventory[i] == null)
                 {
                     Inventory[i] = item;
-                    item.Interact(Animator.rightHand);
-                    item.Hide(true);
-                    OnInventoryAdd?.Invoke(item, i);
+                    Events.Item.OnItemHide?.Invoke(item.InstanceID, true, true);
+                    Events.Inventory.OnInventoryAdd?.Invoke(item, i);
                     break;
                 }
             }
         }else
         {
             Inventory[index] = item;
-            item.Interact(Animator.rightHand);
-            OnInventoryAdd?.Invoke(item, index);
+            Events.Inventory.OnInventoryAdd?.Invoke(item, index);
         }
 
-        OnInventoryChange?.Invoke(Inventory);
+        Events.Inventory.OnInventoryChange?.Invoke(Inventory);
     }
 
     private void Drop(int removeIndex)
     {
         if(Inventory[removeIndex] != null)
         {
-            Inventory[removeIndex].ResetObjct();
+            Events.Item.OnItemReset?.Invoke(Inventory[removeIndex].InstanceID, true);
             Inventory[removeIndex] = null;
-            OnInventoryRemove?.Invoke(removeIndex);
-            OnInventoryChange?.Invoke(Inventory);
+            Events.Inventory.OnInventoryRemove?.Invoke(removeIndex);
+            Events.Inventory.OnInventoryChange?.Invoke(Inventory);
         }
     }
 

@@ -1,10 +1,6 @@
--Improved Trees Meshes Performance
--Improved Terrain Shader
-    Added Beach & Other Ways to variate terrain
--Added player sounds when walking(Very early foundation)
--Model & Textures: 6 Rocks, and 4 Boulders
--Improved Terrain Generation
-    Removed Empty or Plateaued generations
--Combined Foliage & Tree Shader & Gave all Trees & Leaves
-the same Material
+[04/03/2020]
+-Implemented Coil Gun/Hand Cannon
+-Implemented new Event based system(hopefully improve performance)
+-Added Item Interaction, Reset, & Hide Sync over NetCode w/ new Event based system
+-Modified Item Spawn & Destruction to use new Event-Based System
 

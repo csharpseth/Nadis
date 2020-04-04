@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerSync : MonoBehaviour
 {
@@ -26,23 +24,30 @@ public class PlayerSync : MonoBehaviour
     private PlayerMoveState moveState;
 
     public int[] Inventory { get; private set; }
+    public BipedProceduralAnimator Animator { get { return animator; } }
 
-    public int ID { get { return id; } set
+    public int ID
+    {
+        get { return id; }
+        set
         {
-            if (idSet == false) id = value;
-            idSet = true;
+            if(idSet == false)
+            {
+                id = value;
+                idSet = true;
+            }
         }
     }
 
     private void Awake()
     {
-        if (Local && NetworkManager.localPlayer == null)
-            NetworkManager.localPlayer = this;
+        if (Local && NetworkManager.LocalPlayer == null)
+            NetworkManager.LocalPlayer = this;
         animator = GetComponent<BipedProceduralAnimator>();
         if (Send)
         {
             moveController = GetComponent<MovementController>();
-            InteractionController.ins.OnInventoryChange += InventoryChange;
+            Events.Inventory.OnInventoryChange += InventoryChange;
         }
     }
 
@@ -85,7 +90,7 @@ public class PlayerSync : MonoBehaviour
 
         UpdateMoveData();
     }
-
+    
     float moveDataTimer = 0f;
     private void UpdateMoveData()
     {
@@ -143,5 +148,5 @@ public class PlayerSync : MonoBehaviour
         }
 
     }
-
+    
 }

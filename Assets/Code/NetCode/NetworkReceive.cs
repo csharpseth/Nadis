@@ -19,9 +19,8 @@ enum ServerPackets
     SPlayerMoveData = 11,
     SPlayerInventoryUpdate = 12,
     SSpawnItem = 13,
-    SDestroyItem = 14,
-    SMoveItem = 15,
-    SRotateItem = 16,
+    SDestroyItem = 14, //Convert to Item Event As well
+    SItemEvent = 15,
 }
 
 internal static class NetworkReceive
@@ -40,8 +39,7 @@ internal static class NetworkReceive
         NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerInventoryUpdate] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerInventoryUpdate);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SSpawnItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_SpawnItem);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SDestroyItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_DestroyItem);
-        NetworkConfig.socket.PacketId[(int)ServerPackets.SMoveItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_MoveItem);
-        NetworkConfig.socket.PacketId[(int)ServerPackets.SRotateItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_RotateItem);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SItemEvent] = new KaymakNetwork.Network.Client.DataArgs(Packet_ItemEvent);
     }
 
     private static void Packet_WelcomeMSG(ref byte[] data)
@@ -238,35 +236,50 @@ internal static class NetworkReceive
 
         buffer.Dispose();
     }
-
-    private static void Packet_MoveItem(ref byte[] data)
+    
+    private static void Packet_ItemEvent(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
         int instanceID = buffer.ReadInt32();
+        ItemEventType type = (ItemEventType)buffer.ReadInt32();
+        
+        if(type == ItemEventType.Interact)
+        {
+            int playerID = buffer.ReadInt32();
+            Side side = (Side)buffer.ReadInt32();
 
-        float x = (float)buffer.ReadDouble();
-        float y = (float)buffer.ReadDouble();
-        float z = (float)buffer.ReadDouble();
+            Events.Item.OnItemInteract(instanceID, playerID, side, false);
+            //Call The ItemInteract Event
 
-        Vector3 pos = new Vector3(x, y, z);
+        }else if (type == ItemEventType.Hide)
+        {
+            bool hide = buffer.ReadBoolean();
 
-        ItemManager.ins.OnItemMove(instanceID, pos);
+            Events.Item.OnItemHide(instanceID, hide, false);
+            //Call the ItemReset Event
 
-        buffer.Dispose();
-    }
+        }else if(type == ItemEventType.Reset)
+        {
+            //Call the ItemHide Event
+            Events.Item.OnItemReset(instanceID, false);
+        }else if(type == ItemEventType.Transform)
+        {
+            Vector3 pos = new Vector3((float)buffer.ReadDouble(), (float)buffer.ReadDouble(), (float)buffer.ReadDouble());
+            Vector3 rot = new Vector3((float)buffer.ReadDouble(), (float)buffer.ReadDouble(), (float)buffer.ReadDouble());
 
-    private static void Packet_RotateItem(ref byte[] data)
-    {
-        ByteBuffer buffer = new ByteBuffer(data);
-        int instanceID = buffer.ReadInt32();
+            Events.Item.OnSetItemTransform(instanceID, pos, rot);
+        }else if(type == ItemEventType.Spawn)
+        {
+            int itemID = buffer.ReadInt32();
+            Vector3 pos = new Vector3((float)buffer.ReadDouble(), (float)buffer.ReadDouble(), (float)buffer.ReadDouble());
+            Vector3 rot = new Vector3((float)buffer.ReadDouble(), (float)buffer.ReadDouble(), (float)buffer.ReadDouble());
 
-        float x = (float)buffer.ReadDouble();
-        float y = (float)buffer.ReadDouble();
-        float z = (float)buffer.ReadDouble();
-
-        Vector3 rot = new Vector3(x, y, z);
-
-        ItemManager.ins.OnItemRotate(instanceID, rot);
+            ItemManager.ins.SpawnItem(itemID, instanceID, pos, rot);
+        }
+        else if (type == ItemEventType.Destroy)
+        {
+            ItemManager.ins.DestroyItem(instanceID);
+        }
 
         buffer.Dispose();
     }

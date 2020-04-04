@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager ins;
-    public static PlayerSync localPlayer;
+    public static PlayerSync LocalPlayer;
     [HideInInspector]
     public NetworkObjectsManager netObjectsManager;
 
     [SerializeField]
     private List<Vector3> spawnPoints;
-    public float chanceOfPointBeingSelectedForSpawn = 0.05f;
-    public float heightRangeMin = 0.3f, heightRangeMax = 0.45f;
-    public int maxSpawnPoints = 30;
     private MapGenerator mapGenerator;
 
     private void Awake()
@@ -26,6 +21,8 @@ public class NetworkManager : MonoBehaviour
 
         mapGenerator = FindObjectOfType<MapGenerator>();
 
+        Events.Player.OnGetPlayerSync += GetPlayer;
+        Events.Player.OnGetPlayerAnimator += GetPlayerAnimator;
     }
 
     public GameObject nonLocalPlayerPrefab;
@@ -51,7 +48,7 @@ public class NetworkManager : MonoBehaviour
 
     public void CreateLocalPlayer(int connID, int inventorySize)
     {
-        if (localPlayer != null) return;
+        if (LocalPlayer != null) return;
 
         Vector3 spawnPoint = Vector3.zero;
         if(spawnPoints.Count > 0)
@@ -59,14 +56,14 @@ public class NetworkManager : MonoBehaviour
             spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
         }
 
-        localPlayer = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
-        localPlayer.transform.position = spawnPoint;
+        LocalPlayer = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
+        LocalPlayer.transform.position = spawnPoint;
 
-        if (localPlayer.Local == false)
+        if (LocalPlayer.Local == false)
             Debug.LogError("Spawned Local Player is Not Set as 'Local'!");
         else
         {
-            localPlayer.ID = connID;
+            LocalPlayer.ID = connID;
             InteractionController.ins.InitInventory(inventorySize);
         }
     }
@@ -148,6 +145,26 @@ public class NetworkManager : MonoBehaviour
         ply.UpdateInventory(ids);
     }
 
+    public PlayerSync GetPlayer(int playerID)
+    {
+        if (connectedPlayers.ContainsKey(playerID) == false)
+            return null;
+
+        return connectedPlayers[playerID];
+    }
+    public BipedProceduralAnimator GetPlayerAnimator(int playerID)
+    {
+        PlayerSync ply = GetPlayer(playerID);
+        if (ply == null && playerID == LocalPlayer.ID)
+            ply = LocalPlayer;
+
+
+        if (ply != null)
+            return ply.GetComponent<BipedProceduralAnimator>();
+
+        return null;
+    }
+    
     private void OnDrawGizmos()
     {
         if(spawnPoints != null && spawnPoints.Count > 0)

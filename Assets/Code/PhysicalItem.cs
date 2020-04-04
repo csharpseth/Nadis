@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PhysicalItem : MonoBehaviour
 {
@@ -22,7 +20,10 @@ public class PhysicalItem : MonoBehaviour
         if(instanceIDSet == false)
         {
             InstanceID = id;
-            instanceIDSet = true;
+            Events.Item.OnItemInteract += Interact;
+            Events.Item.OnItemReset += ResetItem;
+            Events.Item.OnItemHide += Hide;
+            Events.Item.OnSetItemTransform += SetItemTransform;
         }
     }
 
@@ -49,16 +50,25 @@ public class PhysicalItem : MonoBehaviour
 
     public virtual void PrimaryUse()
     {
-        Debug.Log(meta.name + " Primary Use");
+        
     }
 
     public virtual void SecondaryUse(bool state)
     {
-        Debug.Log(meta.name + " Secondary Use");
+        
     }
 
-    public void Interact(Transform hand)
+    public void Interact(int instID, int playerID, Side handSide, bool send = false)
     {
+        if (InstanceID != instID) return;
+        BipedProceduralAnimator animator = Events.Player.OnGetPlayerAnimator(playerID);
+        if (animator == null) return;
+
+        Send = false;
+        Receive = false;
+
+        Transform hand = (handSide == Side.Right) ? animator.rightHand : animator.leftHand;
+
         rb.isKinematic = true;
         col.enabled = false;
         transform.SetParent(hand);
@@ -67,16 +77,23 @@ public class PhysicalItem : MonoBehaviour
         parent = hand;
     }
 
-    public void ResetObjct()
+    public void ResetItem(int instanceID, bool send = false)
     {
+        if (instanceID != InstanceID)
+            return;
+        
         transform.parent = null;
         parent = null;
         rb.isKinematic = false;
         col.enabled = true;
+        Send = true;
+        Receive = true;
     }
 
-    public void Hide(bool val)
+    public void Hide(int instanceID, bool val, bool send = true)
     {
+        if (instanceID != InstanceID) return;
+        
         gameObject.SetActive(!val);
     }
 
@@ -84,20 +101,16 @@ public class PhysicalItem : MonoBehaviour
     {
         if(Send && NetworkManager.ins != null)
         {
-            if((transform.position - lastPos).sqrMagnitude >= (positionSendThresholdDist * positionSendThresholdDist) && receiving == false)
+            if((transform.position - lastPos).sqrMagnitude >= (positionSendThresholdDist * positionSendThresholdDist) || lastRot != transform.eulerAngles && receiving == false)
             {
                 sending = true;
-                NetworkSend.SendItemMove(InstanceID, transform.position);
+                Events.Item.OnItemTransform(InstanceID, transform.position, transform.eulerAngles, true);
                 lastPos = transform.position;
-            }else
+                lastRot = transform.eulerAngles;
+            }
+            else
             {
                 sending = false;
-            }
-
-            if(lastRot != transform.eulerAngles && receiving == false)
-            {
-                NetworkSend.SendItemRotate(InstanceID, transform.eulerAngles);
-                lastRot = transform.eulerAngles;
             }
         }
 
@@ -121,21 +134,15 @@ public class PhysicalItem : MonoBehaviour
     }
 
     //Item Event Callbacks from 'ItemManager'
-    public void ItemMove(int instanceID, Vector3 pos)
+    public void SetItemTransform(int instanceID, Vector3 pos, Vector3 rot)
     {
         if(instanceID == InstanceID)
         {
             nextPos = pos;
-        }
-    }
-
-    public void ItemRotate(int instanceID, Vector3 rot)
-    {
-        if(instanceID == InstanceID)
-        {
             transform.eulerAngles = rot;
         }
     }
+    
 
     public void Destroy()
     {

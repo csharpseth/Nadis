@@ -15,9 +15,9 @@ public class InventoryUIManager : MonoBehaviour
         {
             InventorySlot slot = Instantiate(slotPrefab, container).GetComponent<InventorySlot>();
             slot.Init(i);
-            InteractionController.ins.OnInventoryAdd += slot.AddItem;
-            InteractionController.ins.OnInventoryRemove += slot.Clear;
-            InteractionController.ins.OnInventorySelect += slot.Select;
+            Events.Inventory.OnInventoryAdd += slot.AddItem;
+            Events.Inventory.OnInventoryRemove += slot.Clear;
+            Events.Inventory.OnInventorySelect += slot.Select;
 
             slot.Select(0);
         }

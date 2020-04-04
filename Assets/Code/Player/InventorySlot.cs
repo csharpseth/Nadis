@@ -32,14 +32,14 @@ public class InventorySlot : MonoBehaviour
         if(_id == id)
         {
             background.color = selectColor;
-            if(item != null)
-                item.Hide(false);
+            if (item != null)
+                Events.Item.OnItemHide(item.InstanceID, false, true);
         }
         else
         {
             background.color = normalColor;
             if(item != null)
-                item.Hide(true);
+                Events.Item.OnItemHide(item.InstanceID, true, true);
         }
     }
 

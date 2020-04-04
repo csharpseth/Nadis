@@ -27,17 +27,14 @@ public class PlayerSoundController : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<BipedProceduralAnimator>();
-        
-        animator.OnRightFootStepping += RightFootStepping;
-        animator.OnLeftFootStepping += LeftFootStepping;
+        Events.BipedAnimator.OnRightFootStepping += RightFootStepping;
+        Events.BipedAnimator.OnLeftFootStepping += LeftFootStepping;
 
-        animator.OnRightFootBeginStep += RightFootBeginStep;
-        animator.OnLeftFootBeginStep += LeftFootBeginStep;
+        Events.BipedAnimator.OnRightFootBeginStep += RightFootBeginStep;
+        Events.BipedAnimator.OnLeftFootBeginStep += LeftFootBeginStep;
 
-        animator.OnRightFootFinishStep += RightFootFinishStep;
-        animator.OnLeftFootFinishStep += LeftFootFinishStep;
-
+        Events.BipedAnimator.OnRightFootFinishStep += RightFootFinishStep;
+        Events.BipedAnimator.OnLeftFootFinishStep += LeftFootFinishStep;
     }
     
     private void AddActive()

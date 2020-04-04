@@ -16,8 +16,7 @@ enum ClientPackets
     CPlayerInventoryUpdate = 9,
     CPlayerRequestSpawnItem = 10,
     CPlayerRequestDestroyItem = 11,
-    CItemMove = 12,
-    CItemRotate = 13,
+    CItemEvent = 12,
 }
 
 internal static class NetworkSend
@@ -135,11 +134,52 @@ internal static class NetworkSend
         buffer.Dispose();
     }
 
-    public static void SendPlayerRequestItemSpawn(int itemID, Vector3 pos, Vector3 rot)
+    public static void SendRequestItemSpawn(int itemID, Vector3 pos, Vector3 rot, bool send = true)
     {
+        if (send == false)
+            return;
+
         ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CPlayerRequestSpawnItem);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
         buffer.WriteInt32(itemID);
+        buffer.WriteInt32((int)ItemEventType.Spawn);
+
+        buffer.WriteDouble(pos.x);
+        buffer.WriteDouble(pos.y + 0.2f);
+        buffer.WriteDouble(pos.z);
+
+        buffer.WriteDouble(rot.x);
+        buffer.WriteDouble(rot.y);
+        buffer.WriteDouble(rot.z);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    public static void SendRequestItemDestroy(int instanceID, bool send = true)
+    {
+        if (send == false)
+            return;
+
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
+        buffer.WriteInt32(instanceID);
+        buffer.WriteInt32((int)ItemEventType.Destroy);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    public static void SendItemTransform(int instanceID, Vector3 pos, Vector3 rot, bool send = true)
+    {
+        if (send == false) return;
+
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
+        buffer.WriteInt32(instanceID);
+        buffer.WriteInt32((int)ItemEventType.Transform);
 
         buffer.WriteDouble(pos.x);
         buffer.WriteDouble(pos.y);
@@ -153,42 +193,46 @@ internal static class NetworkSend
 
         buffer.Dispose();
     }
-
-    public static void SendPlayerRequestItemDestroy(int instanceID)
+    
+    public static void SendItemInteract(int instanceID, int playerID, Side side, bool send = true)
     {
+        if (send == false) return;
+
         ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CPlayerRequestDestroyItem);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
         buffer.WriteInt32(instanceID);
+        buffer.WriteInt32((int)ItemEventType.Interact);
+        buffer.WriteInt32(playerID);
+        buffer.WriteInt32((int)side);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 
         buffer.Dispose();
     }
 
-    public static void SendItemMove(int instanceID, Vector3 pos)
+    public static void SendItemHide(int instanceID, bool hide, bool send = true)
     {
-        ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CItemMove);
-        buffer.WriteInt32(instanceID);
+        if (send == false) return;
 
-        buffer.WriteDouble(pos.x);
-        buffer.WriteDouble(pos.y);
-        buffer.WriteDouble(pos.z);
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
+        buffer.WriteInt32(instanceID);
+        buffer.WriteInt32((int)ItemEventType.Hide);
+        buffer.WriteBoolean(hide);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 
         buffer.Dispose();
     }
 
-    public static void SendItemRotate(int instanceID, Vector3 rot)
+    public static void SendItemReset(int instanceID, bool send = true)
     {
-        ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CItemRotate);
-        buffer.WriteInt32(instanceID);
+        if (send == false) return;
 
-        buffer.WriteDouble(rot.x);
-        buffer.WriteDouble(rot.y);
-        buffer.WriteDouble(rot.z);
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CItemEvent);
+        buffer.WriteInt32(instanceID);
+        buffer.WriteInt32((int)ItemEventType.Reset);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 

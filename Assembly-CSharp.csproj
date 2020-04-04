@@ -98,6 +98,7 @@
     <Compile Include="Assets\Code\SmoothFollow.cs" />
     <Compile Include="Assets\Code\TestPunch.cs" />
     <Compile Include="Assets\Code\User Interface\UIServerBrowser.cs" />
+    <Compile Include="Assets\Code\Utility\Events.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKCCD.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKFabric.cs" />
     <Compile Include="Assets\FastIK\Scripts\FastIK\FastIKLook.cs" />

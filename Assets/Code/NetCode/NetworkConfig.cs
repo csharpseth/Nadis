@@ -16,19 +16,26 @@ internal static class NetworkConfig
         socket = new Client(100);
         config = new ClientConnectionConfig();
         NetworkReceive.PacketRouter();
+
+        Events.Item.OnRequestSpawnItem += NetworkSend.SendRequestItemSpawn;
+        Events.Item.OnRequestDestroyItem += NetworkSend.SendRequestItemDestroy;
+
+        Events.Item.OnItemInteract += NetworkSend.SendItemInteract;
+        Events.Item.OnItemReset += NetworkSend.SendItemReset;
+        Events.Item.OnItemHide += NetworkSend.SendItemHide;
+
+        Events.Item.OnItemTransform += NetworkSend.SendItemTransform;
     }
 
     internal static void ConnectLocal(int port = 5555)
     {
         socket.Connect("localhost", port);
-        TimeOutCheck(false);
     }
 
     internal static void ConnectToServer(ServerData server)
     {
         Debug.LogFormat("Attempting To Connect To Server At: {0}:{1}", server.remoteIP, server.port);
         socket.Connect(server.remoteIP, server.port);
-        TimeOutCheck(true, server);
     }
 
     internal static async void TimeOutCheck(bool retryLocal, ServerData server = null)

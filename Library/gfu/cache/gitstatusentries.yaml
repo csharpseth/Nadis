@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 6
-  lastUpdatedAtString: 2020-04-03T01:54:09.295-05:00
-  initializedAtString: 2020-04-02T21:13:11.963-05:00
+  lastUpdatedAtString: 2020-04-03T22:34:08.912-05:00
+  initializedAtString: 2020-04-03T16:47:35.365-05:00
   entries:
-  - path: .gitignore
-    fullPath: D:\Unity-Projects\Darwin\.gitignore
-    projectPath: .gitignore
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: .vs\TimeDrivenSurvival_New\v15\.suo
     fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\.suo
     projectPath: .vs\TimeDrivenSurvival_New\v15\.suo
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
+    fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
+    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -46,15 +46,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assembly-CSharp-Editor.csproj
-    fullPath: D:\Unity-Projects\Darwin\Assembly-CSharp-Editor.csproj
-    projectPath: Assembly-CSharp-Editor.csproj
+  - path: Assets\Code\ItemManager.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\ItemManager.cs
+    projectPath: Assets\Code\ItemManager.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assembly-CSharp-Editor-firstpass.csproj
-    fullPath: D:\Unity-Projects\Darwin\Assembly-CSharp-Editor-firstpass.csproj
-    projectPath: Assembly-CSharp-Editor-firstpass.csproj
+  - path: Assets\Code\NetCode\NetworkConfig.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\NetCode\NetworkConfig.cs
+    projectPath: Assets\Code\NetCode\NetworkConfig.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -64,9 +64,21 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Code\NetCode\ServerData.cs
-    fullPath: D:\Unity-Projects\Darwin\Assets\Code\NetCode\ServerData.cs
-    projectPath: Assets\Code\NetCode\ServerData.cs
+  - path: Assets\Code\NetCode\NetworkReceive.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\NetCode\NetworkReceive.cs
+    projectPath: Assets\Code\NetCode\NetworkReceive.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\NetCode\NetworkSend.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\NetCode\NetworkSend.cs
+    projectPath: Assets\Code\NetCode\NetworkSend.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\NetCode\PlayerSync.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\NetCode\PlayerSync.cs
+    projectPath: Assets\Code\NetCode\PlayerSync.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -88,9 +100,27 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Assets\Code\Player\InventorySlot.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\InventorySlot.cs
+    projectPath: Assets\Code\Player\InventorySlot.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\Player\InventoryUIManager.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\InventoryUIManager.cs
+    projectPath: Assets\Code\Player\InventoryUIManager.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
   - path: Assets\Code\Player\MovementController.cs
     fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\MovementController.cs
     projectPath: Assets\Code\Player\MovementController.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\Player\PlayerSoundController.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\PlayerSoundController.cs
+    projectPath: Assets\Code\Player\PlayerSoundController.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -106,552 +136,78 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Inventory\Items\Coil Gun.prefab
-    fullPath: D:\Unity-Projects\Darwin\Assets\Inventory\Items\Coil Gun.prefab
-    projectPath: Assets\Inventory\Items\Coil Gun.prefab
+  - path: Assets\Code\Utility\Events.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Utility\Events.cs
+    projectPath: Assets\Code\Utility\Events.cs
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Assets\Materials\Mat_CoilGun.mat
-    fullPath: D:\Unity-Projects\Darwin\Assets\Materials\Mat_CoilGun.mat
-    projectPath: Assets\Materials\Mat_CoilGun.mat
+  - path: Assets\Inventory\Normal Item Database.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\Inventory\Normal Item Database.asset
+    projectPath: Assets\Inventory\Normal Item Database.asset
     originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Models\CoilGun_01.fbx
-    fullPath: D:\Unity-Projects\Darwin\Assets\Models\CoilGun_01.fbx
-    projectPath: Assets\Models\CoilGun_01.fbx
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
+    indexStatus: 0
+    workTreeStatus: 3
   - path: Assets\New Terrain.asset
     fullPath: D:\Unity-Projects\Darwin\Assets\New Terrain.asset
     projectPath: Assets\New Terrain.asset
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Scenes\Player Testing.unity
-    fullPath: D:\Unity-Projects\Darwin\Assets\Scenes\Player Testing.unity
-    projectPath: Assets\Scenes\Player Testing.unity
+  - path: Assets\Prefabs\Player Procedural Robot Variant.prefab
+    fullPath: D:\Unity-Projects\Darwin\Assets\Prefabs\Player Procedural Robot Variant.prefab
+    projectPath: Assets\Prefabs\Player Procedural Robot Variant.prefab
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Scenes\PrefabCreation.unity
-    fullPath: D:\Unity-Projects\Darwin\Assets\Scenes\PrefabCreation.unity
-    projectPath: Assets\Scenes\PrefabCreation.unity
+  - path: changelog.txt
+    fullPath: D:\Unity-Projects\Darwin\changelog.txt
+    projectPath: changelog.txt
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Textures\Dirt.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt.meta
-    projectPath: Assets\Textures\Dirt.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    projectPath: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    projectPath: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    projectPath: Assets\Textures\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray.meta
-    projectPath: Assets\Textures\Dirt\Dirt_Gray.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif.meta
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif.meta
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp.meta
-    projectPath: Assets\Textures\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage.meta
-    projectPath: Assets\Textures\Foliage.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Easy_Grass.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Easy_Grass.meta
-    projectPath: Assets\Textures\Foliage\Easy_Grass.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif
-    projectPath: Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif.meta
-    projectPath: Assets\Textures\Foliage\Easy_Grass\easy_grass_1024.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    projectPath: Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif.meta
-    projectPath: Assets\Textures\Foliage\Easy_Grass\easy_grass_maps_1024.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees.meta
-    projectPath: Assets\Textures\Foliage\Trees.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    projectPath: Assets\Textures\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_01\Barks_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_01\Barks_Maps.tif
-    projectPath: Assets\Textures\Foliage\Trees\Trees_01\Barks_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_01\Barks_Normal.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_01\Barks_Normal.tif
-    projectPath: Assets\Textures\Foliage\Trees\Trees_01\Barks_Normal.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Albedo.tif
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Albedo.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Albedo.tif.meta
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Albedo.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Maps.tif
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Maps.tif.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Maps.tif.meta
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Maps.tif.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Normal.bmp
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Normal.bmp
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Normal.bmp
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Foliage\Trees\Trees_Normal.bmp.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Foliage\Trees\Trees_Normal.bmp.meta
-    projectPath: Assets\Textures\Foliage\Trees\Trees_Normal.bmp.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass.meta
-    projectPath: Assets\Textures\Grass.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Albedo.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Albedo.tiff
-    projectPath: Assets\Textures\Grass\Grass_01_Albedo.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Albedo.tiff.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Albedo.tiff.meta
-    projectPath: Assets\Textures\Grass\Grass_01_Albedo.tiff.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Maps.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Maps.tiff
-    projectPath: Assets\Textures\Grass\Grass_01_Maps.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Maps.tiff.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Maps.tiff.meta
-    projectPath: Assets\Textures\Grass\Grass_01_Maps.tiff.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Normal.tiff
-    projectPath: Assets\Textures\Grass\Grass_01_Normal.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Grass\Grass_01_Normal.tiff.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Grass\Grass_01_Normal.tiff.meta
-    projectPath: Assets\Textures\Grass\Grass_01_Normal.tiff.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Items\CoilGun\Albedo_HandCannon.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Items\CoilGun\Albedo_HandCannon.tif
-    projectPath: Assets\Textures\Items\CoilGun\Albedo_HandCannon.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Items\CoilGun\HandCannon_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Items\CoilGun\HandCannon_Maps.tif
-    projectPath: Assets\Textures\Items\CoilGun\HandCannon_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Items\CoilGun\HC_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Items\CoilGun\HC_Normal.tiff
-    projectPath: Assets\Textures\Items\CoilGun\HC_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    projectPath: Assets\Textures\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Rocks\Rocks_01\Boulders_01_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Boulders_01_Maps.tif
-    projectPath: Assets\Textures\Rocks\Rocks_01\Boulders_01_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    projectPath: Assets\Textures\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    projectPath: Assets\Textures\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    projectPath: Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    projectPath: Assets\Textures\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Sand\Sand_01\Sand_01_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Sand\Sand_01\Sand_01_Albedo.tif
-    projectPath: Assets\Textures\Sand\Sand_01\Sand_01_Albedo.tif
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Sand\Sand_01\Sand_01_Maps.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Sand\Sand_01\Sand_01_Maps.tiff
-    projectPath: Assets\Textures\Sand\Sand_01\Sand_01_Maps.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Sand\Sand_01\Sand_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Sand\Sand_01\Sand_01_Normal.tiff
-    projectPath: Assets\Textures\Sand\Sand_01\Sand_01_Normal.tiff
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Albedo.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Brown\Dirt_Brown_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    projectPath: Assets\Textures\Terrain\Dirt\Dirt_Gray\Dirt_Gray_Normal.bmp
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_1024.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_1024.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_1024.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Easy_Grass\easy_grass_maps_1024.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Maps.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Normal.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Normal.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_01\Barks_Normal.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_Maps.tif
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Foliage\Trees\Trees_Normal.bmp
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Foliage\Trees\Trees_Normal.bmp
-    projectPath: Assets\Textures\Terrain\Foliage\Trees\Trees_Normal.bmp
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Grass\Grass_01_Albedo.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Grass\Grass_01_Albedo.tiff
-    projectPath: Assets\Textures\Terrain\Grass\Grass_01_Albedo.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Grass\Grass_01_Maps.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Grass\Grass_01_Maps.tiff
-    projectPath: Assets\Textures\Terrain\Grass\Grass_01_Maps.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Grass\Grass_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Grass\Grass_01_Normal.tiff
-    projectPath: Assets\Textures\Terrain\Grass\Grass_01_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Maps.tif
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Boulders_01_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01__Tex_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Maps.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    projectPath: Assets\Textures\Terrain\Rocks\Rocks_01\Rocks_01_Tex_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Albedo.tif
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Albedo.tif
-    projectPath: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Albedo.tif
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Maps.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Maps.tiff
-    projectPath: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Maps.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Normal.tiff
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Normal.tiff
-    projectPath: Assets\Textures\Terrain\Sand\Sand_01\Sand_01_Normal.tiff
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Textures\trees_color.png
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\trees_color.png
-    projectPath: Assets\Textures\trees_color.png
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Assets\Textures\trees_color.png.meta
-    fullPath: D:\Unity-Projects\Darwin\Assets\Textures\trees_color.png.meta
-    projectPath: Assets\Textures\trees_color.png.meta
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
   - path: Library\ArtifactDB
     fullPath: D:\Unity-Projects\Darwin\Library\ArtifactDB
     projectPath: Library\ArtifactDB
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\Artifacts\61\61bdcb42ad10d1db03979b70ab1d360b
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\61\61bdcb42ad10d1db03979b70ab1d360b
-    projectPath: Library\Artifacts\61\61bdcb42ad10d1db03979b70ab1d360b
+  - path: Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
+    projectPath: Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\7a\7acd051f0686da86c66f8a9ec3ab136c
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\7a\7acd051f0686da86c66f8a9ec3ab136c
-    projectPath: Library\Artifacts\7a\7acd051f0686da86c66f8a9ec3ab136c
+  - path: Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
+    projectPath: Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\7e\7e158bee0b4fa2d44ae07f1dc6720d10
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\7e\7e158bee0b4fa2d44ae07f1dc6720d10
-    projectPath: Library\Artifacts\7e\7e158bee0b4fa2d44ae07f1dc6720d10
+  - path: Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
+    projectPath: Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\90\90f520c30ee6ccbfac223581595398e1
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\90\90f520c30ee6ccbfac223581595398e1
-    projectPath: Library\Artifacts\90\90f520c30ee6ccbfac223581595398e1
+  - path: Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
+    projectPath: Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\be\be9f80d612e86fd7dfe294eb01d5307c
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\be\be9f80d612e86fd7dfe294eb01d5307c
-    projectPath: Library\Artifacts\be\be9f80d612e86fd7dfe294eb01d5307c
+  - path: Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
+    projectPath: Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\bf\bf974af18156e9194d913f596a1902d6
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\bf\bf974af18156e9194d913f596a1902d6
-    projectPath: Library\Artifacts\bf\bf974af18156e9194d913f596a1902d6
+  - path: Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
+    projectPath: Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\c1\c1a4cb2940ee3825680d1cc9920f8696
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\c1\c1a4cb2940ee3825680d1cc9920f8696
-    projectPath: Library\Artifacts\c1\c1a4cb2940ee3825680d1cc9920f8696
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
-  - path: Library\CurrentLayout-default.dwlt
-    fullPath: D:\Unity-Projects\Darwin\Library\CurrentLayout-default.dwlt
-    projectPath: Library\CurrentLayout-default.dwlt
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\EditorUserBuildSettings.asset
-    fullPath: D:\Unity-Projects\Darwin\Library\EditorUserBuildSettings.asset
-    projectPath: Library\EditorUserBuildSettings.asset
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\expandedItems
-    fullPath: D:\Unity-Projects\Darwin\Library\expandedItems
-    projectPath: Library\expandedItems
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\gfu\cache\branches.yaml
     fullPath: D:\Unity-Projects\Darwin\Library\gfu\cache\branches.yaml
     projectPath: Library\gfu\cache\branches.yaml
@@ -685,12 +241,6 @@ MonoBehaviour:
   - path: Library\gfu\cache\repoinfo.yaml
     fullPath: D:\Unity-Projects\Darwin\Library\gfu\cache\repoinfo.yaml
     projectPath: Library\gfu\cache\repoinfo.yaml
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\InspectorExpandedItems.asset
-    fullPath: D:\Unity-Projects\Darwin\Library\InspectorExpandedItems.asset
-    projectPath: Library\InspectorExpandedItems.asset
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -790,21 +340,231 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Assembly-CSharp-Editor.pdb
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor.pdb
+  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ShaderCache.db
-    fullPath: D:\Unity-Projects\Darwin\Library\ShaderCache.db
-    projectPath: Library\ShaderCache.db
+  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ShaderCache\EditorEncounteredVariants
-    fullPath: D:\Unity-Projects\Darwin\Library\ShaderCache\EditorEncounteredVariants
-    projectPath: Library\ShaderCache\EditorEncounteredVariants
+  - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.Rider.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Rider.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Rider.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.Rider.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
+    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.TextMeshPro.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.pdb
+    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.dll
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.Timeline.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.pdb
+    projectPath: Library\ScriptAssemblies\Unity.Timeline.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    projectPath: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
+    projectPath: Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    projectPath: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
+    projectPath: Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEditor.UI.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEditor.UI.dll
+    projectPath: Library\ScriptAssemblies\UnityEditor.UI.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    projectPath: Library\ScriptAssemblies\UnityEngine.TestRunner.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
+    projectPath: Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ScriptAssemblies\UnityEngine.UI.dll
+    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEngine.UI.dll
+    projectPath: Library\ScriptAssemblies\UnityEngine.UI.dll
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -844,45 +604,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\StateCache\SceneView\9c818f-mainStage.json
-    fullPath: D:\Unity-Projects\Darwin\Library\StateCache\SceneView\9c818f-mainStage.json
-    projectPath: Library\StateCache\SceneView\9c818f-mainStage.json
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
     fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
     projectPath: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    projectPath: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
-    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
-    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor-firstpass.csprojAssemblyReference.cache
+  - path: obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+    fullPath: D:\Unity-Projects\Darwin\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+    projectPath: obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
