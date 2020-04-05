@@ -22,8 +22,7 @@ public class PlayerSync : MonoBehaviour
     private bool grounded;
     private Vector2 inputDir;
     private PlayerMoveState moveState;
-
-    public int[] Inventory { get; private set; }
+    
     public BipedProceduralAnimator Animator { get { return animator; } }
 
     public int ID
@@ -47,18 +46,9 @@ public class PlayerSync : MonoBehaviour
         if (Send)
         {
             moveController = GetComponent<MovementController>();
-            Events.Inventory.OnInventoryChange += InventoryChange;
         }
     }
-
-    private void Start()
-    {
-        if(Send == false)
-        {
-            InteractionController.ins.InitInventory();
-        }
-    }
-
+    
     private void Update()
     {
         if (Send == false)
@@ -123,30 +113,6 @@ public class PlayerSync : MonoBehaviour
         {
             animator.SetMoveData(grounded, inputDir, moveState);
         }
-    }
-
-    public void SetInventorySize(int size)
-    {
-        Inventory = new int[size];
-    }
-    public void UpdateInventory(int[] ids)
-    {
-        for (int i = 0; i < ids.Length; i++)
-        {
-            Inventory[i] = ids[i];
-        }
-    }
-    public void InventoryChange(PhysicalItem[] items)
-    {
-        int[] ids = new int[items.Length];
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i] != null)
-                ids[i] = items[i].meta.id;
-            else
-                ids[i] = -1;
-        }
-
     }
     
 }

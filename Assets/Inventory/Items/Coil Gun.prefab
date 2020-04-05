@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8993959403768337813}
   - component: {fileID: 8993959403768337810}
   - component: {fileID: 8993959403768337811}
-  - component: {fileID: 8993959403768337808}
+  - component: {fileID: 144783158}
   m_Layer: 0
   m_Name: Coil Gun
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1148729593304845479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0.233, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -125,7 +125,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.040404648, y: 0.05081573, z: 0.06720567}
   m_Center: {x: -0.00018875673, y: 0.0010133088, z: -0.011289865}
---- !u!114 &8993959403768337808
+--- !u!114 &144783158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,16 +134,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1148729593304845479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dde7b4d4e4bf6748955d7307ef37c4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c7a279b0157ec544b7bbe418ad02942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   meta:
     name: Coil Gun
     id: -1
-  grabSpeed: 5
+  grabSpeed: 10
   grabbedThreshold: 0.1
   heldEulerOffset: {x: 0, y: 0, z: 0}
   Send: 1
   Receive: 1
-  positionSendThresholdDist: 0.1
+  positionSendThresholdDist: 0.5
   positionReachedThreshold: 0.1
+  range: 100
+  force: 75
+  aimOffset: {x: 0.3, y: -0.15, z: 0.4}

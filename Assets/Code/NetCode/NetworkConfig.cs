@@ -20,11 +20,19 @@ internal static class NetworkConfig
         Events.Item.OnRequestSpawnItem += NetworkSend.SendRequestItemSpawn;
         Events.Item.OnRequestDestroyItem += NetworkSend.SendRequestItemDestroy;
 
-        Events.Item.OnItemInteract += NetworkSend.SendItemInteract;
-        Events.Item.OnItemReset += NetworkSend.SendItemReset;
-        Events.Item.OnItemHide += NetworkSend.SendItemHide;
+        Events.Item.Interact += NetworkSend.SendItemInteract;
+        Events.Item.Reset += NetworkSend.SendItemReset;
+        Events.Item.Hide += NetworkSend.SendItemHide;
 
         Events.Item.OnItemTransform += NetworkSend.SendItemTransform;
+
+        Events.Inventory.OnAddItem += NetworkSend.SendInventoryAdd;
+        Events.Inventory.OnRemoveItem += NetworkSend.SendInventoryRemove;
+
+        Events.BipedAnimator.SetHandTargetPosition += NetworkSend.SendPlayerSetHandPosition;
+        Events.BipedAnimator.EndCurrentHandTarget += NetworkSend.SendPlayerEndCurrentHandTarget;
+
+        //Events.Inventory.OnInventoryChange += NetworkSend.SendPlayerInventoryUpdate;
     }
 
     internal static void ConnectLocal(int port = 5555)

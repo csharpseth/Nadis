@@ -13,10 +13,12 @@ enum ClientPackets
     CMoveNetObject = 6,
     CRotatateNetObject = 7,
     CPlayerMoveData = 8,
-    CPlayerInventoryUpdate = 9,
-    CPlayerRequestSpawnItem = 10,
-    CPlayerRequestDestroyItem = 11,
-    CItemEvent = 12,
+    CPlayerRequestSpawnItem = 9,
+    CPlayerRequestDestroyItem = 10,
+    CItemEvent = 11,
+    CInventoryEvent = 12,
+    CPlayerSetHandTarget = 13,
+    CPlayerEndCurrentHandTarget = 14,
 }
 
 internal static class NetworkSend
@@ -118,22 +120,76 @@ internal static class NetworkSend
         buffer.Dispose();
     }
 
-    public static void SendPlayerInventoryUpdate(int id, int[] ids)
+    public static void SendInventoryAdd(int index, PhysicalItem item, int playerID, bool send)
     {
+        if (send == false) return;
+
         ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CPlayerMoveData);
-        buffer.WriteInt32(id);
-        buffer.WriteInt32(ids.Length);
-        for (int i = 0; i < ids.Length; i++)
-        {
-            buffer.WriteInt32(ids[i]);
-        }
+        buffer.WriteInt32((int)ClientPackets.CInventoryEvent);
+        buffer.WriteInt32((int)InventoryEventType.AddItem);
+        buffer.WriteInt32(index);
+        buffer.WriteInt32(playerID);
+        buffer.WriteInt32(item.InstanceID);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
 
         buffer.Dispose();
     }
 
+    public static void SendInventoryRemove(int index, int playerID, bool send)
+    {
+        if (send == false) return;
+
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CInventoryEvent);
+        buffer.WriteInt32((int)InventoryEventType.RemoveItem);
+        buffer.WriteInt32(index);
+        buffer.WriteInt32(playerID);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    public static void SendPlayerSetHandPosition(int playerID, Vector3 position, Side side, float speed, AnimatorTarget target, bool persistent, bool send)
+    {
+        if (send == false) return;
+        
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CPlayerSetHandTarget);
+        buffer.WriteInt32(playerID);
+
+        //Target Position
+        buffer.WriteDouble(position.x);
+        buffer.WriteDouble(position.y);
+        buffer.WriteDouble(position.z);
+
+        buffer.WriteInt32((int)side);
+        buffer.WriteDouble(speed);
+
+        buffer.WriteInt32((int)target);
+
+        buffer.WriteBoolean(persistent);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    public static void SendPlayerEndCurrentHandTarget(int playerID, bool send)
+    {
+        if (send == false) return;
+
+        ByteBuffer buffer = new ByteBuffer(4);
+        buffer.WriteInt32((int)ClientPackets.CPlayerSetHandTarget);
+        buffer.WriteInt32(playerID);
+
+        NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
+
+        buffer.Dispose();
+    }
+
+    #region Item
     public static void SendRequestItemSpawn(int itemID, Vector3 pos, Vector3 rot, bool send = true)
     {
         if (send == false)
@@ -193,7 +249,7 @@ internal static class NetworkSend
 
         buffer.Dispose();
     }
-    
+
     public static void SendItemInteract(int instanceID, int playerID, Side side, bool send = true)
     {
         if (send == false) return;
@@ -238,5 +294,6 @@ internal static class NetworkSend
 
         buffer.Dispose();
     }
-
+    
+    #endregion
 }

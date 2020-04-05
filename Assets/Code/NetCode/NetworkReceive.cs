@@ -17,10 +17,12 @@ enum ServerPackets
     SMoveNetObject = 9,
     SRotateNetObject = 10,
     SPlayerMoveData = 11,
-    SPlayerInventoryUpdate = 12,
+    SInventoryEvent = 12,
     SSpawnItem = 13,
-    SDestroyItem = 14, //Convert to Item Event As well
+    SDestroyItem = 14,
     SItemEvent = 15,
+    SPlayerSetHandPosition = 16,
+    SPlayerEndCurrentHandPosition = 17,
 }
 
 internal static class NetworkReceive
@@ -36,10 +38,12 @@ internal static class NetworkReceive
         NetworkConfig.socket.PacketId[(int)ServerPackets.SMoveNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectMove);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SRotateNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectRotate);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerMoveData] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerMoveData);
-        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerInventoryUpdate] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerInventoryUpdate);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SInventoryEvent] = new KaymakNetwork.Network.Client.DataArgs(Packet_InventoryEvent);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SSpawnItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_SpawnItem);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SDestroyItem] = new KaymakNetwork.Network.Client.DataArgs(Packet_DestroyItem);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SItemEvent] = new KaymakNetwork.Network.Client.DataArgs(Packet_ItemEvent);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerSetHandPosition] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerHandPosition);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerEndCurrentHandPosition] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerEndCurrentHandPosition);
     }
 
     private static void Packet_WelcomeMSG(ref byte[] data)
@@ -189,18 +193,21 @@ internal static class NetworkReceive
         buffer.Dispose();
     }
 
-    private static void Packet_PlayerInventoryUpdate(ref byte[] data)
+    private static void Packet_InventoryEvent(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
+        InventoryEventType type = (InventoryEventType)buffer.ReadInt32();
+        int instanceID = buffer.ReadInt32();
         int playerID = buffer.ReadInt32();
-        int inventorySize = buffer.ReadInt32();
-        int[] ids = new int[inventorySize];
-        for (int i = 0; i < inventorySize; i++)
-        {
-            ids[i] = buffer.ReadInt32();
-        }
 
-        NetworkManager.ins.UpdateInventory(playerID, ids);
+        if (type == InventoryEventType.AddItem)
+        {
+            Events.Inventory.AddItem(instanceID, playerID, false);
+        }
+        else if (type == InventoryEventType.RemoveItem)
+        {
+            Events.Inventory.RemoveItem(instanceID, playerID, false);
+        }
 
         buffer.Dispose();
     }
@@ -248,20 +255,20 @@ internal static class NetworkReceive
             int playerID = buffer.ReadInt32();
             Side side = (Side)buffer.ReadInt32();
 
-            Events.Item.OnItemInteract(instanceID, playerID, side, false);
+            Events.Item.Interact(instanceID, playerID, side, false);
             //Call The ItemInteract Event
 
         }else if (type == ItemEventType.Hide)
         {
             bool hide = buffer.ReadBoolean();
 
-            Events.Item.OnItemHide(instanceID, hide, false);
+            Events.Item.Hide(instanceID, hide, false);
             //Call the ItemReset Event
 
         }else if(type == ItemEventType.Reset)
         {
             //Call the ItemHide Event
-            Events.Item.OnItemReset(instanceID, false);
+            Events.Item.Reset(instanceID, false);
         }else if(type == ItemEventType.Transform)
         {
             Vector3 pos = new Vector3((float)buffer.ReadDouble(), (float)buffer.ReadDouble(), (float)buffer.ReadDouble());
@@ -280,6 +287,40 @@ internal static class NetworkReceive
         {
             ItemManager.ins.DestroyItem(instanceID);
         }
+
+        buffer.Dispose();
+    }
+
+    private static void Packet_PlayerHandPosition(ref byte[] data)
+    {
+        ByteBuffer buffer = new ByteBuffer(data);
+
+        int playerID = buffer.ReadInt32();
+
+        float x = (float)buffer.ReadDouble();
+        float y = (float)buffer.ReadDouble();
+        float z = (float)buffer.ReadDouble();
+        Vector3 pos = new Vector3(x, y, z);
+
+        Side side = (Side)buffer.ReadInt32();
+        float speed = (float)buffer.ReadDouble();
+
+        AnimatorTarget target = (AnimatorTarget)buffer.ReadInt32();
+
+        bool persistent = buffer.ReadBoolean();
+
+        Events.BipedAnimator.SetHandTargetPosition(playerID, pos, side, speed, target, persistent, false);
+
+        buffer.Dispose();
+    }
+
+    private static void Packet_PlayerEndCurrentHandPosition(ref byte[] data)
+    {
+        ByteBuffer buffer = new ByteBuffer(data);
+
+        int playerID = buffer.ReadInt32();
+
+        Events.BipedAnimator.EndCurrentHandTarget(playerID, false);
 
         buffer.Dispose();
     }

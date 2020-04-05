@@ -15,6 +15,7 @@ public class ItemManager : MonoBehaviour
         {
             ins = this;
             instanceItems = new Dictionary<int, PhysicalItem>();
+            Events.Item.GetItem = GetItem;
         }
     }
     
@@ -37,4 +38,9 @@ public class ItemManager : MonoBehaviour
         item.Destroy();
     }
 
+    public PhysicalItem GetItem(int instanceID)
+    {
+        if (instanceItems.ContainsKey(instanceID) == false) return null;
+        return instanceItems[instanceID];
+    }
 }

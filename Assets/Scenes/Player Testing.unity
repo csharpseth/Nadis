@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 294a607509e347c4c9d888858519ca86,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -189,55 +189,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4155206871776296628, guid: e5f3931f66ee7ed4eb95b496286c84cb,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8993959403768337808, guid: e5f3931f66ee7ed4eb95b496286c84cb, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5f3931f66ee7ed4eb95b496286c84cb, type: 3}
---- !u!1 &144783157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1148729593304845479, guid: e5f3931f66ee7ed4eb95b496286c84cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 144783156}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &144783158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144783157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c7a279b0157ec544b7bbe418ad02942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meta:
-    name: Coil Gun
-    id: -1
-  grabSpeed: 10
-  grabbedThreshold: 0.1
-  heldEulerOffset: {x: 0, y: 0, z: 0}
-  Send: 1
-  Receive: 1
-  positionSendThresholdDist: 0.5
-  positionReachedThreshold: 0.1
-  range: 100
-  force: 75
-  aimOffset: {x: 0.3, y: -0.15, z: 0.4}
 --- !u!1 &224267712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1023,7 @@ GameObject:
   - component: {fileID: 2114821483}
   - component: {fileID: 2114821482}
   - component: {fileID: 2114821481}
+  - component: {fileID: 2114821484}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1125,6 +1079,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2114821484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114821480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d80860b0422a784784ab1c647900078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2769120225630936065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1204,7 +1170,7 @@ PrefabInstance:
     - target: {fileID: 1032715391471015123, guid: 7a4343643166d524bb707aab8ed2c41f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1032715391471015125, guid: 7a4343643166d524bb707aab8ed2c41f,
         type: 3}

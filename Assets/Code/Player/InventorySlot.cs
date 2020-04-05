@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +6,10 @@ public class InventorySlot : MonoBehaviour
 {
     public const string DefaultText = "";
 
-    private int _id;
+    private int _slotID;
+    private int _netID;
     private PhysicalItem item;
+    private bool selected = false;
 
     public TextMeshProUGUI nameText;
     public Image background;
@@ -17,48 +17,56 @@ public class InventorySlot : MonoBehaviour
     public Color normalColor;
     public Color selectColor;
 
-    public void Init(int id)
+    public void Init(int slotID, int netID)
     {
-        _id = id;
-        Clear(id);
+        _slotID = slotID;
+        _netID = netID;
+
         if (background == null)
             background = GetComponent<Image>();
         if (nameText == null)
             nameText = GetComponentInChildren<TextMeshProUGUI>();
+
+        //Subscribe Events
+        Events.Inventory.OnAddItem += OnAddItem;
+        Events.Inventory.OnRemoveItem += OnRemoveItem;
+        Events.Inventory.OnActive += OnSelectSlot;
     }
 
-    public void Select(int id)
+    private void UpdateSlot()
     {
-        if(_id == id)
+        if(item == null)
         {
-            background.color = selectColor;
-            if (item != null)
-                Events.Item.OnItemHide(item.InstanceID, false, true);
-        }
-        else
-        {
-            background.color = normalColor;
-            if(item != null)
-                Events.Item.OnItemHide(item.InstanceID, true, true);
-        }
-    }
-
-    public void AddItem(PhysicalItem item, int id)
-    {
-        if(this.item == null && _id == id)
-        {
-            this.item = item;
-            nameText.text = item.meta.name;
-            Debug.Log(item.meta.name);
-        }
-    }
-
-    public void Clear(int id)
-    {
-        if(id == _id)
-        {
-            item = null;
             nameText.text = DefaultText;
+        }else
+        {
+            nameText.text = item.meta.name;
+        }
+
+        background.color = (selected) ? selectColor : normalColor;
+    }
+
+    public void OnAddItem(int index, PhysicalItem addItem, int netID, bool send)
+    {
+        if (_netID != netID || item != null || _slotID != index) return;
+        item = addItem;
+        UpdateSlot();
+    }
+    public void OnRemoveItem(int index, int netID, bool send)
+    {
+        if (netID != _netID || index != _slotID) return;
+
+        item = null;
+        UpdateSlot();
+    }
+    public void OnSelectSlot(int slotIndex)
+    {
+        selected = (slotIndex == _slotID);
+        UpdateSlot();
+        if(item != null)
+        {
+            Events.Item.Hide(item.InstanceID, !selected, true);
         }
     }
+
 }

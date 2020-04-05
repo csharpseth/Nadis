@@ -78,8 +78,8 @@
     <Compile Include="Assets\Code\PhysicalItem.cs" />
     <Compile Include="Assets\Code\Player\BipedProceduralAnimator.cs" />
     <Compile Include="Assets\Code\Player\InteractionController.cs" />
+    <Compile Include="Assets\Code\Player\Inventory.cs" />
     <Compile Include="Assets\Code\Player\InventorySlot.cs" />
-    <Compile Include="Assets\Code\Player\InventoryUIManager.cs" />
     <Compile Include="Assets\Code\Player\MovementController.cs" />
     <Compile Include="Assets\Code\Player\PerspectiveController.cs" />
     <Compile Include="Assets\Code\Player\PlayerSoundController.cs" />

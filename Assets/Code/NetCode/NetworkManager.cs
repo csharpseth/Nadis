@@ -21,8 +21,9 @@ public class NetworkManager : MonoBehaviour
 
         mapGenerator = FindObjectOfType<MapGenerator>();
 
-        Events.Player.OnGetPlayerSync += GetPlayer;
-        Events.Player.OnGetPlayerAnimator += GetPlayerAnimator;
+        Events.Player.GetPlayerSync = GetPlayer;
+        Events.Player.GetPlayerAnimator = GetPlayerAnimator;
+        Events.Inventory.GetInventory = GetPlayerInventory;
     }
 
     public GameObject nonLocalPlayerPrefab;
@@ -43,7 +44,7 @@ public class NetworkManager : MonoBehaviour
 
         NetworkConfig.InitNetwork();
         //SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
-        NetworkConfig.ConnectToServer(new ServerData("45.79.9.19", 5555));
+        NetworkConfig.ConnectToServer(new ServerData("127.0.0.1", 5555));
     }
 
     public void CreateLocalPlayer(int connID, int inventorySize)
@@ -64,7 +65,7 @@ public class NetworkManager : MonoBehaviour
         else
         {
             LocalPlayer.ID = connID;
-            InteractionController.ins.InitInventory(inventorySize);
+            Events.Inventory.GetInventory(connID).Init(connID, inventorySize);
         }
     }
     
@@ -83,7 +84,7 @@ public class NetworkManager : MonoBehaviour
 
         PlayerSync ps = Instantiate(nonLocalPlayerPrefab).GetComponent<PlayerSync>();
         ps.ID = connID;
-        ps.SetInventorySize(inventorySize);
+        ps.GetComponent<Inventory>().Init(connID, inventorySize);
 
         connectedPlayers.Add(connID, ps);
 
@@ -135,22 +136,23 @@ public class NetworkManager : MonoBehaviour
 
         connectedPlayers[playerID].SetProceduralMoveData(grounded, inputDir, moveState, moveSpeed);
     }
-
-    public void UpdateInventory(int playerID, int[] ids)
-    {
-        if (connectedPlayers.ContainsKey(playerID) == false)
-            return;
-
-        PlayerSync ply = connectedPlayers[playerID];
-        ply.UpdateInventory(ids);
-    }
-
+    
     public PlayerSync GetPlayer(int playerID)
     {
         if (connectedPlayers.ContainsKey(playerID) == false)
             return null;
 
         return connectedPlayers[playerID];
+    }
+    public Inventory GetPlayerInventory(int playerID)
+    {
+        PlayerSync ply = GetPlayer(playerID);
+        if (ply == null && playerID == LocalPlayer.ID)
+            ply = LocalPlayer;
+        if (ply != null)
+            return ply.GetComponent<Inventory>();
+
+        return null;
     }
     public BipedProceduralAnimator GetPlayerAnimator(int playerID)
     {
@@ -163,18 +165,6 @@ public class NetworkManager : MonoBehaviour
             return ply.GetComponent<BipedProceduralAnimator>();
 
         return null;
-    }
-    
-    private void OnDrawGizmos()
-    {
-        if(spawnPoints != null && spawnPoints.Count > 0)
-        {
-            for (int i = 0; i < spawnPoints.Count; i++)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(spawnPoints[i], 1.5f);
-            }
-        }
     }
 
     private void OnApplicationQuit()

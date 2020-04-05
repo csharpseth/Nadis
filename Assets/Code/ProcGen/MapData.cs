@@ -110,9 +110,7 @@ public class MapData : ScriptableObject
                 map[x, y] = (bottom / (1f - (min / max)));
             }
         }*/
-
-        Debug.Log("Min:" + min + "  Max:" + max);
-
+        
         return map;
     }
 

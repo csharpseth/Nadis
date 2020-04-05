@@ -52,11 +52,7 @@ public class MapGenerator : MonoBehaviour
         }
         
         terrain.terrainData.SetHeights(0, 0, heightMap);
-
-        Texture2D tex = ProcDebug.FalloffMaskFromHeightMap(terrain.terrainData.GetHeights(0, 0, size, size), beachHeight, beachBlend);
-
-        terrain.materialTemplate.SetTexture("_beachMask", tex);
-
+        
         if(applyDecorations && mapDecorator != null)
         {
             mapDecorator.Decorate(decorationLayers, seed, transform);
@@ -67,7 +63,7 @@ public class MapGenerator : MonoBehaviour
 
 
         if (mapDecorator != null && networked == true)
-            mapDecorator.Generate(spawnPointsData.minHeight, spawnPointsData.maxHeight, spawnPointsData.density, spawnPointsData.maximumPoints, spawnPointsData.maxNormalAngle, spawnPointsData.maxPrefabAngle, seed);
+            mapDecorator.Generate(spawnPointsData.minHeight, spawnPointsData.maxHeight, spawnPointsData.density, spawnPointsData.maximumPoints, spawnPointsData.maxNormalAngle, spawnPointsData.maxPrefabAngle, seed, null, spawnPointsData.name);
     }
 
     private void OnDrawGizmos()

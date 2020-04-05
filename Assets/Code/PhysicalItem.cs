@@ -14,17 +14,27 @@ public class PhysicalItem : MonoBehaviour
 
     bool instanceIDSet = false;
     public int InstanceID { get; private set; }
+    public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
+    public Vector3 Rotation { get { return transform.eulerAngles; } set { transform.eulerAngles = value; } }
+    public Vector3 LocalPosition { get { return transform.localPosition; } set { transform.localPosition = value; } }
+    public Vector3 LocalRotation { get { return transform.localEulerAngles; } set { transform.localEulerAngles = value; } }
 
     public void SetInstanceID(int id)
     {
         if(instanceIDSet == false)
         {
             InstanceID = id;
-            Events.Item.OnItemInteract += Interact;
-            Events.Item.OnItemReset += ResetItem;
-            Events.Item.OnItemHide += Hide;
+            Events.Item.Interact += Interact;
+            Events.Item.Reset += ResetItem;
+            Events.Item.Hide += Hide;
             Events.Item.OnSetItemTransform += SetItemTransform;
+
+            Events.Item.Use += Use;
         }
+    }
+    public void SetParent(Transform parent)
+    {
+        transform.SetParent(parent);
     }
 
     [Header("Network Parameters:")]
@@ -38,6 +48,8 @@ public class PhysicalItem : MonoBehaviour
     private Vector3 nextPos;
     private Vector3 lastRot;
 
+    internal int ownerID = -1;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,6 +60,24 @@ public class PhysicalItem : MonoBehaviour
         }
     }
 
+    public virtual void Use(int instanceID, int useIndex, bool useValue, bool send = false)
+    {
+        if (instanceID != InstanceID)
+            return;
+
+        switch(useIndex)
+        {
+            case (1):
+                PrimaryUse();
+                break;
+            case (2):
+                SecondaryUse(useValue);
+                break;
+            default:
+                break;
+        }
+    }
+    
     public virtual void PrimaryUse()
     {
         
@@ -61,8 +91,10 @@ public class PhysicalItem : MonoBehaviour
     public void Interact(int instID, int playerID, Side handSide, bool send = false)
     {
         if (InstanceID != instID) return;
-        BipedProceduralAnimator animator = Events.Player.OnGetPlayerAnimator(playerID);
+        BipedProceduralAnimator animator = Events.Player.GetPlayerAnimator(playerID);
         if (animator == null) return;
+
+        ownerID = playerID;
 
         Send = false;
         Receive = false;
@@ -75,6 +107,7 @@ public class PhysicalItem : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localEulerAngles = heldEulerOffset;
         parent = hand;
+        
     }
 
     public void ResetItem(int instanceID, bool send = false)
@@ -88,6 +121,7 @@ public class PhysicalItem : MonoBehaviour
         col.enabled = true;
         Send = true;
         Receive = true;
+        ownerID = -1;
     }
 
     public void Hide(int instanceID, bool val, bool send = true)

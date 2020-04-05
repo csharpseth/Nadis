@@ -13,6 +13,8 @@ public class Weapon : PhysicalItem
 
     public override void PrimaryUse()
     {
+        if (ownerID == -1) return;
+
         RaycastHit hit;
         if(Physics.Raycast(InteractionController.ins.CenterScreenRay, out hit, range))
         {
@@ -26,13 +28,21 @@ public class Weapon : PhysicalItem
 
     public override void SecondaryUse(bool state)
     {
-        if(state == true)
+        if (ownerID == -1) return;
+
+        Debug.LogFormat("State:{0}   Aimed:{1}", state, aimed);
+
+        if (state == true && aimed == false)
         {
-            InteractionController.ins.SetHandTargetPosition(aimOffset, Side.Right, grabSpeed, InteractionController.ins.Camera.transform, true);
+            aimed = true;
+            Events.BipedAnimator.SetHandTargetPosition(ownerID, aimOffset, Side.Right, grabSpeed, AnimatorTarget.Head, true, true);
         }
-        else
+
+
+        if (state == false)
         {
-            InteractionController.ins.EndCurrentHandTarget();
+            aimed = false;
+            Events.BipedAnimator.EndCurrentHandTarget(ownerID, true);
         }
     }
 }

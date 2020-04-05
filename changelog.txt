@@ -4,3 +4,8 @@
 -Added Item Interaction, Reset, & Hide Sync over NetCode w/ new Event based system
 -Modified Item Spawn & Destruction to use new Event-Based System
 
+[04/04/2020]
+-Refactored: Inventory, Animator to use new Event system
+-Started to add player hand position syncing
+    Hand goes to position & returns but once returned it doesnt do the hand walk anim
+-Improved Inventory System & Its NetCode

@@ -41,7 +41,7 @@ public class MapDecorator : MonoBehaviour
         return g;
     }
 
-    public GameObject Generate(float minHeight, float maxHeight, float density, int maxPoints, float maxNormalAngle, float maxAngle, int seed = 0, GameObject[] prefabs = null, string groupName = null)
+    public GameObject Generate(float minHeight, float maxHeight, float density, int maxPoints, float maxNormalAngle, float maxAngle, int seed = 0, GameObject[] prefabs = null, string groupName = "")
     {
         float max = -1000f;
         float min = 1000f;
@@ -126,14 +126,19 @@ public class MapDecorator : MonoBehaviour
 
             return parent.gameObject;
         }
-        if (NetworkManager.ins != null)
+        
+        if(groupName.ToLower() == "spawnpoints")
         {
-            for (int i = 0; i < spawnPoints.Count; i++)
+            if (NetworkManager.ins != null)
             {
+                for (int i = 0; i < spawnPoints.Count; i++)
+                {
 
-                NetworkManager.ins.RegisterSpawnPoint(spawnPoints[i].pos);
+                    NetworkManager.ins.RegisterSpawnPoint(spawnPoints[i].pos);
+                }
             }
         }
+
         return null;
 
     }

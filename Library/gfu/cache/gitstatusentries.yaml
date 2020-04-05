@@ -13,39 +13,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 6
-  lastUpdatedAtString: 2020-04-03T22:34:08.912-05:00
-  initializedAtString: 2020-04-03T16:47:35.365-05:00
+  lastUpdatedAtString: 2020-04-04T23:06:51.028-05:00
+  initializedAtString: 2020-04-04T13:42:11.435-05:00
   entries:
-  - path: .vs\TimeDrivenSurvival_New\v15\.suo
-    fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\.suo
-    projectPath: .vs\TimeDrivenSurvival_New\v15\.suo
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
-    fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
-    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
-    fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
-    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-shm
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
-    fullPath: D:\Unity-Projects\Darwin\.vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
-    projectPath: .vs\TimeDrivenSurvival_New\v15\Server\sqlite3\storage.ide-wal
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Assembly-CSharp.csproj
     fullPath: D:\Unity-Projects\Darwin\Assembly-CSharp.csproj
     projectPath: Assembly-CSharp.csproj
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Assets\BipedAnimator.controller
+    fullPath: D:\Unity-Projects\Darwin\Assets\BipedAnimator.controller
+    projectPath: Assets\BipedAnimator.controller
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\BipedAnimator.controller.meta
+    fullPath: D:\Unity-Projects\Darwin\Assets\BipedAnimator.controller.meta
+    projectPath: Assets\BipedAnimator.controller.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
   - path: Assets\Code\ItemManager.cs
     fullPath: D:\Unity-Projects\Darwin\Assets\Code\ItemManager.cs
     projectPath: Assets\Code\ItemManager.cs
@@ -100,6 +88,12 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Assets\Code\Player\Inventory.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\Inventory.cs
+    projectPath: Assets\Code\Player\Inventory.cs
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
   - path: Assets\Code\Player\InventorySlot.cs
     fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\InventorySlot.cs
     projectPath: Assets\Code\Player\InventorySlot.cs
@@ -111,28 +105,34 @@ MonoBehaviour:
     projectPath: Assets\Code\Player\InventoryUIManager.cs
     originalPath: 
     indexStatus: 0
-    workTreeStatus: 3
-  - path: Assets\Code\Player\MovementController.cs
-    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\MovementController.cs
-    projectPath: Assets\Code\Player\MovementController.cs
+    workTreeStatus: 5
+  - path: Assets\Code\Player\InventoryUIManager.cs.meta
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\InventoryUIManager.cs.meta
+    projectPath: Assets\Code\Player\InventoryUIManager.cs.meta
     originalPath: 
     indexStatus: 0
-    workTreeStatus: 3
-  - path: Assets\Code\Player\PlayerSoundController.cs
-    fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\PlayerSoundController.cs
-    projectPath: Assets\Code\Player\PlayerSoundController.cs
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
+    workTreeStatus: 5
   - path: Assets\Code\Player\Weapon.cs
     fullPath: D:\Unity-Projects\Darwin\Assets\Code\Player\Weapon.cs
     projectPath: Assets\Code\Player\Weapon.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Assets\Code\TestPunch.cs
-    fullPath: D:\Unity-Projects\Darwin\Assets\Code\TestPunch.cs
-    projectPath: Assets\Code\TestPunch.cs
+  - path: Assets\Code\ProcGen\MapData.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\ProcGen\MapData.cs
+    projectPath: Assets\Code\ProcGen\MapData.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\ProcGen\MapDecorator.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\ProcGen\MapDecorator.cs
+    projectPath: Assets\Code\ProcGen\MapDecorator.cs
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Code\ProcGen\MapGenerator.cs
+    fullPath: D:\Unity-Projects\Darwin\Assets\Code\ProcGen\MapGenerator.cs
+    projectPath: Assets\Code\ProcGen\MapGenerator.cs
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -140,17 +140,41 @@ MonoBehaviour:
     fullPath: D:\Unity-Projects\Darwin\Assets\Code\Utility\Events.cs
     projectPath: Assets\Code\Utility\Events.cs
     originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Assets\Inventory\Normal Item Database.asset
-    fullPath: D:\Unity-Projects\Darwin\Assets\Inventory\Normal Item Database.asset
-    projectPath: Assets\Inventory\Normal Item Database.asset
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Inventory\Items\Coil Gun.prefab
+    fullPath: D:\Unity-Projects\Darwin\Assets\Inventory\Items\Coil Gun.prefab
+    projectPath: Assets\Inventory\Items\Coil Gun.prefab
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Assets\Models\Water_Plane.fbx
+    fullPath: D:\Unity-Projects\Darwin\Assets\Models\Water_Plane.fbx
+    projectPath: Assets\Models\Water_Plane.fbx
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\Models\Water_Plane.fbx.meta
+    fullPath: D:\Unity-Projects\Darwin\Assets\Models\Water_Plane.fbx.meta
+    projectPath: Assets\Models\Water_Plane.fbx.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
   - path: Assets\New Terrain.asset
     fullPath: D:\Unity-Projects\Darwin\Assets\New Terrain.asset
     projectPath: Assets\New Terrain.asset
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\New Terrain.asset.meta
+    fullPath: D:\Unity-Projects\Darwin\Assets\New Terrain.asset.meta
+    projectPath: Assets\New Terrain.asset.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\Prefabs\NonLocal Player Procedural.prefab
+    fullPath: D:\Unity-Projects\Darwin\Assets\Prefabs\NonLocal Player Procedural.prefab
+    projectPath: Assets\Prefabs\NonLocal Player Procedural.prefab
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -160,6 +184,84 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Assets\Readme.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\Readme.asset
+    projectPath: Assets\Readme.asset
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\Readme.asset.meta
+    fullPath: D:\Unity-Projects\Darwin\Assets\Readme.asset.meta
+    projectPath: Assets\Readme.asset.meta
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 5
+  - path: Assets\Scenes\Network Testing.unity
+    fullPath: D:\Unity-Projects\Darwin\Assets\Scenes\Network Testing.unity
+    projectPath: Assets\Scenes\Network Testing.unity
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\Scenes\Player Testing.unity
+    fullPath: D:\Unity-Projects\Darwin\Assets\Scenes\Player Testing.unity
+    projectPath: Assets\Scenes\Player Testing.unity
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Assets\TerrainData\CentralTerrain.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\CentralTerrain.asset
+    projectPath: Assets\TerrainData\CentralTerrain.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_02f13efc-22bd-4635-a5aa-415ec5a94ea3.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_02f13efc-22bd-4635-a5aa-415ec5a94ea3.asset
+    projectPath: Assets\TerrainData\TerrainData_02f13efc-22bd-4635-a5aa-415ec5a94ea3.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_0587a826-fc13-4fdb-befe-1637cb83aece.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_0587a826-fc13-4fdb-befe-1637cb83aece.asset
+    projectPath: Assets\TerrainData\TerrainData_0587a826-fc13-4fdb-befe-1637cb83aece.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_68827580-e332-4f1d-a305-d07f504b67c5.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_68827580-e332-4f1d-a305-d07f504b67c5.asset
+    projectPath: Assets\TerrainData\TerrainData_68827580-e332-4f1d-a305-d07f504b67c5.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_8ee344cc-d255-4564-bd50-99794a790e9b.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_8ee344cc-d255-4564-bd50-99794a790e9b.asset
+    projectPath: Assets\TerrainData\TerrainData_8ee344cc-d255-4564-bd50-99794a790e9b.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_9d861f7e-df9a-466e-b9d5-d34da026334a.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_9d861f7e-df9a-466e-b9d5-d34da026334a.asset
+    projectPath: Assets\TerrainData\TerrainData_9d861f7e-df9a-466e-b9d5-d34da026334a.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_a4cec7b0-7354-41ec-bd93-7f7b4388bbe9.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_a4cec7b0-7354-41ec-bd93-7f7b4388bbe9.asset
+    projectPath: Assets\TerrainData\TerrainData_a4cec7b0-7354-41ec-bd93-7f7b4388bbe9.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_c7045312-e01b-484a-8c09-51fe3dd66004.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_c7045312-e01b-484a-8c09-51fe3dd66004.asset
+    projectPath: Assets\TerrainData\TerrainData_c7045312-e01b-484a-8c09-51fe3dd66004.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Assets\TerrainData\TerrainData_cdec8c75-a90b-48a8-84be-208241165225.asset
+    fullPath: D:\Unity-Projects\Darwin\Assets\TerrainData\TerrainData_cdec8c75-a90b-48a8-84be-208241165225.asset
+    projectPath: Assets\TerrainData\TerrainData_cdec8c75-a90b-48a8-84be-208241165225.asset
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
   - path: changelog.txt
     fullPath: D:\Unity-Projects\Darwin\changelog.txt
     projectPath: changelog.txt
@@ -172,42 +274,36 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
-    projectPath: Library\Artifacts\10\10836e189b05acfeefe4d7ca4124824c
+  - path: Library\Artifacts\0a\0a60d5327b4deb6df25c2b7bcc6695ce
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\0a\0a60d5327b4deb6df25c2b7bcc6695ce
+    projectPath: Library\Artifacts\0a\0a60d5327b4deb6df25c2b7bcc6695ce
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
-    projectPath: Library\Artifacts\39\3905e90207c17aa108e01239b2bcccfc
+  - path: Library\Artifacts\5f\5f836d718cf1e69292c3e843f0c3cc69
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\5f\5f836d718cf1e69292c3e843f0c3cc69
+    projectPath: Library\Artifacts\5f\5f836d718cf1e69292c3e843f0c3cc69
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
-    projectPath: Library\Artifacts\5e\5e48a774d633c6263bb959f9326913ee
+  - path: Library\Artifacts\77\7727af96f65d9730c2c09fb32c07cb33
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\77\7727af96f65d9730c2c09fb32c07cb33
+    projectPath: Library\Artifacts\77\7727af96f65d9730c2c09fb32c07cb33
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
-    projectPath: Library\Artifacts\af\af7968a885888d9631db813c3225cdbb
+  - path: Library\Artifacts\e7\e797417285050e6d7b3d1aa9add39cb1
+    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\e7\e797417285050e6d7b3d1aa9add39cb1
+    projectPath: Library\Artifacts\e7\e797417285050e6d7b3d1aa9add39cb1
     originalPath: 
     indexStatus: 0
     workTreeStatus: 5
-  - path: Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
-    projectPath: Library\Artifacts\d5\d56f475f9909dceed394c7c251cd19ce
+  - path: Library\EditorUserBuildSettings.asset
+    fullPath: D:\Unity-Projects\Darwin\Library\EditorUserBuildSettings.asset
+    projectPath: Library\EditorUserBuildSettings.asset
     originalPath: 
     indexStatus: 0
-    workTreeStatus: 5
-  - path: Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
-    fullPath: D:\Unity-Projects\Darwin\Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
-    projectPath: Library\Artifacts\e1\e1856b9337cd8abbc801459d8c29cee3
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
+    workTreeStatus: 3
   - path: Library\gfu\cache\branches.yaml
     fullPath: D:\Unity-Projects\Darwin\Library\gfu\cache\branches.yaml
     projectPath: Library\gfu\cache\branches.yaml
@@ -241,6 +337,12 @@ MonoBehaviour:
   - path: Library\gfu\cache\repoinfo.yaml
     fullPath: D:\Unity-Projects\Darwin\Library\gfu\cache\repoinfo.yaml
     projectPath: Library\gfu\cache\repoinfo.yaml
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\InspectorExpandedItems.asset
+    fullPath: D:\Unity-Projects\Darwin\Library\InspectorExpandedItems.asset
+    projectPath: Library\InspectorExpandedItems.asset
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -346,21 +448,9 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
     projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -376,21 +466,9 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
     projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
-    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -412,21 +490,9 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
     projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
-    projectPath: Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -442,33 +508,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.Rider.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Rider.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.Rider.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
     projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
     projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
-    projectPath: Library\ScriptAssemblies\Unity.ShaderGraph.Utilities.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -484,18 +532,6 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.TextMeshPro.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.TextMeshPro.pdb
-    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.Timeline.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.dll
     projectPath: Library\ScriptAssemblies\Unity.Timeline.dll
@@ -508,39 +544,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.Timeline.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.Timeline.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.Timeline.pdb
-    projectPath: Library\ScriptAssemblies\Unity.Timeline.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.VSCode.Editor.dll
     projectPath: Library\ScriptAssemblies\Unity.VSCode.Editor.dll
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
-    projectPath: Library\ScriptAssemblies\Unity.VSCode.Editor.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEditor.TestRunner.dll
     projectPath: Library\ScriptAssemblies\UnityEditor.TestRunner.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
-    projectPath: Library\ScriptAssemblies\UnityEditor.TestRunner.pdb
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -556,15 +568,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
-    fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
-    projectPath: Library\ScriptAssemblies\UnityEngine.TestRunner.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\UnityEngine.UI.dll
     fullPath: D:\Unity-Projects\Darwin\Library\ScriptAssemblies\UnityEngine.UI.dll
     projectPath: Library\ScriptAssemblies\UnityEngine.UI.dll
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\ShaderCache\EditorEncounteredVariants
+    fullPath: D:\Unity-Projects\Darwin\Library\ShaderCache\EditorEncounteredVariants
+    projectPath: Library\ShaderCache\EditorEncounteredVariants
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -598,15 +610,51 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Library\StateCache\Hierarchy\5f8f24-7a4343643166d524bb.json
+    fullPath: D:\Unity-Projects\Darwin\Library\StateCache\Hierarchy\5f8f24-7a4343643166d524bb.json
+    projectPath: Library\StateCache\Hierarchy\5f8f24-7a4343643166d524bb.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\Hierarchy\5f8f24-d4f35833671aef246a.json
+    fullPath: D:\Unity-Projects\Darwin\Library\StateCache\Hierarchy\5f8f24-d4f35833671aef246a.json
+    projectPath: Library\StateCache\Hierarchy\5f8f24-d4f35833671aef246a.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
   - path: Library\StateCache\Hierarchy\5f8f24-mainStage.json
     fullPath: D:\Unity-Projects\Darwin\Library\StateCache\Hierarchy\5f8f24-mainStage.json
     projectPath: Library\StateCache\Hierarchy\5f8f24-mainStage.json
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Library\StateCache\SceneView\9c818f-d4f35833671aef246a.json
+    fullPath: D:\Unity-Projects\Darwin\Library\StateCache\SceneView\9c818f-d4f35833671aef246a.json
+    projectPath: Library\StateCache\SceneView\9c818f-d4f35833671aef246a.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\SceneView\9c818f-mainStage.json
+    fullPath: D:\Unity-Projects\Darwin\Library\StateCache\SceneView\9c818f-mainStage.json
+    projectPath: Library\StateCache\SceneView\9c818f-mainStage.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
   - path: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
     fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
     projectPath: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    projectPath: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+    fullPath: D:\Unity-Projects\Darwin\obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
+    projectPath: obj\Debug\Assembly-CSharp-Editor.csprojAssemblyReference.cache
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3

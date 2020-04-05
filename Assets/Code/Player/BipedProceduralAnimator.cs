@@ -4,6 +4,7 @@ using UnityEngine;
 public class BipedProceduralAnimator : MonoBehaviour
 {
     public ProceduralAnimationData data;
+    private PlayerSync player;
 
     #region Targets
     public Transform targets;
@@ -61,7 +62,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     public bool moving = false;
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         InitialSetup();
 
@@ -129,6 +130,11 @@ public class BipedProceduralAnimator : MonoBehaviour
 
         defaultRightHand = rightHand.localPosition;
         defaultLeftHand = leftHand.localPosition;
+
+        player = GetComponent<PlayerSync>();
+
+        Events.BipedAnimator.SetHandTargetPosition += SetHandTargetPosition;
+        Events.BipedAnimator.EndCurrentHandTarget += EndCurrentHandTarget;
     }
 
     public void FootStepping()
@@ -285,15 +291,27 @@ public class BipedProceduralAnimator : MonoBehaviour
         leftHand.localPosition = lPos;
     }
 
-    public void SetHandTargetPosition(Vector3 position, Side side, float speed = 0f, Transform parent = null, bool persistent = false)
+    public void SetHandTargetPosition(int playerID, Vector3 position, Side side, float speed = 0f, AnimatorTarget target = AnimatorTarget.None, bool persistent = false, bool send = true)
     {
+        if (playerID != player.ID) return;
+
+        Transform parent = null;
+
+        if(target == AnimatorTarget.Head)
+        {
+            parent = head;
+        }else if(target == AnimatorTarget.Chest)
+        {
+            parent = chest;
+        }
+
         if(parent != null)
         {
             if(side == Side.Right || side == Side.Both && rightHandLerp == null)
             {
                 rightHand.SetParent(parent);
 
-                rightHandLerp = new HandLerpData(rightHand, position, speed, true, targets);
+                rightHandLerp = new HandLerpData(rightHand, position, speed, true, true, targets);
                 
                 rightHand.localRotation = Quaternion.identity;
             }
@@ -302,7 +320,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             {
                 leftHand.SetParent(parent);
 
-                leftHandLerp = new HandLerpData(leftHand, position, speed, true, targets);
+                leftHandLerp = new HandLerpData(leftHand, position, speed, true, true, targets);
 
                 leftHand.localRotation = Quaternion.identity;
             }
@@ -330,16 +348,18 @@ public class BipedProceduralAnimator : MonoBehaviour
         }
     }
 
-    public void EndCurrentHandTarget()
+    public void EndCurrentHandTarget(int playerID, bool send = true)
     {
-        if (overrideNormalHandCondition == false)
-            return;
+        if (playerID != player.ID) return;
         
         overrideNormalHandCondition = false;
         handTargetPersistent = false;
 
         rightHand.SetParent(targets);
         leftHand.SetParent(targets);
+
+        rightHandLerp = null;
+        leftHandLerp = null;
 
         rightHand.localPosition = defaultRightHand;
         leftHand.localPosition = defaultLeftHand;
@@ -490,6 +510,13 @@ public enum Side
     Both  = 3
 }
 
+public enum AnimatorTarget
+{
+    None,
+    Head,
+    Chest
+}
+
 public class HandLerpData
 {
     private const float FinishThreshold = (0.05f * 0.05f);
@@ -499,15 +526,17 @@ public class HandLerpData
     private Transform target;
     private Transform defParent;
     private bool local;
+    private bool persistent;
     public bool Done { get; private set; }
 
-    public HandLerpData(Transform tar, Vector3 pos, float speed, bool local = true, Transform defParent = null)
+    public HandLerpData(Transform tar, Vector3 pos, float speed, bool local = true, bool persistent = false, Transform defParent = null)
     {
         target = tar;
         nextPos = pos;
         this.speed = speed;
         this.local = local;
         this.defParent = defParent;
+        this.persistent = persistent;
     }
     public HandLerpData(Transform tar, Vector3[] pos, float speed, bool local = true, Transform defParent = null)
     {
@@ -529,7 +558,7 @@ public class HandLerpData
     {
         if(posQueue == null || posQueue.Count == 0)
         {
-            if(nextPos == Vector3.zero)
+            if(nextPos == Vector3.zero && persistent == false)
             {
                 Done = true;
                 if(defParent != null)

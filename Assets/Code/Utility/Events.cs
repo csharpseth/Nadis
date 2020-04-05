@@ -12,25 +12,48 @@ public enum ItemEventType
     Destroy = 6,
 }
 
+public enum InventoryEventType
+{
+    AddItem = 1,
+    RemoveItem = 2,
+}
+
 public static class Events
 {
     public struct InventoryEvents
     {
-        public Action<PhysicalItem, int> OnInventoryAdd;
-        public Action<int> OnInventoryRemove;
-        public Action<int> OnInventorySelect;
-        public Action<PhysicalItem[]> OnInventoryChange;
+        public delegate void ItemPlayerEvent(int instanceID, int playerID, bool send);
+
+        //Networked
+        public Action<int, PhysicalItem, int, bool> OnAddItem;
+        public Action<int, int, bool> OnRemoveItem;
+
+        //Not Networked
+        public delegate Inventory OnGetInventory(int playerID);
+        public OnGetInventory GetInventory;
+        public ItemPlayerEvent AddItem;
+        public ItemPlayerEvent RemoveItem;
+        public Action<int, bool> RemoveActiveItem;
+
+        public Action<int> OnActive;
     }
     public struct ItemEvents
     {
         public Action<int, Vector3, Vector3, bool> OnRequestSpawnItem;
         public Action<int, bool> OnRequestDestroyItem;
 
-        public Action<int, int, Side, bool> OnItemInteract;
-        public Action<int, bool> OnItemReset;
-        public Action<int, bool, bool> OnItemHide; 
+        public delegate void OnItemInteract(int instanceID, int playerID, Side side, bool send);
+        public OnItemInteract Interact;
+        public Action<int, bool> Reset;
+        public Action<int, bool, bool> Hide;
+        public Action<int, int, bool, bool> Use;
         public Action<int, Vector3, Vector3, bool> OnItemTransform;
         public Action<int, Vector3, Vector3> OnSetItemTransform;
+
+        public Action<int, int, bool, bool> OnItemUse;
+
+        public delegate PhysicalItem OnGetItem(int instanceID);
+        public OnGetItem GetItem;
     }
     public struct BipedAnimatorEvents
     {
@@ -42,14 +65,17 @@ public static class Events
 
         public Action OnRightFootFinishStep;
         public Action OnLeftFootFinishStep;
+
+        public Action<int, Vector3, Side, float, AnimatorTarget, bool, bool> SetHandTargetPosition;
+        public Action<int, bool> EndCurrentHandTarget;
     }
     public struct PlayerEvents
     {
-        public delegate PlayerSync GetPlayerSync(int playerID);
-        public delegate BipedProceduralAnimator GetPlayerAnimator(int playerID);
+        public delegate PlayerSync OnGetPlayerSync(int playerID);
+        public delegate BipedProceduralAnimator OnGetPlayerAnimator(int playerID);
 
-        public GetPlayerSync OnGetPlayerSync;
-        public GetPlayerAnimator OnGetPlayerAnimator;
+        public OnGetPlayerSync GetPlayerSync;
+        public OnGetPlayerAnimator GetPlayerAnimator;
 
     }
 
