@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using LibNoise;
-using LibNoise.Generator;
+﻿using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -28,11 +24,12 @@ public class MapGenerator : MonoBehaviour
     {
         mapDecorator = GetComponent<MapDecorator>();
         if (networked == false)
-            Generate(Random.Range(0, int.MaxValue));
+            Generate();
     }
 
     public void Generate(int seed = -1)
     {
+        Debug.Log("START :: Generating Map...");
         if (seed == -1)
             seed = Random.Range(0, int.MaxValue);
         int size = terrain.terrainData.heightmapResolution;
@@ -56,32 +53,51 @@ public class MapGenerator : MonoBehaviour
         if(applyDecorations && mapDecorator != null)
         {
             mapDecorator.Decorate(decorationLayers, seed, transform);
-        }else
-        {
-            Debug.LogFormat("No Decorations Were Applied -- Decorate:{0}   Component:{1}", applyDecorations, mapDecorator);
         }
 
-
-        if (mapDecorator != null && networked == true)
-            mapDecorator.Generate(spawnPointsData.minHeight, spawnPointsData.maxHeight, spawnPointsData.density, spawnPointsData.maximumPoints, spawnPointsData.maxNormalAngle, spawnPointsData.maxPrefabAngle, seed, null, spawnPointsData.name);
+        GenerateSpawnPoints(points, terrain.terrainData, 0.1f, 0.2f, 0.3f, seed);
+        
+        Debug.Log("FINSIH :: Map Generated");
     }
 
-    private void OnDrawGizmos()
+    public void GenerateSpawnPoints(float[,] heightMap, TerrainData terrain, float chance, float minHeight, float maxHeight, int seed, int maxPoints = 1)
     {
-        if (points == null) return;
+        float min = 500f;
+        float max = -500f;
 
-        int size = terrain.terrainData.heightmapResolution;
-        for (int x = 0; x < size; x++)
+        int pointCount = 0;
+
+        for (int x = 0; x < heightMap.GetLength(0); x++)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 0; y < heightMap.GetLength(1); y++)
             {
-                if(points[x, y] > 0f)
+                if (pointCount >= maxPoints) return;
+
+                if (heightMap[x, y] > max) max = heightMap[x, y];
+                if (heightMap[x, y] < min) min = heightMap[x, y];
+
+                if (heightMap[x, y] <= maxHeight && heightMap[x, y] >= minHeight)
                 {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(new Vector3(x * 2, points[x, y], y * 2), 10f);
+                    float val = Random.value;
+                    if (val <= chance)
+                    {
+                        RaycastHit hit;
+                        Vector3 pos = new Vector3(x, terrain.size.y + 25f, y);
+                        if (Physics.Raycast(pos, Vector3.down, out hit))
+                        {
+                            pos.y = hit.point.y;
+                            NetworkManager.ins.RegisterSpawnPoint(pos);
+                            pointCount++;
+                        }
+
+                        
+                    }
                 }
             }
         }
+
+        Debug.LogFormat("Min:{0}  Max:{1}  ActualMaxHeight:{2}", min, max, terrain.size.y);
     }
+    
 
 }

@@ -169,10 +169,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   netObjectsManager: {fileID: 0}
   spawnPoints: []
-  nonLocalPlayerPrefab: {fileID: 5306550393391481251, guid: d4f35833671aef246a4010054a6d2c61,
+  localPlayerPrefab: {fileID: 7374546707893095327, guid: cc348900a83e80e49a0e11a600383498,
     type: 3}
-  localPlayerPrefab: {fileID: 1032715391471015123, guid: 7a4343643166d524bb707aab8ed2c41f,
+  remotePlayerPrefab: {fileID: 8006833277413759994, guid: 5bda221fba41c32479e33738b2bd1372,
     type: 3}
+  playerRagdoll: {fileID: 1843969878122021682, guid: 1fd3b0146319d3e4fa5b05c3167e68a4,
+    type: 3}
+  ragdollCleanupDelay: 120
 --- !u!4 &204002004
 Transform:
   m_ObjectHideFlags: 0
@@ -181,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204002001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2118883, y: -0.4426423, z: 19.983105}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1895,14 +1898,14 @@ Terrain:
   m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
+  m_DrawTreesAndFoliage: 0
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 14b110f2baa0eb7439ad0f0132ed4420, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1

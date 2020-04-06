@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\MapGeneratorEditor.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/Unity-Projects/Darwin/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
@@ -102,12 +101,6 @@
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>D:/Unity-Projects/Darwin/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Unity-Projects/Darwin/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Unity-Projects/Darwin/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>D:/Unity-Projects/Darwin/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
@@ -315,21 +308,6 @@
     </Reference>
     <Reference Include="KaymakNetwork">
       <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/KaymakNetwork.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Api.45">
-      <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Logging">
-      <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.Unity.45">
-      <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll</HintPath>
-    </Reference>
-    <Reference Include="GitHub.UnityShim">
-      <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll</HintPath>
-    </Reference>
-    <Reference Include="sfw.net">
-      <HintPath>D:/Unity-Projects/Darwin/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>D:/Unity-Projects/Darwin/Library/PackageCache/com.unity.render-pipelines.core@7.1.8/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
@@ -696,10 +674,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{76B00F49-CE67-B2B4-DB15-58336B542447}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{1F7E99DA-5C57-65C9-4FFD-A547A7563522}</Project>
-      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

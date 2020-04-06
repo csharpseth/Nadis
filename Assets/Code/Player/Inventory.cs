@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
         Events.Inventory.AddItem += AddItem;
         Events.Inventory.RemoveItem += RemoveItem;
         Events.Inventory.RemoveActiveItem += RemoveAtCurrentIndex;
+        Events.Inventory.DropAllItems += DropAllItems;
     }
     private void Update()
     {
@@ -77,6 +78,8 @@ public class Inventory : MonoBehaviour
         if (Contains(instanceID) == false) return -1;
         for (int i = 0; i < _content.Length; i++)
         {
+            if (_content[i] == null) continue;
+
             if (_content[i].InstanceID == instanceID) return i;
         }
 
@@ -111,5 +114,18 @@ public class Inventory : MonoBehaviour
     {
         if (_content[_activeIndex] == null) return;
         RemoveItem(_content[_activeIndex].InstanceID, netID, send);
+    }
+
+    public void DropAllItems(int netID, bool send)
+    {
+        if (netID != _netID) return;
+
+        for (int i = 0; i < _content.Length; i++)
+        {
+            _activeIndex = i;
+            Events.Inventory.RemoveActiveItem(netID, send);
+        }
+
+        _activeIndex = 0;
     }
 }

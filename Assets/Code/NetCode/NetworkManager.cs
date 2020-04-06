@@ -5,6 +5,9 @@ public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager ins;
     public static PlayerSync LocalPlayer;
+    public static PlayerStats DefaultStats;
+    private static bool defaultPlayerStatSet = false;
+
     [HideInInspector]
     public NetworkObjectsManager netObjectsManager;
 
@@ -24,18 +27,21 @@ public class NetworkManager : MonoBehaviour
         Events.Player.GetPlayerSync = GetPlayer;
         Events.Player.GetPlayerAnimator = GetPlayerAnimator;
         Events.Inventory.GetInventory = GetPlayerInventory;
+
+        Events.Player.Respawn += RespawnPlayer;
     }
 
-    public GameObject nonLocalPlayerPrefab;
     public GameObject localPlayerPrefab;
+    public GameObject remotePlayerPrefab;
+    public GameObject playerRagdoll;
+    public float ragdollCleanupDelay = 30f;
 
     public Dictionary<int, PlayerSync> connectedPlayers = new Dictionary<int, PlayerSync>();
 
     private bool spawnPointsGenerated = false;
     private int localPlayerID = -1;
+    
 
-    
-    
     void Start()
     {
         DontDestroyOnLoad(this);
@@ -47,26 +53,51 @@ public class NetworkManager : MonoBehaviour
         NetworkConfig.ConnectToServer(new ServerData("127.0.0.1", 5555));
     }
 
-    public void CreateLocalPlayer(int connID, int inventorySize)
+    public void SetDefaultStats(PlayerStats stats)
     {
-        if (LocalPlayer != null) return;
+        if (defaultPlayerStatSet == true) return;
 
-        Vector3 spawnPoint = Vector3.zero;
-        if(spawnPoints.Count > 0)
+        DefaultStats = stats;
+        defaultPlayerStatSet = true;
+    }
+
+    private void RespawnPlayer(int playerID)
+    {
+        if (playerID != LocalPlayer.ID) return;
+
+        LocalPlayer.transform.position = GetSpawnPoint();
+    }
+
+    private Vector3 GetSpawnPoint()
+    {
+        if (spawnPoints == null || spawnPoints.Count == 0) return Vector3.zero;
+
+        int index = Random.Range(0, spawnPoints.Count);
+        return spawnPoints[index];
+    }
+
+    public void CreatePlayer(int connID, int inventorySize, bool local)
+    {
+        PlayerSync ps = null;
+
+        if (GetPlayer(connID) != null) return;
+
+        if(local)
         {
-            spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
+            ps = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
+            ps.transform.position = GetSpawnPoint();
+
+            LocalPlayer = ps;
+        }else
+        {
+            ps = Instantiate(remotePlayerPrefab).GetComponent<PlayerSync>();
         }
 
-        LocalPlayer = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
-        LocalPlayer.transform.position = spawnPoint;
+        ps.ID = connID;
+        ps.GetComponent<Inventory>().Init(connID, inventorySize);
+        ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power);
 
-        if (LocalPlayer.Local == false)
-            Debug.LogError("Spawned Local Player is Not Set as 'Local'!");
-        else
-        {
-            LocalPlayer.ID = connID;
-            Events.Inventory.GetInventory(connID).Init(connID, inventorySize);
-        }
+        connectedPlayers.Add(connID, ps);
     }
     
     public void RegisterSpawnPoint(Vector3 point)
@@ -76,21 +107,14 @@ public class NetworkManager : MonoBehaviour
 
         spawnPoints.Add(point);
     }
-
-    public void CreateNonLocalPlayer(int connID, int inventorySize)
+    
+    public void CreatePlayerRagdoll(Vector3 pos, Quaternion rot)
     {
-        if (connectedPlayers.ContainsKey(connID))
-            return;
-
-        PlayerSync ps = Instantiate(nonLocalPlayerPrefab).GetComponent<PlayerSync>();
-        ps.ID = connID;
-        ps.GetComponent<Inventory>().Init(connID, inventorySize);
-
-        connectedPlayers.Add(connID, ps);
-
+        GameObject temp = Instantiate(playerRagdoll, pos, rot);
+        Destroy(temp, ragdollCleanupDelay);
     }
 
-    public void DestroyNonLocalPlayer(int playerID)
+    public void DestroyRemotePlayer(int playerID)
     {
         if(connectedPlayers.ContainsKey(playerID) == false)
         {

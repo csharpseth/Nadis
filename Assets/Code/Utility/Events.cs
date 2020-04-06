@@ -18,6 +18,13 @@ public enum InventoryEventType
     RemoveItem = 2,
 }
 
+public enum PlayerStatsEventType
+{
+    AlterHealth = 1,
+    AlterPower,
+    Die
+}
+
 public static class Events
 {
     public struct InventoryEvents
@@ -27,6 +34,7 @@ public static class Events
         //Networked
         public Action<int, PhysicalItem, int, bool> OnAddItem;
         public Action<int, int, bool> OnRemoveItem;
+        public Action<int, bool> DropAllItems;
 
         //Not Networked
         public delegate Inventory OnGetInventory(int playerID);
@@ -77,13 +85,29 @@ public static class Events
         public OnGetPlayerSync GetPlayerSync;
         public OnGetPlayerAnimator GetPlayerAnimator;
 
+        public Action<int> Respawn;
+
+    }
+    public struct PlayerStatEvents
+    {
+        public delegate void StatEvent(int playerID, int amount, bool send);
+        public delegate void OnStatEvent(int playerID, float percent, bool send);
+        public StatEvent Heal;
+        public StatEvent Damage;
+        public OnStatEvent SetHealth;
+        public StatEvent AlterPower;
+        public OnStatEvent SetPower;
+        public Action<int> Die;
+
+        public OnStatEvent OnAlterHealth;
+        public OnStatEvent OnAlterPower;
     }
 
     public static InventoryEvents Inventory;
     public static ItemEvents Item;
     public static BipedAnimatorEvents BipedAnimator;
     public static PlayerEvents Player;
-
+    public static PlayerStatEvents PlayerStats;
     
 
 }

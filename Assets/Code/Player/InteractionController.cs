@@ -60,7 +60,15 @@ public class InteractionController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        
+        Inventory inv = Events.Inventory.GetInventory(NetworkManager.LocalPlayer.ID);
+        if (inv != null && inv.ActiveItem != null)
+        {
+            Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 2, Input.GetButton("Fire2"), false);
+            if (Input.GetButtonDown("Fire1")) Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 1, true, false);
+        }
+
+        if (Input.GetButtonDown("Fire1") && inv.ActiveItem == null)
         {
             RaycastHit hit;
             if (Physics.Raycast(CenterScreenRay, out hit))
@@ -69,13 +77,7 @@ public class InteractionController : MonoBehaviour
             }
         }
 
-        Inventory inv = Events.Inventory.GetInventory(NetworkManager.LocalPlayer.ID);
-        if (inv != null && inv.ActiveItem != null)
-        {
-            Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 2, Input.GetButton("Fire2"), true);
-        }
-
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && inv.ActiveItem == null)
         {
             RaycastHit hit;
             if (Physics.Raycast(CenterScreenRay, out hit))

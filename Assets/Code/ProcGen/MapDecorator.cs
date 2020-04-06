@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MapDecorator : MonoBehaviour
@@ -8,18 +7,10 @@ public class MapDecorator : MonoBehaviour
     public Vector3 center { get { return regionSize / 2; } }
     public float stepSize = 0.5f;
     public float offset = 0.2f;
+    public List<SpawnPoint> points;
     
-    public List<GameObject> Decorate(MapDecoratorData[] datas, int seed, Transform parent, List<GameObject> prevLayers = null)
+    public List<GameObject> Decorate(MapDecoratorData[] datas, int seed, Transform parent)
     {
-        if(prevLayers != null)
-        {
-            for (int i = 0; i < prevLayers.Count; i++)
-            {
-                if (prevLayers[i] != null)
-                    DestroyImmediate(prevLayers[i]);
-            }
-        }
-
         List<GameObject> gos = new List<GameObject>();
 
         for (int i = 0; i < datas.Length; i++)
@@ -45,37 +36,41 @@ public class MapDecorator : MonoBehaviour
     {
         float max = -1000f;
         float min = 1000f;
-
-        List<SpawnPoint> points = new List<SpawnPoint>();
-
-        for (float x = 0; x < regionSize.x; x += stepSize)
+        
+        if(points == null || points.Count == 0)
         {
-            for (float y = 0; y < regionSize.z; y += stepSize)
+            points = new List<SpawnPoint>();
+
+            for (float x = 0; x < regionSize.x; x += stepSize)
             {
-
-                System.Random rX = new System.Random(seed + Mathf.RoundToInt(x));
-                System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
-                float offsetX = (float)rX.NextDouble() * offset;
-                float offsetY = (float)rY.NextDouble() * offset;
-                Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
-                RaycastHit hit;
-                if(Physics.Raycast(origin, Vector3.down, out hit))
+                for (float y = 0; y < regionSize.z; y += stepSize)
                 {
-                    Vector3 normal = hit.normal * 90f;
-                    if(Mathf.Abs(normal.x) <= maxNormalAngle && Mathf.Abs(normal.z) <= maxNormalAngle)
+
+                    System.Random rX = new System.Random(seed + Mathf.RoundToInt(x));
+                    System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
+                    float offsetX = (float)rX.NextDouble() * offset;
+                    float offsetY = (float)rY.NextDouble() * offset;
+                    Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
+                    RaycastHit hit;
+                    if (Physics.Raycast(origin, Vector3.down, out hit))
                     {
-                        SpawnPoint point = new SpawnPoint(hit.point, ClampVector(normal, maxAngle));
-                        points.Add(point);
+                        Vector3 normal = hit.normal * 90f;
+                        if (Mathf.Abs(normal.x) <= maxNormalAngle && Mathf.Abs(normal.z) <= maxNormalAngle)
+                        {
+                            SpawnPoint point = new SpawnPoint(hit.point, ClampVector(normal, maxAngle));
+                            points.Add(point);
 
-                        if (point.pos.y > max)
-                            max = point.pos.y;
-                        if (point.pos.y < min)
-                            min = point.pos.y;
+                            if (point.pos.y > max)
+                                max = point.pos.y;
+                            if (point.pos.y < min)
+                                min = point.pos.y;
+                        }
                     }
-                }
 
+                }
             }
         }
+        
 
         float minH = (max - min) * minHeight;
         float maxH = (max - min) * maxHeight;
@@ -127,18 +122,6 @@ public class MapDecorator : MonoBehaviour
             return parent.gameObject;
         }
         
-        if(groupName.ToLower() == "spawnpoints")
-        {
-            if (NetworkManager.ins != null)
-            {
-                for (int i = 0; i < spawnPoints.Count; i++)
-                {
-
-                    NetworkManager.ins.RegisterSpawnPoint(spawnPoints[i].pos);
-                }
-            }
-        }
-
         return null;
 
     }

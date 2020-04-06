@@ -9,3 +9,15 @@
 -Started to add player hand position syncing
     Hand goes to position & returns but once returned it doesnt do the hand walk anim
 -Improved Inventory System & Its NetCode
+
+[04/05/2020]
+-Added a PlayerStatsController that stores player stats
+and can alter the health and power levels of the player
+aswell as interact with the Server
+-Fixed Arms not swinging when holding an item
+-Improved generation times for Spawn, & decorations points
+-Added player death, and making the player ragdoll,
+and drop their items when they die
+-Cleaned up project and removed unused files
+-Fixed an issue where multiple REMOTE players were
+being spawned at a time
