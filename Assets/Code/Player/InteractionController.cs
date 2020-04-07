@@ -65,7 +65,7 @@ public class InteractionController : MonoBehaviour
         if (inv != null && inv.ActiveItem != null)
         {
             Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 2, Input.GetButton("Fire2"), false);
-            if (Input.GetButtonDown("Fire1")) Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 1, true, false);
+            Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 1, Input.GetButton("Fire1"), false);
         }
 
         if (Input.GetButtonDown("Fire1") && inv.ActiveItem == null)

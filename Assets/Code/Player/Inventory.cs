@@ -27,10 +27,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        Events.Inventory.AddItem += AddItem;
-        Events.Inventory.RemoveItem += RemoveItem;
-        Events.Inventory.RemoveActiveItem += RemoveAtCurrentIndex;
-        Events.Inventory.DropAllItems += DropAllItems;
+        Subscribe();
     }
     private void Update()
     {
@@ -127,5 +124,25 @@ public class Inventory : MonoBehaviour
         }
 
         _activeIndex = 0;
+    }
+
+    //Don't Forget To Unsubscribe
+    private void Subscribe()
+    {
+        Events.Inventory.AddItem += AddItem;
+        Events.Inventory.RemoveItem += RemoveItem;
+        Events.Inventory.RemoveActiveItem += RemoveAtCurrentIndex;
+        Events.Inventory.DropAllItems += DropAllItems;
+        Events.Player.UnSubscribe += UnSubscribe;
+    }
+    private void UnSubscribe(int netID)
+    {
+        if (_netID != netID) return;
+
+        Events.Inventory.AddItem -= AddItem;
+        Events.Inventory.RemoveItem -= RemoveItem;
+        Events.Inventory.RemoveActiveItem -= RemoveAtCurrentIndex;
+        Events.Inventory.DropAllItems -= DropAllItems;
+        Events.Player.UnSubscribe -= UnSubscribe;
     }
 }

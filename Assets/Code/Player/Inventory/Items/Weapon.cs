@@ -12,20 +12,22 @@ public class Weapon : PhysicalItem
     Transform idleParent;
     Transform aimParent;
 
-    public override void PrimaryUse()
+    public override void PrimaryUse(bool useValue)
     {
         if (ownerID == -1) return;
+
+        base.PrimaryUse(useValue);
 
         RaycastHit hit;
         if(Physics.Raycast(InteractionController.ins.CenterScreenRay, out hit, range))
         {
             Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
             if(rb != null)
-            {
                 rb.AddForceAtPosition((rb.transform.position - transform.position).normalized * force, hit.point, ForceMode.Impulse);
-            }
+
             PlayerSync ply = hit.transform.GetComponent<PlayerSync>();
-            Events.PlayerStats.Damage(ply.ID, damage, true);
+            if(ply != null)
+                Events.PlayerStats.Damage(ply.ID, damage, true);
         }
     }
 

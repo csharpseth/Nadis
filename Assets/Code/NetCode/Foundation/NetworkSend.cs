@@ -1,25 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using KaymakNetwork;
 
 enum ClientPackets
 {
     CPing = 1,
-    CPlayerPosition = 2,
-    CPlayerRotation = 3,
-    CSpawnNetObject = 4,
-    CDestroyNetObject = 5,
-    CMoveNetObject = 6,
-    CRotatateNetObject = 7,
-    CPlayerMoveData = 8,
-    CPlayerRequestSpawnItem = 9,
-    CPlayerRequestDestroyItem = 10,
-    CItemEvent = 11,
-    CInventoryEvent = 12,
-    CPlayerSetHandTarget = 13,
-    CPlayerEndCurrentHandTarget = 14,
-    CPlayerStatsEvent = 15,
+    CPlayerPos,
+    CPlayerRot,
+    CSpawnNetObject,
+    CDestroyNetObject,
+    CMoveNetObject,
+    CRotatateNetObject,
+    CPlayerMoveData,
+    CRequestSpawnItem,
+    CRequestDestroyItem,
+    CItemEvent,
+    CInventoryEvent,
+    CPlayerSetHandTarget,
+    CPlayerEndCurrentHandTarget,
+    CPlayerStatsEvent,
 }
 
 internal static class NetworkSend
@@ -34,36 +32,32 @@ internal static class NetworkSend
         buffer.Dispose();
     }
 
-    public static void SendPlayerPosition(int id, Vector3 pos)
+    public static void SendPlayerPosition(int playerID, Vector3 pos)
     {
         ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CPlayerPosition);
-        buffer.WriteInt32(id);
+        buffer.WriteInt32((int)ClientPackets.CPlayerPos);
+        buffer.WriteInt32(playerID);
 
         buffer.WriteDouble(pos.x);
         buffer.WriteDouble(pos.y);
         buffer.WriteDouble(pos.z);
-
+        
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
-
         buffer.Dispose();
 
     }
 
-    public static void SendPlayerRotation(int id, Vector3 rot)
+    public static void SendPlayerRotation(int playerID, float rot)
     {
         ByteBuffer buffer = new ByteBuffer(4);
-        buffer.WriteInt32((int)ClientPackets.CPlayerRotation);
-        buffer.WriteInt32(id);
+        buffer.WriteInt32((int)ClientPackets.CPlayerRot);
+        buffer.WriteInt32(playerID);
         
-        buffer.WriteDouble(rot.x);
-        buffer.WriteDouble(rot.y);
-        buffer.WriteDouble(rot.z);
+        buffer.WriteDouble(rot);
 
         NetworkConfig.socket.SendData(buffer.Data, buffer.Head);
-
+        
         buffer.Dispose();
-
     }
 
     public static void SendSpawnNetObjectRequest(int registryID)

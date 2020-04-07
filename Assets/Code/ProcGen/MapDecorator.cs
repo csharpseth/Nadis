@@ -7,7 +7,8 @@ public class MapDecorator : MonoBehaviour
     public Vector3 center { get { return regionSize / 2; } }
     public float stepSize = 0.5f;
     public float offset = 0.2f;
-    public List<SpawnPoint> points;
+    private List<SpawnPoint> points;
+    private float min, max;
     
     public List<GameObject> Decorate(MapDecoratorData[] datas, int seed, Transform parent)
     {
@@ -26,17 +27,13 @@ public class MapDecorator : MonoBehaviour
 
     public GameObject Decorate(MapDecoratorData data, int seed, Transform parent)
     {
-        Debug.Log("Decoration Created");
-        GameObject g = Generate(data.minHeight, data.maxHeight, data.density, data.maximumPoints, data.maxNormalAngle, data.maxPrefabAngle, seed, data.prefabs, data.name);
+        GameObject g = Generate(data.minHeight, data.maxHeight, data.density, data.maximumPoints, data.maxNormalAngle, data.maxPrefabAngle, seed, data.prefabs, data.prefabOffset, data.name);
         g.transform.SetParent(parent);
         return g;
     }
 
-    public GameObject Generate(float minHeight, float maxHeight, float density, int maxPoints, float maxNormalAngle, float maxAngle, int seed = 0, GameObject[] prefabs = null, string groupName = "")
+    public GameObject Generate(float minHeight, float maxHeight, float density, int maxPoints, float maxNormalAngle, float maxAngle, int seed = 0, GameObject[] prefabs = null, Vector3 prefabOffset = default(Vector3), string groupName = "")
     {
-        float max = -1000f;
-        float min = 1000f;
-        
         if(points == null || points.Count == 0)
         {
             points = new List<SpawnPoint>();
@@ -71,12 +68,11 @@ public class MapDecorator : MonoBehaviour
             }
         }
         
-
         float minH = (max - min) * minHeight;
         float maxH = (max - min) * maxHeight;
 
         List<SpawnPoint> processedPoints = new List<SpawnPoint>();
-
+        
         for (int i = 0; i < points.Count; i++)
         {
             if (points[i].pos.y >= minH && points[i].pos.y <= maxH)
@@ -86,7 +82,7 @@ public class MapDecorator : MonoBehaviour
         }
         
         int pointCount = Mathf.RoundToInt((float)processedPoints.Count * density);
-
+        
         List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
         for (int i = 0; i < pointCount; i++)
@@ -112,13 +108,18 @@ public class MapDecorator : MonoBehaviour
             Transform parent = new GameObject(groupName).transform;
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                Vector3 rot = spawnPoints[i].rot;
                 System.Random r = new System.Random(seed + i);
-                rot.y = (float)r.NextDouble() * 180f;
+                float rRot = (float)r.NextDouble() * 180f;
+                int rIndex = r.Next(0, prefabs.Length - 1);
 
-                Instantiate(prefabs[Random.Range(0, prefabs.Length)], spawnPoints[i].pos, Quaternion.Euler(rot), parent);
+                Vector3 rot = spawnPoints[i].rot;
+                rot.x = Mathf.Clamp(rot.x, -maxAngle, maxAngle);
+                rot.z = Mathf.Clamp(rot.z, -maxAngle, maxAngle);
+                rot.y = rRot;
+
+                Instantiate(prefabs[rIndex], spawnPoints[i].pos + prefabOffset, Quaternion.Euler(rot), parent);
             }
-
+            
             return parent.gameObject;
         }
         
@@ -176,6 +177,8 @@ public struct MapDecoratorData
     public float maxNormalAngle;
     public float maxPrefabAngle;
     public int maximumPoints;
+
+    public Vector3 prefabOffset;
 
     public GameObject[] prefabs;
 

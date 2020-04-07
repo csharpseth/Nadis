@@ -35,6 +35,10 @@ internal static class NetworkConfig
         Events.PlayerStats.OnAlterHealth += NetworkSend.SendPlayerAlterHealth;
         Events.PlayerStats.OnAlterPower += NetworkSend.SendPlayerAlterPower;
 
+        Events.Player.OnMove += NetworkSend.SendPlayerPosition;
+        Events.Player.OnRotate += NetworkSend.SendPlayerRotation;
+        Events.Player.OnMoveData += NetworkSend.SendPlayerMoveData;
+
         //Events.Inventory.OnInventoryChange += NetworkSend.SendPlayerInventoryUpdate;
     }
 

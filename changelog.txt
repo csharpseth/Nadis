@@ -1,14 +1,17 @@
-[04/03/2020]
--Implemented Coil Gun/Hand Cannon
--Implemented new Event based system(hopefully improve performance)
--Added Item Interaction, Reset, & Hide Sync over NetCode w/ new Event based system
--Modified Item Spawn & Destruction to use new Event-Based System
-
-[04/04/2020]
--Refactored: Inventory, Animator to use new Event system
--Started to add player hand position syncing
-    Hand goes to position & returns but once returned it doesnt do the hand walk anim
--Improved Inventory System & Its NetCode
+[04/06/2020]
+-Refactored Player Pos & Rot Sync to use Event System
+-Converted Player Creation, Disconnection, & Move Data
+  to new event system
+-Improved Player Procedural Walking/Running
+-Improved Terrain Generation(  )
+-Added Support for Ambient Noises to be scattered
+   around the map. Recorded & implemented a ONE
+   minute clip of birds chirping
+-Added ability to have item noises, but I think I am going
+    to redo that whole system. It does not support scaling
+    as well as I'd like
+-Began implementing an "animation" system for our
+    procedural player animator
 
 [04/05/2020]
 -Added a PlayerStatsController that stores player stats
@@ -21,3 +24,15 @@ and drop their items when they die
 -Cleaned up project and removed unused files
 -Fixed an issue where multiple REMOTE players were
 being spawned at a time
+
+[04/04/2020]
+-Refactored: Inventory, Animator to use new Event system
+-Started to add player hand position syncing
+    Hand goes to position & returns but once returned it doesnt do the hand walk anim
+-Improved Inventory System & Its NetCode
+
+[04/03/2020]
+-Implemented Coil Gun/Hand Cannon
+-Implemented new Event based system(hopefully improve performance)
+-Added Item Interaction, Reset, & Hide Sync over NetCode w/ new Event based system
+-Modified Item Spawn & Destruction to use new Event-Based System

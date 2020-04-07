@@ -79,14 +79,7 @@ public class MovementController : MonoBehaviour
 
         Collider[] cols = Physics.OverlapSphere(transform.position, groundedRadius, groundedMask);
         IsGrounded = (cols.Length > 0);
-
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            Climb();
-            Jump();
-        }
-
+        
         Climbing();
         Crouching();
         
@@ -103,6 +96,16 @@ public class MovementController : MonoBehaviour
         if(dir == Vector3.zero || IsGrounded == false && MoveState != PlayerMoveState.Crouching)
         {
             MoveState = PlayerMoveState.None;
+        }
+
+        if (transform.position.y != prevHeight)
+        {
+            if (prevHeight > transform.position.y)
+            {
+                if (!IsGrounded) IsFalling = true;
+                else IsFalling = false;
+            }
+            prevHeight = transform.position.y;
         }
 
         //rbController.SetSpeed(speed);
@@ -130,22 +133,11 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         if (IsClimbing == true)
             return;
         
-        if (transform.position.y != prevHeight)
-        {
-            if (prevHeight > transform.position.y)
-            {
-                if (!IsGrounded) IsFalling = true;
-                else IsFalling = false;
-            }
-            prevHeight = transform.position.y;
-        }
-
-
         if (IsGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

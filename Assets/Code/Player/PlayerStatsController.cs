@@ -42,12 +42,7 @@ public class PlayerStatsController : MonoBehaviour
         stats.MaxPower = maxPower;
         stats.Power = startPower;
 
-        Events.PlayerStats.SetHealth += SetHealth;
-        Events.PlayerStats.Heal += Heal;
-        Events.PlayerStats.Damage += Damage;
-
-        Events.PlayerStats.AlterPower += AlterPower;
-        Events.PlayerStats.Die += Die;
+        Subcribe();
     }
     private void Init(PlayerStats data)
     {
@@ -60,6 +55,31 @@ public class PlayerStatsController : MonoBehaviour
     {
         Init(NetworkManager.DefaultStats);
     }
+
+
+    private void Subcribe()
+    {
+        Events.PlayerStats.SetHealth += SetHealth;
+        Events.PlayerStats.Heal += Heal;
+        Events.PlayerStats.Damage += Damage;
+
+        Events.PlayerStats.AlterPower += AlterPower;
+        Events.PlayerStats.Die += Die;
+        Events.Player.UnSubscribe += UnSubcribe;
+    }
+    private void UnSubcribe(int netID)
+    {
+        if (NetID != netID) return;
+
+        Events.PlayerStats.SetHealth -= SetHealth;
+        Events.PlayerStats.Heal -= Heal;
+        Events.PlayerStats.Damage -= Damage;
+
+        Events.PlayerStats.AlterPower -= AlterPower;
+        Events.PlayerStats.Die -= Die;
+        Events.Player.UnSubscribe -= UnSubcribe;
+    }
+
 
     private float AddToHealth(int amount)
     {

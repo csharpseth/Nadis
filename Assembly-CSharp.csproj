@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Code\Ambience\AmbientAudio.cs" />
     <Compile Include="Assets\Code\NetCode\Foundation\NetworkConfig.cs" />
     <Compile Include="Assets\Code\NetCode\Foundation\NetworkReceive.cs" />
     <Compile Include="Assets\Code\NetCode\Foundation\NetworkSend.cs" />
@@ -79,10 +80,12 @@
     <Compile Include="Assets\Code\Player\Inventory\ItemDatabase.cs" />
     <Compile Include="Assets\Code\Player\Inventory\ItemManager.cs" />
     <Compile Include="Assets\Code\Player\Inventory\Items\PhysicalItem.cs" />
+    <Compile Include="Assets\Code\Player\Inventory\Items\ProjectileWeapon.cs" />
     <Compile Include="Assets\Code\Player\Inventory\Items\Weapon.cs" />
     <Compile Include="Assets\Code\Player\InventorySlot.cs" />
     <Compile Include="Assets\Code\Player\MovementController.cs" />
     <Compile Include="Assets\Code\Player\PerspectiveController.cs" />
+    <Compile Include="Assets\Code\Player\PlayerInputController.cs" />
     <Compile Include="Assets\Code\Player\PlayerSoundController.cs" />
     <Compile Include="Assets\Code\Player\PlayerStatsController.cs" />
     <Compile Include="Assets\Code\Player\RotateWithMouse.cs" />

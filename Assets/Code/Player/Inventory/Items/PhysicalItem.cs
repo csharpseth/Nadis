@@ -8,6 +8,13 @@ public class PhysicalItem : MonoBehaviour
     public float grabbedThreshold = 0.1f;
     public Vector3 heldEulerOffset;
     
+    [Space(10)]
+    internal AudioSource source;
+    public AudioClip interactSound;
+    public AudioClip equipSound;
+    public AudioClip primaryUseSound;
+    public AudioClip secondaryUseSound;
+
     internal Rigidbody rb;
     private Collider col;
     private Transform parent;
@@ -24,6 +31,9 @@ public class PhysicalItem : MonoBehaviour
         if(instanceIDSet == false)
         {
             InstanceID = id;
+
+            source = GetComponent<AudioSource>();
+
             Events.Item.Interact += Interact;
             Events.Item.Reset += ResetItem;
             Events.Item.Hide += Hide;
@@ -68,7 +78,7 @@ public class PhysicalItem : MonoBehaviour
         switch(useIndex)
         {
             case (1):
-                PrimaryUse();
+                PrimaryUse(useValue);
                 break;
             case (2):
                 SecondaryUse(useValue);
@@ -78,9 +88,12 @@ public class PhysicalItem : MonoBehaviour
         }
     }
     
-    public virtual void PrimaryUse()
+    public virtual void PrimaryUse(bool value)
     {
-        
+        if (value == false) return;
+
+        if (source != null)
+            source.PlayOneShot(primaryUseSound);
     }
 
     public virtual void SecondaryUse(bool state)
@@ -94,12 +107,14 @@ public class PhysicalItem : MonoBehaviour
         BipedProceduralAnimator animator = Events.Player.GetPlayerAnimator(playerID);
         if (animator == null) return;
 
+        source.PlayOneShot(interactSound);
+
         ownerID = playerID;
 
         Send = false;
         Receive = false;
 
-        Transform hand = (handSide == Side.Right) ? animator.rightHand : animator.leftHand;
+        Transform hand = (handSide == Side.Right) ? animator.rightHand.obj : animator.leftHand.obj;
 
         rb.isKinematic = true;
         col.enabled = false;
@@ -130,6 +145,7 @@ public class PhysicalItem : MonoBehaviour
         if (instanceID != InstanceID) return;
         
         gameObject.SetActive(!val);
+        if (gameObject.activeSelf == true) source.PlayOneShot(equipSound);
     }
 
     private void Update()
@@ -190,5 +206,8 @@ public class PhysicalItem : MonoBehaviour
 public class ItemMetaData
 {
     public string name;
+    [TextArea(2, 4)]
+    public string description;
+    [HideInInspector]
     public int id = -1;
 }

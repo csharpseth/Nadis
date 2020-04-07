@@ -28,7 +28,11 @@ public class NetworkManager : MonoBehaviour
         Events.Player.GetPlayerAnimator = GetPlayerAnimator;
         Events.Inventory.GetInventory = GetPlayerInventory;
 
+        Events.PlayerStats.SetDefaults = SetDefaultStats;
+
         Events.Player.Respawn += RespawnPlayer;
+        Events.Player.Create += CreatePlayer;
+        Events.Player.Disconnect += PlayerDisconnect;
     }
 
     public GameObject localPlayerPrefab;
@@ -37,9 +41,7 @@ public class NetworkManager : MonoBehaviour
     public float ragdollCleanupDelay = 30f;
 
     public Dictionary<int, PlayerSync> connectedPlayers = new Dictionary<int, PlayerSync>();
-
     private bool spawnPointsGenerated = false;
-    private int localPlayerID = -1;
     
 
     void Start()
@@ -93,9 +95,10 @@ public class NetworkManager : MonoBehaviour
             ps = Instantiate(remotePlayerPrefab).GetComponent<PlayerSync>();
         }
 
-        ps.ID = connID;
         ps.GetComponent<Inventory>().Init(connID, inventorySize);
         ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power);
+        ps.GetComponent<PlayerSoundController>().InitFromServer(connID);
+        ps.ID = connID;
 
         connectedPlayers.Add(connID, ps);
     }
@@ -114,32 +117,10 @@ public class NetworkManager : MonoBehaviour
         Destroy(temp, ragdollCleanupDelay);
     }
 
-    public void DestroyRemotePlayer(int playerID)
+    public void PlayerDisconnect(int playerID)
     {
-        if(connectedPlayers.ContainsKey(playerID) == false)
-        {
-            return;
-        }
-
-        Destroy(connectedPlayers[playerID].gameObject);
         connectedPlayers.Remove(playerID);
-
-    }
-
-    public void SetPlayerPosition(int playerID, Vector3 newPos)
-    {
-        if (connectedPlayers.ContainsKey(playerID) == false)
-            return;
-
-        connectedPlayers[playerID].SetPosition(newPos);
-    }
-
-    public void SetPlayerRotation(int playerID, Vector3 newRot)
-    {
-        if (connectedPlayers.ContainsKey(playerID) == false)
-            return;
-
-        connectedPlayers[playerID].SetRotation(newRot);
+        Debug.Log("Player Has Disconnected");
     }
     
     public void SetMapGeneratorData(int seed)

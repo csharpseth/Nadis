@@ -9,8 +9,8 @@ public class PlayerSync : MonoBehaviour
     public float maxDistance = 5f;
     private float moveDataCheckDelay = 0.25f;
 
-    private Vector3 prevPosition;
-    private Vector3 prevRotation;
+    private Vector3 prevPosition = new Vector3(-1000f, 1000f, -1000f);
+    private float prevRotation = -180f;
     private int id;
     private bool idSet = false;
     private float lerpSpeed = 10f;
@@ -34,7 +34,17 @@ public class PlayerSync : MonoBehaviour
             {
                 id = value;
                 idSet = true;
+
+                SubscribeEvents();
             }
+        }
+    }
+
+    public bool isLocal
+    {
+        get
+        {
+            return (ID == NetworkManager.LocalPlayer.ID);
         }
     }
 
@@ -51,6 +61,8 @@ public class PlayerSync : MonoBehaviour
     
     private void Update()
     {
+        if (idSet == false) return;
+
         if (Send == false)
         {
             if(destination != Vector3.zero)
@@ -69,19 +81,33 @@ public class PlayerSync : MonoBehaviour
         if((transform.position - prevPosition).sqrMagnitude >= (moveThreshold * moveThreshold))
         {
             prevPosition = transform.position;
-            NetworkSend.SendPlayerPosition(id, transform.position);
+            Events.Player.OnMove?.Invoke(ID, prevPosition);
         }
-        
-        if(transform.eulerAngles != prevRotation)
+
+        if(transform.eulerAngles.y != prevRotation)
         {
-            prevRotation = transform.eulerAngles;
-            NetworkSend.SendPlayerRotation(id, transform.eulerAngles);
+            prevRotation = transform.eulerAngles.y;
+            Events.Player.OnRotate?.Invoke(ID, prevRotation);
         }
 
         UpdateMoveData();
     }
     
     float moveDataTimer = 0f;
+    private void SubscribeEvents()
+    {
+        Events.Player.SetPos += SetPosition;
+        Events.Player.SetRot += SetRotation;
+        Events.Player.Disconnect += Disconnected;
+    }
+
+    private void UnSubscribeEvents()
+    {
+        Events.Player.SetPos -= SetPosition;
+        Events.Player.SetRot -= SetRotation;
+        Events.Player.Disconnect -= Disconnected;
+    }
+
     private void UpdateMoveData()
     {
         if (moveController == null)
@@ -89,21 +115,25 @@ public class PlayerSync : MonoBehaviour
         moveDataTimer += Time.deltaTime;
         if(moveDataTimer >= moveDataCheckDelay)
         {
-            NetworkSend.SendPlayerMoveData(id, moveController.IsGrounded, moveController.InputDir, moveController.MoveState, moveController.Speed);
+            Events.Player.OnMoveData(id, moveController.IsGrounded, moveController.InputDir, moveController.MoveState, moveController.Speed);
             moveDataTimer = 0f;
         }
-        
-
     }
 
-    public void SetPosition(Vector3 newPosition)
+    public void SetPosition(int playerID, Vector3 newPosition)
     {
+        if (playerID != ID) return;
+
         destination = newPosition;
     }
 
-    public void SetRotation(Vector3 newRotation)
+    public void SetRotation(int playerID, float newRotation)
     {
-        transform.eulerAngles = newRotation;
+        if (playerID != ID) return;
+
+        Vector3 temp = transform.eulerAngles;
+        temp.y = newRotation;
+        transform.eulerAngles = temp;
     }
 
     public void SetProceduralMoveData(bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
@@ -115,4 +145,12 @@ public class PlayerSync : MonoBehaviour
         }
     }
     
+    public void Disconnected(int playerID)
+    {
+        if (playerID != ID) return;
+
+        //Later, replace this with a sleeper or Death function( the player ragdolls and drops all items )
+        UnSubscribeEvents();
+        Destroy(gameObject);
+    }
 }

@@ -1,52 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BipedProceduralAnimator : MonoBehaviour
 {
+    [Header("Configuration:")]
     public ProceduralAnimationData data;
+    public AnimationConfig animations;
     private PlayerSync player;
 
+    [Space(10)]
+    [Header("Targets:")]
     #region Targets
     public Transform targets;
-    public Transform root;
-    public Transform head;
-    public Transform chest;
-    public Transform rightHip;
-    public Transform leftHip;
-    public Transform rightFoot;
-    public Transform leftFoot;
-    public Transform rightHand;
-    public Transform leftHand;
-    #endregion
-
-    #region Defaults
-    private Vector3 defaultRight;
-    private Vector3 defaultLeft;
-
-    private Vector3 defaultRightHand;
-    private Vector3 defaultLeftHand;
-
-    private Vector3 defaultHead;
-    private Vector3 defaultChest;
-    private Vector3 defaultRightHip;
-    private Vector3 defaultLeftHip;
-
-    #endregion
-
-    #region Lerp Datas
-    private LerpData rightFootLerp;
-    private LerpData leftFootLerp;
-
-    private HandLerpData rightHandLerp;
-    private HandLerpData leftHandLerp;
-    #endregion
-
-    #region Player Move Data
-    public bool grounded = true;
-    public Vector2 inputDir;
-    public PlayerMoveState moveState;
+    public Target root;
+    public Target head;
+    public Target chest;
+    public Target pelvis;
+    public Target rightHip;
+    public Target leftHip;
+    public FootTarget rightFoot;
+    public FootTarget leftFoot;
+    public Target rightHand;
+    public Target leftHand;
     #endregion
     
+    #region Player Move Data
+    private bool grounded = true;
+    private Vector2 inputDir;
+    private PlayerMoveState moveState;
+    #endregion
+
+    [Header("Other:")]
     #region Other
     public bool handTargetPersistent = false;
     public bool overrideNormalHandCondition = false;
@@ -69,40 +54,50 @@ public class BipedProceduralAnimator : MonoBehaviour
     private void Update()
     {
         RootMomentum();
-        if(rightHandLerp == null)
+        if(rightHand.lerp == null)
         {
             RightArmSwing();
         }else
         {
-            if (rightHandLerp.Done == false)
+            if (rightHand.lerp.Done == false)
             {
-                rightHandLerp.DoLerp();
+                rightHand.lerp.DoLerp();
             }
             else
             {
-                rightHandLerp = null;
-                rightHand.localPosition = defaultRightHand;
+                rightHand.Reset();
             }
         }
 
-        if(leftHandLerp == null)
+        if(leftHand.lerp == null)
         {
             LeftArmSwing();
         }else
         {
-            if (leftHandLerp.Done == false)
-                leftHandLerp.DoLerp();
+            if (leftHand.lerp.Done == false)
+                leftHand.lerp.DoLerp();
             else
             {
-                leftHandLerp = null;
-                leftHand.localPosition = defaultLeftHand;
+                leftHand.Reset();
             }
         }
         
+        if(pelvis.lerp != null)
+        {
+            if (pelvis.lerp.Done == false)
+            {
+                pelvis.lerp.DoLerp();
+            }
+            else
+            {
+                pelvis.Reset();
+            }
+        }
+
         if(grounded == false)
         {
-            rightFootLerp = null;
-            leftFootLerp = null;
+            rightFoot.Reset();
+            leftFoot.Reset();
             right = true;
             left = false;
         }
@@ -115,33 +110,40 @@ public class BipedProceduralAnimator : MonoBehaviour
         nextRight =  rightFoot.position;
         nextLeft =  leftFoot.position;
 
-        defaultRight =  rightFoot.localPosition;
-        defaultLeft =  leftFoot.localPosition;
-
-        //defaultRightHip =  rightHip.localPosition;
-        //defaultLeftHip =  leftHip.localPosition;
-
-        defaultHead =  head.localPosition;
-        defaultChest =  chest.localPosition;
-
-        rightFootLerp = null;
-        leftFootLerp = null;
-
-        defaultRightHand = rightHand.localPosition;
-        defaultLeftHand = leftHand.localPosition;
-
+        rightFoot.Init();
+        leftFoot.Init();
+        head.Init();
+        chest.Init();
+        pelvis.Init();
+        rightHand.Init();
+        leftHand.Init();
+        
         player = GetComponent<PlayerSync>();
 
         Events.BipedAnimator.SetHandTargetPosition += SetHandTargetPosition;
         Events.BipedAnimator.EndCurrentHandTarget += EndCurrentHandTarget;
+        Events.BipedAnimator.ExecuteAnimation += ExecuteAnimation;
+        Events.BipedAnimator.EndAnimation += EndAnimation;
+        Events.Player.UnSubscribe += UnSubscribe;
+    }
+
+    private void UnSubscribe(int playerID)
+    {
+        if (player.ID != playerID) return;
+
+        Events.BipedAnimator.SetHandTargetPosition -= SetHandTargetPosition;
+        Events.BipedAnimator.EndCurrentHandTarget -= EndCurrentHandTarget;
+        Events.BipedAnimator.ExecuteAnimation -= ExecuteAnimation;
+        Events.BipedAnimator.EndAnimation -= EndAnimation;
+        Events.Player.UnSubscribe -= UnSubscribe;
     }
 
     public void FootStepping()
     {
         if(moving == false)
         {
-            rightFoot.localPosition = defaultRight;
-            leftFoot.localPosition = defaultLeft;
+            rightFoot.Reset();
+            leftFoot.Reset();
 
             Vector3 tempR = rightFoot.position;
             Vector3 tempL = leftFoot.position;
@@ -164,37 +166,38 @@ public class BipedProceduralAnimator : MonoBehaviour
 
             if (right == true)
             {
-                if (rightFootLerp == null || rightDist >= sqrDist || rightFootLerp.done == false)
+                if (rightFoot.lerp == null || rightDist >= sqrDist || rightFoot.lerp.done == false)
                 {
-                    if (rightFootLerp == null)
+                    if (rightFoot.lerp == null)
                     {
-                        rightFootLerp = new LerpData();
-                        rightFootLerp.done = true;
+                        rightFoot.lerp = new FootLerpData();
+                        rightFoot.lerp.done = true;
                     }
                     else
                     {
-                        rightFootLerp.done = false;
-                         rightFoot.localPosition = rightFootLerp.DoLerpFrom( rightFoot.localPosition);
+                        rightFoot.lerp.done = false;
+                         rightFoot.localPosition = rightFoot.lerp.DoLerpFrom( rightFoot.localPosition);
                     }
 
-                    if (rightFootLerp.done == true)
+                    if (rightFoot.lerp.done == true)
                     {
-                        Events.BipedAnimator.OnRightFootFinishStep?.Invoke();
-                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
+                        Events.BipedAnimator.OnRightFootFinishStep?.Invoke(player.ID);
+
+                        Vector3 origin = ConvertDir(data.stepData.rightFootRayOffset, inputDir, data.stepData.stepSize, data.stepData.sideStepSize);
 
                         RaycastHit rightHit;
-                        Physics.Raycast(origin, -transform.up, out rightHit, 1.5f);
+                        Physics.Raycast(origin, -transform.up, out rightHit, data.stepData.stepRayLength);
                         if (rightHit.transform != null)
                         {
                             nextRight = rightHit.point;
-                            rightFootLerp = new LerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
+                            rightFoot.lerp = new FootLerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             right = false;
                             left = true;
-                            Events.BipedAnimator.OnLeftFootBeginStep?.Invoke();
+                            Events.BipedAnimator.OnLeftFootBeginStep?.Invoke(player.ID);
                         }
                     }else
                     {
-                        Events.BipedAnimator.OnRightFootStepping?.Invoke(Mathf.Abs(rightHip.localRotation.x));
+                        Events.BipedAnimator.OnRightFootStepping?.Invoke(player.ID);
                     }
 
                 }
@@ -202,48 +205,49 @@ public class BipedProceduralAnimator : MonoBehaviour
 
             if (left == true)
             {
-                if (leftFootLerp == null || leftDist >= sqrDist || leftFootLerp.done == false)
+                if (leftFoot.lerp == null || leftDist >= sqrDist || leftFoot.lerp.done == false)
                 {
-                    if (leftFootLerp == null)
+                    if (leftFoot.lerp == null)
                     {
-                        leftFootLerp = new LerpData();
-                        leftFootLerp.done = true;
+                        leftFoot.lerp = new FootLerpData();
+                        leftFoot.lerp.done = true;
                     }
                     else
                     {
-                        leftFootLerp.done = false;
-                         leftFoot.localPosition = leftFootLerp.DoLerpFrom( leftFoot.localPosition);
+                        leftFoot.lerp.done = false;
+                         leftFoot.localPosition = leftFoot.lerp.DoLerpFrom( leftFoot.localPosition);
                     }
 
-                    if (leftFootLerp.done == true)
+                    if (leftFoot.lerp.done == true)
                     {
-                        Events.BipedAnimator.OnLeftFootFinishStep?.Invoke();
-                        Vector3 origin = transform.position + (transform.forward * (data.stepData.stepSize * inputDir.y)) + transform.up + (transform.right * inputDir.x * data.stepData.sideStepSize);
+                        Events.BipedAnimator.OnLeftFootFinishStep?.Invoke(player.ID);
+
+                        Vector3 origin = ConvertDir(data.stepData.leftFootRayOffset, inputDir, data.stepData.stepSize, data.stepData.sideStepSize);
 
                         RaycastHit leftHit;
-                        Physics.Raycast(origin, -transform.up, out leftHit, 1.5f);
+                        Physics.Raycast(origin, -transform.up, out leftHit, data.stepData.stepRayLength);
                         if (leftHit.transform != null)
                         {
                             nextLeft = leftHit.point;
-                            leftFootLerp = new LerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
+                            leftFoot.lerp = new FootLerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             left = false;
                             right = true;
-                            Events.BipedAnimator.OnRightFootBeginStep?.Invoke();
+                            Events.BipedAnimator.OnRightFootBeginStep?.Invoke(player.ID);
                         }
                     }else
                     {
-                        Events.BipedAnimator.OnLeftFootStepping?.Invoke(Mathf.Abs(leftHip.localRotation.x));
+                        Events.BipedAnimator.OnLeftFootStepping?.Invoke(player.ID);
                     }
                 }
             }
 
-            if (leftFootLerp != null && rightFootLerp != null && data.doBob == true)
+            if (rightFoot.lerp != null && rightFoot.lerp != null && data.doBob == true)
             {
-                float bobPercent = ((rightFootLerp.currentHeight + leftFootLerp.currentHeight) / 2f) / rightFootLerp.height;
+                float bobPercent = ((rightFoot.lerp.currentHeight + leftFoot.lerp.currentHeight) / 2f) / rightFoot.lerp.height;
                 float bobModifier = data.moveData.bobCurve.Evaluate(bobPercent);
 
-                Vector3 newHead = defaultHead;
-                Vector3 newChest = defaultChest;
+                Vector3 newHead = head.defaultPosition;
+                Vector3 newChest = chest.defaultPosition;
                 //Vector3 newRightHip =  rightHip.localPosition;
                 //Vector3 newLeftHip =  leftHip.localPosition;
 
@@ -275,16 +279,32 @@ public class BipedProceduralAnimator : MonoBehaviour
         }
     }
     
+    private Vector3 ConvertDir(Vector3 input, Vector2 inputDir, float stepSize, float sideStepSize)
+    {
+        Vector3 forw = transform.forward;
+        Vector3 right = transform.right;
+
+        Vector3 temp = Vector3.zero;
+
+        temp += ((forw * stepSize) * inputDir.y) + (forw * input.z);
+        temp += ((right * sideStepSize) * inputDir.x) + (right * input.x);
+        temp += Vector3.up;
+
+        temp += transform.position;
+
+        return temp;
+    }
+
     private void RightArmSwing()
     {
-        Vector3 rPos = defaultRightHand;
+        Vector3 rPos = rightHand.defaultPosition;
         
         rPos.z = leftFoot.localPosition.z * data.moveData.handFootMatchStrength;
         rightHand.localPosition = rPos;
     }
     private void LeftArmSwing()
     {
-        Vector3 lPos = defaultLeftHand;
+        Vector3 lPos = leftHand.defaultPosition;
 
         lPos.z = rightFoot.localPosition.z * data.moveData.handFootMatchStrength;
         leftHand.localPosition = lPos;
@@ -298,73 +318,83 @@ public class BipedProceduralAnimator : MonoBehaviour
 
         if(target == AnimatorTarget.Head)
         {
-            parent = head;
+            parent = head.obj;
         }else if(target == AnimatorTarget.Chest)
         {
-            parent = chest;
+            parent = chest.obj;
         }
 
         if(parent != null)
         {
-            if(side == Side.Right || side == Side.Both && rightHandLerp == null)
+            if(side == Side.Right || side == Side.Both && rightHand.lerp == null)
             {
                 rightHand.SetParent(parent);
 
-                rightHandLerp = new HandLerpData(rightHand, position, speed, true, true, targets);
+                rightHand.lerp = new LerpData(rightHand, position, speed, true, true, null);
                 
                 rightHand.localRotation = Quaternion.identity;
             }
 
-            if (side == Side.Left || side == Side.Both && leftHandLerp == null)
+            if (side == Side.Left || side == Side.Both && leftHand.lerp == null)
             {
                 leftHand.SetParent(parent);
 
-                leftHandLerp = new HandLerpData(leftHand, position, speed, true, true, targets);
+                leftHand.lerp = new LerpData(leftHand, position, speed, true, true, null);
 
                 leftHand.localRotation = Quaternion.identity;
             }
         }
     }
-    
     public void SetHandTargetPositions(Vector3[] positions, Side side, float speed = 0f, Transform parent = null, bool local = true)
     {
-        if (side == Side.Right || side == Side.Both && rightHandLerp == null)
+        if (side == Side.Right || side == Side.Both && rightHand.lerp == null)
         {
             if (parent != null)
                 rightHand.SetParent(parent);
             
-            rightHandLerp = new HandLerpData(rightHand, positions, speed, local, targets);
+            rightHand.lerp = new LerpData(rightHand, positions, speed, local, targets);
             rightHand.localRotation = Quaternion.identity;
         }
 
-        if (side == Side.Left || side == Side.Both && leftHandLerp == null)
+        if (side == Side.Left || side == Side.Both && leftHand.lerp == null)
         {
             if (parent != null)
                 leftHand.SetParent(parent);
 
-            leftHandLerp = new HandLerpData(leftHand, positions, speed, local, targets);
+            leftHand.lerp = new LerpData(leftHand, positions, speed, local, targets);
             leftHand.localRotation = Quaternion.identity;
         }
     }
-
     public void EndCurrentHandTarget(int playerID, bool send = true)
     {
         if (playerID != player.ID) return;
 
-        Debug.Log("End Hand Position");
-
-        overrideNormalHandCondition = false;
-        handTargetPersistent = false;
-
-        rightHand.SetParent(targets);
-        leftHand.SetParent(targets);
-
-        rightHandLerp = null;
-        leftHandLerp = null;
-
-        rightHand.localPosition = defaultRightHand;
-        leftHand.localPosition = defaultLeftHand;
+        rightHand.Reset();
+        leftHand.Reset();
     }
+
+    public void ExecuteAnimation(int playerID, string identifier, Action endEvent = null)
+    {
+        if (player.ID != playerID) return;
+
+        AnimationConfig.ConfigData config = animations.GetAnimation(identifier);
+        Debug.Log(config.identifier);
+        Target target = TargetFrom(config.target);
+        
+        target.lerp = new LerpData(target, config.localPoints, config.speed, true, config.persistent, endEvent);
+        target.lerp.Animation = config.identifier;
+    }
+    public void EndAnimation(int playerID, string identifier)
+    {
+        if (player.ID != playerID) return;
+
+        AnimationConfig.ConfigData anim = animations.GetAnimation(identifier);
+        Target t = TargetFrom(anim.target);
+        if (t.Null) return;
+        if (t.lerp != null && anim.identifier == t.lerp.Animation)
+            t.Reset();
+    }
+    
 
     public void RootMomentum()
     {
@@ -375,14 +405,13 @@ public class BipedProceduralAnimator : MonoBehaviour
         Vector3 newRot = new Vector3(forward,  root.localEulerAngles.y, side);
          root.localEulerAngles = newRot;
     }
-
     public void SetMoveData(bool grounded, Vector2 inputDir, PlayerMoveState moveState)
     {
         this.grounded = grounded;
         this.inputDir = inputDir;
         this.moveState = moveState;
     }
-
+    
     private float GroundHeight()
     {
         Vector3 origin = transform.position + transform.up;
@@ -391,7 +420,6 @@ public class BipedProceduralAnimator : MonoBehaviour
 
         return hit.point.y;
     }
-
     private Vector3 WorldToLocal(Vector3 world, Transform t)
     {
         Transform temp = new GameObject("temp").transform;
@@ -402,6 +430,30 @@ public class BipedProceduralAnimator : MonoBehaviour
         Destroy(temp.gameObject);
 
         return local;
+    }
+    private Target TargetFrom(AnimatorTarget target, Side side = Side.Both)
+    {
+        switch (target)
+        {
+            case AnimatorTarget.None:
+                return Target.Empty;
+            case AnimatorTarget.Head:
+                return head;
+            case AnimatorTarget.Chest:
+                return chest;
+            case AnimatorTarget.Pelvis:
+                return pelvis;
+            case AnimatorTarget.Hands:
+                if (side == Side.Right)
+                    return rightHand;
+                else if (side == Side.Left)
+                    return leftHand;
+                break;
+            default:
+                break;
+        }
+
+        return Target.Empty;
     }
 
     private void LateUpdate()
@@ -417,7 +469,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     }
 }
 
-public class LerpData
+public class FootLerpData
 {
     public const float FinishThreshold = 0.2f;
     public Vector3 destination;
@@ -439,11 +491,11 @@ public class LerpData
         }
     }
 
-    public LerpData()
+    public FootLerpData()
     {
 
     }
-    public LerpData(Vector3 destination, Vector3 origin, float speed, float height, float stepSize)
+    public FootLerpData(Vector3 destination, Vector3 origin, float speed, float height, float stepSize)
     {
         this.destination = destination;
         this.initialOrigin = origin;
@@ -484,7 +536,7 @@ public class LerpData
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct ProceduralStepData
 {
     public float footMoveSpeed;
@@ -492,9 +544,12 @@ public struct ProceduralStepData
     public float sideStepSize;
     public float stepHeight;
     public float maxDistBeforeNextStep;
+    public float stepRayLength;
+    public Vector3 rightFootRayOffset;
+    public Vector3 leftFootRayOffset;
 }
 
-[System.Serializable]
+[Serializable]
 public struct ProceduralMoveData
 {
     public float handFootMatchStrength;
@@ -515,31 +570,38 @@ public enum AnimatorTarget
 {
     None,
     Head,
-    Chest
+    Chest,
+    Pelvis,
+    Hands
 }
 
-public class HandLerpData
+public class LerpData
 {
-    private const float FinishThreshold = (0.05f * 0.05f);
+    private float dist;
+    private const float FinishThreshold = (0.1f * 0.1f);
     private Queue<Vector3> posQueue;
     private Vector3 nextPos;
     private float speed;
-    private Transform target;
-    private Transform defParent;
+    private Target target;
+    private Action doneCallback;
     private bool local;
     private bool persistent;
+    private Vector3 finalDestination;
+
+    public string Animation { get; set; }
     public bool Done { get; private set; }
 
-    public HandLerpData(Transform tar, Vector3 pos, float speed, bool local = true, bool persistent = false, Transform defParent = null)
+    public LerpData(Target tar, Vector3 pos, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
     {
         target = tar;
         nextPos = pos;
+        finalDestination = pos;
         this.speed = speed;
         this.local = local;
-        this.defParent = defParent;
+        this.doneCallback = doneCallback;
         this.persistent = persistent;
     }
-    public HandLerpData(Transform tar, Vector3[] pos, float speed, bool local = true, Transform defParent = null)
+    public LerpData(Target tar, Vector3[] pos, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
     {
         target = tar;
         this.speed = speed;
@@ -551,8 +613,12 @@ public class HandLerpData
                 posQueue.Enqueue(pos[i]);
             }
         }
+
+        finalDestination = pos[pos.Length - 1];
+        
         this.local = local;
-        this.defParent = defParent;
+        this.doneCallback = doneCallback;
+        this.persistent = persistent;
     }
 
     public void DoLerp()
@@ -562,12 +628,11 @@ public class HandLerpData
             if(nextPos == Vector3.zero && persistent == false)
             {
                 Done = true;
-                if(defParent != null)
-                    target.SetParent(defParent);
+                doneCallback?.Invoke();
                 return;
             }
         }
-
+        
         SetNextPosition();
 
         if (local)
@@ -576,14 +641,15 @@ public class HandLerpData
             GlobalLerp();
     }
 
-    private void SetNextPosition()
+    private bool SetNextPosition()
     {
         if (nextPos != Vector3.zero)
-            return;
+            return false;
         if (posQueue == null || posQueue.Count == 0)
-            return;
+            return false;
 
         nextPos = posQueue.Dequeue();
+        return true;
 
     }
 
@@ -593,7 +659,8 @@ public class HandLerpData
             return;
 
         target.localPosition = Vector3.Lerp(target.localPosition, nextPos, speed * Time.deltaTime);
-        float dist = (nextPos - target.localPosition).sqrMagnitude;
+        dist = (nextPos - target.localPosition).sqrMagnitude;
+        
         if(dist <= FinishThreshold)
         {
             nextPos = Vector3.zero;
@@ -614,4 +681,125 @@ public class HandLerpData
         }
     }
 
+}
+
+[Serializable]
+public class AnimationConfig
+{
+    [Serializable]
+    public struct ConfigData
+    {
+        public string identifier;
+        public Vector3[] localPoints;
+        public float speed;
+        public bool persistent;
+        public AnimatorTarget target;
+    }
+    public ConfigData[] configs;
+
+    public ConfigData GetAnimation(string identifier)
+    {
+        for (int i = 0; i < configs.Length; i++)
+        {
+            if (configs[i].identifier.ToLower() == identifier.ToLower())
+            {
+                return configs[i];
+            }
+        }
+
+        return default(ConfigData);
+    }
+}
+
+[Serializable]
+public class Target
+{
+    public Transform obj;
+    [HideInInspector]
+    public Vector3 defaultPosition;
+    [HideInInspector]
+    public Transform defaultParent;
+    [HideInInspector]
+    public LerpData lerp;
+
+    public bool Lerping { get { return (lerp != null); } }
+    public bool Null { get { return !obj; } }
+
+    public Vector3 localPosition
+    {
+        get
+        {
+            return obj.localPosition;
+        }
+        set
+        {
+            obj.localPosition = value;
+        }
+    }
+    public Vector3 position { get { return obj.position; } set { obj.position = value; } }
+    public Quaternion rotation { get { return obj.rotation; } set { obj.rotation = value; } }
+    public Quaternion localRotation { get { return obj.localRotation; } set { obj.localRotation = value; } }
+
+    public Vector3 localEulerAngles { get { return obj.localEulerAngles; } set { obj.localEulerAngles = value; } }
+    public void SetParent(Transform t) { obj.SetParent(t); }
+    
+    public static Target Empty { get { return default(Target); } }
+
+    public void Init()
+    {
+        defaultPosition = obj.localPosition;
+        defaultParent = obj.parent;
+    }
+    public void Reset()
+    {
+        SetParent(defaultParent);
+        obj.localPosition = defaultPosition;
+        lerp = null;
+    }
+}
+
+[Serializable]
+public struct FootTarget
+{
+    public Transform obj;
+    [HideInInspector]
+    public Vector3 defaultPosition;
+    [HideInInspector]
+    public Transform defaultParent;
+    [HideInInspector]
+    public FootLerpData lerp;
+
+    public bool Lerping { get { return (lerp != null); } }
+
+    public Vector3 localPosition
+    {
+        get
+        {
+            return obj.localPosition;
+        }
+        set
+        {
+            obj.localPosition = value;
+        }
+    }
+    public Vector3 position { get { return obj.position; } set { obj.position = value; } }
+    public Quaternion rotation { get { return obj.rotation; } set { obj.rotation = value; } }
+    public Quaternion localRotation { get { return obj.localRotation; } set { obj.localRotation = value; } }
+
+    public Vector3 localEulerAngles { get { return obj.localEulerAngles; } set { obj.localEulerAngles = value; } }
+    public void SetParent(Transform t) { obj.SetParent(t); }
+
+    public static Target Empty { get { return default(Target); } }
+
+    public void Init()
+    {
+        defaultPosition = obj.localPosition;
+        defaultParent = obj.parent;
+    }
+    public void Reset()
+    {
+        SetParent(defaultParent);
+        obj.localPosition = defaultPosition;
+        lerp = null;
+    }
 }

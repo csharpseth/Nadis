@@ -16,7 +16,7 @@ public class MapData : ScriptableObject
     {
         float[,] falloff = new float[size, size];
         if (useFalloffMap)
-            falloff = FalloffGenerator.Generate(size, seed, falloffCurve);
+            falloff = FalloffGenerator.GenerateSquare(size, seed, falloffCurve);
 
         for (int i = 0; i < noiseProfiles.Length; i++)
         {
@@ -143,7 +143,7 @@ public class NoiseProfile
         if (active == false)
             return 0f;
 
-        return Mathf.Clamp(heightMap[x, y], 0.1f, 1f);
+        return Mathf.Clamp(heightMap[x, y], 0.01f, 1f);
     }
 
     private float SmoothStep(float x, float leftEdge, float rightEdge)

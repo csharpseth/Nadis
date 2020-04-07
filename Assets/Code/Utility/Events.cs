@@ -65,17 +65,20 @@ public static class Events
     }
     public struct BipedAnimatorEvents
     {
-        public Action OnRightFootBeginStep;
-        public Action OnLeftFootBeginStep;
+        public Action<int> OnRightFootBeginStep;
+        public Action<int> OnLeftFootBeginStep;
 
-        public Action<float> OnRightFootStepping;
-        public Action<float> OnLeftFootStepping;
+        public Action<int> OnRightFootStepping;
+        public Action<int> OnLeftFootStepping;
 
-        public Action OnRightFootFinishStep;
-        public Action OnLeftFootFinishStep;
+        public Action<int> OnRightFootFinishStep;
+        public Action<int> OnLeftFootFinishStep;
 
         public Action<int, Vector3, Side, float, AnimatorTarget, bool, bool> SetHandTargetPosition;
         public Action<int, bool> EndCurrentHandTarget;
+
+        public Action<int, string, Action> ExecuteAnimation;
+        public Action<int, string> EndAnimation;
     }
     public struct PlayerEvents
     {
@@ -85,7 +88,21 @@ public static class Events
         public OnGetPlayerSync GetPlayerSync;
         public OnGetPlayerAnimator GetPlayerAnimator;
 
+        //These Are commands that are sent to the player, all are executed locally but are usually called by a Networked Function
         public Action<int> Respawn;
+        public Action<int, Vector3> SetPos;
+        public Action<int, float> SetRot;
+        //Event Hooks up to the NetworkManager to create either a local or remote player
+        public Action<int, int, bool> Create;
+        public Action<int> UnSubscribe;
+        public Action<int> Disconnect;
+
+        //These Events Are Called by the Local PlayerSync script and are subscribed to by NetworkSend in NetworkConnfig
+        public Action<int, Vector3> OnMove;
+        public Action<int, float> OnRotate;
+        public Action<int, bool, Vector2, PlayerMoveState, float> OnMoveData;
+
+        
 
     }
     public struct PlayerStatEvents
@@ -101,6 +118,8 @@ public static class Events
 
         public OnStatEvent OnAlterHealth;
         public OnStatEvent OnAlterPower;
+
+        public Action<PlayerStats> SetDefaults;
     }
 
     public static InventoryEvents Inventory;

@@ -4,23 +4,23 @@ using KaymakNetwork;
 enum ServerPackets
 {
     SWelcomeMSG = 1,
-    SPlayerPosition = 2,
-    SPlayerRotation = 3,
-    SPlayerConnected = 4,
-    SPlayerDisconnected = 5,
-    SConnectionSuccessful = 6,
-    SSpawnNetObject = 7,
-    SDestroyNetObject = 8,
-    SMoveNetObject = 9,
-    SRotateNetObject = 10,
-    SPlayerMoveData = 11,
-    SInventoryEvent = 12,
-    SSpawnItem = 13,
-    SDestroyItem = 14,
-    SItemEvent = 15,
-    SPlayerSetHandPosition = 16,
-    SPlayerEndCurrentHandPosition = 17,
-    SPlayerStatEvent = 18,
+    SPlayerPos,
+    SPlayerRot,
+    SPlayerConnected,
+    SPlayerDisconnected,
+    SConnectionSuccessful,
+    SSpawnNetObject,
+    SDestroyNetObject,
+    SMoveNetObject,
+    SRotateNetObject,
+    SPlayerMoveData,
+    SInventoryEvent,
+    SSpawnItem,
+    SDestroyItem,
+    SItemEvent,
+    SPlayerSetHandPosition,
+    SPlayerEndCurrentHandPosition,
+    SPlayerStatEvent,
 }
 
 internal static class NetworkReceive
@@ -29,8 +29,9 @@ internal static class NetworkReceive
     {
         NetworkConfig.socket.PacketId[(int)ServerPackets.SWelcomeMSG] = new KaymakNetwork.Network.Client.DataArgs(Packet_WelcomeMSG);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerConnected] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerConnected);
-        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerPosition] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerPosition);
-        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerRotation] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerRotation);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerDisconnected] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerDisconnected);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerPos] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerPosition);
+        NetworkConfig.socket.PacketId[(int)ServerPackets.SPlayerRot] = new KaymakNetwork.Network.Client.DataArgs(Packet_PlayerRotation);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SConnectionSuccessful] = new KaymakNetwork.Network.Client.DataArgs(Packet_ConnectionSuccessful);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SSpawnNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectSpawn);
         NetworkConfig.socket.PacketId[(int)ServerPackets.SMoveNetObject] = new KaymakNetwork.Network.Client.DataArgs(Packet_NetObjectMove);
@@ -65,9 +66,9 @@ internal static class NetworkReceive
         float playerStartPower = (float)buffer.ReadDouble();
 
         //Apply/Generate From Data Given
-        NetworkManager.ins.SetDefaultStats(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
         NetworkManager.ins.SetMapGeneratorData(mapSeed);
-        NetworkManager.ins.CreatePlayer(connID, inventorySize, true);
+        Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
+        Events.Player.Create(connID, inventorySize, true);
 
         Debug.Log("Connected To Server Successfully");
 
@@ -82,31 +83,24 @@ internal static class NetworkReceive
         float x = (float)buffer.ReadDouble();
         float y = (float)buffer.ReadDouble();
         float z = (float)buffer.ReadDouble();
-
+        
         Vector3 newPos = new Vector3(x, y, z);
-
-        NetworkManager.ins.SetPlayerPosition(id, newPos);
+        Events.Player.SetPos(id, newPos);
 
         buffer.Dispose();
-
     }
-    
+
     private static void Packet_PlayerRotation(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
         int id = buffer.ReadInt32();
 
-        float x = (float)buffer.ReadDouble();
-        float y = (float)buffer.ReadDouble();
-        float z = (float)buffer.ReadDouble();
-
-        Vector3 newRot = new Vector3(x, y, z);
-
-        NetworkManager.ins.SetPlayerRotation(id, newRot);
+        float rot = (float)buffer.ReadDouble();
+        Events.Player.SetRot(id, rot);
 
         buffer.Dispose();
     }
-    
+
     private static void Packet_PlayerConnected(ref byte[] data)
     {
         ByteBuffer buffer = new ByteBuffer(data);
@@ -118,8 +112,8 @@ internal static class NetworkReceive
         int playerMaxPower = buffer.ReadInt32();
         float playerStartPower = (float)buffer.ReadDouble();
 
-        NetworkManager.ins.SetDefaultStats(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
-        NetworkManager.ins.CreatePlayer(playerID, inventorySize, false);
+        Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
+        Events.Player.Create(playerID, inventorySize, false);
 
         Debug.Log("Another Player Has Connected");
 
@@ -132,7 +126,8 @@ internal static class NetworkReceive
         int playerID = buffer.ReadInt32();
 
         //Handle Non-Local Player Instancing Here
-        NetworkManager.ins.DestroyRemotePlayer(playerID);
+        Events.Player.UnSubscribe(playerID);
+        Events.Player.Disconnect(playerID);
 
         buffer.Dispose();
 

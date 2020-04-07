@@ -19,71 +19,71 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -1.3737873
+      outSlope: -1.3737873
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.2557141
     - serializedVersion: 3
-      time: 0.20390625
-      value: 0.9364697
-      inSlope: -0.49734485
-      outSlope: -0.49734485
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.17544903
-    - serializedVersion: 3
-      time: 0.6755961
-      value: 0.20673928
-      inSlope: -1.0968809
-      outSlope: -1.0968809
+      time: 0.4158305
+      value: 0.3361491
+      inSlope: -2.1640553
+      outSlope: -2.1640553
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.14582166
-      outWeight: 0.21731439
+      outWeight: 0.22291005
+    - serializedVersion: 3
+      time: 0.83671874
+      value: 0.040008187
+      inSlope: -0.21504292
+      outSlope: -0.21504292
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23388034
+      outWeight: 0.17544903
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -0.02065239
-      outSlope: -0.02065239
+      inSlope: -0.25983852
+      outSlope: -0.25983852
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.59726834
+      inWeight: 0.6100478
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  finalAmplitude: 2.5
+  finalAmplitude: 1.8
   noiseProfiles:
   - active: 1
     noiseType: 0
     blendMode: 0
-    a_noiseScale: 120
-    a_amplitude: 1
-    a_frequency: 0.6
+    a_noiseScale: 75
+    a_amplitude: 0.6
+    a_frequency: 2
     lacunarity: 0.3
-    persistence: 1.8
-    displacement: 0
-    octaves: 6
-    quality: 2
-  - active: 1
-    noiseType: 0
-    blendMode: 0
-    a_noiseScale: 300
-    a_amplitude: 0.5
-    a_frequency: 1
-    lacunarity: 0.7
-    persistence: 1
+    persistence: 2
     displacement: 0
     octaves: 8
     quality: 2
   - active: 1
     noiseType: 0
-    blendMode: 1
-    a_noiseScale: 70
-    a_amplitude: 0.5
+    blendMode: 0
+    a_noiseScale: 100
+    a_amplitude: 0.02
+    a_frequency: 0.5
+    lacunarity: 0.3
+    persistence: 1.8
+    displacement: 5
+    octaves: 8
+    quality: 2
+  - active: 1
+    noiseType: 0
+    blendMode: 3
+    a_noiseScale: 10
+    a_amplitude: -0.5
     a_frequency: 0.2
     lacunarity: 0.3
     persistence: 1.5

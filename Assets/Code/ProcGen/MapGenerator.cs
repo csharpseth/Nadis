@@ -3,15 +3,12 @@
 public class MapGenerator : MonoBehaviour
 {
     public MapData mapData;
-    public MapDecoratorData spawnPointsData;
     public bool useTerraform = true;
     public TerraformData terraformData;
     public ProcDebug procDebug;
     public bool debug = true;
 
     public Terrain terrain;
-    public float beachHeight = 0.5f;
-    public float beachBlend = 0.2f;
     public bool applyDecorations = false;
     public MapDecoratorData[] decorationLayers;
     public bool networked = true;
@@ -36,6 +33,7 @@ public class MapGenerator : MonoBehaviour
         float[,] heightMap = mapData.Generate(size, seed);
         points = new float[size, size];
 
+        /*
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -46,7 +44,7 @@ public class MapGenerator : MonoBehaviour
                     points[x, y] = heightMap[x,y];
                 }
             }
-        }
+        }*/
         
         terrain.terrainData.SetHeights(0, 0, heightMap);
         
@@ -55,17 +53,21 @@ public class MapGenerator : MonoBehaviour
             mapDecorator.Decorate(decorationLayers, seed, transform);
         }
 
-        GenerateSpawnPoints(points, terrain.terrainData, 0.1f, 0.2f, 0.3f, seed);
-        
+        GenerateSpawnPoints(size, terrain.terrainData, 0.1f, 0.2f, 0.3f, seed, 1);
+
         Debug.Log("FINSIH :: Map Generated");
     }
 
-    public void GenerateSpawnPoints(float[,] heightMap, TerrainData terrain, float chance, float minHeight, float maxHeight, int seed, int maxPoints = 1)
+    public void GenerateSpawnPoints(int size, TerrainData terrain, float chance, float minHeight, float maxHeight, int seed, int maxPoints = 1)
     {
+        if (NetworkManager.ins == null) return;
+
         float min = 500f;
         float max = -500f;
 
         int pointCount = 0;
+
+        float[,] heightMap = terrain.GetHeights(0, 0, size, size);
 
         for (int x = 0; x < heightMap.GetLength(0); x++)
         {
@@ -95,8 +97,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-
-        Debug.LogFormat("Min:{0}  Max:{1}  ActualMaxHeight:{2}", min, max, terrain.size.y);
+        
     }
     
 
