@@ -140,19 +140,33 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     public void FootStepping()
     {
-        if(moving == false)
+        if(pelvis.lerp == null || pelvis.lerp.Done == true && grounded)
+        {
+            Vector3 tempPelvis = pelvis.defaultPosition;
+            float leftY = (leftFoot.localPosition.y - leftFoot.defaultPosition.y);
+            float rightY = (rightFoot.localPosition.y - rightFoot.defaultPosition.y);
+            float avgY = (leftY + rightY) / 2f;
+            float plyY = 0.9f + avgY;
+            tempPelvis.y = plyY;
+            pelvis.localPosition = Vector3.Lerp(pelvis.localPosition, tempPelvis, 4f * Time.deltaTime);
+        }
+
+        if (moving == false && grounded == true)
         {
             rightFoot.Reset();
             leftFoot.Reset();
-
             Vector3 tempR = rightFoot.position;
             Vector3 tempL = leftFoot.position;
 
-            tempR.y = GroundHeight();
-            tempL.y = GroundHeight();
+            tempR.y = GroundHeight(rightFoot.obj);
+            tempL.y = GroundHeight(leftFoot.obj);
 
             rightFoot.position = tempR;
             leftFoot.position = tempL;
+        }else if(moving == false)
+        {
+            rightFoot.Reset();
+            leftFoot.Reset();
         }
 
         if (moving == true)
@@ -240,45 +254,22 @@ public class BipedProceduralAnimator : MonoBehaviour
                     }
                 }
             }
-
-            if (rightFoot.lerp != null && rightFoot.lerp != null && data.doBob == true)
-            {
-                float bobPercent = ((rightFoot.lerp.currentHeight + leftFoot.lerp.currentHeight) / 2f) / rightFoot.lerp.height;
-                float bobModifier = data.moveData.bobCurve.Evaluate(bobPercent);
-
-                Vector3 newHead = head.defaultPosition;
-                Vector3 newChest = chest.defaultPosition;
-                //Vector3 newRightHip =  rightHip.localPosition;
-                //Vector3 newLeftHip =  leftHip.localPosition;
-
-                //newRightHip.y = (defaultRightHip.y + bobModifier);
-                //newLeftHip.y = (defaultLeftHip.y + bobModifier);
-
-                newHead.y += bobModifier;
-                newChest.y += bobModifier;
-
-                //rightHip.localPosition = newRightHip;
-                //leftHip.localPosition = newLeftHip;
-
-                head.localPosition = newHead;
-                chest.localPosition = newChest;
-
-            }
-
+            
             if (right == false)
             {
-                nextRight.y = GroundHeight();
+                nextRight.y = GroundHeight(leftFoot.obj);
                 rightFoot.position = nextRight;
             }
 
             if (left == false)
             {
-                nextLeft.y = GroundHeight();
+                nextLeft.y = GroundHeight(leftFoot.obj);
                 leftFoot.position = nextLeft;
             }
         }
+        
     }
-    
+
     private Vector3 ConvertDir(Vector3 input, Vector2 inputDir, float stepSize, float sideStepSize)
     {
         Vector3 forw = transform.forward;
@@ -314,7 +305,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     {
         if (playerID != player.ID) return;
 
-        Transform parent = null;
+        Transform parent = targets;
 
         if(target == AnimatorTarget.Head)
         {
@@ -330,7 +321,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             {
                 rightHand.SetParent(parent);
 
-                rightHand.lerp = new LerpData(rightHand, position, speed, true, true, null);
+                rightHand.lerp = new LerpData(rightHand, position, speed, false, true, null);
                 
                 rightHand.localRotation = Quaternion.identity;
             }
@@ -339,7 +330,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             {
                 leftHand.SetParent(parent);
 
-                leftHand.lerp = new LerpData(leftHand, position, speed, true, true, null);
+                leftHand.lerp = new LerpData(leftHand, position, speed, false, true, null);
 
                 leftHand.localRotation = Quaternion.identity;
             }
@@ -352,7 +343,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             if (parent != null)
                 rightHand.SetParent(parent);
             
-            rightHand.lerp = new LerpData(rightHand, positions, speed, local, targets);
+            //rightHand.lerp = new LerpData(rightHand, positions, speed, local, targets);
             rightHand.localRotation = Quaternion.identity;
         }
 
@@ -361,7 +352,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             if (parent != null)
                 leftHand.SetParent(parent);
 
-            leftHand.lerp = new LerpData(leftHand, positions, speed, local, targets);
+            //leftHand.lerp = new LerpData(leftHand, positions, speed, local, targets);
             leftHand.localRotation = Quaternion.identity;
         }
     }
@@ -378,10 +369,9 @@ public class BipedProceduralAnimator : MonoBehaviour
         if (player.ID != playerID) return;
 
         AnimationConfig.ConfigData config = animations.GetAnimation(identifier);
-        Debug.Log(config.identifier);
         Target target = TargetFrom(config.target);
         
-        target.lerp = new LerpData(target, config.localPoints, config.speed, true, config.persistent, endEvent);
+        target.lerp = new LerpData(target, config.localPoints, true, config.persistent, endEvent);
         target.lerp.Animation = config.identifier;
     }
     public void EndAnimation(int playerID, string identifier)
@@ -412,9 +402,9 @@ public class BipedProceduralAnimator : MonoBehaviour
         this.moveState = moveState;
     }
     
-    private float GroundHeight()
+    private float GroundHeight(Transform target)
     {
-        Vector3 origin = transform.position + transform.up;
+        Vector3 origin = target.position + transform.up;
         RaycastHit hit;
         Physics.Raycast(origin, -transform.up, out hit, 1.5f);
 
@@ -467,6 +457,17 @@ public class BipedProceduralAnimator : MonoBehaviour
             moving = false;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(pelvis.position, 0.2f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(rightFoot.position, 0.2f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(leftFoot.position, 0.2f);
+    }
 }
 
 public class FootLerpData
@@ -480,6 +481,7 @@ public class FootLerpData
     private bool midReached = false;
     public bool done = false;
     public float currentHeight = 0f;
+    private Action callback;
     
     public Vector3 Mid
     {
@@ -495,13 +497,14 @@ public class FootLerpData
     {
 
     }
-    public FootLerpData(Vector3 destination, Vector3 origin, float speed, float height, float stepSize)
+    public FootLerpData(Vector3 destination, Vector3 origin, float speed, float height, float stepSize, Action callback = null)
     {
         this.destination = destination;
         this.initialOrigin = origin;
         this.speed = speed;
         this.height = height;
         this.stepSize = stepSize;
+        this.callback = callback;
     }
 
     public Vector3 DoLerpFrom(Vector3 target)
@@ -509,6 +512,7 @@ public class FootLerpData
         if(Close(target, destination) == true)
         {
             done = true;
+            callback?.Invoke();
         }
         currentHeight = target.y;
         if (midReached == false)
@@ -579,14 +583,13 @@ public class LerpData
 {
     private float dist;
     private const float FinishThreshold = (0.1f * 0.1f);
-    private Queue<Vector3> posQueue;
-    private Vector3 nextPos;
-    private float speed;
+    private Queue<LerpPoint> posQueue;
+    private LerpPoint nextPos;
     private Target target;
     private Action doneCallback;
     private bool local;
     private bool persistent;
-    private Vector3 finalDestination;
+    private LerpPoint finalDestination;
 
     public string Animation { get; set; }
     public bool Done { get; private set; }
@@ -594,24 +597,20 @@ public class LerpData
     public LerpData(Target tar, Vector3 pos, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
     {
         target = tar;
-        nextPos = pos;
-        finalDestination = pos;
-        this.speed = speed;
+        nextPos.position = pos;
+        nextPos.speed = speed;
+        finalDestination.position = pos;
         this.local = local;
         this.doneCallback = doneCallback;
         this.persistent = persistent;
     }
-    public LerpData(Target tar, Vector3[] pos, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
+    public LerpData(Target tar, LerpPoint[] pos, bool local = true, bool persistent = false, Action doneCallback = null)
     {
         target = tar;
-        this.speed = speed;
-        posQueue = new Queue<Vector3>();
+        posQueue = new Queue<LerpPoint>();
         for (int i = 0; i < pos.Length; i++)
         {
-            if(pos[i] != Vector3.zero)
-            {
-                posQueue.Enqueue(pos[i]);
-            }
+            posQueue.Enqueue(pos[i]);
         }
 
         finalDestination = pos[pos.Length - 1];
@@ -625,7 +624,7 @@ public class LerpData
     {
         if(posQueue == null || posQueue.Count == 0)
         {
-            if(nextPos == Vector3.zero && persistent == false)
+            if(nextPos.position == Vector3.zero && persistent == false)
             {
                 Done = true;
                 doneCallback?.Invoke();
@@ -643,7 +642,7 @@ public class LerpData
 
     private bool SetNextPosition()
     {
-        if (nextPos != Vector3.zero)
+        if (nextPos.position != Vector3.zero)
             return false;
         if (posQueue == null || posQueue.Count == 0)
             return false;
@@ -655,29 +654,29 @@ public class LerpData
 
     private void LocalLerp()
     {
-        if (nextPos == Vector3.zero)
+        if (nextPos.position == Vector3.zero)
             return;
 
-        target.localPosition = Vector3.Lerp(target.localPosition, nextPos, speed * Time.deltaTime);
-        dist = (nextPos - target.localPosition).sqrMagnitude;
+        target.localPosition = Vector3.Lerp(target.localPosition, nextPos.position, nextPos.speed * Time.deltaTime);
+        dist = (nextPos.position - target.localPosition).sqrMagnitude;
         
         if(dist <= FinishThreshold)
         {
-            nextPos = Vector3.zero;
+            nextPos.position = Vector3.zero;
         }
 
     }
 
     private void GlobalLerp()
     {
-        if (nextPos == Vector3.zero)
+        if (nextPos.position == Vector3.zero)
             return;
 
-        target.position = Vector3.Lerp(target.position, nextPos, speed * Time.deltaTime);
-        float dist = (nextPos - target.position).sqrMagnitude;
+        target.position = Vector3.Lerp(target.position, nextPos.position, nextPos.speed * Time.deltaTime);
+        float dist = (nextPos.position - target.position).sqrMagnitude;
         if (dist <= FinishThreshold)
         {
-            nextPos = Vector3.zero;
+            nextPos.position = Vector3.zero;
         }
     }
 
@@ -690,8 +689,7 @@ public class AnimationConfig
     public struct ConfigData
     {
         public string identifier;
-        public Vector3[] localPoints;
-        public float speed;
+        public LerpPoint[] localPoints;
         public bool persistent;
         public AnimatorTarget target;
     }
@@ -712,15 +710,26 @@ public class AnimationConfig
 }
 
 [Serializable]
+public struct LerpPoint
+{
+    public Vector3 position;
+    public float speed;
+}
+
+[Serializable]
 public class Target
 {
+    public const float ReturnSpeed = 8f;
+
     public Transform obj;
     [HideInInspector]
     public Vector3 defaultPosition;
     [HideInInspector]
     public Transform defaultParent;
     [HideInInspector]
-    public LerpData lerp;
+    public LerpData lerp = null;
+
+    private bool reset = false;
 
     public bool Lerping { get { return (lerp != null); } }
     public bool Null { get { return !obj; } }
@@ -752,9 +761,11 @@ public class Target
     }
     public void Reset()
     {
+        if(reset == true) { lerp = null; reset = false; obj.localPosition = defaultPosition; return; }
+
+        reset = true;
         SetParent(defaultParent);
-        obj.localPosition = defaultPosition;
-        lerp = null;
+        lerp = new LerpData(this, defaultPosition, ReturnSpeed, true, false, Reset);
     }
 }
 
@@ -798,8 +809,8 @@ public struct FootTarget
     }
     public void Reset()
     {
-        SetParent(defaultParent);
-        obj.localPosition = defaultPosition;
         lerp = null;
+        SetParent(defaultParent);
+        localPosition = defaultPosition;
     }
 }

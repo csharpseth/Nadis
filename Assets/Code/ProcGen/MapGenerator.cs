@@ -47,9 +47,13 @@ public class MapGenerator : MonoBehaviour
         }*/
         
         terrain.terrainData.SetHeights(0, 0, heightMap);
-        
+
+        if (networked == false && mapDecorator == null)
+            mapDecorator = GetComponent<MapDecorator>();
+
         if(applyDecorations && mapDecorator != null)
         {
+            //mapDecorator.GeneratePoints(terrain.terrainData, size, seed);
             mapDecorator.Decorate(decorationLayers, seed, transform);
         }
 

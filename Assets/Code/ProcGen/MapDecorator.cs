@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LibNoise.Generator;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapDecorator : MonoBehaviour
@@ -9,7 +10,17 @@ public class MapDecorator : MonoBehaviour
     public float offset = 0.2f;
     private List<SpawnPoint> points;
     private float min, max;
-    
+
+    public float minHeight, maxHeight;
+    public float threshold;
+    public float noiseScale;
+    [Range(0f, 1f)]
+    public float chance = 0.2f;
+    [Header("Debug:")]
+    public int maxGizmos = 5000;
+    public bool spawn = false;
+
+
     public List<GameObject> Decorate(MapDecoratorData[] datas, int seed, Transform parent)
     {
         List<GameObject> gos = new List<GameObject>();
@@ -28,7 +39,8 @@ public class MapDecorator : MonoBehaviour
     public GameObject Decorate(MapDecoratorData data, int seed, Transform parent)
     {
         GameObject g = Generate(data.minHeight, data.maxHeight, data.density, data.maximumPoints, data.maxNormalAngle, data.maxPrefabAngle, seed, data.prefabs, data.prefabOffset, data.name);
-        g.transform.SetParent(parent);
+        if(g != null)
+            g.transform.SetParent(parent);
         return g;
     }
 
@@ -37,6 +49,7 @@ public class MapDecorator : MonoBehaviour
         if(points == null || points.Count == 0)
         {
             points = new List<SpawnPoint>();
+            Perlin p = new Perlin(1f, 0.5f, 1.8f, 2, seed, LibNoise.QualityMode.Medium);
 
             for (float x = 0; x < regionSize.x; x += stepSize)
             {
@@ -47,6 +60,10 @@ public class MapDecorator : MonoBehaviour
                     System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
                     float offsetX = (float)rX.NextDouble() * offset;
                     float offsetY = (float)rY.NextDouble() * offset;
+                    float pVal = (float)p.GetValue(x / noiseScale, 1f, y / noiseScale);
+
+                    if (pVal < threshold) continue;
+
                     Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
                     RaycastHit hit;
                     if (Physics.Raycast(origin, Vector3.down, out hit))
@@ -67,6 +84,8 @@ public class MapDecorator : MonoBehaviour
                 }
             }
         }
+
+        if (spawn == false) return null;
         
         float minH = (max - min) * minHeight;
         float maxH = (max - min) * maxHeight;
@@ -127,6 +146,33 @@ public class MapDecorator : MonoBehaviour
 
     }
 
+    public void GeneratePoints(TerrainData data, int size, int seed)
+    {
+        Perlin p = new Perlin(1f, 0.5f, 1.8f, 1, seed, LibNoise.QualityMode.Low);
+        float[,] heightMap = data.GetHeights(0, 0, size, size);
+
+        points = new List<SpawnPoint>();
+
+        for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                float perlinValue = (float)p.GetValue((float)x / noiseScale, 0, (float)y / noiseScale);
+                float heightMapVal = heightMap[x, y];
+                float val = Random.value;
+
+                if (heightMapVal >= minHeight && heightMapVal <= maxHeight && perlinValue > threshold && val <= chance)
+                {
+                    Vector3 origin = new Vector3(x, 500f, y);
+                    RaycastHit hit;
+                    Physics.Raycast(origin, Vector3.down, out hit);
+                    if (hit.transform != null) points.Add(new SpawnPoint(hit.point, hit.normal));
+                }
+
+            }
+        }
+    }
+
     public Vector3 ClampVector(Vector3 input, float maxAngle)
     {
         if (input.x > maxAngle)
@@ -147,6 +193,15 @@ public class MapDecorator : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(halfSize, regionSize);
+
+        if(points != null)
+        {
+            for (int i = 0; i < Mathf.Clamp(points.Count, 0, maxGizmos); i++)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawSphere(points[i].pos, 0.2f);
+            }
+        }
     }
 
 }

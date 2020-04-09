@@ -1,3 +1,16 @@
+[04/08/2020]
+-Improved player IK animations
+
+[04/07/2020]
+-Began implementing a more visually appealing
+  decoration point generator
+-Model, Texture, & Implemented 3 new, more performant,
+   trees. Maple, Small Pine, & Med. Pine
+-Implemented a Procedural Animation system & 3
+   animations: crouch, land, & jump
+-Began implementing climbing IKs where the hands
+   are placed offset from the ClimbDestination.
+
 [04/06/2020]
 -Refactored Player Pos & Rot Sync to use Event System
 -Converted Player Creation, Disconnection, & Move Data

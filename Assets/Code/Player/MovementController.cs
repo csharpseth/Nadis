@@ -15,7 +15,7 @@ public class MovementController : MonoBehaviour
     Vector3 dir;
     Rigidbody rb;
     CapsuleCollider physicsCollider;
-    Vector3 climbDestination;
+    public Vector3 ClimbDestination { get; private set; }
     BipedProceduralAnimator animator;
 
     public Vector2 InputDir { get; private set; }
@@ -50,7 +50,7 @@ public class MovementController : MonoBehaviour
     {
         get
         {
-            return (MoveState != PlayerMoveState.Crouching);
+            return (MoveState != PlayerMoveState.Crouching && ClimbDestination != Vector3.zero);
         }
     }
 
@@ -58,6 +58,7 @@ public class MovementController : MonoBehaviour
     public bool IsGrounded { get; private set; }
     public bool IsClimbing { get; private set; }
     public bool IsFalling { get; private set; }
+    public bool JustGrounded { get; private set; }
 
     public float Speed { get; private set; }
 
@@ -70,6 +71,7 @@ public class MovementController : MonoBehaviour
         physicsCollider = GetComponent<CapsuleCollider>();
     }
 
+    bool lastGroundState = true;
     private void Update()
     {
         InputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -77,9 +79,18 @@ public class MovementController : MonoBehaviour
         dir += transform.forward * InputDir.y;
         dir += transform.right * InputDir.x;
 
+        if (IsGrounded == false)
+            lastGroundState = false;
+
         Collider[] cols = Physics.OverlapSphere(transform.position, groundedRadius, groundedMask);
         IsGrounded = (cols.Length > 0);
         
+        if(IsGrounded == true && lastGroundState == false)
+        {
+            Events.BipedAnimator.ExecuteAnimation?.Invoke(NetworkManager.LocalPlayer.ID, "land", null);
+            lastGroundState = true;
+        }
+
         Climbing();
         Crouching();
         
@@ -111,24 +122,20 @@ public class MovementController : MonoBehaviour
         //rbController.SetSpeed(speed);
     }
 
-    private void Climb()
+    public void Climb()
     {
-        if (CanClimb == false)
-        {
-            Debug.Log("Cannot Climb");
-            return;
-        }
-
         if (IsClimbing == false)
         {
             RaycastHit hit;
             if (Physics.Raycast((climbInfo.checkOrigin.position), Vector3.down, out hit, climbInfo.rayDist))
             {
-                climbDestination = hit.point;
+                ClimbDestination = hit.point;
+                IsClimbing = true;
             }
             else
             {
-                climbDestination = Vector3.zero;
+                ClimbDestination = Vector3.zero;
+                IsClimbing = false;
             }
         }
     }
@@ -206,35 +213,35 @@ public class MovementController : MonoBehaviour
 
     private void Climbing()
     {
-        IsClimbing = (climbDestination != Vector3.zero);
+        IsClimbing = (ClimbDestination != Vector3.zero);
         rb.isKinematic = IsClimbing;
-
-
+        
         if (IsClimbing)
         {
+            Debug.Log("Climbing");
             Vector3 temp = transform.position;
-            if((climbDestination - temp).sqrMagnitude > (climbInfo.distToEnd * climbInfo.distToEnd))
+            if((ClimbDestination - temp).sqrMagnitude > (climbInfo.distToEnd * climbInfo.distToEnd))
             {
                 IsClimbing = false;
-                temp.y = Mathf.Lerp(temp.y, climbDestination.y, climbInfo.speed * Time.deltaTime);
-                climbDestination = Vector3.zero;
+                temp.y = Mathf.Lerp(temp.y, ClimbDestination.y, climbInfo.speed * Time.deltaTime);
+                ClimbDestination = Vector3.zero;
                 return;
             }
 
-            if (Mathf.Abs(climbDestination.y - temp.y) > 0.2f)
+            if (Mathf.Abs(ClimbDestination.y - temp.y) > 0.2f)
             {
-                temp.y = Mathf.Lerp(temp.y, climbDestination.y, climbInfo.speed * Time.deltaTime);
+                temp.y = Mathf.Lerp(temp.y, ClimbDestination.y, climbInfo.speed * Time.deltaTime);
             }
             else
             {
-                temp = Vector3.Lerp(temp, climbDestination, climbInfo.speed * Time.deltaTime);
+                temp = Vector3.Lerp(temp, ClimbDestination, climbInfo.speed * Time.deltaTime);
             }
 
             transform.position = temp;
 
-            float sqrDist = (climbDestination - temp).sqrMagnitude;
+            float sqrDist = (ClimbDestination - temp).sqrMagnitude;
 
-            if(Mathf.Abs(climbDestination.y - temp.y) <= yDistToStopGrabbing)
+            if(Mathf.Abs(ClimbDestination.y - temp.y) <= yDistToStopGrabbing)
             {
                 //rbController.ResetHands();
             }
@@ -242,8 +249,8 @@ public class MovementController : MonoBehaviour
             if (sqrDist <= (climbInfo.finishClimbDistance * climbInfo.finishClimbDistance))
             {
                 IsClimbing = false;
-                transform.position = climbDestination;
-                climbDestination = Vector3.zero;
+                transform.position = ClimbDestination;
+                ClimbDestination = Vector3.zero;
                 rb.isKinematic = false;
             }
         }
@@ -272,8 +279,8 @@ public class MovementController : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawRay(climbInfo.checkOrigin.position, Vector3.down * climbInfo.rayDist);
-        if (climbDestination != Vector3.zero)
-            Gizmos.DrawCube(climbDestination, Vector3.one * 0.2f);
+        if (ClimbDestination != Vector3.zero)
+            Gizmos.DrawCube(ClimbDestination, Vector3.one * 0.2f);
 
         if (IsGrounded)
             Gizmos.color = Color.green;
