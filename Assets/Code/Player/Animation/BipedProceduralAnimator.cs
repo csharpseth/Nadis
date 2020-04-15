@@ -7,7 +7,6 @@ public class BipedProceduralAnimator : MonoBehaviour
     [Header("Configuration:")]
     public ProceduralAnimationData data;
     public AnimationConfig animations;
-    private PlayerSync player;
 
     [Space(10)]
     [Header("Targets:")]
@@ -24,7 +23,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     public Target rightHand;
     public Target leftHand;
     #endregion
-    
+
     #region Player Move Data
     private bool grounded = true;
     private Vector2 inputDir;
@@ -47,9 +46,15 @@ public class BipedProceduralAnimator : MonoBehaviour
     public bool moving = false;
     #endregion
 
+    //Network Shit...
+    public int NetID { get; private set; }
+
     private void Start()
     {
-        InitialSetup();
+        if(Nadis.Net.NetworkManager.ins == null)
+        {
+            InitialSetup();
+        }
     }
     private void Update()
     {
@@ -105,8 +110,10 @@ public class BipedProceduralAnimator : MonoBehaviour
         FootStepping();
     }
 
-    private void InitialSetup()
+    public void InitialSetup(int netID = 0)
     {
+        NetID = netID;
+
         nextRight =  rightFoot.position;
         nextLeft =  leftFoot.position;
 
@@ -118,8 +125,6 @@ public class BipedProceduralAnimator : MonoBehaviour
         rightHand.Init();
         leftHand.Init();
         
-        player = GetComponent<PlayerSync>();
-
         Events.BipedAnimator.SetHandTargetPosition += SetHandTargetPosition;
         Events.BipedAnimator.EndCurrentHandTarget += EndCurrentHandTarget;
         Events.BipedAnimator.ExecuteAnimation += ExecuteAnimation;
@@ -129,7 +134,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     private void UnSubscribe(int playerID)
     {
-        if (player.ID != playerID) return;
+        if (NetID != playerID) return;
 
         Events.BipedAnimator.SetHandTargetPosition -= SetHandTargetPosition;
         Events.BipedAnimator.EndCurrentHandTarget -= EndCurrentHandTarget;
@@ -140,17 +145,6 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     public void FootStepping()
     {
-        if(pelvis.lerp == null || pelvis.lerp.Done == true && grounded)
-        {
-            Vector3 tempPelvis = pelvis.defaultPosition;
-            float leftY = (leftFoot.localPosition.y - leftFoot.defaultPosition.y);
-            float rightY = (rightFoot.localPosition.y - rightFoot.defaultPosition.y);
-            float avgY = (leftY + rightY) / 2f;
-            float plyY = 0.9f + avgY;
-            tempPelvis.y = plyY;
-            pelvis.localPosition = Vector3.Lerp(pelvis.localPosition, tempPelvis, 4f * Time.deltaTime);
-        }
-
         if (moving == false && grounded == true)
         {
             rightFoot.Reset();
@@ -158,8 +152,8 @@ public class BipedProceduralAnimator : MonoBehaviour
             Vector3 tempR = rightFoot.position;
             Vector3 tempL = leftFoot.position;
 
-            tempR.y = GroundHeight(rightFoot.obj);
-            tempL.y = GroundHeight(leftFoot.obj);
+            tempR.y = GroundHeight(rightFoot);
+            tempL.y = GroundHeight(leftFoot);
 
             rightFoot.position = tempR;
             leftFoot.position = tempL;
@@ -195,7 +189,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (rightFoot.lerp.done == true)
                     {
-                        Events.BipedAnimator.OnRightFootFinishStep?.Invoke(player.ID);
+                        Events.BipedAnimator.OnRightFootFinishStep?.Invoke(NetID);
 
                         Vector3 origin = ConvertDir(data.stepData.rightFootRayOffset, inputDir, data.stepData.stepSize, data.stepData.sideStepSize);
 
@@ -207,11 +201,11 @@ public class BipedProceduralAnimator : MonoBehaviour
                             rightFoot.lerp = new FootLerpData(WorldToLocal(nextRight, transform),  rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             right = false;
                             left = true;
-                            Events.BipedAnimator.OnLeftFootBeginStep?.Invoke(player.ID);
+                            Events.BipedAnimator.OnLeftFootBeginStep?.Invoke(NetID);
                         }
                     }else
                     {
-                        Events.BipedAnimator.OnRightFootStepping?.Invoke(player.ID);
+                        Events.BipedAnimator.OnRightFootStepping?.Invoke(NetID);
                     }
 
                 }
@@ -234,7 +228,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
                     if (leftFoot.lerp.done == true)
                     {
-                        Events.BipedAnimator.OnLeftFootFinishStep?.Invoke(player.ID);
+                        Events.BipedAnimator.OnLeftFootFinishStep?.Invoke(NetID);
 
                         Vector3 origin = ConvertDir(data.stepData.leftFootRayOffset, inputDir, data.stepData.stepSize, data.stepData.sideStepSize);
 
@@ -246,28 +240,39 @@ public class BipedProceduralAnimator : MonoBehaviour
                             leftFoot.lerp = new FootLerpData(WorldToLocal(nextLeft, transform),  leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                             left = false;
                             right = true;
-                            Events.BipedAnimator.OnRightFootBeginStep?.Invoke(player.ID);
+                            Events.BipedAnimator.OnRightFootBeginStep?.Invoke(NetID);
                         }
                     }else
                     {
-                        Events.BipedAnimator.OnLeftFootStepping?.Invoke(player.ID);
+                        Events.BipedAnimator.OnLeftFootStepping?.Invoke(NetID);
                     }
                 }
             }
             
             if (right == false)
             {
-                nextRight.y = GroundHeight(leftFoot.obj);
+                nextRight.y = GroundHeight(rightFoot);
                 rightFoot.position = nextRight;
             }
 
             if (left == false)
             {
-                nextLeft.y = GroundHeight(leftFoot.obj);
+                nextLeft.y = GroundHeight(leftFoot);
                 leftFoot.position = nextLeft;
             }
+            
         }
         
+        if (pelvis.lerp == null || pelvis.lerp.Done == true && grounded)
+        {
+            Vector3 tempPelvis = pelvis.defaultPosition;
+            float leftY = (leftFoot.localPosition.y - leftFoot.defaultPosition.y);
+            float rightY = (rightFoot.localPosition.y - rightFoot.defaultPosition.y);
+            float avgY = (leftY + rightY) / 2f;
+            float plyY = 0.9f + avgY;
+            tempPelvis.y = plyY;
+            pelvis.localPosition = Vector3.Lerp(pelvis.localPosition, tempPelvis, 4f * Time.deltaTime);
+        }
     }
 
     private Vector3 ConvertDir(Vector3 input, Vector2 inputDir, float stepSize, float sideStepSize)
@@ -303,7 +308,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     public void SetHandTargetPosition(int playerID, Vector3 position, Side side, float speed = 0f, AnimatorTarget target = AnimatorTarget.None, bool persistent = false, bool send = true)
     {
-        if (playerID != player.ID) return;
+        if (playerID != NetID) return;
 
         Transform parent = targets;
 
@@ -358,7 +363,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     }
     public void EndCurrentHandTarget(int playerID, bool send = true)
     {
-        if (playerID != player.ID) return;
+        if (playerID != NetID) return;
 
         rightHand.Reset();
         leftHand.Reset();
@@ -366,7 +371,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     public void ExecuteAnimation(int playerID, string identifier, Action endEvent = null)
     {
-        if (player.ID != playerID) return;
+        if (NetID != playerID) return;
 
         AnimationConfig.ConfigData config = animations.GetAnimation(identifier);
         Target target = TargetFrom(config.target);
@@ -376,7 +381,7 @@ public class BipedProceduralAnimator : MonoBehaviour
     }
     public void EndAnimation(int playerID, string identifier)
     {
-        if (player.ID != playerID) return;
+        if (NetID != playerID) return;
 
         AnimationConfig.ConfigData anim = animations.GetAnimation(identifier);
         Target t = TargetFrom(anim.target);
@@ -402,13 +407,16 @@ public class BipedProceduralAnimator : MonoBehaviour
         this.moveState = moveState;
     }
     
-    private float GroundHeight(Transform target)
+    private float GroundHeight(FootTarget target)
     {
         Vector3 origin = target.position + transform.up;
         RaycastHit hit;
         Physics.Raycast(origin, -transform.up, out hit, 1.5f);
 
-        return hit.point.y;
+        if(hit.transform != null)
+            return hit.point.y;
+
+        return transform.position.y;
     }
     private Vector3 WorldToLocal(Vector3 world, Transform t)
     {
@@ -421,7 +429,7 @@ public class BipedProceduralAnimator : MonoBehaviour
 
         return local;
     }
-    private Target TargetFrom(AnimatorTarget target, Side side = Side.Both)
+    private Target TargetFrom(AnimatorTarget target, Side side = Side.Right)
     {
         switch (target)
         {
@@ -460,13 +468,26 @@ public class BipedProceduralAnimator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        /*
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(pelvis.position, 0.2f);
+        */
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(rightFoot.position, 0.05f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(leftFoot.position, 0.05f);
+
+        float leftY = (leftFoot.position.y);
+        float rightY = (rightFoot.position.y);
+        float avgY = (leftY + rightY) / 2f;
+        Vector3 pos = transform.position;
+        pos.y = avgY + 1f;
+
+        //pelvis.position = pos;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(rightFoot.position, 0.2f);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(leftFoot.position, 0.2f);
+        Gizmos.DrawSphere(pos, 0.1f);
     }
 }
 
@@ -558,7 +579,6 @@ public struct ProceduralMoveData
 {
     public float handFootMatchStrength;
     public float handMoveSpeed;
-    public AnimationCurve bobCurve;
     public float maxRootForwardAngle;
     public float maxRootSideAngle;
 }

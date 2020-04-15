@@ -20,10 +20,15 @@ public class MapDecorator : MonoBehaviour
     public int maxGizmos = 5000;
     public bool spawn = false;
 
+    private void Awake()
+    {
+        Events.MapGenerator.GetPosition = GetPosition;
+    }
 
     public List<GameObject> Decorate(MapDecoratorData[] datas, int seed, Transform parent)
     {
         List<GameObject> gos = new List<GameObject>();
+        GeneratePoints(90f, seed);
 
         for (int i = 0; i < datas.Length; i++)
         {
@@ -46,45 +51,6 @@ public class MapDecorator : MonoBehaviour
 
     public GameObject Generate(float minHeight, float maxHeight, float density, int maxPoints, float maxNormalAngle, float maxAngle, int seed = 0, GameObject[] prefabs = null, Vector3 prefabOffset = default(Vector3), string groupName = "")
     {
-        if(points == null || points.Count == 0)
-        {
-            points = new List<SpawnPoint>();
-            Perlin p = new Perlin(1f, 0.5f, 1.8f, 2, seed, LibNoise.QualityMode.Medium);
-
-            for (float x = 0; x < regionSize.x; x += stepSize)
-            {
-                for (float y = 0; y < regionSize.z; y += stepSize)
-                {
-
-                    System.Random rX = new System.Random(seed + Mathf.RoundToInt(x));
-                    System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
-                    float offsetX = (float)rX.NextDouble() * offset;
-                    float offsetY = (float)rY.NextDouble() * offset;
-                    float pVal = (float)p.GetValue(x / noiseScale, 1f, y / noiseScale);
-
-                    if (pVal < threshold) continue;
-
-                    Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
-                    RaycastHit hit;
-                    if (Physics.Raycast(origin, Vector3.down, out hit))
-                    {
-                        Vector3 normal = hit.normal * 90f;
-                        if (Mathf.Abs(normal.x) <= maxNormalAngle && Mathf.Abs(normal.z) <= maxNormalAngle)
-                        {
-                            SpawnPoint point = new SpawnPoint(hit.point, ClampVector(normal, maxAngle));
-                            points.Add(point);
-
-                            if (point.pos.y > max)
-                                max = point.pos.y;
-                            if (point.pos.y < min)
-                                min = point.pos.y;
-                        }
-                    }
-
-                }
-            }
-        }
-
         if (spawn == false) return null;
         
         float minH = (max - min) * minHeight;
@@ -146,27 +112,39 @@ public class MapDecorator : MonoBehaviour
 
     }
 
-    public void GeneratePoints(TerrainData data, int size, int seed)
+    public void GeneratePoints(float maxNormalAngle, int seed)
     {
-        Perlin p = new Perlin(1f, 0.5f, 1.8f, 1, seed, LibNoise.QualityMode.Low);
-        float[,] heightMap = data.GetHeights(0, 0, size, size);
-
         points = new List<SpawnPoint>();
+        Perlin p = new Perlin(1f, 0.5f, 1.8f, 2, seed, LibNoise.QualityMode.Medium);
 
-        for (int x = 0; x < size; x++)
+        for (float x = 0; x < regionSize.x; x += stepSize)
         {
-            for (int y = 0; y < size; y++)
+            for (float y = 0; y < regionSize.z; y += stepSize)
             {
-                float perlinValue = (float)p.GetValue((float)x / noiseScale, 0, (float)y / noiseScale);
-                float heightMapVal = heightMap[x, y];
-                float val = Random.value;
 
-                if (heightMapVal >= minHeight && heightMapVal <= maxHeight && perlinValue > threshold && val <= chance)
+                System.Random rX = new System.Random(seed + Mathf.RoundToInt(x));
+                System.Random rY = new System.Random(seed + Mathf.RoundToInt(y));
+                float offsetX = (float)rX.NextDouble() * offset;
+                float offsetY = (float)rY.NextDouble() * offset;
+                float pVal = (float)p.GetValue(x / noiseScale, 1f, y / noiseScale);
+
+                if (pVal < threshold) continue;
+
+                Vector3 origin = new Vector3(x + offsetX, regionSize.y, y + offsetY);
+                RaycastHit hit;
+                if (Physics.Raycast(origin, Vector3.down, out hit))
                 {
-                    Vector3 origin = new Vector3(x, 500f, y);
-                    RaycastHit hit;
-                    Physics.Raycast(origin, Vector3.down, out hit);
-                    if (hit.transform != null) points.Add(new SpawnPoint(hit.point, hit.normal));
+                    Vector3 normal = hit.normal * 90f;
+                    if (Mathf.Abs(normal.x) <= maxNormalAngle && Mathf.Abs(normal.z) <= maxNormalAngle)
+                    {
+                        SpawnPoint point = new SpawnPoint(hit.point, ClampVector(normal, maxNormalAngle));
+                        points.Add(point);
+
+                        if (point.pos.y > max)
+                            max = point.pos.y;
+                        if (point.pos.y < min)
+                            min = point.pos.y;
+                    }
                 }
 
             }
@@ -185,6 +163,26 @@ public class MapDecorator : MonoBehaviour
             input.z = -maxAngle;
 
         return input;
+    }
+
+    public Vector3 GetPosition(float minH, float maxH, float maxAng)
+    {
+        List<Vector3> pts = new List<Vector3>();
+        int size = Mathf.Clamp(100, 0, points.Count);
+        Vector3 pos = Vector3.zero;
+        for (int i = 0; i < size; i++)
+        {
+            int index = Random.Range(0, size);
+            Vector3 p = points[index].pos;
+            Vector3 r = points[index].rot;
+            if (p.y >= minH && p.y <= maxH && Mathf.Abs(r.x) <= maxAng && Mathf.Abs(r.z) <= maxAng)
+            {
+                pos = p;
+                break;
+            }
+        }
+
+        return pos;
     }
 
     private void OnDrawGizmos()

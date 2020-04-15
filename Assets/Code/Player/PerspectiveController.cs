@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PerspectiveController : MonoBehaviour
 {
@@ -36,7 +34,8 @@ public class PerspectiveController : MonoBehaviour
 
         firstPersonCam.enabled = firstPerson;
         thirdPersonCam.enabled = !firstPerson;
-        headRenderer.shadowCastingMode = firstPerson == true ? UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly : UnityEngine.Rendering.ShadowCastingMode.On;
+        if(headRenderer != null)
+            headRenderer.shadowCastingMode = firstPerson == true ? UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly : UnityEngine.Rendering.ShadowCastingMode.On;
 
         if (firstPerson == true)
             ActiveCamera = firstPersonCam;

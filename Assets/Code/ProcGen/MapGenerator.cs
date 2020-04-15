@@ -22,6 +22,8 @@ public class MapGenerator : MonoBehaviour
         mapDecorator = GetComponent<MapDecorator>();
         if (networked == false)
             Generate();
+        else
+            Events.MapGenerator.GenerateMap += Generate;
     }
 
     public void Generate(int seed = -1)
@@ -62,10 +64,8 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("FINSIH :: Map Generated");
     }
 
-    public void GenerateSpawnPoints(int size, TerrainData terrain, float chance, float minHeight, float maxHeight, int seed, int maxPoints = 1)
+    private void GenerateSpawnPoints(int size, TerrainData terrain, float chance, float minHeight, float maxHeight, int seed, int maxPoints = 1)
     {
-        if (NetworkManager.ins == null) return;
-
         float min = 500f;
         float max = -500f;
 
@@ -92,7 +92,7 @@ public class MapGenerator : MonoBehaviour
                         if (Physics.Raycast(pos, Vector3.down, out hit))
                         {
                             pos.y = hit.point.y;
-                            NetworkManager.ins.RegisterSpawnPoint(pos);
+                            Events.MapGenerator.RegisterSpawnPoint?.Invoke(pos);
                             pointCount++;
                         }
 

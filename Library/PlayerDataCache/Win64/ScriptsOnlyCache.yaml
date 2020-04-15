@@ -26,8 +26,6 @@ ScriptsOnlyBuild:
     - SessionFinder
     - WaterGenerator
     - Weapon
-    KaymakNetwork.dll:
-    - UnityThread
     Unity.RenderPipelines.Core.Runtime.dll:
     - UnityEngine.Rendering.UI.DebugUIHandlerBitField
     - UnityEngine.Rendering.UI.DebugUIHandlerButton
@@ -245,31 +243,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14170}
     - Class: 114
-      Script: {instanceID: 14274}
+      Script: {instanceID: 14276}
     - Class: 114
-      Script: {instanceID: 14348}
+      Script: {instanceID: 14350}
     - Class: 114
-      Script: {instanceID: 14394}
+      Script: {instanceID: 14396}
     - Class: 114
-      Script: {instanceID: 14484}
+      Script: {instanceID: 14486}
     - Class: 114
-      Script: {instanceID: 14524}
+      Script: {instanceID: 14526}
     - Class: 114
-      Script: {instanceID: 14572}
+      Script: {instanceID: 14574}
     - Class: 114
-      Script: {instanceID: 14766}
+      Script: {instanceID: 14768}
     - Class: 114
-      Script: {instanceID: 14770}
+      Script: {instanceID: 14772}
     - Class: 114
-      Script: {instanceID: 14806}
-    - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14808}
     - Class: 114
       Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14936}
+      Script: {instanceID: 14824}
     - Class: 114
-      Script: {instanceID: 14942}
+      Script: {instanceID: 14938}
+    - Class: 114
+      Script: {instanceID: 14944}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1063,6 +1061,12 @@ ScriptsOnlyBuild:
     className: BipedProceduralAnimator
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ProceduralAnimator
+  - hash:
+      serializedVersion: 2
       Hash: 1f051cf315b40db5ea3471c074c1339b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1313,12 +1317,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ProceduralAnimator
   platform: 19
   scenePathNames:
   - Assets/Scenes/Network Testing.unity

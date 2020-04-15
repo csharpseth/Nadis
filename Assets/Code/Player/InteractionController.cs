@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
@@ -50,64 +49,54 @@ public class InteractionController : MonoBehaviour
         }
     }
 
+    private Inventory localInventory;
+
     public BipedProceduralAnimator Animator { get; private set; }
     
     private void Awake()
     {
         if (ins == null)
             ins = this;
-    }
 
+        localInventory = GetComponent<Inventory>();
+    }
     private void Update()
     {
+        if (InputManager.Interact.PrimaryDown)
+        {
+            Events.BipedAnimator.ExecuteAnimation(0, "punch", null);
+            //Events.Item.OnRequestSpawnItem(0, hit.point, Vector3.zero, true);
+        }
+
+        UseActiveItem();
+        Interaction();
+    }
+
+    private void UseActiveItem()
+    {
+        if (localInventory == null) return;
+        if (localInventory.ActiveItem == null) return;
+
+        //localInventory.Use(1, Input.GetKeyDown(PlayerInput.FireOne));
+        //localInventory.Use(2, Input.GetKey(PlayerInput.FireTwo));
+    }
+    private void Interaction()
+    {
+        if (localInventory == null) return;
+        if (localInventory.ActiveItem != null) return;
+
+        RaycastHit hit;
+        Physics.Raycast(CenterScreenRay, out hit, interactionReach, interactionMask);
+        if (hit.transform == null) return;
         
-        Inventory inv = Events.Inventory.GetInventory(NetworkManager.LocalPlayer.ID);
-        if (inv != null && inv.ActiveItem != null)
-        {
-            Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 2, Input.GetButton("Fire2"), false);
-            Events.Item.Use?.Invoke(inv.ActiveItem.InstanceID, 1, Input.GetButton("Fire1"), false);
-        }
+        
 
-        if (Input.GetButtonDown("Fire1") && inv.ActiveItem == null)
+        if(false)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(CenterScreenRay, out hit))
-            {
-                Events.Item.OnRequestSpawnItem?.Invoke(0, hit.point, Vector3.zero, true);
-            }
-        }
+            PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
+            if (item == null) return;
 
-        if (Input.GetButtonDown("Fire2") && inv.ActiveItem == null)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(CenterScreenRay, out hit))
-            {
-                PhysicalItem item = hit.transform.GetComponent<PhysicalItem>();
-                if (item != null && ItemManager.ins != null)
-                {
-                    Events.Item.OnRequestDestroyItem?.Invoke(item.InstanceID, true);
-                }
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            PhysicalItem item = ItemLookingAt;
-            PlayerSync ply = LookingAt.GetComponent<PlayerSync>();
-            if (item != null) Events.Inventory.AddItem(item.InstanceID, NetworkManager.LocalPlayer.ID, true);
-            if(ply != null)
-            {
-                for (int i = 0; i < inv.Content.Length; i++)
-                {
-                    if(inv.Content[i] != null)
-                        Debug.Log("Player[" + ply.ID + "] :: Item[" + i + "]: " + inv.Content[i].meta.name);
-                }
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            Events.Inventory.RemoveActiveItem(NetworkManager.LocalPlayer.ID, true);
+            Events.Item.OnRequestDestroyItem(item.InstanceID, true);
         }
     }
 

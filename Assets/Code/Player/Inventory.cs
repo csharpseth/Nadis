@@ -8,14 +8,14 @@ public class Inventory : MonoBehaviour
 
     private PhysicalItem[] _content;
     private int _activeIndex = 0;
-    private int _netID;
+    public int NetID { get; private set; }
     
     public PhysicalItem ActiveItem { get { return _content[_activeIndex]; } }
     public PhysicalItem[] Content { get { return _content; } }
     
     public void Init(int playerID, int size)
     {
-        _netID = playerID;
+        NetID = playerID;
         _content = new PhysicalItem[size];
 
         if(slotContainer != null && slotPrefab != null)
@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
     }
     private void Update()
     {
-        if (_netID != NetworkManager.LocalPlayer.ID) return;
+        if (NetID != Events.Player.GetLocalID()) return;
 
         float val = Input.GetAxisRaw(SelectInputAxis);
         if(val > 0f)
@@ -83,9 +83,16 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    public void Use(int useIndex, bool useValue)
+    {
+        if (ActiveItem == null) return;
+
+        ActiveItem.Use(useIndex, useValue);
+    }
+
     public void AddItem(int instanceID, int netID, bool send)
     {
-        if (netID != _netID) return;
+        if (netID != NetID) return;
 
         int addIndex = GetFirstOpenIndex();
         PhysicalItem item = Events.Item.GetItem(instanceID);
@@ -97,7 +104,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(int instanceID, int netID, bool send)
     {
-        if (netID != _netID) return;
+        if (netID != NetID) return;
 
         int indexOf = GetIndexOf(instanceID);
         if (indexOf == -1) return;
@@ -115,7 +122,7 @@ public class Inventory : MonoBehaviour
 
     public void DropAllItems(int netID, bool send)
     {
-        if (netID != _netID) return;
+        if (netID != NetID) return;
 
         for (int i = 0; i < _content.Length; i++)
         {
@@ -125,7 +132,7 @@ public class Inventory : MonoBehaviour
 
         _activeIndex = 0;
     }
-
+    
     //Don't Forget To Unsubscribe
     private void Subscribe()
     {
@@ -133,11 +140,12 @@ public class Inventory : MonoBehaviour
         Events.Inventory.RemoveItem += RemoveItem;
         Events.Inventory.RemoveActiveItem += RemoveAtCurrentIndex;
         Events.Inventory.DropAllItems += DropAllItems;
+
         Events.Player.UnSubscribe += UnSubscribe;
     }
     private void UnSubscribe(int netID)
     {
-        if (_netID != netID) return;
+        if (NetID != netID) return;
 
         Events.Inventory.AddItem -= AddItem;
         Events.Inventory.RemoveItem -= RemoveItem;

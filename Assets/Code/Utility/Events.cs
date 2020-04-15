@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
+using Nadis.Net;
 
 public enum ItemEventType
 {
@@ -37,8 +37,6 @@ public static class Events
         public Action<int, bool> DropAllItems;
 
         //Not Networked
-        public delegate Inventory OnGetInventory(int playerID);
-        public OnGetInventory GetInventory;
         public ItemPlayerEvent AddItem;
         public ItemPlayerEvent RemoveItem;
         public Action<int, bool> RemoveActiveItem;
@@ -54,12 +52,9 @@ public static class Events
         public OnItemInteract Interact;
         public Action<int, bool> Reset;
         public Action<int, bool, bool> Hide;
-        public Action<int, int, bool, bool> Use;
         public Action<int, Vector3, Vector3, bool> OnItemTransform;
         public Action<int, Vector3, Vector3> OnSetItemTransform;
-
-        public Action<int, int, bool, bool> OnItemUse;
-
+        
         public delegate PhysicalItem OnGetItem(int instanceID);
         public OnGetItem GetItem;
     }
@@ -84,9 +79,13 @@ public static class Events
     {
         public delegate PlayerSync OnGetPlayerSync(int playerID);
         public delegate BipedProceduralAnimator OnGetPlayerAnimator(int playerID);
+        public delegate Inventory OnGetInventory(int playerID);
+        public delegate int OnGetLocalPlayerID();
 
         public OnGetPlayerSync GetPlayerSync;
         public OnGetPlayerAnimator GetPlayerAnimator;
+        public OnGetInventory GetInventory;
+        public OnGetLocalPlayerID GetLocalID;
 
         //These Are commands that are sent to the player, all are executed locally but are usually called by a Networked Function
         public Action<int> Respawn;
@@ -102,7 +101,8 @@ public static class Events
         public Action<int, float> OnRotate;
         public Action<int, bool, Vector2, PlayerMoveState, float> OnMoveData;
 
-        
+        public Action<int, bool, Vector2, PlayerMoveState, float> SetMoveData;
+        public Action<Vector3, Quaternion> CreateRagdoll;
 
     }
     public struct PlayerStatEvents
@@ -121,12 +121,19 @@ public static class Events
 
         public Action<PlayerStats> SetDefaults;
     }
+    public struct MapGeneratorEvents
+    {
+        public Action<Vector3> RegisterSpawnPoint;
+        public Action<int> GenerateMap;
+
+        public delegate Vector3 GetMapPosition(float minH, float maxH, float maxAng);
+        public GetMapPosition GetPosition;
+    }
 
     public static InventoryEvents Inventory;
     public static ItemEvents Item;
     public static BipedAnimatorEvents BipedAnimator;
     public static PlayerEvents Player;
     public static PlayerStatEvents PlayerStats;
-    
-
+    public static MapGeneratorEvents MapGenerator;
 }

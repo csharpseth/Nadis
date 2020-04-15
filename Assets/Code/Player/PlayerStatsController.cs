@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nadis.Net;
+using System;
 using UnityEngine;
 
 [Serializable]
@@ -146,13 +147,12 @@ public class PlayerStatsController : MonoBehaviour
         if (playerID != NetID) return;
         if(NetID == NetworkManager.LocalPlayer.ID)
         {
-            Events.Inventory.DropAllItems(playerID, true);
-            Events.Player.Respawn(playerID);
-            Events.BipedAnimator.EndCurrentHandTarget(playerID, true);
+            Events.Inventory.DropAllItems?.Invoke(playerID, true);
+            Events.Player.Respawn?.Invoke(playerID);
+            Events.BipedAnimator.EndCurrentHandTarget?.Invoke(playerID, true);
         }
 
-        NetworkManager.ins.CreatePlayerRagdoll(transform.position, transform.rotation);
+        Events.Player.CreateRagdoll?.Invoke(transform.position, transform.rotation);
         ResetStats();
-        Debug.LogFormat("Player W/ ID:{0} Has Died R.I.P.", playerID);
     }
 }

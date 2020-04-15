@@ -16,10 +16,8 @@ public class RotateWithMouse : MonoBehaviour
 
     private void Update()
     {
-
-
-        float h = lookSpeed * Input.GetAxisRaw("Mouse X");
-        float v = -lookSpeed * Input.GetAxisRaw("Mouse Y");
+        float h = lookSpeed * InputManager.Move.LookDir.x;
+        float v = -lookSpeed * InputManager.Move.LookDir.y;
         Vector3 rot = transform.eulerAngles;
 
         if (axis == RotateAxis.X || axis == RotateAxis.XandY)
@@ -36,20 +34,8 @@ public class RotateWithMouse : MonoBehaviour
         if (axis == RotateAxis.Y || axis == RotateAxis.XandY)
         {
             rot.y += h;
-            if (maxAngle != 0f)
-            {
-                if (rot.y > maxAngle)
-                    rot.y = maxAngle;
-
-                /*
-                if (rot.y < -maxAngle)
-                    rot.y = -maxAngle;
-                    */
-            }
         }
-
-
-
+        
         transform.eulerAngles = rot;
     }
 

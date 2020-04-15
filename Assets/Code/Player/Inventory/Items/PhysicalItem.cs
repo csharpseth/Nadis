@@ -10,11 +10,6 @@ public class PhysicalItem : MonoBehaviour
     
     [Space(10)]
     internal AudioSource source;
-    public AudioClip interactSound;
-    public AudioClip equipSound;
-    public AudioClip primaryUseSound;
-    public AudioClip secondaryUseSound;
-
     internal Rigidbody rb;
     private Collider col;
     private Transform parent;
@@ -38,8 +33,6 @@ public class PhysicalItem : MonoBehaviour
             Events.Item.Reset += ResetItem;
             Events.Item.Hide += Hide;
             Events.Item.OnSetItemTransform += SetItemTransform;
-
-            Events.Item.Use += Use;
         }
     }
     public void SetParent(Transform parent)
@@ -70,11 +63,8 @@ public class PhysicalItem : MonoBehaviour
         }
     }
 
-    public virtual void Use(int instanceID, int useIndex, bool useValue, bool send = false)
+    public virtual void Use(int useIndex, bool useValue)
     {
-        if (instanceID != InstanceID)
-            return;
-
         switch(useIndex)
         {
             case (1):
@@ -90,10 +80,7 @@ public class PhysicalItem : MonoBehaviour
     
     public virtual void PrimaryUse(bool value)
     {
-        if (value == false) return;
-
-        if (source != null)
-            source.PlayOneShot(primaryUseSound);
+        
     }
 
     public virtual void SecondaryUse(bool state)
@@ -106,9 +93,7 @@ public class PhysicalItem : MonoBehaviour
         if (InstanceID != instID) return;
         BipedProceduralAnimator animator = Events.Player.GetPlayerAnimator(playerID);
         if (animator == null) return;
-
-        source.PlayOneShot(interactSound);
-
+        
         ownerID = playerID;
 
         Send = false;
@@ -145,12 +130,11 @@ public class PhysicalItem : MonoBehaviour
         if (instanceID != InstanceID) return;
         
         gameObject.SetActive(!val);
-        if (gameObject.activeSelf == true) source.PlayOneShot(equipSound);
     }
 
     private void Update()
     {
-        if(Send && NetworkManager.ins != null)
+        if(Send)
         {
             if((transform.position - lastPos).sqrMagnitude >= (positionSendThresholdDist * positionSendThresholdDist) || lastRot != transform.eulerAngles && receiving == false)
             {

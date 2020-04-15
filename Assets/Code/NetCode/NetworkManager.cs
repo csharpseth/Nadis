@@ -1,180 +1,177 @@
 ﻿using System.Collections.Generic;
+using Nadis.Net.Foundation;
 using UnityEngine;
 
-public class NetworkManager : MonoBehaviour
+namespace Nadis.Net
 {
-    public static NetworkManager ins;
-    public static PlayerSync LocalPlayer;
-    public static PlayerStats DefaultStats;
-    private static bool defaultPlayerStatSet = false;
-
-    [HideInInspector]
-    public NetworkObjectsManager netObjectsManager;
-
-    [SerializeField]
-    private List<Vector3> spawnPoints;
-    private MapGenerator mapGenerator;
-
-    private void Awake()
+    public class NetworkManager : MonoBehaviour
     {
-        if (ins != null)
-            Destroy(this);
+        public static NetworkManager ins;
+        public static PlayerSync LocalPlayer;
+        public static PlayerStats DefaultStats;
+        private static bool defaultPlayerStatSet = false;
+        
+        [SerializeField]
+        private List<Vector3> spawnPoints;
+        private MapGenerator mapGenerator;
 
-        ins = this;
-
-        mapGenerator = FindObjectOfType<MapGenerator>();
-
-        Events.Player.GetPlayerSync = GetPlayer;
-        Events.Player.GetPlayerAnimator = GetPlayerAnimator;
-        Events.Inventory.GetInventory = GetPlayerInventory;
-
-        Events.PlayerStats.SetDefaults = SetDefaultStats;
-
-        Events.Player.Respawn += RespawnPlayer;
-        Events.Player.Create += CreatePlayer;
-        Events.Player.Disconnect += PlayerDisconnect;
-    }
-
-    public GameObject localPlayerPrefab;
-    public GameObject remotePlayerPrefab;
-    public GameObject playerRagdoll;
-    public float ragdollCleanupDelay = 30f;
-
-    public Dictionary<int, PlayerSync> connectedPlayers = new Dictionary<int, PlayerSync>();
-    private bool spawnPointsGenerated = false;
-    
-
-    void Start()
-    {
-        DontDestroyOnLoad(this);
-
-        netObjectsManager = GetComponent<NetworkObjectsManager>();
-
-        NetworkConfig.InitNetwork();
-        //SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
-        NetworkConfig.ConnectToServer(new ServerData("127.0.0.1", 5555));
-    }
-
-    public void SetDefaultStats(PlayerStats stats)
-    {
-        if (defaultPlayerStatSet == true) return;
-
-        DefaultStats = stats;
-        defaultPlayerStatSet = true;
-    }
-
-    private void RespawnPlayer(int playerID)
-    {
-        if (playerID != LocalPlayer.ID) return;
-
-        LocalPlayer.transform.position = GetSpawnPoint();
-    }
-
-    private Vector3 GetSpawnPoint()
-    {
-        if (spawnPoints == null || spawnPoints.Count == 0) return Vector3.zero;
-
-        int index = Random.Range(0, spawnPoints.Count);
-        return spawnPoints[index];
-    }
-
-    public void CreatePlayer(int connID, int inventorySize, bool local)
-    {
-        PlayerSync ps = null;
-
-        if (GetPlayer(connID) != null) return;
-
-        if(local)
+        private void Awake()
         {
-            ps = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
-            ps.transform.position = GetSpawnPoint();
+            if (ins != null)
+                Destroy(this);
 
-            LocalPlayer = ps;
-        }else
-        {
-            ps = Instantiate(remotePlayerPrefab).GetComponent<PlayerSync>();
+            ins = this;
+
+            mapGenerator = FindObjectOfType<MapGenerator>();
+
+            Events.Player.GetPlayerSync = GetPlayer;
+            Events.Player.GetPlayerAnimator = GetPlayerAnimator;
+            Events.Player.GetLocalID = GetLocalPlayerID;
+            Events.Player.GetInventory = GetPlayerInventory;
+
+            Events.PlayerStats.SetDefaults = SetDefaultStats;
+
+            Events.Player.Respawn += RespawnPlayer;
+            Events.Player.Create += CreatePlayer;
+            Events.Player.Disconnect += PlayerDisconnect;
+            Events.Player.CreateRagdoll += CreatePlayerRagdoll;
+
+            Events.MapGenerator.RegisterSpawnPoint += RegisterSpawnPoint;
         }
 
-        ps.GetComponent<Inventory>().Init(connID, inventorySize);
-        ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power);
-        ps.GetComponent<PlayerSoundController>().InitFromServer(connID);
-        ps.ID = connID;
+        public GameObject localPlayerPrefab;
+        public GameObject remotePlayerPrefab;
+        public GameObject playerRagdoll;
+        public float ragdollCleanupDelay = 30f;
 
-        connectedPlayers.Add(connID, ps);
-    }
-    
-    public void RegisterSpawnPoint(Vector3 point)
-    {
-        if (spawnPoints == null)
-            spawnPoints = new List<Vector3>();
+        public Dictionary<int, PlayerSync> connectedPlayers = new Dictionary<int, PlayerSync>();
+        private bool spawnPointsGenerated = false;
 
-        spawnPoints.Add(point);
-    }
-    
-    public void CreatePlayerRagdoll(Vector3 pos, Quaternion rot)
-    {
-        GameObject temp = Instantiate(playerRagdoll, pos, rot);
-        Destroy(temp, ragdollCleanupDelay);
-    }
 
-    public void PlayerDisconnect(int playerID)
-    {
-        connectedPlayers.Remove(playerID);
-        Debug.Log("Player Has Disconnected");
-    }
-    
-    public void SetMapGeneratorData(int seed)
-    {
-        if (mapGenerator != null)
+        void Start()
         {
-            mapGenerator.Generate(seed);
-        }
-    }
-
-    public void SetPlayerMoveData(int playerID, bool grounded, Vector2 inputDir, PlayerMoveState moveState, float moveSpeed)
-    {
-        if(connectedPlayers.ContainsKey(playerID) == false)
-        {
-            Debug.Log("Error No Player w/ ID:" + playerID + " was found to apply MoveData!");
-            return;
+            DontDestroyOnLoad(this);
+            
+            NetworkConfig.InitNetwork();
+            //SessionFinder.ins.FindSession(NetworkConfig.ConnectToServer, 2f, Debug.LogError);
+            NetworkConfig.ConnectToServer(new ServerData("127.0.0.1", 5555));
         }
 
-        connectedPlayers[playerID].SetProceduralMoveData(grounded, inputDir, moveState, moveSpeed);
-    }
-    
-    public PlayerSync GetPlayer(int playerID)
-    {
-        if (connectedPlayers.ContainsKey(playerID) == false)
+        private void SetDefaultStats(PlayerStats stats)
+        {
+            if (defaultPlayerStatSet == true) return;
+
+            DefaultStats = stats;
+            defaultPlayerStatSet = true;
+        }
+
+        private int GetLocalPlayerID()
+        {
+            return LocalPlayer.ID;
+        }
+
+        private void RespawnPlayer(int playerID)
+        {
+            if (playerID != LocalPlayer.ID) return;
+
+            LocalPlayer.transform.position = GetSpawnPoint();
+        }
+
+        private Vector3 GetSpawnPoint()
+        {
+            if (spawnPoints == null || spawnPoints.Count == 0) return Vector3.zero;
+
+            int index = Random.Range(0, spawnPoints.Count);
+            return spawnPoints[index];
+        }
+
+        private void CreatePlayer(int connID, int inventorySize, bool local)
+        {
+            PlayerSync ps = null;
+
+            if (GetPlayer(connID) != null) return;
+
+            if (local)
+            {
+                ps = Instantiate(localPlayerPrefab).GetComponent<PlayerSync>();
+                ps.transform.position = GetSpawnPoint();
+
+                LocalPlayer = ps;
+            }
+            else
+            {
+                ps = Instantiate(remotePlayerPrefab).GetComponent<PlayerSync>();
+            }
+
+            ps.GetComponent<Inventory>().Init(connID, inventorySize);
+            ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power);
+            ps.GetComponent<PlayerSoundController>().InitFromServer(connID);
+            ps.GetComponent<BipedProceduralAnimator>().InitialSetup(connID);
+            ps.ID = connID;
+            ps.name = "ply_" + connID;
+
+            connectedPlayers.Add(connID, ps);
+
+            if(ps == LocalPlayer)
+            {
+                NetworkSend.SendLocalPlayerSpawned();
+            }
+        }
+
+        private void RegisterSpawnPoint(Vector3 point)
+        {
+            if (spawnPoints == null)
+                spawnPoints = new List<Vector3>();
+
+            spawnPoints.Add(point);
+        }
+
+        private void CreatePlayerRagdoll(Vector3 pos, Quaternion rot)
+        {
+            GameObject temp = Instantiate(playerRagdoll, pos, rot);
+            Destroy(temp, ragdollCleanupDelay);
+        }
+
+        private void PlayerDisconnect(int playerID)
+        {
+            connectedPlayers.Remove(playerID);
+            Debug.Log("Player Has Disconnected");
+        }
+        
+        private PlayerSync GetPlayer(int playerID)
+        {
+            if (connectedPlayers.ContainsKey(playerID) == false)
+                return null;
+
+            return connectedPlayers[playerID];
+        }
+        private Inventory GetPlayerInventory(int playerID)
+        {
+            PlayerSync ply = GetPlayer(playerID);
+            if (ply == null && playerID == LocalPlayer.ID)
+                ply = LocalPlayer;
+            if (ply != null)
+                return ply.GetComponent<Inventory>();
+
             return null;
-
-        return connectedPlayers[playerID];
-    }
-    public Inventory GetPlayerInventory(int playerID)
-    {
-        PlayerSync ply = GetPlayer(playerID);
-        if (ply == null && playerID == LocalPlayer.ID)
-            ply = LocalPlayer;
-        if (ply != null)
-            return ply.GetComponent<Inventory>();
-
-        return null;
-    }
-    public BipedProceduralAnimator GetPlayerAnimator(int playerID)
-    {
-        PlayerSync ply = GetPlayer(playerID);
-        if (ply == null && playerID == LocalPlayer.ID)
-            ply = LocalPlayer;
+        }
+        private BipedProceduralAnimator GetPlayerAnimator(int playerID)
+        {
+            PlayerSync ply = GetPlayer(playerID);
+            if (ply == null && playerID == LocalPlayer.ID)
+                ply = LocalPlayer;
 
 
-        if (ply != null)
-            return ply.GetComponent<BipedProceduralAnimator>();
+            if (ply != null)
+                return ply.GetComponent<BipedProceduralAnimator>();
 
-        return null;
-    }
+            return null;
+        }
 
-    private void OnApplicationQuit()
-    {
-        NetworkConfig.DisconnectFromServer();
+        private void OnApplicationQuit()
+        {
+            NetworkConfig.DisconnectFromServer();
+        }
     }
 }
 

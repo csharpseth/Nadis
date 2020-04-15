@@ -22,12 +22,15 @@ public class Weapon : PhysicalItem
         if(Physics.Raycast(InteractionController.ins.CenterScreenRay, out hit, range))
         {
             Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
-            if(rb != null)
+            string name = hit.transform.name;
+            if (rb != null)
                 rb.AddForceAtPosition((rb.transform.position - transform.position).normalized * force, hit.point, ForceMode.Impulse);
 
-            PlayerSync ply = hit.transform.GetComponent<PlayerSync>();
-            if(ply != null)
-                Events.PlayerStats.Damage(ply.ID, damage, true);
+            if (name.StartsWith("ply_"))
+            {
+                int id = int.Parse(name.Replace("ply_", ""));
+                Events.PlayerStats.Damage(id, damage, true);
+            }
         }
     }
 

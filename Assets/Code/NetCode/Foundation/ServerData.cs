@@ -1,15 +1,18 @@
 ﻿using System;
 
-[Serializable]
-public class ServerData
+namespace Nadis.Net.Foundation
 {
-    public string displayName;
-    public string remoteIP;
-    public int port;
-
-    public ServerData(string ip, int port)
+    [Serializable]
+    public class ServerData
     {
-        remoteIP = ip;
-        this.port = port;
+        public string displayName;
+        public string remoteIP;
+        public int port;
+
+        public ServerData(string ip, int port)
+        {
+            remoteIP = ip;
+            this.port = port;
+        }
     }
 }

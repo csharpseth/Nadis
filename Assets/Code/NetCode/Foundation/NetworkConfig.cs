@@ -1,85 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using KaymakNetwork.Network;
-using System.Threading.Tasks;
 
-internal static class NetworkConfig
+namespace Nadis.Net.Foundation
 {
-    internal static Client socket;
-    internal static ClientConnectionConfig config;
-
-    internal static void InitNetwork()
+    internal static class NetworkConfig
     {
-        if (!ReferenceEquals(socket, null)) return;
+        internal static Client socket;
 
-        socket = new Client(100);
-        config = new ClientConnectionConfig();
-        NetworkReceive.PacketRouter();
-
-        Events.Item.OnRequestSpawnItem += NetworkSend.SendRequestItemSpawn;
-        Events.Item.OnRequestDestroyItem += NetworkSend.SendRequestItemDestroy;
-
-        Events.Item.Interact += NetworkSend.SendItemInteract;
-        Events.Item.Reset += NetworkSend.SendItemReset;
-        Events.Item.Hide += NetworkSend.SendItemHide;
-
-        Events.Item.OnItemTransform += NetworkSend.SendItemTransform;
-
-        Events.Inventory.OnAddItem += NetworkSend.SendInventoryAdd;
-        Events.Inventory.OnRemoveItem += NetworkSend.SendInventoryRemove;
-
-        Events.BipedAnimator.SetHandTargetPosition += NetworkSend.SendPlayerSetHandPosition;
-        Events.BipedAnimator.EndCurrentHandTarget += NetworkSend.SendPlayerEndCurrentHandTarget;
-
-        Events.PlayerStats.OnAlterHealth += NetworkSend.SendPlayerAlterHealth;
-        Events.PlayerStats.OnAlterPower += NetworkSend.SendPlayerAlterPower;
-
-        Events.Player.OnMove += NetworkSend.SendPlayerPosition;
-        Events.Player.OnRotate += NetworkSend.SendPlayerRotation;
-        Events.Player.OnMoveData += NetworkSend.SendPlayerMoveData;
-
-        //Events.Inventory.OnInventoryChange += NetworkSend.SendPlayerInventoryUpdate;
-    }
-
-    internal static void ConnectLocal(int port = 5555)
-    {
-        socket.Connect("localhost", port);
-    }
-
-    internal static void ConnectToServer(ServerData server)
-    {
-        Debug.LogFormat("Attempting To Connect To Server At: {0}:{1}", server.remoteIP, server.port);
-        socket.Connect(server.remoteIP, server.port);
-    }
-
-    internal static async void TimeOutCheck(bool retryLocal, ServerData server = null)
-    {
-        await Task.Delay(config.connectTimeout * 1000);
-        if (socket.IsConnected == true)
-            return;
-
-        DisconnectFromServer();
-        if(retryLocal)
+        internal static void InitNetwork()
         {
-            Debug.Log("Failed To Connect On Public Address, Attempting on Local Address");
-            ConnectLocal(server.port);
+            if (!ReferenceEquals(socket, null)) return;
+
+            socket = new Client(100);
+            NetworkReceive.PacketRouter();
+
+            Events.Item.OnRequestSpawnItem += NetworkSend.SendRequestItemSpawn;
+            Events.Item.OnRequestDestroyItem += NetworkSend.SendRequestItemDestroy;
+
+            Events.Item.Interact += NetworkSend.SendItemInteract;
+            Events.Item.Reset += NetworkSend.SendItemReset;
+            Events.Item.Hide += NetworkSend.SendItemHide;
+
+            Events.Item.OnItemTransform += NetworkSend.SendItemTransform;
+
+            Events.Inventory.OnAddItem += NetworkSend.SendInventoryAdd;
+            Events.Inventory.OnRemoveItem += NetworkSend.SendInventoryRemove;
+
+            Events.BipedAnimator.SetHandTargetPosition += NetworkSend.SendPlayerSetHandPosition;
+            Events.BipedAnimator.EndCurrentHandTarget += NetworkSend.SendPlayerEndCurrentHandTarget;
+
+            Events.PlayerStats.OnAlterHealth += NetworkSend.SendPlayerAlterHealth;
+            Events.PlayerStats.OnAlterPower += NetworkSend.SendPlayerAlterPower;
+
+            Events.Player.OnMove += NetworkSend.SendPlayerPosition;
+            Events.Player.OnRotate += NetworkSend.SendPlayerRotation;
+            Events.Player.OnMoveData += NetworkSend.SendPlayerMoveData;
+
+            //Events.Inventory.OnInventoryChange += NetworkSend.SendPlayerInventoryUpdate;
+        }
+
+        internal static void ConnectLocal(int port = 5555)
+        {
+            socket.Connect("localhost", port);
+        }
+
+        internal static void ConnectToServer(ServerData server)
+        {
+            Debug.LogFormat("Attempting To Connect To Server At: {0}:{1}", server.remoteIP, server.port);
+            socket.Connect(server.remoteIP, server.port);
+        }
+
+        internal static void DisconnectFromServer()
+        {
+            if (socket != null)
+            {
+                socket.Dispose();
+                InitNetwork();
+            }
         }
 
     }
-
-    internal static void DisconnectFromServer()
-    {
-        if(socket != null)
-        {
-            socket.Dispose();
-            InitNetwork();
-        }
-    }
-
 }
 
-public class ClientConnectionConfig
-{
-    public int connectTimeout = 3;
-}

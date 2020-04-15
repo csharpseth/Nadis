@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Nadis.Net;
+using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MovementController : MonoBehaviour
     CapsuleCollider physicsCollider;
     public Vector3 ClimbDestination { get; private set; }
     BipedProceduralAnimator animator;
+    PlayerSync player;
 
     public Vector2 InputDir { get; private set; }
 
@@ -64,17 +66,20 @@ public class MovementController : MonoBehaviour
 
     public PlayerMoveState MoveState { get; private set; }
 
+    public bool Run;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<BipedProceduralAnimator>();
         physicsCollider = GetComponent<CapsuleCollider>();
+        player = GetComponent<PlayerSync>();
     }
 
     bool lastGroundState = true;
     private void Update()
     {
-        InputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        InputDir = InputManager.Move.InputDir;
         dir = Vector3.zero;
         dir += transform.forward * InputDir.y;
         dir += transform.right * InputDir.x;
@@ -87,7 +92,7 @@ public class MovementController : MonoBehaviour
         
         if(IsGrounded == true && lastGroundState == false)
         {
-            Events.BipedAnimator.ExecuteAnimation?.Invoke(NetworkManager.LocalPlayer.ID, "land", null);
+            Events.BipedAnimator.ExecuteAnimation?.Invoke(player.ID, "land", null);
             lastGroundState = true;
         }
 
@@ -96,12 +101,15 @@ public class MovementController : MonoBehaviour
         
         physicsCollider.center = new Vector3(0f, (physicsCollider.height / 2f), 0f);
 
-        if (Input.GetButton("Sprint") && dir != Vector3.zero)
+        if (Run && dir != Vector3.zero)
         {
             Running();
         }else if(dir != Vector3.zero)
         {
             Walking();
+        }else
+        {
+            Run = false;
         }
 
         if(dir == Vector3.zero || IsGrounded == false && MoveState != PlayerMoveState.Crouching)
@@ -187,11 +195,7 @@ public class MovementController : MonoBehaviour
 
         if (MoveState != PlayerMoveState.Crouching)
         {
-            physicsCollider.height = Mathf.Lerp(physicsCollider.height, sizeInfo.normalHeight, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
-            if (sizeInfo.camera != null)
-            {
-                sizeInfo.camera.transform.localPosition = Vector3.Lerp(sizeInfo.camera.transform.localPosition, sizeInfo.cameraNormalOffset, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
-            }
+            physicsCollider.height = sizeInfo.normalHeight;
             return;
         }
 
@@ -204,11 +208,7 @@ public class MovementController : MonoBehaviour
 
 
         Speed = moveInfo.crouchSpeed;
-        physicsCollider.height = Mathf.Lerp(physicsCollider.height, sizeInfo.crouchHeight, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
-        if (sizeInfo.camera != null)
-        {
-            sizeInfo.camera.transform.localPosition = Vector3.Lerp(sizeInfo.camera.transform.localPosition, sizeInfo.cameraCrouchOffset, sizeInfo.smoothedLerpSpeed * Time.deltaTime);
-        }
+        physicsCollider.height = sizeInfo.crouchHeight;
     }
 
     private void Climbing()
@@ -282,12 +282,14 @@ public class MovementController : MonoBehaviour
         if (ClimbDestination != Vector3.zero)
             Gizmos.DrawCube(ClimbDestination, Vector3.one * 0.2f);
 
+        /*
         if (IsGrounded)
             Gizmos.color = Color.green;
         else
             Gizmos.color = Color.red;
 
         Gizmos.DrawSphere(transform.position, groundedRadius);
+        */
     }
 
 }
@@ -297,10 +299,6 @@ public struct PlayerPhysicalDimensions
 {
     public float normalHeight;
     public float crouchHeight;
-    public Camera camera;
-    public Vector3 cameraNormalOffset;
-    public Vector3 cameraCrouchOffset;
-    public float smoothedLerpSpeed;
 }
 
 [System.Serializable]
