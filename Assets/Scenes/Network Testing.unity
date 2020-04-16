@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
-  localPlayerPrefab: {fileID: 1409777460289432516, guid: 9ac7c275291b99945bf7b171f53c30f5,
+  localPlayerPrefab: {fileID: 2194545676906854260, guid: 9ac7c275291b99945bf7b171f53c30f5,
     type: 3}
   remotePlayerPrefab: {fileID: 8006833277413759994, guid: 5bda221fba41c32479e33738b2bd1372,
     type: 3}
@@ -265,7 +265,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &204002005
 MonoBehaviour:
@@ -370,7 +370,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 42.1, y: -30, z: 0}
 --- !u!1 &211219466
 GameObject:
@@ -491,12 +491,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295191639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 0, z: 500}
+  m_LocalPosition: {x: 250, y: 0, z: 250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1164113240}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &295191641
 MonoBehaviour:
@@ -660,10 +660,10 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855658936}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dbb1b80b1ae8afd43a0c7e8dcc60d56b, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: c9f375d3451c37340924c88ec04f2bec, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &855658938
 Terrain:
   m_ObjectHideFlags: 0
@@ -932,11 +932,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionSize: {x: 1000, y: 250, z: 1000}
-  stepSize: 0.5
-  offset: 0.25
-  minHeight: 0.1
+  stepSize: 2
+  offset: 0.5
+  minHeight: 0.15
   maxHeight: 1
-  threshold: 0.6
+  threshold: 0.5
   noiseScale: 100
   chance: 0.151
   maxGizmos: 0
@@ -975,51 +975,31 @@ MonoBehaviour:
   applyDecorations: 1
   decorationLayers:
   - name: Grass
-    enabled: 0
-    minHeight: 0.2
+    enabled: 1
+    minHeight: 0.05
     maxHeight: 1
     density: 0.5
     maxNormalAngle: 50
     maxPrefabAngle: 35
-    maximumPoints: 8000
-    prefabOffset: {x: 0, y: 0, z: 0}
+    minScale: {x: 1.6, y: 0.5, z: 1.6}
+    maxScale: {x: 2, y: 1, z: 2}
+    maximumPoints: 30000
+    prefabOffset: {x: 0, y: -0.05, z: 0}
     prefabs:
-    - {fileID: 8002321573796704496, guid: 268a834495812a8478be4a10cdde8c72, type: 3}
+    - {fileID: 5580482755130496962, guid: 1eac00ad25ca7ed47850a26850e6e132, type: 3}
   - name: Trees
-    enabled: 0
+    enabled: 1
     minHeight: 0.2
     maxHeight: 1
-    density: 0.3
-    maxNormalAngle: 15
-    maxPrefabAngle: 5
-    maximumPoints: 3000
-    prefabOffset: {x: 0, y: 0, z: 0}
+    density: 0.25
+    maxNormalAngle: 10
+    maxPrefabAngle: 8
+    minScale: {x: 0.8, y: 0.8, z: 0.8}
+    maxScale: {x: 1.5, y: 2.5, z: 1.5}
+    maximumPoints: 1100
+    prefabOffset: {x: 0, y: -0.2, z: 0}
     prefabs:
-    - {fileID: 4189794481650371142, guid: b350355d8bbe8d04299682a535a2d3c8, type: 3}
-    - {fileID: 8688965857370426935, guid: 110f1041bdd4d384ea7ef2947c223b4c, type: 3}
-    - {fileID: 2655771117566225798, guid: 6c8ed27af52169b47a32fa0932a75805, type: 3}
-  - name: Ambient Audio
-    enabled: 1
-    minHeight: 0.3
-    maxHeight: 1
-    density: 0.2
-    maxNormalAngle: 30
-    maxPrefabAngle: 0
-    maximumPoints: 30
-    prefabOffset: {x: 0, y: 15, z: 0}
-    prefabs:
-    - {fileID: 7828635596615813067, guid: cb973cdc3de25cc4e94f213cffcb3228, type: 3}
-  - name: Maple
-    enabled: 0
-    minHeight: 0.4
-    maxHeight: 1
-    density: 0.02
-    maxNormalAngle: 30
-    maxPrefabAngle: 5
-    maximumPoints: 20
-    prefabOffset: {x: 0, y: 0, z: 0}
-    prefabs:
-    - {fileID: 5350076111169614059, guid: 8a682e60a921e94468b0437a93f47195, type: 3}
+    - {fileID: 2109505692874852797, guid: 5757b8c9f30a0a84d94643efe3ecefff, type: 3}
   networked: 1
 --- !u!4 &1097076448
 Transform:
@@ -1232,7 +1212,7 @@ Transform:
   - {fileID: 778314735}
   - {fileID: 876808953}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793398552
 GameObject:
@@ -1243,6 +1223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1793398553}
+  - component: {fileID: 1793398554}
   m_Layer: 0
   m_Name: Terrain Generation
   m_TagString: Untagged
@@ -1264,8 +1245,21 @@ Transform:
   - {fileID: 1097076448}
   - {fileID: 1296363973}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1793398554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793398552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2649e06ea40ef4f4fb163e03d5ba70a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Enable: 0
 --- !u!1001 &2143370082749436429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1273,6 +1267,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1064274383249695572, guid: 9ac7c275291b99945bf7b171f53c30f5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1391261962217455651, guid: 9ac7c275291b99945bf7b171f53c30f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,6 +1333,11 @@ PrefabInstance:
       value: Player_Mk2
       objectReference: {fileID: 0}
     - target: {fileID: 1409777460289432516, guid: 9ac7c275291b99945bf7b171f53c30f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194545676906854260, guid: 9ac7c275291b99945bf7b171f53c30f5,
         type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -93,6 +93,7 @@
     <Compile Include="Assets\Code\ProcGen\ProcDebug.cs" />
     <Compile Include="Assets\Code\ProcGen\TerraformGenerator.cs" />
     <Compile Include="Assets\Code\ProcGen\WaterGenerator.cs" />
+    <Compile Include="Assets\Code\SRPBatcherProfiler.cs" />
     <Compile Include="Assets\Code\SimpleCameraController.cs" />
     <Compile Include="Assets\Code\SmoothFollow.cs" />
     <Compile Include="Assets\Code\Utility\DebugUIController.cs" />

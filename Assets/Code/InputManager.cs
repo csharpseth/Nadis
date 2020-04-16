@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour
     {
         move = GetComponent<MovementController>();
         player = GetComponent<PlayerSync>();
+
+        
     }
 
     private void Update()
@@ -91,7 +93,8 @@ public struct InputMovement
             Vector2 dir = Vector2.zero;
             if (UseMouse)
             {
-                dir = ActiveMouse.radius.ReadValue();
+                dir.x = Input.GetAxisRaw("Mouse X");
+                dir.y = Input.GetAxisRaw("Mouse Y");
 
             }
 

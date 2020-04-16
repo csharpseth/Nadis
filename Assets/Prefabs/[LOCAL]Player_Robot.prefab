@@ -1395,10 +1395,6 @@ MonoBehaviour:
   sizeInfo:
     normalHeight: 2
     crouchHeight: 1.1
-    camera: {fileID: 0}
-    cameraNormalOffset: {x: 0, y: 1.5, z: 0}
-    cameraCrouchOffset: {x: 0, y: 0.75, z: 0}
-    smoothedLerpSpeed: 10
   moveInfo:
     walkSpeed: 5
     runSpeed: 10
@@ -1419,6 +1415,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   yDistToStopGrabbing: 0.1
+  Run: 0
 --- !u!114 &6190300849631600325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,33 +1456,8 @@ MonoBehaviour:
     moveData:
       handFootMatchStrength: 0.5
       handMoveSpeed: 5
-      bobCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
       maxRootForwardAngle: 3
       maxRootSideAngle: -2
-    doBob: 0
   animations:
     configs:
     - identifier: crouch
@@ -1585,6 +1557,7 @@ MonoBehaviour:
   firstPersonCam: {fileID: 913128239254560569}
   thirdPersonCam: {fileID: 9066107592802082271}
   headRenderer: {fileID: 238035028907791313}
+  noDisplay: 1
 --- !u!114 &6610348561968285793
 MonoBehaviour:
   m_ObjectHideFlags: 0

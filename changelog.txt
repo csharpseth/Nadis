@@ -1,3 +1,12 @@
+[04/15/2020]
+-Implemented mesh combining when placing
+   decorations; greatly improved performance
+-Improved foliage Shader
+-Added new character model, no texture yet but
+   was implemented as the current Player Prefab
+-All in all there was a lot done however I have not
+been planning anything out
+
 [04/08/2020]
 -Improved player IK animations
 

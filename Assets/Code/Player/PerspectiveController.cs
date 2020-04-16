@@ -9,6 +9,8 @@ public class PerspectiveController : MonoBehaviour
     public SkinnedMeshRenderer headRenderer;
     private bool firstPerson = false;
 
+    public bool noDisplay = false;
+
     public Camera ActiveCamera { get; private set; }
 
     private void Awake()
@@ -17,7 +19,15 @@ public class PerspectiveController : MonoBehaviour
             return;
 
         ins = this;
-        TogglePerspective();
+        if (noDisplay)
+        {
+            firstPersonCam.gameObject.SetActive(false);
+            thirdPersonCam.gameObject.SetActive(false);
+        }
+        else
+        {
+            TogglePerspective();
+        }
     }
 
     private void Update()
