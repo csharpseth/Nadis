@@ -8,6 +8,9 @@ public class PerspectiveController : MonoBehaviour
     public Camera thirdPersonCam;
     public SkinnedMeshRenderer headRenderer;
     private bool firstPerson = false;
+    public bool debugAllowed = true;
+    private GameObject debugObject;
+    private bool debugView = false;
 
     public bool noDisplay = false;
 
@@ -19,6 +22,13 @@ public class PerspectiveController : MonoBehaviour
             return;
 
         ins = this;
+
+        if(debugAllowed)
+        {
+            debugObject = GameObject.FindGameObjectWithTag("Debug View");
+            debugObject.SetActive(false);
+        }
+
         if (noDisplay)
         {
             firstPersonCam.gameObject.SetActive(false);
@@ -35,6 +45,17 @@ public class PerspectiveController : MonoBehaviour
         if (Input.GetKeyDown(toggleKey))
         {
             TogglePerspective();
+        }
+
+        if(debugAllowed && debugObject != null && Input.GetKeyDown(KeyCode.I))
+        {
+            debugView = !debugView;
+            debugObject.SetActive(debugView);
+            firstPersonCam.enabled = !debugView;
+            thirdPersonCam.enabled = !debugView;
+
+            if(!debugView)
+                TogglePerspective();
         }
     }
 

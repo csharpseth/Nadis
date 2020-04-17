@@ -1190,6 +1190,7 @@ MonoBehaviour:
   firstPersonCam: {fileID: 2172691807654686144}
   thirdPersonCam: {fileID: 1446368664019086894}
   headRenderer: {fileID: 0}
+  debugAllowed: 1
   noDisplay: 0
 --- !u!114 &6333524068135911683
 MonoBehaviour:
@@ -1475,7 +1476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1532,7 +1533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8835434143608304174
 RectTransform:
   m_ObjectHideFlags: 0

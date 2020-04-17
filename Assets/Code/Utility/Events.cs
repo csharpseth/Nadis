@@ -127,7 +127,15 @@ public static class Events
         public Action<int> GenerateMap;
 
         public delegate Vector3 GetMapPosition(float minH, float maxH, float maxAng);
+        public delegate SpawnPoint GetChargePoint(int index);
+        public delegate SpawnPoint[] GetChargePoints();
         public GetMapPosition GetPosition;
+        public GetChargePoint GetChargePosition;
+
+        public Action<float, float, float, int, int> CreateChargePoints;
+        public GetChargePoints GetChargePositions;
+        public Action PlaceChargingStations;
+
     }
 
     public static InventoryEvents Inventory;

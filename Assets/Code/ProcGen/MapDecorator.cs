@@ -22,15 +22,35 @@ public class MapDecorator : MonoBehaviour
     public int maxGizmos = 5000;
     public bool spawn = false;
 
+    private List<SpawnPoint> chargingPoints;
+
+    private SpawnPoint GetChargePoint(int index)
+    {
+        if(index >= chargingPoints.Count)
+        {
+            Debug.LogError("Charge Point Index Too Big!");
+            return default;
+        }
+
+        return chargingPoints[index];
+    }
+    private SpawnPoint[] GetChargePoints()
+    {
+        return chargingPoints.ToArray();
+    }
+
     private void Awake()
     {
         Events.MapGenerator.GetPosition = GetPosition;
+        Events.MapGenerator.GetChargePosition = GetChargePoint;
+        Events.MapGenerator.CreateChargePoints = FindAndSetChargePoints;
+        Events.MapGenerator.GetChargePositions = GetChargePoints;
     }
 
     public void Decorate(MapDecoratorData[] datas, float[,] heightMap, int seed, Transform parent)
     {
         List<GameObject> gos = new List<GameObject>();
-        GeneratePoints(heightMap, 0.15f, 90f, seed);
+        GeneratePoints(heightMap, minHeight, 180f, seed);
 
         for (int i = 0; i < datas.Length; i++)
         {
@@ -56,12 +76,12 @@ public class MapDecorator : MonoBehaviour
         Perlin p = new Perlin(0.75f, 0.5f, 1.8f, 2, seed, LibNoise.QualityMode.Medium);
         List<SpawnPoint> processedPoints = new List<SpawnPoint>();
 
-        float minH = (minHeight * this.maxHeight);
-        float maxH = (maxHeight * this.maxHeight);
+        float minH = data.minHeight * max;
+        float maxH = data.maxHeight * max;
 
         for (int i = 0; i < points.Count; i++)
         {
-            float h = points[i].pos.y;
+            float h = (points[i].pos.y);
             if (h <= maxH && h >= minH)
             {
                 processedPoints.Add(points[i]);
@@ -71,6 +91,8 @@ public class MapDecorator : MonoBehaviour
         int pointCount = Mathf.RoundToInt((float)processedPoints.Count * data.density);
         
         List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+
+        Debug.Log("Process Points: " + points.Count);
 
         for (int i = 0; i < pointCount; i++)
         {
@@ -90,9 +112,9 @@ public class MapDecorator : MonoBehaviour
 
         }
         
-        if(data.prefabs != null)
+        if(data.prefab != null)
         {
-            GameObject t = Instantiate(data.prefabs[0]);
+            GameObject t = Instantiate(data.prefab);
             int verts = t.GetComponentInChildren<MeshFilter>().mesh.vertices.Length * data.maximumPoints;
             Destroy(t);
             int meshCount = RoundUpToInt((float)verts / MaxVerts);
@@ -100,7 +122,9 @@ public class MapDecorator : MonoBehaviour
             int totalSpawned = 0;
 
             Transform godParent = new GameObject(data.name).transform;
-            
+
+            Debug.LogFormat("SpawnPoints:{0} Laps:{1} MeshCountPer:{2}", spawnPoints.Count, laps, meshCount);
+
             for (int y = 0; y < meshCount; y++)
             {
                 GameObject parent = new GameObject(data.name + "_" + y);
@@ -111,7 +135,7 @@ public class MapDecorator : MonoBehaviour
 
                 for (int i = 0; i < laps; i++)
                 {
-                    filter[i] = Instantiate(data.prefabs[0], spawnPoints[0].pos, Quaternion.Euler(spawnPoints[0].rot), parent.transform).GetComponentInChildren<MeshFilter>();
+                    filter[i] = Instantiate(data.prefab, spawnPoints[0].pos, spawnPoints[0].rot, parent.transform).GetComponentInChildren<MeshFilter>();
                     totalSpawned++;
                     spawnPoints.RemoveAt(0);
 
@@ -169,13 +193,16 @@ public class MapDecorator : MonoBehaviour
         points = new List<SpawnPoint>();
         int size = heightMap.GetLength(0);
         System.Random r = new System.Random(seed);
-        for (float x = 0; x < size; x += stepSize)
+        for (float x = 0f; x <= size; x += stepSize)
         {
-            for (float y = 0; y < size; y += stepSize)
+            for (float y = 0f; y <= size; y += stepSize)
             {
-                int iX = Mathf.Clamp(Mathf.RoundToInt(x), 0, size - 1);
-                int iY = Mathf.Clamp(Mathf.RoundToInt(y), 0, size - 1);
+                int iX = RoundUpToInt(x);
+                int iY = RoundUpToInt(y);
 
+                if (iX >= size) iX = size - 1;
+                if (iY >= size) iY = size - 1;
+                
                 if (heightMap[iX, iY] >= minH)
                 {
                     r = new System.Random(seed + iX);
@@ -184,26 +211,27 @@ public class MapDecorator : MonoBehaviour
                     float yOff = (float)(r.Next(-1, 1) * r.NextDouble()) * offset;
 
                     RaycastHit hit;
-                    Vector3 origin = new Vector3(x + xOff, 500f, y + yOff);
+                    Vector3 origin = new Vector3(x, regionSize.y, y);
 
                     if (Physics.Raycast(origin, Vector3.down, out hit))
                     {
-                        Vector3 ang = hit.normal * -90f;
-                        if (Mathf.Abs(ang.x) <= maxNormalAngle && Mathf.Abs(ang.z) <= maxNormalAngle)
-                        {
-                            r = new System.Random(seed);
-                            ang.y = (360f * (float)r.NextDouble());
-                            points.Add(new SpawnPoint(hit.point, ang));
+                        Vector3 ang = hit.normal;
+                        r = new System.Random(seed);
+                        ang.y = (360f * (float)r.NextDouble());
 
-                            if (hit.point.y > maxHeight)
-                                maxHeight = hit.point.y;
-                            if (hit.point.y < minHeight)
-                                minHeight = hit.point.y;
-                        }
+                        Quaternion qAng = Quaternion.FromToRotation(Vector3.up, ang);
+                        points.Add(new SpawnPoint(hit.point, qAng));
+
+                        if (hit.point.y > max)
+                            max = hit.point.y;
+                        if (hit.point.y < min)
+                            min = hit.point.y;
                     }
                 }
             }
         }
+
+        Debug.Log("Points: " + points.Count);
         
     }
 
@@ -230,7 +258,7 @@ public class MapDecorator : MonoBehaviour
         {
             int index = UnityEngine.Random.Range(0, size);
             Vector3 p = points[index].pos;
-            Vector3 r = points[index].rot;
+            Vector3 r = points[index].rot.eulerAngles;
             if (p.y >= minH && p.y <= maxH && Mathf.Abs(r.x) <= maxAng && Mathf.Abs(r.z) <= maxAng)
             {
                 pos = p;
@@ -241,6 +269,65 @@ public class MapDecorator : MonoBehaviour
         return pos;
     }
 
+    private void FindAndSetChargePoints(float minH, float maxH, float minDistFromEachother, int amount, int seed)
+    {
+        if (chargingPoints == null) chargingPoints = new List<SpawnPoint>();
+        if (points == null) return;
+
+        List<SpawnPoint> random = new List<SpawnPoint>();
+        int initialSampleSize = Mathf.RoundToInt(points.Count * 0.25f);
+        float minimum = minH * max;
+        float maximum = maxH * max;
+
+        System.Random r = new System.Random();
+
+        //Only sample points that are within a certain height range
+        for (int i = 0; i < initialSampleSize; i++)
+        {
+            r = new System.Random(seed + i);
+            int index = r.Next(0, points.Count - 1);
+            Vector3 pos = points[index].pos;
+            if(pos.y >= minimum && pos.y <= maximum)
+            {
+                random.Add(points[index]);
+            }
+        }
+        
+        //Proccess those points distances until the limit has been reached
+        float minsqrDist = minDistFromEachother * minDistFromEachother;
+
+        Debug.Log(random.Count);
+
+        for (int i = 0; i < random.Count; i++)
+        {
+            if (chargingPoints.Count == 0)
+                chargingPoints.Add(random[i]);
+
+            int checkAmt = chargingPoints.Count;
+            int validCnt = 0;
+
+            if (checkAmt >= amount)
+                break;
+
+            for (int j = 0; j < checkAmt; j++)
+            {
+                float sqrDist = (random[i].pos - chargingPoints[j].pos).sqrMagnitude;
+                if(sqrDist >= minsqrDist)
+                {
+                    validCnt++;
+                }
+            }
+
+            if(validCnt >= chargingPoints.Count)
+            {
+                chargingPoints.Add(random[i]);
+            }
+        }
+
+        Debug.LogFormat("Generated {0} Charge Points.", chargingPoints.Count);
+
+    }
+    
     private void OnDrawGizmos()
     {
         Vector3 halfSize = regionSize / 2;
@@ -252,8 +339,17 @@ public class MapDecorator : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Clamp(points.Count, 0, maxGizmos); i++)
             {
-                Gizmos.color = Color.cyan;
-                Gizmos.DrawSphere(points[i].pos, 0.2f);
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(points[i].pos, 1f);
+            }
+        }
+
+        if(chargingPoints != null)
+        {
+            Gizmos.color = Color.green;
+            for (int i = 0; i < chargingPoints.Count; i++)
+            {
+                Gizmos.DrawSphere(chargingPoints[i].pos, 5f);
             }
         }
     }
@@ -263,16 +359,16 @@ public class MapDecorator : MonoBehaviour
 public struct SpawnPoint
 {
     public Vector3 pos;
-    public Vector3 rot;
+    public Quaternion rot;
 
-    public SpawnPoint(Vector3 pos, Vector3 rot)
+    public SpawnPoint(Vector3 pos, Quaternion rot)
     {
         this.pos = pos;
         this.rot = rot;
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct MapDecoratorData
 {
     public string name;
@@ -291,6 +387,6 @@ public struct MapDecoratorData
 
     public Vector3 prefabOffset;
 
-    public GameObject[] prefabs;
+    public GameObject prefab;
 
 }

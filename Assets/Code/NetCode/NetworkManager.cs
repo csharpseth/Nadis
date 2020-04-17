@@ -37,12 +37,15 @@ namespace Nadis.Net
             Events.Player.CreateRagdoll += CreatePlayerRagdoll;
 
             Events.MapGenerator.RegisterSpawnPoint += RegisterSpawnPoint;
+            Events.MapGenerator.PlaceChargingStations = PlaceChargingStations;
         }
 
         public GameObject localPlayerPrefab;
         public GameObject remotePlayerPrefab;
         public GameObject playerRagdoll;
         public float ragdollCleanupDelay = 30f;
+        [Space(10)]
+        public GameObject chargingStationPrefab;
 
         public Dictionary<int, PlayerSync> connectedPlayers = new Dictionary<int, PlayerSync>();
         private bool spawnPointsGenerated = false;
@@ -138,6 +141,17 @@ namespace Nadis.Net
             Debug.Log("Player Has Disconnected");
         }
         
+        private void PlaceChargingStations()
+        {
+            SpawnPoint[] pts = Events.MapGenerator.GetChargePositions();
+            GameObject container = new GameObject("Charging Stations");
+            container.transform.SetParent(transform);
+            for (int i = 0; i < pts.Length; i++)
+            {
+                Instantiate(chargingStationPrefab, pts[i].pos, pts[i].rot, container.transform);
+            }
+        }
+
         private PlayerSync GetPlayer(int playerID)
         {
             if (connectedPlayers.ContainsKey(playerID) == false)

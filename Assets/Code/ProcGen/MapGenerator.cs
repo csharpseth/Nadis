@@ -56,9 +56,9 @@ public class MapGenerator : MonoBehaviour
         if(applyDecorations && mapDecorator != null)
         {
             //mapDecorator.GeneratePoints(terrain.terrainData, size, seed);
-            mapDecorator.Decorate(decorationLayers, heightMap, seed, transform);
+            mapDecorator.Decorate(decorationLayers, terrain.terrainData.GetHeights(0, 0, size, size), seed, transform);
         }
-
+        
         GenerateSpawnPoints(size, terrain.terrainData, 0.1f, 0.2f, 0.3f, seed, 1);
 
         Debug.Log("FINSIH :: Map Generated");

@@ -59,6 +59,11 @@ namespace Nadis.Net.Foundation
             int mapSeed = buffer.ReadInt32();
             int inventorySize = buffer.ReadInt32();
 
+            float minChargePointHeight = (float)buffer.ReadDouble();
+            float maxChargePointHeight = (float)buffer.ReadDouble();
+            float minChargePointDist = (float)buffer.ReadDouble();
+            int chargePoints = buffer.ReadInt32();
+
             int playerMaxHealth = buffer.ReadInt32();
             float playerStartHealth = (float)buffer.ReadDouble();
             int playerMaxPower = buffer.ReadInt32();
@@ -66,6 +71,8 @@ namespace Nadis.Net.Foundation
 
             //Apply/Generate From Data Given
             Events.MapGenerator.GenerateMap(mapSeed);
+            Events.MapGenerator.CreateChargePoints(minChargePointHeight, maxChargePointHeight, minChargePointDist, chargePoints, mapSeed);
+            Events.MapGenerator.PlaceChargingStations();
             Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
             Events.Player.Create(connID, inventorySize, true);
 

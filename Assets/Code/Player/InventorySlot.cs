@@ -16,6 +16,7 @@ public class InventorySlot : MonoBehaviour
 
     public Color normalColor;
     public Color selectColor;
+    public bool dontDraw = false;
 
     public void Init(int slotID, int netID)
     {
@@ -44,6 +45,9 @@ public class InventorySlot : MonoBehaviour
         }
 
         background.color = (selected) ? selectColor : normalColor;
+
+        if (dontDraw)
+            background.color = Color.clear;
     }
 
     public void OnAddItem(int index, PhysicalItem addItem, int netID, bool send)
