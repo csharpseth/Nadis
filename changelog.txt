@@ -1,3 +1,11 @@
+[04/18/2020]
+-Implemented a notifications system. Icons need to better fit the game
+-Implemented Charging stations, Cient Side
+    You can walk up to a charging station and gain power but the station has no limit
+-Implemented a super basic power loss system.
+    still need add ability to adjust the rate you lose health
+-Overall performance improvements & tweaks
+
 [04/15/2020]
 -Implemented mesh combining when placing
    decorations; greatly improved performance
