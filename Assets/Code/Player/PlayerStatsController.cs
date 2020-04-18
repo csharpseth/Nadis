@@ -5,21 +5,26 @@ using UnityEngine;
 [Serializable]
 public struct PlayerStats
 {
+    public const float TimeToCheckCharging = 2f;
     public int MaxHealth;
     public float Health;
     public int MaxPower;
     public float Power;
 
+    public float powerLossRatePerMinute;
+
     public int ActualHealth { get { return (int)(MaxHealth * Health); } }
     public int ActualPower { get { return (int)(MaxPower / Power); } }
 
-    public PlayerStats(int maxHealth, float health, int maxPower, float power)
+    public PlayerStats(int maxHealth, float health, int maxPower, float power, float powerLossRate)
     {
         MaxHealth = maxHealth;
         MaxPower = maxPower;
 
         Health = health;
         Power = power;
+
+        powerLossRatePerMinute = powerLossRate;
     }
 }
 
@@ -30,11 +35,13 @@ public class PlayerStatsController : MonoBehaviour
     public PlayerStats Stats { get { return stats; } }
     public int NetID { get; private set; }
 
+    bool charging = false;
+    int powerLoseAmount = 0;
 
     //maxHealth & maxPower are the maximum integer value that either can be
     //The health & power are a float  from 0f-1f that are multiplied by the maximums to get the current value
     //This way you can directly use the health and power for UI elements
-    public void InitFromServer(int playerID, int maxHealth, float startHealth, int maxPower, float startPower)
+    public void InitFromServer(int playerID, int maxHealth, float startHealth, int maxPower, float startPower, float powerLossRate)
     {
         NetID = playerID;
         stats = new PlayerStats();
@@ -42,6 +49,8 @@ public class PlayerStatsController : MonoBehaviour
         stats.Health = startHealth;
         stats.MaxPower = maxPower;
         stats.Power = startPower;
+        stats.powerLossRatePerMinute = powerLossRate;
+        powerLoseAmount = 1;
 
         Subcribe();
     }
@@ -51,11 +60,47 @@ public class PlayerStatsController : MonoBehaviour
         stats.Health = data.Health;
         stats.MaxPower = data.MaxPower;
         stats.Power = data.Power;
+
+        stats.powerLossRatePerMinute = data.powerLossRatePerMinute;
+        powerLoseAmount = 1;
     }
     private void ResetStats()
     {
         Init(NetworkManager.DefaultStats);
     }
+
+
+
+    float powerTimer = 0f;
+    float chargeTimer = 0f;
+
+    private void Update()
+    {
+        if (NetID != Events.Player.GetLocalID()) return;
+
+        if(charging == true)
+        {
+            chargeTimer += Time.deltaTime;
+            if(chargeTimer >= PlayerStats.TimeToCheckCharging)
+            {
+                charging = false;
+                chargeTimer = 0f;
+            }
+            return;
+        }
+        chargeTimer = 0f;
+
+        if(stats.ActualPower > 0)
+        {
+            powerTimer += Time.deltaTime;
+            if (powerTimer >= 1f)
+            {
+                Events.PlayerStats.AlterPower(NetID, -powerLoseAmount, true);
+                powerTimer = 0f;
+            }
+        }
+    }
+
 
 
     private void Subcribe()
@@ -84,7 +129,7 @@ public class PlayerStatsController : MonoBehaviour
 
     private float AddToHealth(int amount)
     {
-        float perc = (amount / stats.MaxHealth);
+        float perc = (amount / (float)stats.MaxHealth);
         stats.Health += perc;
         if (stats.Health > 1f) stats.Health = 1f;
         return stats.Health;
@@ -99,7 +144,7 @@ public class PlayerStatsController : MonoBehaviour
 
     private float AddToPower(int amount)
     {
-        float perc = (amount / stats.MaxPower);
+        float perc = (amount / (float)stats.MaxPower);
         stats.Power += perc;
         if (stats.Power > 1f) stats.Power = 1f;
         return stats.Power;
@@ -123,7 +168,7 @@ public class PlayerStatsController : MonoBehaviour
 
     public void Heal(int playerID, int amount, bool send)
     {
-        if (playerID != NetID) return;
+        if (playerID != NetID || stats.Health >= 1f) return;
         float perc = AddToHealth(amount);
         Events.PlayerStats.OnAlterHealth?.Invoke(playerID, perc, send);
     }
@@ -138,6 +183,27 @@ public class PlayerStatsController : MonoBehaviour
     public void AlterPower(int playerID, int amount, bool send)
     {
         if (playerID != NetID) return;
+        Events.Notification.Remove(NotificationType.Charging);
+        Events.Notification.Remove(NotificationType.NoPower);
+        Events.Notification.Remove(NotificationType.FullyCharged);
+
+        if (stats.Power >= 1f)
+        {
+            Events.Notification.Remove(NotificationType.Charging);
+            Events.Notification.New(NotificationType.FullyCharged, true);
+        }else if (stats.Power <= 0.25f)
+        {
+            Events.Notification.New(NotificationType.NoPower);
+        }
+
+        if (stats.Power >= 1f && amount > 0) return;
+        if (stats.Power <= 0 && amount < 0) return;
+
+        if (amount > 0) {
+            charging = true;
+            Events.Notification.New(NotificationType.Charging, true);
+        }
+
         float perc = AddToPower(amount);
         Events.PlayerStats.OnAlterPower?.Invoke(playerID, perc, send);
     }

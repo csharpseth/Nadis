@@ -73,7 +73,7 @@ namespace Nadis.Net.Foundation
             Events.MapGenerator.GenerateMap(mapSeed);
             Events.MapGenerator.CreateChargePoints(minChargePointHeight, maxChargePointHeight, minChargePointDist, chargePoints, mapSeed);
             Events.MapGenerator.PlaceChargingStations();
-            Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
+            Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower, 0.2f));
             Events.Player.Create(connID, inventorySize, true);
 
             Debug.Log("Connected To Server Successfully");
@@ -118,7 +118,7 @@ namespace Nadis.Net.Foundation
             int playerMaxPower = buffer.ReadInt32();
             float playerStartPower = (float)buffer.ReadDouble();
 
-            Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower));
+            Events.PlayerStats.SetDefaults(new PlayerStats(playerMaxHealth, playerStartHealth, playerMaxPower, playerStartPower, 0.2f));
             Events.Player.Create(playerID, inventorySize, false);
 
             Debug.Log("Another Player Has Connected");

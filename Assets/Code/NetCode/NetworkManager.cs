@@ -107,7 +107,7 @@ namespace Nadis.Net
             }
 
             ps.GetComponent<Inventory>().Init(connID, inventorySize);
-            ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power);
+            ps.GetComponent<PlayerStatsController>().InitFromServer(connID, DefaultStats.MaxHealth, DefaultStats.Health, DefaultStats.MaxPower, DefaultStats.Power, DefaultStats.powerLossRatePerMinute);
             ps.GetComponent<PlayerSoundController>().InitFromServer(connID);
             ps.GetComponent<BipedProceduralAnimator>().InitialSetup(connID);
             ps.ID = connID;

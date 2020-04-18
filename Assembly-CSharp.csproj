@@ -70,6 +70,7 @@
     <Compile Include="Assets\Code\NetCode\Foundation\ServerData.cs" />
     <Compile Include="Assets\Code\NetCode\NetworkManager.cs" />
     <Compile Include="Assets\Code\NetCode\PlayerSync.cs" />
+    <Compile Include="Assets\Code\NotificationSystem.cs" />
     <Compile Include="Assets\Code\Player\Animation\BipedProceduralAnimator.cs" />
     <Compile Include="Assets\Code\Player\Animation\ProceduralAnimationData.cs" />
     <Compile Include="Assets\Code\Player\InteractionController.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Assets\Code\Player\PlayerStatsController.cs" />
     <Compile Include="Assets\Code\Player\ProceduralAnimator.cs" />
     <Compile Include="Assets\Code\Player\RotateWithMouse.cs" />
+    <Compile Include="Assets\Code\Player\UIController.cs" />
+    <Compile Include="Assets\Code\PlayerStatAdjuster.cs" />
     <Compile Include="Assets\Code\ProcGen\FalloffGenerator.cs" />
     <Compile Include="Assets\Code\ProcGen\MapData.cs" />
     <Compile Include="Assets\Code\ProcGen\MapDecorator.cs" />
@@ -215,6 +218,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>D:/Unity-Projects/Nadis/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/Unity-Projects/Nadis/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:/Unity-Projects/Nadis/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
