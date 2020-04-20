@@ -99,6 +99,8 @@
     <Compile Include="Assets\Code\SRPBatcherProfiler.cs" />
     <Compile Include="Assets\Code\SimpleCameraController.cs" />
     <Compile Include="Assets\Code\SmoothFollow.cs" />
+    <Compile Include="Assets\Code\Tween.cs" />
+    <Compile Include="Assets\Code\TweenTest.cs" />
     <Compile Include="Assets\Code\Utility\DebugUIController.cs" />
     <Compile Include="Assets\Code\Utility\Enums.cs" />
     <Compile Include="Assets\Code\Utility\Events.cs" />

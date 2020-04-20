@@ -271,7 +271,7 @@ public class BipedProceduralAnimator : MonoBehaviour
             float avgY = (leftY + rightY) / 2f;
             float plyY = 0.9f + avgY;
             tempPelvis.y = plyY;
-            pelvis.localPosition = Vector3.Lerp(pelvis.localPosition, tempPelvis, 4f * Time.deltaTime);
+            pelvis.localPosition = Vector3.Lerp(pelvis.localPosition, tempPelvis, 8f * Time.deltaTime);
         }
     }
 

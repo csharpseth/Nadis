@@ -390,3 +390,10 @@ public struct MapDecoratorData
     public GameObject prefab;
 
 }
+
+public class DecorationLayer
+{
+    public Vector3 averagePosition;
+    public Vector3[] actualPositions;
+
+}

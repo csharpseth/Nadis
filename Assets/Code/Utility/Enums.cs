@@ -42,3 +42,31 @@
     }
 }
 
+public enum TweenType
+{
+    FromTo,
+    DirForDuration,
+
+}
+public enum Space
+{
+    Local,
+    World
+}
+public enum Direction
+{
+    None,
+    Forward,
+    Reverse,
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+public enum LogicType
+{
+    None,
+    Tree,
+    Ore
+}

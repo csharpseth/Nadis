@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour
         {
             if(Move.JumpDown)
             {
+                Debug.Log("Jump");
                 Events.BipedAnimator.ExecuteAnimation(player.ID, "jump", move.Jump);
             }
 
