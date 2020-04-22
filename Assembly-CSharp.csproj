@@ -65,8 +65,12 @@
     <Compile Include="Assets\Code\AlternateTestGun.cs" />
     <Compile Include="Assets\Code\Ambience\AmbientAudio.cs" />
     <Compile Include="Assets\Code\Entities\Classes\Entity.cs" />
+    <Compile Include="Assets\Code\Entities\Classes\EntityComponent.cs" />
+    <Compile Include="Assets\Code\Entities\Classes\EntityManager.cs" />
     <Compile Include="Assets\Code\Entities\Classes\EntityProjectileWeapon.cs" />
     <Compile Include="Assets\Code\Entities\Classes\EntityWeapon.cs" />
+    <Compile Include="Assets\Code\Entities\Interfaces\IComponent.cs" />
+    <Compile Include="Assets\Code\Entities\Interfaces\IIdentification.cs" />
     <Compile Include="Assets\Code\Entities\Interfaces\IWeapon.cs" />
     <Compile Include="Assets\Code\Inventory\Classes\EntityContainer.cs" />
     <Compile Include="Assets\Code\Inventory\Classes\Inventory.cs" />
