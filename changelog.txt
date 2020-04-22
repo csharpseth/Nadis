@@ -1,3 +1,14 @@
+[04/21/2020]
+-Huge Refacor:
+    +Removed All OLD Net-Code
+    +Began transition to MLAPI
+    +Removed a lot of old player mechanics:
+        -MoveController, Inventory, Interaction, & some other boiler-plate stuff
+       And I have rewritten them for: performance & scalability
+-Created Parent/Base classes for entities(items), and create
+    a basic test gun that can be full or semi auto, variable fire rate,
+    and has recoil/aim features on the CLIENT-SIDE
+
 [04/18/2020]
 -Implemented a notifications system. Icons need to better fit the game
 -Implemented Charging stations, Cient Side

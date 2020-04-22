@@ -16,20 +16,20 @@ public class RotateWithMouse : MonoBehaviour
 
     private void Update()
     {
-        float h = lookSpeed * InputManager.Move.LookDir.x;
-        float v = -lookSpeed * InputManager.Move.LookDir.y;
+        float h = lookSpeed * Inp.Move.LookDir.x;
+        float v = -lookSpeed * Inp.Move.LookDir.y;
         Vector3 rot = transform.eulerAngles;
 
         if (axis == RotateAxis.X || axis == RotateAxis.XandY)
         {
             rot.x += v;
 
-            if (rot.x > 0f && rot.x < 180f && rot.x > maxAngle)
+            if (rot.x > 0f && rot.x < 180f && rot.x > Settings.player.MinHorizontalAngle)
             {
-                rot.x = maxAngle;
+                rot.x = Settings.player.MinHorizontalAngle;
             }
-            if (rot.x > 0f && rot.x > 180f && rot.x < (360f - maxAngle))
-                rot.x = (360f - maxAngle);
+            if (rot.x > 0f && rot.x > 180f && rot.x < (360f - Settings.player.MaxHorizontalAngle))
+                rot.x = (360f - Settings.player.MaxHorizontalAngle);
         }
         if (axis == RotateAxis.Y || axis == RotateAxis.XandY)
         {

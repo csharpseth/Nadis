@@ -1,5 +1,4 @@
-﻿using Nadis.Net;
-using System;
+﻿using System;
 using UnityEngine;
 
 [Serializable]
@@ -66,7 +65,7 @@ public class PlayerStatsController : MonoBehaviour
     }
     private void ResetStats()
     {
-        Init(NetworkManager.DefaultStats);
+        //Init(NetworkManager.DefaultStats);
     }
 
 
@@ -76,6 +75,7 @@ public class PlayerStatsController : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (NetID != Events.Player.GetLocalID()) return;
 
         if(charging == true)
@@ -99,6 +99,7 @@ public class PlayerStatsController : MonoBehaviour
                 powerTimer = 0f;
             }
         }
+        */
     }
 
 
@@ -111,7 +112,7 @@ public class PlayerStatsController : MonoBehaviour
 
         Events.PlayerStats.AlterPower += AlterPower;
         Events.PlayerStats.Die += Die;
-        Events.Player.UnSubscribe += UnSubcribe;
+        //Events.Player.UnSubscribe += UnSubcribe;
     }
     private void UnSubcribe(int netID)
     {
@@ -123,7 +124,7 @@ public class PlayerStatsController : MonoBehaviour
 
         Events.PlayerStats.AlterPower -= AlterPower;
         Events.PlayerStats.Die -= Die;
-        Events.Player.UnSubscribe -= UnSubcribe;
+        //Events.Player.UnSubscribe -= UnSubcribe;
     }
 
 
@@ -211,7 +212,7 @@ public class PlayerStatsController : MonoBehaviour
     private void Die(int playerID)
     {
         if (playerID != NetID) return;
-        if(NetID == NetworkManager.LocalPlayer.ID)
+        /*if(NetID == NetworkManager.LocalPlayer.ID)
         {
             Events.Inventory.DropAllItems?.Invoke(playerID, true);
             Events.Player.Respawn?.Invoke(playerID);
@@ -220,5 +221,6 @@ public class PlayerStatsController : MonoBehaviour
 
         Events.Player.CreateRagdoll?.Invoke(transform.position, transform.rotation);
         ResetStats();
+        */
     }
 }

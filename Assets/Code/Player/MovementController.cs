@@ -1,330 +1,106 @@
-﻿using Nadis.Net;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class MovementController : MonoBehaviour
 {
-    public PlayerPhysicalDimensions sizeInfo;
-    public PlayerMovementStats moveInfo;
-    public PlayerClimbingInfo climbInfo;
-    public float jumpForce = 600f;
-    public bool useBetterFall = false;
-    public float betterFallMultiplier = 0.8f;
-    public float fallingMovementModifier = 0.25f;
-    public float groundedRadius = 0.5f;
-    public LayerMask groundedMask;
-    public float yDistToStopGrabbing = 0.5f;
-    Vector3 dir;
-    Rigidbody rb;
-    CapsuleCollider physicsCollider;
-    public Vector3 ClimbDestination { get; private set; }
-    BipedProceduralAnimator animator;
-    PlayerSync player;
+    //Data
+    public MovementData data;
+    private bool runToggle = false;
+    private bool crouch = false;
 
-    public Vector2 InputDir { get; private set; }
-
-    float prevHeight;
-
-    float time = 0f;
-    Vector3 prevPosition;
-
-    public bool CanCrouch
-    {
-        get
-        {
-            return (IsGrounded == true && MoveState != PlayerMoveState.Running);
-        }
-    }
-    public bool CanWalk
-    {
-        get
-        {
-            return (IsGrounded == true && IsClimbing == false);
-        }
-    }
-    public bool CanRun
-    {
-        get
-        {
-            return (IsClimbing == false && IsGrounded == true && MoveState != PlayerMoveState.Crouching);
-        }
-    }
-    public bool CanClimb
-    {
-        get
-        {
-            return (MoveState != PlayerMoveState.Crouching && ClimbDestination != Vector3.zero);
-        }
-    }
-
-    public bool IsCrouching { get; private set; }
-    public bool IsGrounded { get; private set; }
-    public bool IsClimbing { get; private set; }
-    public bool IsFalling { get; private set; }
-    public bool JustGrounded { get; private set; }
-
-    public float Speed { get; private set; }
-
-    public PlayerMoveState MoveState { get; private set; }
-
-    public bool Run;
+    //Setup Stuffs
+    private Rigidbody rb;
+    private BipedProceduralAnimator anim;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<BipedProceduralAnimator>();
-        physicsCollider = GetComponent<CapsuleCollider>();
-        player = GetComponent<PlayerSync>();
+        anim = GetComponent<BipedProceduralAnimator>();
     }
-
-    bool lastGroundState = true;
+    
+    //Actual Movement Logic & State Determination
     private void Update()
     {
-        InputDir = InputManager.Move.InputDir;
-        dir = Vector3.zero;
-        dir += transform.forward * InputDir.y;
-        dir += transform.right * InputDir.x;
-
-        if (IsGrounded == false)
-            lastGroundState = false;
-
-        Collider[] cols = Physics.OverlapSphere(transform.position, groundedRadius, groundedMask);
-        IsGrounded = (cols.Length > 0);
-        
-        if(IsGrounded == true && lastGroundState == false)
+        if(Inp.Move.SprintDown)
         {
-            Events.BipedAnimator.ExecuteAnimation?.Invoke(player.ID, "land", null);
-            lastGroundState = true;
+            runToggle = !runToggle;
+        }
+        if(Inp.Move.CrouchDown && runToggle == false)
+        {
+            crouch = !crouch;
         }
 
-        Climbing();
-        Crouching();
-        
-        physicsCollider.center = new Vector3(0f, (physicsCollider.height / 2f), 0f);
-
-        if (Run && dir != Vector3.zero)
+        if (Inp.Move.InputDir != Vector2.zero)
         {
-            Running();
-        }else if(dir != Vector3.zero)
-        {
-            Walking();
-        }else
-        {
-            Run = false;
-        }
-
-        if(dir == Vector3.zero || IsGrounded == false && MoveState != PlayerMoveState.Crouching)
-        {
-            MoveState = PlayerMoveState.None;
-        }
-
-        if (transform.position.y != prevHeight)
-        {
-            if (prevHeight > transform.position.y)
-            {
-                if (!IsGrounded) IsFalling = true;
-                else IsFalling = false;
-            }
-            prevHeight = transform.position.y;
-        }
-
-        //rbController.SetSpeed(speed);
-    }
-
-    public void Climb()
-    {
-        if (IsClimbing == false)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast((climbInfo.checkOrigin.position), Vector3.down, out hit, climbInfo.rayDist))
-            {
-                ClimbDestination = hit.point;
-                IsClimbing = true;
-            }
+            if (runToggle)
+                data.state = PlayerMoveState.Running;
             else
-            {
-                ClimbDestination = Vector3.zero;
-                IsClimbing = false;
-            }
+                data.state = PlayerMoveState.Walking;
+
+            if (crouch)
+                data.state = PlayerMoveState.CrouchWalking;
+
+            anim.SetMoveData(true, Inp.Move.InputDir, data.state);
         }
-    }
-
-    public void Jump()
-    {
-        if (IsClimbing == true)
-            return;
-        
-        if (IsGrounded)
+        else
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            rb.velocity = (dir * Speed * 0.8f);
-        }
-    }
-
-    private void Walking()
-    {
-        if (CanWalk == false)
-            return;
-        if(MoveState != PlayerMoveState.Crouching)
-            MoveState = PlayerMoveState.Walking;
-        Speed = moveInfo.walkSpeed;
-    }
-
-    private void Running()
-    {
-        if (CanRun == false)
-            return;
-        
-        MoveState = PlayerMoveState.Running;
-        Speed = moveInfo.runSpeed;
-    }
-
-    private void Crouching()
-    {
-        if (Input.GetButton("Crouch") && CanCrouch)
-        {
-            MoveState = PlayerMoveState.Crouching;
-            IsCrouching = true;
-        }
-
-        if (CanCrouch == false)
-        {
-            return;
-        }
-
-        
-
-        if (MoveState != PlayerMoveState.Crouching)
-        {
-            physicsCollider.height = sizeInfo.normalHeight;
-            return;
-        }
-
-        if(!Input.GetButton("Crouch"))
-        {
-            MoveState = PlayerMoveState.None;
-            IsCrouching = false;
-            return;
-        }
-
-
-        Speed = moveInfo.crouchSpeed;
-        physicsCollider.height = sizeInfo.crouchHeight;
-    }
-
-    private void Climbing()
-    {
-        IsClimbing = (ClimbDestination != Vector3.zero);
-        rb.isKinematic = IsClimbing;
-        
-        if (IsClimbing)
-        {
-            Debug.Log("Climbing");
-            Vector3 temp = transform.position;
-            if((ClimbDestination - temp).sqrMagnitude > (climbInfo.distToEnd * climbInfo.distToEnd))
-            {
-                IsClimbing = false;
-                temp.y = Mathf.Lerp(temp.y, ClimbDestination.y, climbInfo.speed * Time.deltaTime);
-                ClimbDestination = Vector3.zero;
-                return;
-            }
-
-            if (Mathf.Abs(ClimbDestination.y - temp.y) > 0.2f)
-            {
-                temp.y = Mathf.Lerp(temp.y, ClimbDestination.y, climbInfo.speed * Time.deltaTime);
-            }
+            if (crouch == false)
+                data.state = PlayerMoveState.None;
             else
-            {
-                temp = Vector3.Lerp(temp, ClimbDestination, climbInfo.speed * Time.deltaTime);
-            }
+                data.state = PlayerMoveState.Crouching;
 
-            transform.position = temp;
-
-            float sqrDist = (ClimbDestination - temp).sqrMagnitude;
-
-            if(Mathf.Abs(ClimbDestination.y - temp.y) <= yDistToStopGrabbing)
-            {
-                //rbController.ResetHands();
-            }
-
-            if (sqrDist <= (climbInfo.finishClimbDistance * climbInfo.finishClimbDistance))
-            {
-                IsClimbing = false;
-                transform.position = ClimbDestination;
-                ClimbDestination = Vector3.zero;
-                rb.isKinematic = false;
-            }
+            anim.SetMoveData(true, Vector2.zero, data.state);
         }
-    }
 
-    private void LateUpdate()
-    {
-        if (animator != null)
-            animator.SetMoveData(IsGrounded, InputDir, MoveState);
     }
-
     private void FixedUpdate()
     {
-        float determinedSpeed = (IsGrounded ? Speed : (Speed * fallingMovementModifier));
-        rb.position += (dir * determinedSpeed * Time.fixedDeltaTime);
-        
+        float speed = data.GetSpeed;
+        Vector3 dir = InputToWorld(Inp.Move.InputDir) * speed;
+        rb.MovePosition(rb.position + (dir * Time.fixedDeltaTime));
+    }
+    private Vector3 InputToWorld(Vector2 input)
+    {
+        Vector3 dir = Vector3.zero;
+        dir += transform.forward * input.y;
+        dir += transform.right * input.x;
+        return dir;
+    }
 
-        if(useBetterFall == true && IsFalling == true)
+}
+
+[System.Serializable]
+public struct MovementData
+{
+    public float maxSpeed; //This is the maximum speed the player can move
+    [HideInInspector]
+    public float speed; //This is a value from 0.0 - 1.0
+
+    [HideInInspector]
+    public PlayerMoveState state;
+    [HideInInspector]
+    public bool grounded;
+    public SpeedProfile[] speedProfiles;
+    
+    public float GetSpeed
+    {
+        get
         {
-            rb.AddForce(Vector3.down * betterFallMultiplier, ForceMode.VelocityChange);
+            float speed = 0f;
+            for (int i = 0; i < speedProfiles.Length; i++)
+            {
+                if (speedProfiles[i].moveState == state) { speed = speedProfiles[i].speedPercent; break; }
+            }
+
+            return speed * maxSpeed;
         }
     }
-
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawRay(climbInfo.checkOrigin.position, Vector3.down * climbInfo.rayDist);
-        if (ClimbDestination != Vector3.zero)
-            Gizmos.DrawCube(ClimbDestination, Vector3.one * 0.2f);
-
-        /*
-        if (IsGrounded)
-            Gizmos.color = Color.green;
-        else
-            Gizmos.color = Color.red;
-
-        Gizmos.DrawSphere(transform.position, groundedRadius);
-        */
-    }
-
 }
 
 [System.Serializable]
-public struct PlayerPhysicalDimensions
+public struct SpeedProfile
 {
-    public float normalHeight;
-    public float crouchHeight;
-}
-
-[System.Serializable]
-public struct PlayerMovementStats
-{
-    public float walkSpeed;
-    public float runSpeed;
-    public float crouchSpeed;
-    public float smoothedLerpSpeed;
-}
-
-[System.Serializable]
-public struct PlayerClimbingInfo
-{
-    public Transform checkOrigin;
-    public float rayDist;
-    public float speed;
-    public float finishClimbDistance;
-    public float distToEnd;
-}
-
-public enum PlayerMoveState
-{
-    None = 1,
-    Walking = 2,
-    Running = 3,
-    Crouching = 4,
-    CrouchWalking = 5,
+    public PlayerMoveState moveState;
+    public float speedPercent;
 }

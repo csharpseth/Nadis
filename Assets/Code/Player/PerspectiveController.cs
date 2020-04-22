@@ -23,6 +23,8 @@ public class PerspectiveController : MonoBehaviour
 
         ins = this;
 
+        if (debugObject == null) debugAllowed = false;
+
         if(debugAllowed)
         {
             debugObject = GameObject.FindGameObjectWithTag("Debug View");
