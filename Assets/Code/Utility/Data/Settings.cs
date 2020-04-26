@@ -1,12 +1,10 @@
-﻿
-public static class Settings
+﻿public static class Settings
 {
     public struct Player
     {
         public const float DefaultMaxHorizontalAngle = 40f;
         public const float DefaultMinHorizontalAngle = 50f;
-
-
+        
         private float maxHorizontalAngle;
         private float minHorizontalAngle;
 

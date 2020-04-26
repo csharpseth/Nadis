@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 8f1702fccf97cb24d819d280b4d38b30,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -386,43 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9619c5e6b11e2804d8e6a79bc19eadd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 858000718}
-  dest1: {x: 2, y: 2, z: 0}
-  dest2: {x: -2, y: -2, z: 0}
-  speed: 0.1
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.1864487
-      outSlope: 1.1864487
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9100292
-      value: 1.079703
-      inSlope: 0.15028647
-      outSlope: 0.15028647
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.88587576
-      outSlope: -0.88587576
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1260736831
 GameObject:
   m_ObjectHideFlags: 0

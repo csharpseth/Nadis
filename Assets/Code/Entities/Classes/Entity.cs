@@ -1,7 +1,5 @@
-﻿using MLAPI;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(NetworkedObject))]
 public abstract class Entity : MonoBehaviour, IItem, IUsable
 {
     public string Name { get { return _name; } set { _name = value; } }
@@ -19,7 +17,6 @@ public abstract class Entity : MonoBehaviour, IItem, IUsable
 
     internal virtual void Awake()
     {
-        _networkID = GetComponent<NetworkedObject>().NetworkId;
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
         Inventory.RegisterEntity(this);
@@ -27,12 +24,12 @@ public abstract class Entity : MonoBehaviour, IItem, IUsable
 
     public virtual void Interact(ulong interactorID)
     {
-        BipedProceduralAnimator anim = TesterMenu.GetAnimator(interactorID);
+        BipedProceduralAnimator anim = null;// = TesterMenu.GetAnimator(interactorID);
         if (anim == null) return;
 
         if(Inventory.AddItem(interactorID, this))
         {
-            transform.SetParent(anim.rightHand.obj);
+            transform.SetParent(anim.TargetFrom(AnimatorTarget.Hands, Side.Right).obj);
             _rigidbody.isKinematic = true;
             _collider.enabled = false;
 

@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Code\AlternateTestGun.cs" />
     <Compile Include="Assets\Code\Ambience\AmbientAudio.cs" />
     <Compile Include="Assets\Code\Entities\Classes\Entity.cs" />
     <Compile Include="Assets\Code\Entities\Classes\EntityProjectileWeapon.cs" />
@@ -72,10 +71,34 @@
     <Compile Include="Assets\Code\Inventory\Classes\Inventory.cs" />
     <Compile Include="Assets\Code\Inventory\Interfaces\IItem.cs" />
     <Compile Include="Assets\Code\Inventory\Interfaces\IUsable.cs" />
-    <Compile Include="Assets\Code\Net-Code\NetworkedPlayer.cs" />
-    <Compile Include="Assets\Code\Net-Code\TesterMenu.cs" />
+    <Compile Include="Assets\Code\Net-Code\Client\Client.cs" />
+    <Compile Include="Assets\Code\Net-Code\Client\ClientPacketHandler.cs" />
+    <Compile Include="Assets\Code\Net-Code\Client\ClientTCP.cs" />
+    <Compile Include="Assets\Code\Net-Code\Client\Data\PacketHandlerData.cs" />
+    <Compile Include="Assets\Code\Net-Code\Client\ThreadManager.cs" />
+    <Compile Include="Assets\Code\Net-Code\Interfaces\IDisableIfRemotePlayer.cs" />
+    <Compile Include="Assets\Code\Net-Code\Interfaces\INetworkID.cs" />
+    <Compile Include="Assets\Code\Net-Code\Interfaces\INetworkInitialized.cs" />
+    <Compile Include="Assets\Code\Net-Code\Interfaces\IPacketData.cs" />
+    <Compile Include="Assets\Code\Net-Code\NetTester.cs" />
+    <Compile Include="Assets\Code\Net-Code\Packets\PacketWelcomeMessage.cs" />
+    <Compile Include="Assets\Code\Net-Code\Server\Data\ClientManager.cs" />
+    <Compile Include="Assets\Code\Net-Code\Server\Data\ServerClientData.cs" />
+    <Compile Include="Assets\Code\Net-Code\Server\Server.cs" />
+    <Compile Include="Assets\Code\Net-Code\Server\ServerSend.cs" />
+    <Compile Include="Assets\Code\Net-Code\Shared\Data\NetData.cs" />
+    <Compile Include="Assets\Code\Net-Code\Shared\Data\PacketIdentitifier.cs" />
+    <Compile Include="Assets\Code\Net-Code\Shared\NetworkedPlayer.cs" />
+    <Compile Include="Assets\Code\Net-Code\Shared\Packet.cs" />
+    <Compile Include="Assets\Code\Net-Code\Shared\Systems\PlayerPopulatorSystem.cs" />
+    <Compile Include="Assets\Code\Player\Animation\AnimationData.cs" />
+    <Compile Include="Assets\Code\Player\Animation\BipedIKTargetGroup.cs" />
     <Compile Include="Assets\Code\Player\Animation\BipedProceduralAnimator.cs" />
-    <Compile Include="Assets\Code\Player\Animation\ProceduralAnimationData.cs" />
+    <Compile Include="Assets\Code\Player\Animation\FootTarget.cs" />
+    <Compile Include="Assets\Code\Player\Animation\IKTarget.cs" />
+    <Compile Include="Assets\Code\Player\Animation\LerpData.cs" />
+    <Compile Include="Assets\Code\Player\Animation\LerpPoint.cs" />
+    <Compile Include="Assets\Code\Player\Animation\ProceduralData.cs" />
     <Compile Include="Assets\Code\Player\MovementController.cs" />
     <Compile Include="Assets\Code\Player\NotificationSystem.cs" />
     <Compile Include="Assets\Code\Player\PerspectiveController.cs" />
@@ -100,9 +123,11 @@
     <Compile Include="Assets\Code\Utility\DebugUIController.cs" />
     <Compile Include="Assets\Code\Utility\QoL\Events.cs" />
     <Compile Include="Assets\Code\Utility\QoL\INP.cs" />
+    <Compile Include="Assets\Code\Utility\QoL\Interfaces\IEventAccessor.cs" />
     <Compile Include="Assets\Code\Utility\QoL\Pool.cs" />
     <Compile Include="Assets\Code\Utility\QoL\Tween.cs" />
     <Compile Include="Assets\Code\Utility\Rotator.cs" />
+    <Compile Include="Assets\Code\Utility\Util.cs" />
     <Compile Include="Assets\Third Party\FastIK\Scripts\FastIK\FastIKCCD.cs" />
     <Compile Include="Assets\Third Party\FastIK\Scripts\FastIK\FastIKFabric.cs" />
     <Compile Include="Assets\Third Party\FastIK\Scripts\FastIK\FastIKLook.cs" />
@@ -161,7 +186,6 @@
     <Compile Include="Assets\Third Party\RestClient\Packages\RSG.Promise\Tuple.cs" />
     <None Include="Assets\Third Party\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Third Party\FastIK\Documentation.txt" />
-    <None Include="Assets\Third Party\MLAPI\Lib\MLAPI.xml" />
     <None Include="Assets\Third Party\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Third Party\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Third Party\NoiseLib\COPYING.txt" />
@@ -411,18 +435,6 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:/Unity Editors/2019.3.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="KaymakNetwork">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Plugins/KaymakNetwork.dll</HintPath>
-    </Reference>
-    <Reference Include="MLAPI">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/Lib/MLAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Ruffles">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/OfficialTransports/ruffles/Ruffles.dll</HintPath>
-    </Reference>
-    <Reference Include="RufflesTransport">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/OfficialTransports/ruffles/RufflesTransport.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Unity Editors/2019.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

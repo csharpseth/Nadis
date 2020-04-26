@@ -68,6 +68,8 @@ public struct BipedAnimatorEvents
     public Action<int, Vector3, Side, float, AnimatorTarget, bool> SetHandTargetPosition;
     public Action<int> EndCurrentHandTarget;
 
+    public Action<int, bool, float, float, int> OnAnimatorDataSet;
+
     public Action<int, string, Action> ExecuteAnimation;
     public Action<int, string> EndAnimation;
 }

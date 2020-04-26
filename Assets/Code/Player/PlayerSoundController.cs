@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerSoundController : MonoBehaviour
+public class PlayerSoundController : MonoBehaviour, IEventAccessor, INetworkInitialized
 {
     public AudioClip[] defaultStepSounds;
     public AudioClip defaultJointSound;
@@ -24,10 +24,14 @@ public class PlayerSoundController : MonoBehaviour
 
     public int NetID { get; private set; }
 
-    public void InitFromServer(int playerID)
+    public void InitFromNetwork(int playerID)
     {
         NetID = playerID;
-
+        Subscribe();
+    }
+    
+    public void Subscribe()
+    {
         Events.BipedAnimator.OnRightFootStepping += RightFootStepping;
         Events.BipedAnimator.OnLeftFootStepping += LeftFootStepping;
 
@@ -37,12 +41,11 @@ public class PlayerSoundController : MonoBehaviour
         Events.BipedAnimator.OnRightFootFinishStep += RightFootFinishStep;
         Events.BipedAnimator.OnLeftFootFinishStep += LeftFootFinishStep;
 
-        Events.Player.UnSubscribe += UnSubcribe;
+        Events.Player.UnSubscribe += UnSubscribe;
     }
-    
-    private void UnSubcribe(int playerID)
+    public void UnSubscribe(int netID)
     {
-        if (NetID != playerID) return;
+        if (NetID != netID) return;
 
         Events.BipedAnimator.OnRightFootStepping -= RightFootStepping;
         Events.BipedAnimator.OnLeftFootStepping -= LeftFootStepping;
@@ -53,7 +56,7 @@ public class PlayerSoundController : MonoBehaviour
         Events.BipedAnimator.OnRightFootFinishStep -= RightFootFinishStep;
         Events.BipedAnimator.OnLeftFootFinishStep -= LeftFootFinishStep;
 
-        Events.Player.UnSubscribe -= UnSubcribe;
+        Events.Player.UnSubscribe -= UnSubscribe;
     }
 
     private void AddActive()
@@ -71,9 +74,9 @@ public class PlayerSoundController : MonoBehaviour
         return defaultStepSounds[index];
     }
 
-    public void RightFootBeginStep(int playerID)
+    public void RightFootBeginStep(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
 
         rightHipSrc.pitch = Pitch();
@@ -81,9 +84,9 @@ public class PlayerSoundController : MonoBehaviour
         AddActive();
         Invoke("RemoveActive", defaultJointSound.length);
     }
-    public void LeftFootBeginStep(int playerID)
+    public void LeftFootBeginStep(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
 
         leftHipSrc.pitch = Pitch();
@@ -92,9 +95,9 @@ public class PlayerSoundController : MonoBehaviour
         Invoke("RemoveActive", defaultJointSound.length);
     }
 
-    public void RightFootFinishStep(int playerID)
+    public void RightFootFinishStep(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
         AudioClip clip = GetStepClip();
 
@@ -103,9 +106,9 @@ public class PlayerSoundController : MonoBehaviour
         AddActive();
         Invoke("RemoveActive", clip.length);
     }
-    public void LeftFootFinishStep(int playerID)
+    public void LeftFootFinishStep(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
         AudioClip clip = GetStepClip();
 
@@ -115,15 +118,15 @@ public class PlayerSoundController : MonoBehaviour
         Invoke("RemoveActive", clip.length);
     }
 
-    public void RightFootStepping(int playerID)
+    public void RightFootStepping(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
 
     }
-    public void LeftFootStepping(int playerID)
+    public void LeftFootStepping(int netID)
     {
-        if (CanPlay == false || playerID != NetID)
+        if (CanPlay == false || netID != NetID)
             return;
 
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PerspectiveController : MonoBehaviour
+public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
 {
     public static PerspectiveController ins;
     public KeyCode toggleKey = KeyCode.Tab;
@@ -77,4 +77,10 @@ public class PerspectiveController : MonoBehaviour
 
     }
 
+    public void Disable()
+    {
+        Destroy(firstPersonCam.gameObject);
+        Destroy(thirdPersonCam.gameObject);
+        Destroy(this);
+    }
 }

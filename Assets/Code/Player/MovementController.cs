@@ -2,12 +2,14 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public class MovementController : MonoBehaviour
+public class MovementController : MonoBehaviour, INetworkInitialized
 {
     //Data
     public MovementData data;
     private bool runToggle = false;
     private bool crouch = false;
+    public int NetID { get; private set; }
+    private bool initialized = false;
 
     //Setup Stuffs
     private Rigidbody rb;
@@ -18,10 +20,18 @@ public class MovementController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<BipedProceduralAnimator>();
     }
-    
+
+    public void InitFromNetwork(int netID)
+    {
+        NetID = netID;
+        initialized = true;
+    }
+
     //Actual Movement Logic & State Determination
     private void Update()
     {
+        if (initialized == false) return;
+
         if(Inp.Move.SprintDown)
         {
             runToggle = !runToggle;
@@ -40,8 +50,10 @@ public class MovementController : MonoBehaviour
 
             if (crouch)
                 data.state = PlayerMoveState.CrouchWalking;
-
-            anim.SetMoveData(true, Inp.Move.InputDir, data.state);
+            
+            //InvokeClientRpcOnEveryone(anim.SetMoveData, true, Inp.Move.InputDir, (int)data.state);
+            //InvokeClientRpcOnEveryone(anim.RPCSetMoveData, true, Inp.Move.InputDir.x, Inp.Move.InputDir.y, (int)data.state);
+            anim.SetMoveData(true, (int)Inp.Move.InputDir.x, (int)Inp.Move.InputDir.y, (int)data.state);
         }
         else
         {
@@ -50,7 +62,9 @@ public class MovementController : MonoBehaviour
             else
                 data.state = PlayerMoveState.Crouching;
 
-            anim.SetMoveData(true, Vector2.zero, data.state);
+            //InvokeClientRpcOnEveryone(anim.SetMoveData, true, Vector2.zero, (int)data.state);
+            //InvokeClientRpcOnEveryone(anim.RPCSetMoveData, true, 0f, 0f, (int)data.state);
+            anim.SetMoveData(true, 0, 0, (int)data.state);
         }
 
     }

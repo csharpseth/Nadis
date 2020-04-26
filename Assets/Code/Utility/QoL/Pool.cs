@@ -7,7 +7,9 @@ public struct Pool<T>
     private bool createNewOnOverflow;
     private int inUse;
 
-    public Pool(int size = 100, bool overflow = true)
+    public bool IsNull { get { UnityEngine.Debug.Log(_content); return _content == null; } }
+
+    public Pool(int size, bool overflow)
     {
         _content = new Queue<T>();
         for (int i = 0; i < size; i++)

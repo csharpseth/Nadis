@@ -62,14 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\MLAPI\MLAPIEditor.cs" />
-    <Compile Include="Assets\Editor\MLAPI\MLAPIProfiler.cs" />
-    <Compile Include="Assets\Editor\MLAPI\NetworkedAnimatorEditor.cs" />
-    <Compile Include="Assets\Editor\MLAPI\NetworkedBehaviourEditor.cs" />
-    <Compile Include="Assets\Editor\MLAPI\NetworkedObjectEditor.cs" />
-    <Compile Include="Assets\Editor\MLAPI\NetworkingManagerEditor.cs" />
-    <Compile Include="Assets\Editor\MLAPI\PostProcessScene.cs" />
-    <Compile Include="Assets\Editor\MLAPI\TrackedObjectEditor.cs" />
     <Compile Include="Assets\Editor\MapGeneratorEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/Unity-Projects/Nadis/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
@@ -322,18 +314,6 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="KaymakNetwork">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Plugins/KaymakNetwork.dll</HintPath>
-    </Reference>
-    <Reference Include="MLAPI">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/Lib/MLAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Ruffles">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/OfficialTransports/ruffles/Ruffles.dll</HintPath>
-    </Reference>
-    <Reference Include="RufflesTransport">
-      <HintPath>D:/Unity-Projects/Nadis/Assets/Third Party/MLAPI/OfficialTransports/ruffles/RufflesTransport.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>D:/Unity-Projects/Nadis/Library/PackageCache/com.unity.render-pipelines.core@7.1.8/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>

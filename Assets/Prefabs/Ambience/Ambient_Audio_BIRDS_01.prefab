@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: afa8243e67915c14182d09805cc5aff7, type: 3}
   minDuration: 6
+  maxPitchVariation: 0.1
+  maxVolumeVariation: 0.5
+  maxSpeedVariation: 0.3
   duration: 0
   timer: 0
 --- !u!82 &7828635596615812918

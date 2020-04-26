@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: 1
+  maxDistance: 10
   delay: 0.2
   adjustAmt: 2
 --- !u!135 &381090583

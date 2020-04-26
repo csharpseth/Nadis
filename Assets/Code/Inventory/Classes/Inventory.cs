@@ -38,10 +38,10 @@ public static class Inventory
 
         EntityContainer<Entity> playerInventory = new EntityContainer<Entity>(size);
         _inventories.Add(playerID, playerInventory);
-        if(playerID == NetworkedPlayer.LocalID)
+        /*if(playerID == NetworkedPlayer.LocalID)
         {
             Events.Inventory.OnInventoryCreated?.Invoke(size);
-        }
+        }*/
     }
     public static void Destroy(ulong playerID)
     {
@@ -65,7 +65,7 @@ public static class Inventory
         if (Exists(playerID) == false) return false;
         int index = _inventories[playerID].AddItem(item);
 
-        if(index != -1 && playerID == NetworkedPlayer.LocalID)
+        if(index != -1 )//&& playerID == NetworkedPlayer.LocalID)
         {
             Events.Inventory.OnItemAddedToInventory?.Invoke(item, index);
         }
@@ -76,7 +76,7 @@ public static class Inventory
     {
         if (Exists(playerID) == false) return false;
         bool val = _inventories[playerID].Remove(index);
-        if(val && playerID == NetworkedPlayer.LocalID)
+        if(val) //&& playerID == NetworkedPlayer.LocalID)
         {
             Events.Inventory.OnItemRemovedFromInventory?.Invoke(index);
         }
@@ -88,7 +88,7 @@ public static class Inventory
         if (Exists(playerID) == false) return false;
         int index = _inventories[playerID].Remove(item);
 
-        if(index != -1 && playerID == NetworkedPlayer.LocalID)
+        if(index != -1)// && playerID == NetworkedPlayer.LocalID)
         {
             Events.Inventory.OnItemRemovedFromInventory?.Invoke(index);
         }
@@ -103,6 +103,8 @@ public static class Inventory
 
     private static bool Exists(ulong key)
     {
+        if (_inventories == null) return false;
+
         return _inventories.ContainsKey(key);
     }
     private static void DictCheck()

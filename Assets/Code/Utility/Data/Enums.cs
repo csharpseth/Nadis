@@ -42,6 +42,7 @@
     }
 }
 
+//Player
 public enum PlayerMoveState
 {
     None = 1,
@@ -51,6 +52,7 @@ public enum PlayerMoveState
     CrouchWalking
 }
 
+//Tween
 public enum TweenType
 {
     FromTo,
@@ -73,6 +75,7 @@ public enum Direction
     Right
 }
 
+//Decorations
 public enum LogicType
 {
     None,
@@ -80,9 +83,27 @@ public enum LogicType
     Ore
 }
 
+//Entities
 public enum WeaponFireType
 {
     Single = 1,
     Semi,
     Full
 }
+
+//Procedural Animator
+public enum Side
+{
+    Right = 1,
+    Left = 2,
+    Both = 3
+}
+public enum AnimatorTarget
+{
+    None,
+    head,
+    chest,
+    pelvis,
+    Hands
+}
+

@@ -8,18 +8,26 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 1e7b8c71cc58ea54dbcece8e3887d539,
+    type: 3}
   m_ShaderKeywords: _SPECULAR_SETUP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_954424FE:
+        m_Texture: {fileID: 2800000, guid: 365f93cad263ba44aa293163ee9b1fa9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B0B819AC:
+        m_Texture: {fileID: 2800000, guid: aaa980ce307d74a4aae0d6db5b668fef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 100, y: 100}
@@ -48,7 +56,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_4AB010CA_Out_0:
+        m_Texture: {fileID: 2800000, guid: 0309e8674cc25ea4fbf1353831cfb589, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_F3D3A9B0_Out_0:
+        m_Texture: {fileID: 2800000, guid: 0309e8674cc25ea4fbf1353831cfb589, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TriPlanar_FA00AB53_Texture2DE789B0BE_1328201610:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_80F59368: 0.25
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
