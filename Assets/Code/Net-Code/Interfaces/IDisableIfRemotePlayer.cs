@@ -1,4 +1,4 @@
 ﻿public interface IDisableIfRemotePlayer
 {
-    void Disable();
+    void Disable(bool disabled);
 }

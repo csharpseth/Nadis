@@ -32,13 +32,19 @@ public static class Events
     public static MapGeneratorEvents MapGenerator;
     public static Notifications Notification;
     public static Networking Net;
+    public static AdministratorEvents admin;
 }
 
+public struct AdministratorEvents
+{
+    public delegate void SwitchActivePlayer(int fromID, int toID);
+    public SwitchActivePlayer OnSwitchActivePlayer;
+}
 
 public struct InventoryEvents
 {
     public Action<int> OnInventoryCreated;
-    public Action<Entity, int> OnItemAddedToInventory;
+    public Action<Item, int> OnItemAddedToInventory;
     public Action<int> OnItemRemovedFromInventory;
 }
 public struct ItemEvents
@@ -99,13 +105,13 @@ public struct MapGeneratorEvents
     public Action<int> GenerateMap;
 
     public delegate Vector3 GetMapPosition(float minH, float maxH, float maxAng);
-    public delegate SpawnPoint GetChargePoint(int index);
-    public delegate SpawnPoint[] GetChargePoints();
-    public GetMapPosition GetPosition;
-    public GetChargePoint GetChargePosition;
+    //public delegate SpawnPoint GetChargePoint(int index);
+    //public delegate SpawnPoint[] GetChargePoints();
+    //public GetMapPosition GetPosition;
+    //public GetChargePoint GetChargePosition;
 
     public Action<float, float, float, int, int> CreateChargePoints;
-    public GetChargePoints GetChargePositions;
+    //public GetChargePoints GetChargePositions;
     public Action PlaceChargingStations;
 
 }
@@ -118,5 +124,6 @@ public struct Notifications
 
 public struct Networking
 {
-    
+    public delegate void ClientDataCallback(int clientToSendAs, IPacketData packet);
+    public ClientDataCallback SendAsClient;
 }

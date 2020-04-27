@@ -42,7 +42,7 @@ namespace Nadis.Net
                 IDisableIfRemotePlayer[] disable = player.GetComponentsInChildren<IDisableIfRemotePlayer>();
                 for (int i = 0; i < disable.Length; i++)
                 {
-                    disable[i].Disable();
+                    disable[i].Disable(true);
                 }
             }
             INetworkInitialized[] networkInitialized = player.GetComponentsInChildren<INetworkInitialized>();

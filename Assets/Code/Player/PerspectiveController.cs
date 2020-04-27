@@ -44,6 +44,8 @@ public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
 
     private void Update()
     {
+        if (noDisplay) return;
+
         if (Input.GetKeyDown(toggleKey))
         {
             TogglePerspective();
@@ -77,10 +79,10 @@ public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
 
     }
 
-    public void Disable()
+    public void Disable(bool disabled)
     {
-        Destroy(firstPersonCam.gameObject);
-        Destroy(thirdPersonCam.gameObject);
-        Destroy(this);
+        firstPersonCam.gameObject.SetActive(!disabled);
+        thirdPersonCam.gameObject.SetActive(!disabled);
+        noDisplay = disabled;
     }
 }

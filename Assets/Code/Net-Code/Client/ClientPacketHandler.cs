@@ -21,6 +21,18 @@ namespace Nadis.Net.Client
             
             handlers[packetID].Invoke(buffer);
         }
+        /*
+        public static void Handle(int packetID, JobPacketBuffer buffer)
+        {
+            if (handlers.ContainsKey(packetID) == false)
+            {
+                UnityEngine.Debug.LogErrorFormat("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
+                return;
+            }
+
+            handlers[packetID].Invoke(buffer);
+        }
+        */
         public static void SubscribeTo(int packetID, PacketHandlerData.ReceiveCallback callback)
         {
             if (handlers.ContainsKey(packetID) == false) return;
@@ -38,10 +50,11 @@ namespace Nadis.Net.Client
         //You should never need to use ClientPacketID here.
         private static void PopulateHandlers()
         {
-            CreateHandler((int)ServerPacketID.WelcomeMessage, new PacketWelcomeMessage(), (IPacketData data) => {
+            CreateHandler((int)ServerPacket.WelcomeMessage, new PacketWelcomeMessage(), (IPacketData data) => {
                 PacketWelcomeMessage msg = (PacketWelcomeMessage)data;
                 PlayerPopulatorSystem.CreatePlayer(msg.clientID);
             });
+            CreateHandler((int)SharedPacket.PlayerTransform, new PacketPlayerTransform());
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

@@ -6,7 +6,7 @@ using System.Net.Sockets;
 
 namespace Nadis.Net.Client
 {
-    public class Client : INetworkID
+    public class Client : INetworkID, IEventAccessor
     {
         public int NetID { get; private set; }
         public ClientTCP TCP { get; private set; }
@@ -24,12 +24,31 @@ namespace Nadis.Net.Client
         public void ConnectToServer()
         {
             ClientPacketHandler.Initialize();
-            ClientPacketHandler.SubscribeTo((int)ServerPacketID.WelcomeMessage, (IPacketData data) =>
+            ClientPacketHandler.SubscribeTo((int)ServerPacket.WelcomeMessage, (IPacketData data) =>
             {
                 PacketWelcomeMessage msg = (PacketWelcomeMessage)data;
                 Debug.Log(msg.message);
             });
+
+            Subscribe();
+
             TCP.Connect(_ip, _port);
+        }
+
+        public void SendData(int clientToSendOn, IPacketData data)
+        {
+            if (NetID != clientToSendOn) return;
+            TCP.TrySendData(data.Serialize());
+        }
+
+        public void Subscribe()
+        {
+            Events.Net.SendAsClient += SendData;
+        }
+
+        public void UnSubscribe(int netID)
+        {
+            
         }
     }
 }

@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public class MovementController : MonoBehaviour, INetworkInitialized
+public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIfRemotePlayer
 {
     //Data
     public MovementData data;
@@ -14,6 +14,7 @@ public class MovementController : MonoBehaviour, INetworkInitialized
     //Setup Stuffs
     private Rigidbody rb;
     private BipedProceduralAnimator anim;
+    private bool disabled = false;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class MovementController : MonoBehaviour, INetworkInitialized
     //Actual Movement Logic & State Determination
     private void Update()
     {
-        if (initialized == false) return;
+        if (initialized == false || disabled == true) return;
 
         if(Inp.Move.SprintDown)
         {
@@ -70,6 +71,8 @@ public class MovementController : MonoBehaviour, INetworkInitialized
     }
     private void FixedUpdate()
     {
+        if (disabled == true) return;
+
         float speed = data.GetSpeed;
         Vector3 dir = InputToWorld(Inp.Move.InputDir) * speed;
         rb.MovePosition(rb.position + (dir * Time.fixedDeltaTime));
@@ -82,6 +85,10 @@ public class MovementController : MonoBehaviour, INetworkInitialized
         return dir;
     }
 
+    public void Disable(bool disabled)
+    {
+        this.disabled = disabled;
+    }
 }
 
 [System.Serializable]

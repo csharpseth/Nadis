@@ -2,24 +2,24 @@
 
 public static class Inventory
 {
-    private static Dictionary<ulong, EntityContainer<Entity>> _inventories;
-    private static Dictionary<ulong, Entity> _sceneEntities;
+    private static Dictionary<ulong, EntityContainer<Item>> _inventories;
+    private static Dictionary<ulong, Item> _sceneEntities;
 
     //Entities
-    public static void RegisterEntity(Entity ent)
+    public static void RegisterEntity(Item ent)
     {
-        if (_sceneEntities == null) _sceneEntities = new Dictionary<ulong, Entity>();
+        if (_sceneEntities == null) _sceneEntities = new Dictionary<ulong, Item>();
         if (EntityExists(ent.NetworkID)) return;
 
         _sceneEntities.Add(ent.NetworkID, ent);
     }
-    public static void DeRegisterEntity(Entity ent)
+    public static void DeRegisterEntity(Item ent)
     {
         if (EntityExists(ent.NetworkID) == false) return;
         _sceneEntities.Remove(ent.NetworkID);
     }
 
-    public static Entity GetEntity(ulong networkID)
+    public static Item GetEntity(ulong networkID)
     {
         if (EntityExists(networkID) == false) return null;
         return _sceneEntities[networkID];
@@ -36,7 +36,7 @@ public static class Inventory
         DictCheck();
         if (Exists(playerID)) return;
 
-        EntityContainer<Entity> playerInventory = new EntityContainer<Entity>(size);
+        EntityContainer<Item> playerInventory = new EntityContainer<Item>(size);
         _inventories.Add(playerID, playerInventory);
         /*if(playerID == NetworkedPlayer.LocalID)
         {
@@ -49,18 +49,18 @@ public static class Inventory
         _inventories.Remove(playerID);
     }
 
-    public static Entity GetItem(ulong playerID, ulong netID)
+    public static Item GetItem(ulong playerID, ulong netID)
     {
         if (Exists(playerID) == false) return null;
         return _inventories[playerID].GetItem(netID);
     }
-    public static Entity GetItem(ulong playerID, int index)
+    public static Item GetItem(ulong playerID, int index)
     {
         if (Exists(playerID) == false) return null;
         return _inventories[playerID].GetItem(index);
     }
 
-    public static bool AddItem(ulong playerID, Entity item)
+    public static bool AddItem(ulong playerID, Item item)
     {
         if (Exists(playerID) == false) return false;
         int index = _inventories[playerID].AddItem(item);
@@ -83,7 +83,7 @@ public static class Inventory
 
         return val;
     }
-    public static bool RemoveItem(ulong playerID, Entity item)
+    public static bool RemoveItem(ulong playerID, Item item)
     {
         if (Exists(playerID) == false) return false;
         int index = _inventories[playerID].Remove(item);
@@ -109,7 +109,7 @@ public static class Inventory
     }
     private static void DictCheck()
     {
-        if (_inventories == null) _inventories = new Dictionary<ulong, EntityContainer<Entity>>();
+        if (_inventories == null) _inventories = new Dictionary<ulong, EntityContainer<Item>>();
     }
     public static int GetSize(ulong playerID)
     {

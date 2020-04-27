@@ -60,7 +60,7 @@ public class PlayerUIController : MonoBehaviour
             slots[i].Update();
         }
     }
-    public void OnItemAddedToInventory(Entity ent, int index)
+    public void OnItemAddedToInventory(Item ent, int index)
     {
         slots[index].content = ent;
         slots[index].Update();
@@ -79,7 +79,7 @@ public class InventorySlot
 
     public Image background;
     public TextMeshProUGUI nameText;
-    public Entity content;
+    public Item content;
 
     public void Update()
     {

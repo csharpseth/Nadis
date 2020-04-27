@@ -21,6 +21,17 @@ public class NetTester : MonoBehaviour
     float time = 0f;
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            int fromID = NetData.LocalPlayerID;
+            int toID = fromID + 1;
+            int numClient = ClientManager.Clients.Count;
+            if (toID >= numClient) toID = (numClient - 1);
+
+            Events.admin.OnSwitchActivePlayer?.Invoke(fromID, toID);
+        }
+
+
         if (numClients >= numClientsToSimulate) return;
         
         time += Time.deltaTime;

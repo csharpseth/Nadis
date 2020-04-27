@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class EntityContainer<T> where T : Entity
+public class EntityContainer<T> where T : Item
 {
     private T[] _content;
     private int _size;

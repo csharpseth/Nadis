@@ -2,7 +2,7 @@
 
 public struct PacketWelcomeMessage : IPacketData
 {
-    public int PacketID { get { return (int)ServerPacketID.WelcomeMessage; } }
+    public int PacketID { get { return (int)ServerPacket.WelcomeMessage; } }
     public string message;
     public int clientID;
     
@@ -19,4 +19,5 @@ public struct PacketWelcomeMessage : IPacketData
         buffer.Write(clientID);
         return buffer;
     }
+    
 }

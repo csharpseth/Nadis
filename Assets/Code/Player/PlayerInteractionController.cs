@@ -10,7 +10,7 @@ public class PlayerInteractionController : MonoBehaviour
     private Camera cam;
     private int _activeIndex = 0;
     private int ActiveIndex { get { return _activeIndex; } set { _activeIndex = Mathf.Clamp(value, 0, Inventory.GetSize(0) - 1); Inventory.DisableAllExcept(0, _activeIndex); } }
-    private Entity ActiveItem { get { return Inventory.GetItem(0, ActiveIndex); } }
+    private Item ActiveItem { get { return Inventory.GetItem(0, ActiveIndex); } }
 
     public Vector2 CenterScreen { get { return new Vector2(Screen.width / 2f, Screen.height / 2f); } }
     public Ray CenterScreenRay{ get { return cam.ScreenPointToRay(CenterScreen); } }
@@ -55,7 +55,7 @@ public class PlayerInteractionController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(CenterScreenRay, out hit, reach, interactionMask))
         {
-            Entity ent = hit.transform.GetComponent<Entity>();
+            Item ent = hit.transform.GetComponent<Item>();
             if(ent != null)
             {
                 //ent.Interact(NetworkedPlayer.LocalID);
