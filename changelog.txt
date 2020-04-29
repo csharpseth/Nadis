@@ -1,3 +1,8 @@
+[04/28/2020]
+-Completed Client & Server Packet Handlers
+-Implemented Player Position, Rotation, & Animator
+   Data Syncing
+
 [04/26/2020]
 -Began reconstructing NetCode
 -Implemented a very easy to use system to quickly

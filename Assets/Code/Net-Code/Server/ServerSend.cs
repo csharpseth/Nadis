@@ -15,9 +15,8 @@ namespace Nadis.Net.Server
         {
             ServerClientData client = ClientManager.GetClient(clientID);
             if (client.Invalid) return;
-
-            PacketBuffer buffer = data.Serialize();
-            client.SendData(buffer, true);
+            
+            client.SendData(data.Serialize().ToArray());
         }
 
         //Hopefully improve with C# Jobs :D
@@ -27,21 +26,20 @@ namespace Nadis.Net.Server
         /// <param name="data"></param>
         public static void ReliableToAll(IPacketData data, int exceptionID = -1)
         {
-            List<ServerClientData> clients = ClientManager.Clients;
+            List<int> clients = ClientManager.Clients;
             if (clients == null || clients.Count == 0) return;
 
             bool except = (exceptionID != -1);
             for (int i = 0; i < clients.Count; i++)
             {
-                if (clients[i].Invalid) continue;
                 if(except == true)
                 {
-                    if (clients[i].NetID != exceptionID)
-                        ReliableToOne(data, clients[i].NetID);
+                    if (clients[i] != exceptionID)
+                        ReliableToOne(data, clients[i]);
                 }
                 else
                 {
-                    ReliableToOne(data, clients[i].NetID);
+                    ReliableToOne(data, clients[i]);
                 }
             }
         }

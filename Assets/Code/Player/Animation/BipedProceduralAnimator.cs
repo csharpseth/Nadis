@@ -11,13 +11,18 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
 
     #region Player Move Data
     public bool grounded;
-    public int inputDirX;
-    public int inputDirY;
 
-    public Vector2 inputDir { get { return new Vector2(inputDirX, inputDirY); } }
+    public Vector2 inputDir;
     public bool moving;
     private PlayerMoveState moveState;
     #endregion
+    [Header("NetworkData:")]
+    public int timesToCheclPerSecond = 2;
+    private Vector2 lastInputDir;
+    private bool lastGrounded;
+    private float netSendTimer = 0f;
+
+
     [Header("Other:")]
     #region Other
     public bool handTargetPersistent = false;
@@ -98,8 +103,6 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         targets.leftHand.Init(this);
         Subscribe();
         initialized = true;
-        Debug.Log("Initialized");
-        Debug.Log(lerpDatas.IsNull);
     }
     
     //Boiler Plate Motion
@@ -204,7 +207,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
                 {
                     nextRight = rightHit.point;
                     FootLerpData lerp = new FootLerpData();
-                    lerp.Init(WorldToLocal(nextRight, transform), targets.rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDirY));
+                    lerp.Init(WorldToLocal(nextRight, transform), targets.rightFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                     targets.rightFoot.lerp = lerp;
                     right = false;
                     left = true;
@@ -248,7 +251,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
                     {
                         nextLeft = leftHit.point;
                         FootLerpData lerp = new FootLerpData();
-                        lerp.Init(WorldToLocal(nextLeft, transform), targets.leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDirY));
+                        lerp.Init(WorldToLocal(nextLeft, transform), targets.leftFoot.localPosition, data.stepData.footMoveSpeed, data.stepData.stepHeight, (data.stepData.stepSize * inputDir.y));
                         targets.leftFoot.lerp = lerp;
                         left = false;
                         right = true;
@@ -383,20 +386,31 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
     public void RootMomentum()
     {
         Vector3 rootRot =  targets.root.localEulerAngles;
-        float forward = Mathf.LerpAngle(rootRot.x, inputDirY * data.moveData.maxRootForwardAngle, 3f * Time.deltaTime);
-        float side = Mathf.LerpAngle(rootRot.y, inputDirX * data.moveData.maxRootSideAngle, 3f * Time.deltaTime);
+        float forward = Mathf.LerpAngle(rootRot.x, inputDir.y * data.moveData.maxRootForwardAngle, 3f * Time.deltaTime);
+        float side = Mathf.LerpAngle(rootRot.y, inputDir.x * data.moveData.maxRootSideAngle, 3f * Time.deltaTime);
 
         Vector3 newRot = new Vector3(forward, targets.root.localEulerAngles.y, side);
         targets.root.localEulerAngles = newRot;
     }
 
     //Helper Functions
-    public void SetMoveData(bool grnd, int inputX, int inputY, int state)
+    public void SetMoveData(IPacketData packet)
     {
-        this.grounded = grnd;
-        this.inputDirX = inputX;
-        PlayerMoveState pSt = (PlayerMoveState)state;
-        this.moving = (pSt != PlayerMoveState.None && pSt != PlayerMoveState.Crouching);
+        PacketPlayerAnimatorData data = (PacketPlayerAnimatorData)packet;
+        if (data.playerID != NetID) return;
+
+        grounded = data.playerGrounded;
+        inputDir = data.playerInputDir;
+        moveState = data.playerMoveState;
+        moving = (moveState != PlayerMoveState.None && moveState != PlayerMoveState.Crouching);
+    }
+    public void SetMoveData(bool grounded, int inputX, int inputY, int moveState)
+    {
+        this.grounded = grounded;
+        inputDir.x = inputX;
+        inputDir.y = inputY;
+        this.moveState = (PlayerMoveState)moveState;
+        moving = (this.moveState != PlayerMoveState.None && this.moveState != PlayerMoveState.Crouching);
     }
     
     private float GroundHeight(FootTarget target)
@@ -452,8 +466,8 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
 
         Vector3 temp = Vector3.zero;
 
-        temp += ((forw * stepSize) * inputDirY) + (forw * input.z);
-        temp += ((right * sideStepSize) * inputDirX) + (right * input.x);
+        temp += ((forw * stepSize) * inputDir.y) + (forw * input.z);
+        temp += ((right * sideStepSize) * inputDir.x) + (right * input.x);
         temp += Vector3.up;
 
         temp += transform.position;
@@ -468,6 +482,9 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         Events.BipedAnimator.EndCurrentHandTarget += EndCurrentHandTarget;
         Events.BipedAnimator.ExecuteAnimation += ExecuteAnimation;
         Events.BipedAnimator.EndAnimation += EndAnimation;
+
+        Nadis.Net.Client.ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorData, SetMoveData);
+
         Events.Player.UnSubscribe += UnSubscribe;
     }
     public void UnSubscribe(int netID)
@@ -484,13 +501,27 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
     //Other
     private void LateUpdate()
     {
-        //rightRayWheel.Rotate(Vector3.right, Time.time * rayWheelSpeed, Space.Self);
-        if(moveState != PlayerMoveState.None)
+        if (NetID != NetData.LocalPlayerID) return;
+
+        netSendTimer += Time.deltaTime;
+        if(netSendTimer >= (1f / timesToCheclPerSecond))
         {
-            moving = true;
-        }else
-        {
-            moving = false;
+            if(inputDir != lastInputDir || grounded != lastGrounded)
+            {
+                PacketPlayerAnimatorData packet = new PacketPlayerAnimatorData
+                {
+                    playerID = NetID,
+                    playerMoveState = moveState,
+                    playerInputDir = inputDir,
+                    playerGrounded = grounded
+                };
+                Events.Net.SendAsClient(NetID, packet);
+
+                lastInputDir = inputDir;
+                lastGrounded = grounded;
+            }
+
+            netSendTimer = 0f;
         }
     }
     private void OnDrawGizmos()

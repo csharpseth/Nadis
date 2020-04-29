@@ -339,7 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6367fe79ac34e0b449912e89ec21cdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numClientsToSimulate: 50
 --- !u!4 &1087751607
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 ﻿namespace Nadis.Net
 {
-    public struct PacketHandlerData
+    public class PacketHandlerData
     {
         public delegate void ReceiveCallback(IPacketData packet);
         private ReceiveCallback callback;
@@ -22,7 +22,7 @@
             this.callback -= callback;
         }
 
-        public void Invoke(Nadis.Net.PacketBuffer buffer)
+        public void Invoke(PacketBuffer buffer)
         {
             packet.Deserialize(buffer);
 

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Network Testing.unity
-    guid: e87c58db12d8fdf43a094ba8acecc1ae
+    path: Assets/Scenes/NetTesting.unity
+    guid: 6eb327d7ff6ae7747aa1457f476f8b2a
   m_configObjects: {}

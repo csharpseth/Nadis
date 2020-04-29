@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateWithMouse : MonoBehaviour
+public class RotateWithMouse : MonoBehaviour, IDisableIfRemotePlayer
 {
     public RotateAxis axis;
     public float lookSpeed = 300f;
     public float maxAngle = 50f;
+    private bool disabled = false;
+
+    public void Disable(bool disabled)
+    {
+        this.disabled = disabled;
+    }
 
     private void Awake()
     {
@@ -16,6 +22,8 @@ public class RotateWithMouse : MonoBehaviour
 
     private void Update()
     {
+        if (disabled) return;
+
         float h = lookSpeed * Inp.Move.LookDir.x;
         float v = -lookSpeed * Inp.Move.LookDir.y;
         Vector3 rot = transform.eulerAngles;

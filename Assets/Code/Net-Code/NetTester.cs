@@ -5,43 +5,29 @@ using UnityEngine;
 
 public class NetTester : MonoBehaviour
 {
-    [Range(1, 50)]
-    public int numClientsToSimulate = 1;
     private Server server;
-    private int numClients = 0;
+    private Client client;
 
     private void Awake()
     {
-        server = new Server();
-        server.Start();
-
-        
+        server = null;
+        client = null;
     }
-
-    float time = 0f;
+    
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.H) && server == null)
         {
-            int fromID = NetData.LocalPlayerID;
-            int toID = fromID + 1;
-            int numClient = ClientManager.Clients.Count;
-            if (toID >= numClient) toID = (numClient - 1);
-
-            Events.admin.OnSwitchActivePlayer?.Invoke(fromID, toID);
+            //Start Server
+            server = new Server();
+            server.Start();
         }
 
-
-        if (numClients >= numClientsToSimulate) return;
-        
-        time += Time.deltaTime;
-        if (numClients < 1 || Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.C) && client == null)
         {
-            Client c = new Client();
-            c.ConnectToServer();
-            numClients++;
-
-            time = 0f;
+            //Start Connection
+            client = new Client();
+            client.ConnectToServer();
         }
     }
 }

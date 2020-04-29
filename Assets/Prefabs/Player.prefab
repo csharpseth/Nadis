@@ -2374,6 +2374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7896eb078b7934b4eb38b319a71bb456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Send: 0
+  timeToCheckPerSecond: 10
+  maxMoveDistanceBeforeSending: 0.05
+  maxRotBeforeSending: 1
 --- !u!1 &5909854991284634465
 GameObject:
   m_ObjectHideFlags: 0

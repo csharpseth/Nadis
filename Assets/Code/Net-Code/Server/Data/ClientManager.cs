@@ -7,10 +7,10 @@ namespace Nadis.Net.Server
 {
     public static class ClientManager
     {
-        public static List<ServerClientData> Clients { get { return _clients; } }
+        public static List<int> Clients { get { return _clients; } }
 
         private static Dictionary<int, ServerClientData> _clientDictionary;
-        private static List<ServerClientData> _clients;
+        private static List<int> _clients;
         private static int _maxClients;
         private static int _currentID = 0;
         private static bool initialized = false;
@@ -21,7 +21,7 @@ namespace Nadis.Net.Server
 
             _maxClients = maxClients;
             _clientDictionary = new Dictionary<int, ServerClientData>();
-            _clients = new List<ServerClientData>();
+            _clients = new List<int>();
             initialized = true;
         }
 
@@ -56,7 +56,7 @@ namespace Nadis.Net.Server
             {
                 ServerClientData cd = new ServerClientData(socket, clientID);
                 _clientDictionary.Add(clientID, cd);
-                _clients.Add(cd);
+                _clients.Add(clientID);
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace Nadis.Net.Server
                 _clientDictionary.Remove(clientID);
                 for (int i = 0; i < _clients.Count; i++)
                 {
-                    if (_clients[i].NetID != clientID) continue;
+                    if (_clients[i] != clientID) continue;
                     _clients.Remove(_clients[i]);
                 }
             }

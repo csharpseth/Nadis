@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace Nadis.Net.Server
 {
-    public struct ServerClientData : INetworkID
+    public class ServerClientData : INetworkID
     {
         //Public
         public int NetID { get; private set; }
@@ -16,6 +16,7 @@ namespace Nadis.Net.Server
         private NetworkStream _stream;
         private byte[] _receiveBuffer;
         private int _bufferSize;
+        private PacketBuffer _packetBuffer;
 
         //Constructors
         public ServerClientData(TcpClient socket, int id)
@@ -29,6 +30,7 @@ namespace Nadis.Net.Server
 
             _stream = _socket.GetStream();
             _receiveBuffer = new byte[_bufferSize];
+            _packetBuffer = new PacketBuffer();
 
             BeginReceive();
         }
@@ -38,6 +40,48 @@ namespace Nadis.Net.Server
         {
             _stream.BeginRead(_receiveBuffer, 0, _bufferSize, OnReceiveCallback, null);
         }
+
+        private bool HandleData(byte[] data)
+        {
+            int packetLength = 0;
+            _packetBuffer.SetBytes(data);
+
+            if (_packetBuffer.UnreadLength() >= 4)
+            {
+                packetLength = _packetBuffer.ReadInt();
+                if (packetLength <= 0)
+                    return true;
+            }
+
+            while (packetLength > 0 && packetLength <= _packetBuffer.UnreadLength())
+            {
+                byte[] packetBytes = _packetBuffer.ReadBytes(packetLength);
+                //NativeArray<byte> packetBytes = new NativeArray<byte>(_receivedPacket.ReadBytes(packetLength), Allocator.TempJob);
+                //Try to do this with the job system instead
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                    using (PacketBuffer buffer = new PacketBuffer(packetBytes))
+                    {
+                        int packetID = buffer.ReadInt();
+                        ServerPacketHandler.Handle(packetID, buffer);
+                    }
+                });
+                
+                packetLength = 0;
+                if (_packetBuffer.UnreadLength() >= 4)
+                {
+                    packetLength = _packetBuffer.ReadInt();
+                    if (packetLength <= 0)
+                        return true;
+                }
+            }
+
+            if (packetLength <= 1)
+                return true;
+
+            return false;
+        }
+
         private void OnReceiveCallback(IAsyncResult ar)
         {
             try
@@ -53,6 +97,7 @@ namespace Nadis.Net.Server
                 Array.Copy(_receiveBuffer, data, size);
 
                 //Handle Data
+                _packetBuffer.Reset(HandleData(data));
 
                 BeginReceive();
             }
@@ -63,23 +108,20 @@ namespace Nadis.Net.Server
             }
         }
 
-        public void SendData(PacketBuffer buffer, bool disposeWhenFinished = true)
+        public void SendData(byte[] data)
         {
             try
             {
                 if(_socket != null)
                 {
-                    buffer.WriteLength();
-                    _stream.BeginWrite(buffer.ToArray(), 0, buffer.Length(), null, null);
+                    _stream.BeginWrite(data, 0, data.Length, null, null);
                 }
             }
             catch (Exception e)
             {
                 UnityEngine.Debug.LogError(e);
             }
-            
-            if (disposeWhenFinished)
-                buffer.Dispose();
         }
     }
 }
+ 

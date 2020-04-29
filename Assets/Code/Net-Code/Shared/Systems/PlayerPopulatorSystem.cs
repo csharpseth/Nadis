@@ -9,54 +9,57 @@ namespace Nadis.Net
 {
     public class PlayerPopulatorSystem : MonoBehaviour
     {
+        #region Singleton
         public static PlayerPopulatorSystem instance;
-
-        public GameObject playerPrefab;
-        private Queue<int> playersToSpawn;
-
-
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-                playersToSpawn = new Queue<int>();
-            }
-            else
-                Destroy(this);
+            if (instance == null) instance = this;
+            else Destroy(this);
+            Init();
+        }
+        #endregion
+
+
+        public GameObject playerPrefab;
+        private Queue<PacketPlayerConnection> playersToSpawn;
+
+        private void Init()
+        {
+            playersToSpawn = new Queue<PacketPlayerConnection>();
         }
 
         private void Update()
         {
             if (playersToSpawn == null || playersToSpawn.Count == 0) return;
 
-            int id = playersToSpawn.Dequeue();
-            if (NetData.LocalPlayerID == -1)
-                NetData.LocalPlayerID = id;
-
-            GameObject player = Instantiate(playerPrefab);
-
-            //Check if the player you are spawning is local
-            if(NetData.LocalPlayerID != id)
+            int amount = playersToSpawn.Count;
+            for (int i = 0; i < amount; i++)
             {
-                IDisableIfRemotePlayer[] disable = player.GetComponentsInChildren<IDisableIfRemotePlayer>();
-                for (int i = 0; i < disable.Length; i++)
+                PacketPlayerConnection temp = playersToSpawn.Dequeue();
+                GameObject ply = Instantiate(playerPrefab); //Add support for a specific position from the packet
+                if(temp.playerIsLocal == false)
                 {
-                    disable[i].Disable(true);
+                    IDisableIfRemotePlayer[] disable = ply.GetComponentsInChildren<IDisableIfRemotePlayer>();
+                    for (int j = 0; j < disable.Length; j++)
+                    {
+                        disable[j].Disable(true);
+                    }
+                }else
+                {
+                    NetData.LocalPlayerID = temp.playerID;
+                    Client.Client.Local.SetID(temp.playerID);
+                }
+                INetworkInitialized[] netInit = ply.GetComponentsInChildren<INetworkInitialized>();
+                for (int y = 0; y < netInit.Length; y++)
+                {
+                    netInit[y].InitFromNetwork(temp.playerID);
                 }
             }
-            INetworkInitialized[] networkInitialized = player.GetComponentsInChildren<INetworkInitialized>();
-            for (int i = 0; i < networkInitialized.Length; i++)
-            {
-                networkInitialized[i].InitFromNetwork(id);
-            }
-
         }
 
-
-        public static void CreatePlayer(int clientID)
+        public static void SpawnPlayer(PacketPlayerConnection playerToSpawn)
         {
-            instance.playersToSpawn.Enqueue(clientID);
+            instance.playersToSpawn.Enqueue(playerToSpawn);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Nadis.Net.Server
                 UnityEngine.Debug.LogErrorFormat("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
                 return;
             }
-
+            
             handlers[packetID].Invoke(buffer);
         }
         /*
@@ -54,7 +54,23 @@ namespace Nadis.Net.Server
         //You should never need to use ClientPacketID here.
         private static void PopulateHandlers()
         {
-            CreateHandler((int)SharedPacket.PlayerTransform, new PacketPlayerTransform());
+            CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), (IPacketData data) =>
+            {
+                PacketPlayerPosition plyPos = (PacketPlayerPosition)data;
+                ServerSend.ReliableToAll(plyPos, plyPos.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), (IPacketData data) =>
+            {
+                PacketPlayerRotation plyRot = (PacketPlayerRotation)data;
+                ServerSend.ReliableToAll(plyRot, plyRot.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorData plyAnimData = (PacketPlayerAnimatorData)data;
+                ServerSend.ReliableToAll(plyAnimData, plyAnimData.playerID);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

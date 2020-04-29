@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using Unity.Jobs;
 using Unity.Collections;
 using System.Text;
@@ -384,3 +385,4 @@ namespace Nadis.Net
         #endregion
     }
 }
+*/

@@ -6,8 +6,11 @@
 /// </summary>
 public enum SharedPacket
 {
-    PlayerTransform = 1,
+    PlayerPosition = 1,
+    PlayerRotation,
+    PlayerAnimatorData,
 }
+
 
 //Starts at 250
 /// <summary>
@@ -16,7 +19,8 @@ public enum SharedPacket
 /// </summary>
 public enum ServerPacket
 {
-    WelcomeMessage = 250,
+    PlayerConnection = 250,
+
 }
 
 //Starts at 500

@@ -21,6 +21,7 @@ namespace Nadis.Net.Server
 
             _socket = new TcpListener(IPAddress.Any, Port);
             ClientManager.Init(MaxPlayers);
+            ServerPacketHandler.Initialize();
 
             _socket.Start();
             BeginListenForClient();
@@ -44,14 +45,32 @@ namespace Nadis.Net.Server
             int clientID = ClientManager.TryAddClient(client);
             if (clientID != -1)
             {
-                Debug.Log("A Player Has Successfully Connected To The Server.");
-                PacketWelcomeMessage msg = new PacketWelcomeMessage
+                //Send all ALREADY connected players to the Client
+                int[] clients = ClientManager.Clients.ToArray();
+                for (int i = 0; i < clients.Length; i++)
                 {
-                    message = "Hello from Seth H, Creator of Nadis",
-                    clientID = clientID
-                };
+                    int id = clients[i];
+                    if (id == clientID) continue;
+                    PacketPlayerConnection playerData = new PacketPlayerConnection
+                    {
+                        playerID = id,
+                        playerIsLocal = false
+                    };
+                    ServerSend.ReliableToOne(playerData, clientID);
+                }
 
-                ServerSend.ReliableToOne(msg, clientID);
+                //Send THIS clients data to this client so they are sync'd with the server
+                PacketPlayerConnection localClientData = new PacketPlayerConnection
+                {
+                    playerID = clientID,
+                    playerIsLocal = true
+                };
+                ServerSend.ReliableToOne(localClientData, clientID);
+
+                //TODO Send this clients data to all already connected players
+                localClientData.playerIsLocal = false;
+                ServerSend.ReliableToAll(localClientData, clientID);
+
                 return;
             }
 

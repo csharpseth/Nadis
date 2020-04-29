@@ -8,12 +8,14 @@ namespace Nadis.Net.Client
 {
     public class Client : INetworkID, IEventAccessor
     {
+        public static Client Local { get; set; }
         public int NetID { get; private set; }
         public ClientTCP TCP { get; private set; }
 
         private int _bufferSize;
         private string _ip = NetData.Default.IP;
         private int _port = NetData.Default.Port;
+        private bool _idSet = false;
 
         public Client()
         {
@@ -24,12 +26,7 @@ namespace Nadis.Net.Client
         public void ConnectToServer()
         {
             ClientPacketHandler.Initialize();
-            ClientPacketHandler.SubscribeTo((int)ServerPacket.WelcomeMessage, (IPacketData data) =>
-            {
-                PacketWelcomeMessage msg = (PacketWelcomeMessage)data;
-                Debug.Log(msg.message);
-            });
-
+            Local = this;
             Subscribe();
 
             TCP.Connect(_ip, _port);
@@ -38,9 +35,16 @@ namespace Nadis.Net.Client
         public void SendData(int clientToSendOn, IPacketData data)
         {
             if (NetID != clientToSendOn) return;
-            TCP.TrySendData(data.Serialize());
+            TCP.TrySendData(data.Serialize().ToArray());
         }
 
+        public void SetID(int id)
+        {
+            if (_idSet) return;
+            NetID = id;
+            _idSet = true;
+        }
+        
         public void Subscribe()
         {
             Events.Net.SendAsClient += SendData;

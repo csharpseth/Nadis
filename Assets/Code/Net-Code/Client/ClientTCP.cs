@@ -15,7 +15,7 @@ namespace Nadis.Net.Client
         public TcpClient socket;
         private NetworkStream _stream;
         private byte[] _receiveBuffer;
-        private PacketBuffer _receivedPacket;
+        private PacketBuffer _packetBuffer;
         
         public void Connect(string ip, int port)
         {
@@ -26,7 +26,7 @@ namespace Nadis.Net.Client
             };
 
             _receiveBuffer = new byte[NetData.Default.BufferSize];
-            _receivedPacket = new PacketBuffer();
+            _packetBuffer = new PacketBuffer();
             socket.BeginConnect(ip, port, ConnectionCallback, null);
         }
 
@@ -64,7 +64,7 @@ namespace Nadis.Net.Client
                 Array.Copy(_receiveBuffer, data, size);
 
                 //Handle Data
-                _receivedPacket.Reset(HandleData(data));
+                _packetBuffer.Reset(HandleData(data));
 
                 BeginRead();
             }
@@ -78,31 +78,32 @@ namespace Nadis.Net.Client
         private bool HandleData(byte[] data)
         {
             int packetLength = 0;
-            _receivedPacket.SetBytes(data);
+            _packetBuffer.SetBytes(data);
 
-            if(_receivedPacket.UnreadLength() >= 4)
+            if(_packetBuffer.UnreadLength() >= 4)
             {
-                packetLength = _receivedPacket.ReadInt();
+                packetLength = _packetBuffer.ReadInt();
                 if (packetLength <= 0)
                     return true;
             }
-
-            while(packetLength > 0 && packetLength <= _receivedPacket.UnreadLength())
+            while(packetLength > 0 && packetLength <= _packetBuffer.UnreadLength())
             {
-                byte[] packetBytes = _receivedPacket.ReadBytes(packetLength);
+                byte[] packetBytes = _packetBuffer.ReadBytes(packetLength);
                 //NativeArray<byte> packetBytes = new NativeArray<byte>(_receivedPacket.ReadBytes(packetLength), Allocator.TempJob);
                 //Try to do this with the job system instead
                 ThreadManager.ExecuteOnMainThread(() =>
                 {
-                    PacketBuffer buffer = new PacketBuffer(packetBytes);
-                    int packetID = buffer.ReadInt();
-                    ClientPacketHandler.Handle(packetID, buffer);
-                    buffer.Dispose();
+                    using (PacketBuffer buffer = new PacketBuffer(packetBytes))
+                    {
+                        int packetID = buffer.ReadInt();
+                        ClientPacketHandler.Handle(packetID, buffer);
+                    }
                 });
 
-                if (_receivedPacket.UnreadLength() >= 4)
+                packetLength = 0;
+                if (_packetBuffer.UnreadLength() >= 4)
                 {
-                    packetLength = _receivedPacket.ReadInt();
+                    packetLength = _packetBuffer.ReadInt();
                     if (packetLength <= 0)
                         return true;
                 }
@@ -114,22 +115,19 @@ namespace Nadis.Net.Client
             return false;
         }
 
-        public void TrySendData(PacketBuffer buffer)
+        public void TrySendData(byte[] data)
         {
             try
             {
                 if(socket != null)
                 {
-                    buffer.WriteLength();
-                    _stream.BeginWrite(buffer.ToArray(), 0, buffer.Length(), null, null);
+                    _stream.BeginWrite(data, 0, data.Length, null, null);
                 }
             }
             catch (Exception e)
             {
                 Debug.LogError(e);
             }
-
-            buffer.Dispose();
         }
         /*
         struct HandlePacketBufferJob : IJob

@@ -50,11 +50,12 @@ namespace Nadis.Net.Client
         //You should never need to use ClientPacketID here.
         private static void PopulateHandlers()
         {
-            CreateHandler((int)ServerPacket.WelcomeMessage, new PacketWelcomeMessage(), (IPacketData data) => {
-                PacketWelcomeMessage msg = (PacketWelcomeMessage)data;
-                PlayerPopulatorSystem.CreatePlayer(msg.clientID);
+            CreateHandler((int)ServerPacket.PlayerConnection, new PacketPlayerConnection(), (IPacketData packet) => {
+                PlayerPopulatorSystem.SpawnPlayer((PacketPlayerConnection)packet);
             });
-            CreateHandler((int)SharedPacket.PlayerTransform, new PacketPlayerTransform());
+            CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), null);
+            CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), null);
+            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,
