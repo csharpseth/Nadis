@@ -61,7 +61,7 @@ public enum TweenType
 }
 public enum Space
 {
-    Local,
+    Local = 1,
     World
 }
 public enum Direction
@@ -100,10 +100,10 @@ public enum Side
 }
 public enum AnimatorTarget
 {
-    None,
-    head,
-    chest,
-    pelvis,
+    None = 1,
+    Head,
+    Chest,
+    Pelvis,
     Hands
 }
 

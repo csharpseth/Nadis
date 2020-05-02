@@ -7,6 +7,9 @@ public class NetTester : MonoBehaviour
 {
     private Server server;
     private Client client;
+    public bool LogText = false;
+    public bool LogWarn = false;
+    public bool LogError = true;
 
     private void Awake()
     {
@@ -29,5 +32,17 @@ public class NetTester : MonoBehaviour
             client = new Client();
             client.ConnectToServer();
         }
+
+        Log.LogText = LogText;
+        Log.LogWarnings = LogWarn;
+        Log.LogErrors = LogError;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (client != null)
+            Events.Net.DisconnectClient();
+        if (server != null)
+            server.Stop();
     }
 }

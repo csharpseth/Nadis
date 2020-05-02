@@ -24,8 +24,8 @@ public class ItemProjectileWeapon : ItemWeapon
     internal float _timeToAim;
     [SerializeField]
     internal WeaponFireType _fireType;
-    internal bool _aimed;
-    internal bool _aiming;
+    internal bool _aimed = false;
+    internal bool _aiming = false;
 
     [SerializeField]
     internal bool _toggleAim;
@@ -36,45 +36,46 @@ public class ItemProjectileWeapon : ItemWeapon
     private bool aimStarted = false;
     private float fireTime = 0f;
     private BipedProceduralAnimator anim;
+    private NetworkedPlayer player;
     private bool canFire = true;
-
-    internal override void Awake()
+    
+    public override void InitFromNetwork(int netID)
     {
-        base.Awake();
+        base.InitFromNetwork(netID);
         fireTime = fireDelay;
     }
 
-    public override void ActiveUpdate()
+    public override void ActiveUpdate(int ownerID)
     {
-        AimCheck();
-        FireCheck();
+        AimCheck(ownerID);
+        FireCheck(ownerID);
     }
 
-    private void FireCheck()
+    private void FireCheck(int ownerID)
     {
         if(canFire)
         {
             if (_fireType == WeaponFireType.Full && Inp.Interact.Primary)
             {
                 canFire = false;
-                Fire(0);
+                Fire(ownerID);
             }
             else if (_fireType == WeaponFireType.Semi && Inp.Interact.PrimaryDown)
             {
                 canFire = false;
-                Fire(0);
+                Fire(ownerID);
             }
         }
     }
 
-    private void AimCheck()
+    private void AimCheck(int ownerID)
     {
         if (_toggleAim)
         {
             if (Inp.Interact.SecondaryDown)
             {
                 _aimed = !_aimed;
-                Aim(0);
+                Aim(ownerID);
             }
         }
         else
@@ -82,26 +83,30 @@ public class ItemProjectileWeapon : ItemWeapon
             if (Inp.Interact.Secondary && _aimed == false)
             {
                 _aimed = true;
-                Aim(0);
+                Aim(ownerID);
             }
             else if (_aimed == true)
             {
                 _aimed = false;
-                Aim(0);
+                Aim(ownerID);
             }
         }
     }
 
-    public void Aim(ulong playerID)
+    public void Aim(int playerID)
     {
-        /*
-        if (anim == null)
-            anim = TesterMenu.GetAnimator(playerID);
-        */
-
+        if(player == null || player.NetID != playerID)
+        {
+            Events.Player.GetPlayer(playerID, ref player);
+            anim = player.Animator;
+        }
         if (_aimed)
         {
-            transform.SetParent(anim.TargetFrom(AnimatorTarget.head).target);
+            player.SendPlayerAnimatorTargetSet(_aimPosition, _aimRotation, AnimatorTarget.Hands, 5f, Space.Local, true, AnimatorTarget.Head, Side.Right);
+
+
+            /*
+            transform.SetParent(anim.TargetFrom(AnimatorTarget.Head).target);
 
             anim.SetHandTarget(transform, Side.Right, _aimHandPosition, _aimHandRotation);
 
@@ -109,7 +114,7 @@ public class ItemProjectileWeapon : ItemWeapon
                 t.SetParent(transform);
                 t.localPosition = _aimHandPosition;
                 t.localEulerAngles = _aimHandRotation;
-            });*/
+            });
 
             //anim.SetHandTarget(transform, Side.Right, _aimHandPosition);
             //anim.targets.rightHand.localEulerAngles = _aimHandRotation;
@@ -120,17 +125,22 @@ public class ItemProjectileWeapon : ItemWeapon
                 t.localEulerAngles = _aimRotation;
                 _aiming = false;
             });
+            */
         }
         else
         {
-            anim.EndCurrentHandTarget(0);
+
+            player.SendPlayerAnimatorTargetEnd(AnimatorTarget.Hands, Side.Right);
+            /*
+            anim.EndCurrentHandTarget(playerID);
             transform.SetParent(anim.targets.rightHand.obj);
             transform.localPosition = Vector3.zero;
             transform.localEulerAngles = _holdRotation;
+            */
         }
     }
 
-    public void Fire(ulong playerID)
+    public void Fire(int playerID)
     {
         if(Source != null && fireSound != null)
             Source.PlayOneShot(fireSound);

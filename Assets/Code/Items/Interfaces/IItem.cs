@@ -2,9 +2,9 @@
 {
     string Name { get; set; }
     int ID { get; set; }
-    ulong NetworkID { get; set; }
+    int NetID { get; }
 
-    void Interact(ulong interactorID);
+    void Interact(int playerID);
     void Hide(bool hide);
-    void Destroy(ulong netID);
+    void Destroy();
 }

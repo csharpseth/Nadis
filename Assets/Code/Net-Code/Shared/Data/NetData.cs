@@ -12,6 +12,7 @@ public static class NetData
         public const int MaxPlayers = 15;
         public const int BufferSize = 2048;
         public const string IP = "127.0.0.1";
+        public const int InventorySize = 7;
     }
 
     public static int LocalPlayerID = -1;

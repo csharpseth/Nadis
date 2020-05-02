@@ -1,10 +1,25 @@
-[04/28/2020]
--Completed Client & Server Packet Handlers
--Implemented Player Position, Rotation, & Animator
-   Data Syncing
+[Week: 4/27/20 - 5/1/20]
+Implemented:
+-Player Instantiation Sync
+-Created Server-Side Packet Handler
+-Player Position & Rotation Sync
+-Player Animation Data Sync
+-Player Target Sync( Set & End Target Seek )
+-Remote Clients Smoothly move to match
+   Received Positions
+-Player's Head Look Angle Sync
+-Disconnect: Needs Rework, Throws Errors
+-Implemented UDP protocol on top of TCP protocol
+-Converted Player Transform & Animation Data
+   packets to UDP
+-Basic Inventory Syncing
+-Item interaction Sync
+-Item Visibility Sync
+-Item Dropping Sync
+-Initial Item Sync: Giving the connecting player, all of
+   the already existent items in the scene & in inventories
 
-[04/26/2020]
--Began reconstructing NetCode
--Implemented a very easy to use system to quickly
-share data over network
--Started Player Synchronization Setup
+Bug Fixes:
+-Player target Syncing was always set to global space
+-Host Client's head was not visible to any other connected players
+-Fixed Disconnect Throwing Errors on Client & Server

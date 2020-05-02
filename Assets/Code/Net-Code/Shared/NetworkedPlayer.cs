@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Nadis.Net;
+using Nadis.Net.Client;
 
 public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccessor
 {
     public int NetID { get; private set; }
+    public BipedProceduralAnimator Animator { get { return animator; } }
     public bool Send = false;
     [Range(1, 30)]
     public int timeToCheckPerSecond = 1;
@@ -15,14 +17,38 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
 
     private Vector3 lastPosition;
     private float lastRotation;
+    private float lastHeadRotation;
+
+    private Transform head;
+
+    private BipedProceduralAnimator animator;
 
     public void InitFromNetwork(int playerID)
     {
         NetID = playerID;
         Send = (NetID == NetData.LocalPlayerID);
+        animator = GetComponent<BipedProceduralAnimator>();
+
+        head = animator.targets.head.defaultParent;
+
         Subscribe();
     }
 
+    private void Update()
+    {
+        if (Send == false) return;
+
+        //TEST
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            SendPlayerAnimatorTargetSet(new Vector3(0.2f, -0.2f, 0.5f), new Vector3(0f, 0f, 180f), AnimatorTarget.Hands, 5f, Space.Local, true, AnimatorTarget.Head, Side.Right);
+        }
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SendPlayerAnimatorTargetEnd(AnimatorTarget.Hands, Side.Right);
+        }
+    }
     private void LateUpdate()
     {
         if (Send == false) return;
@@ -37,6 +63,9 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         {
             float distance = (transform.position - lastPosition).sqrMagnitude;
             float angle = Mathf.Abs(transform.eulerAngles.y - lastRotation);
+            float headAngle = head.localEulerAngles.x;
+            float headAngleDiff = Mathf.Abs(headAngle - lastHeadRotation);
+
             if(distance >= MaxDistance)
             {
                 PacketPlayerPosition packet = new PacketPlayerPosition
@@ -44,7 +73,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
                     playerID = NetID,
                     playerPosition = transform.position
                 };
-                Events.Net.SendAsClient(NetID, packet);
+                Events.Net.SendAsClientUnreliable(NetID, packet);
 
                 lastPosition = transform.position;
             }
@@ -56,9 +85,20 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
                     playerID = NetID,
                     playerRotation = transform.eulerAngles.y
                 };
-                Events.Net.SendAsClient(NetID, packet);
+                Events.Net.SendAsClientUnreliable(NetID, packet);
 
                 lastRotation = transform.eulerAngles.y;
+            }
+
+            if(headAngleDiff >= maxRotBeforeSending)
+            {
+                PacketPlayerAnimatorHeadData packet = new PacketPlayerAnimatorHeadData
+                {
+                    playerID = NetID,
+                    headAngle = headAngle
+                };
+                Events.Net.SendAsClientUnreliable(NetID, packet);
+                lastHeadRotation = headAngle;
             }
 
             timer = 0f;
@@ -69,7 +109,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         PacketPlayerPosition data = (PacketPlayerPosition)packet;
         if (NetID != data.playerID) return;
 
-        transform.position = data.playerPosition;
+        Tween.FromToPosition(transform, data.playerPosition, CheckInterval, Space.World, false);
     }
     private void ReceivePlayerRotation(IPacketData packet)
     {
@@ -81,18 +121,121 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         transform.eulerAngles = rot;
     }
 
+    private void ReceivePlayerAnimatorTargetSet(IPacketData packet)
+    {
+        PacketPlayerAnimatorTargetSet data = (PacketPlayerAnimatorTargetSet)packet;
+        if (NetID != data.playerID) return;
+        
+        animator.SetTarget(data.targetsNewPosition, data.targetsNewRotation, data.target, data.speed, data.space, data.persistent, data.targetParent, data.side, null);
+    }
+    private void ReceivePlayerAnimatorEndTarget(IPacketData packet)
+    {
+        PacketPlayerAnimatorTargetEnd data = (PacketPlayerAnimatorTargetEnd)packet;
+        if (NetID != data.playerID) return;
+
+        animator.EndTarget(data.target, data.side);
+    }
+
+    private void ReceivePlayerAnimatorHeadData(IPacketData packet)
+    {
+        PacketPlayerAnimatorHeadData data = (PacketPlayerAnimatorHeadData)packet;
+        if (data.playerID != NetID) return;
+
+        Vector3 rot = head.transform.localEulerAngles;
+        rot.x = data.headAngle;
+        head.transform.localEulerAngles = rot;
+    }
+
+    private void PlayerDisconnected(IPacketData packet)
+    {
+        PacketDisconnectPlayer data = (PacketDisconnectPlayer)packet;
+        if (data.playerID != NetID) return;
+
+        Events.Player.UnSubscribe(NetID);
+        Destroy(gameObject);
+    }
+    private void DisconnectLocalPlayer()
+    {
+        Events.Player.UnSubscribe?.Invoke(NetID);
+        Destroy(gameObject);
+    }
+
+    private void GetPlayer(int playerID, ref NetworkedPlayer netPlayer)
+    {
+        if (playerID != NetID) return;
+        netPlayer = this;
+    }
+
+    public void SendPlayerAnimatorTargetSet(Vector3 pos, Vector3 rot, AnimatorTarget target, float speed, Space space, bool persistent, AnimatorTarget parent, Side side)
+    {
+        PacketPlayerAnimatorTargetSet packet = new PacketPlayerAnimatorTargetSet
+        {
+            playerID = NetID,
+            targetsNewPosition = pos,
+            targetsNewRotation = rot,
+            target = target,
+            speed = speed,
+            space = space,
+            persistent = persistent,
+            targetParent = parent,
+            side = side
+        };
+
+        Events.Net.SendAsClient(NetID, packet);
+
+        animator.SetTarget(pos, rot, target, speed, space, persistent, parent, side, null);
+    }
+    public void SendPlayerAnimatorTargetEnd(AnimatorTarget target, Side side)
+    {
+        PacketPlayerAnimatorTargetEnd packet = new PacketPlayerAnimatorTargetEnd
+        {
+            playerID = NetID,
+            target = target,
+            side = side
+        };
+        Events.Net.SendAsClient(NetID, packet);
+
+        animator.EndTarget(target, side);
+    }
 
     public void Subscribe()
     {
-        Nadis.Net.Client.ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerPosition, ReceivePlayerPosition);
-        Nadis.Net.Client.ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerRotation, ReceivePlayerRotation);
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerPosition, ReceivePlayerPosition);
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerRotation, ReceivePlayerRotation);
+
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorTargetSet, ReceivePlayerAnimatorTargetSet);
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorTargetEnd, ReceivePlayerAnimatorEndTarget);
+
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorHeadData, ReceivePlayerAnimatorHeadData);
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
+
+        Events.Net.DisconnectClient += DisconnectLocalPlayer;
+        Events.Player.GetPlayer += GetPlayer;
+
         Events.Player.UnSubscribe += UnSubscribe;
     }
-
     public void UnSubscribe(int netID)
     {
         if (NetID != netID) return;
-        Nadis.Net.Client.ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerPosition, ReceivePlayerPosition);
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerPosition, ReceivePlayerPosition);
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerRotation, ReceivePlayerRotation);
+
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorTargetSet, ReceivePlayerAnimatorTargetSet);
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorTargetEnd, ReceivePlayerAnimatorEndTarget);
+
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorHeadData, ReceivePlayerAnimatorHeadData);
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
+
+        Events.Net.DisconnectClient -= DisconnectLocalPlayer;
+        Events.Player.GetPlayer -= GetPlayer;
+
         Events.Player.UnSubscribe -= UnSubscribe;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (NetID != Client.Local.NetID) return;
+
+        Events.Net.DisconnectClient?.Invoke();
     }
 }

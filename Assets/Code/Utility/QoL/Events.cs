@@ -49,15 +49,6 @@ public struct InventoryEvents
 }
 public struct ItemEvents
 {
-    public Action<int, Vector3, Vector3, bool> OnRequestSpawnItem;
-    public Action<int, bool> OnRequestDestroyItem;
-
-    public delegate void OnItemInteract(int instanceID, int playerID, Side side, bool send);
-    public OnItemInteract Interact;
-    public Action<int, bool> Reset;
-    public Action<int, bool, bool> Hide;
-    public Action<int, Vector3, Vector3, bool> OnItemTransform;
-    public Action<int, Vector3, Vector3> OnSetItemTransform;
     
 }
 public struct BipedAnimatorEvents
@@ -81,6 +72,10 @@ public struct BipedAnimatorEvents
 }
 public struct PlayerEvents
 {
+    public delegate void OnGetPlayerAnimator(int playerID, ref BipedProceduralAnimator animator);
+    public delegate void OnGetPlayer(int playerID, ref NetworkedPlayer netPlayer);
+    public OnGetPlayerAnimator GetPlayerAnimator;
+    public OnGetPlayer GetPlayer;
     public Action<int> UnSubscribe;
 }
 public struct PlayerStatEvents
@@ -125,5 +120,10 @@ public struct Notifications
 public struct Networking
 {
     public delegate void ClientDataCallback(int clientToSendAs, IPacketData packet);
+    public delegate void ClientDisconnect();
+
     public ClientDataCallback SendAsClient;
+    public ClientDataCallback SendAsClientUnreliable;
+    public ClientDisconnect DisconnectClient;
+
 }

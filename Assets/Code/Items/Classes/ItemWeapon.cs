@@ -11,12 +11,13 @@ public abstract class ItemWeapon : Item, IWeapon
     internal float _damage;
     [SerializeField]
     internal float _range;
-
-    internal override void Awake()
+    
+    public override void InitFromNetwork(int netID)
     {
-        base.Awake();
+        base.InitFromNetwork(netID);
         Source = GetComponent<AudioSource>();
     }
-    public override abstract void ActiveUpdate();
+
+    public override abstract void ActiveUpdate(int ownerID);
     public override abstract void Update();
 }

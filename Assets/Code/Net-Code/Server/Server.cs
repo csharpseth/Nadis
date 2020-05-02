@@ -9,72 +9,38 @@ namespace Nadis.Net.Server
 {
     public class Server
     {
+        public static Server instance;
         public int MaxPlayers { get; private set; }
         public int Port { get; private set; }
 
-        private TcpListener _socket;
+        private ServerTCP TCP;
+        public ServerUDP UDP;
 
-        public void Start(int maxPlayers = NetData.Default.MaxPlayers, int port = NetData.Default.Port)
+        public Server(int maxPlayers = NetData.Default.MaxPlayers, int port = NetData.Default.Port)
         {
+            if (instance == null) instance = this;
             MaxPlayers = maxPlayers;
             Port = port;
 
-            _socket = new TcpListener(IPAddress.Any, Port);
+            TCP = new ServerTCP(Port);
+            UDP = new ServerUDP(Port);
+        }
+
+        public void Start()
+        {
             ClientManager.Init(MaxPlayers);
+            ItemManager.Init();
             ServerPacketHandler.Initialize();
 
-            _socket.Start();
-            BeginListenForClient();
+            TCP.Start();
+            UDP.Start();
 
-            Debug.Log("Server Started Successfully");
+            Log.Not("Server Started Successfully");
         }
-
-        private void BeginListenForClient()
+        public void Stop()
         {
-            _socket.BeginAcceptTcpClient(new AsyncCallback(ClientConnectCallback), null);
-        }
-
-        private void ClientConnectCallback(IAsyncResult ar)
-        {
-            TcpClient client = _socket.EndAcceptTcpClient(ar);
-            BeginListenForClient();
-
-            if (client == null)
-                return;
-
-            int clientID = ClientManager.TryAddClient(client);
-            if (clientID != -1)
-            {
-                //Send all ALREADY connected players to the Client
-                int[] clients = ClientManager.Clients.ToArray();
-                for (int i = 0; i < clients.Length; i++)
-                {
-                    int id = clients[i];
-                    if (id == clientID) continue;
-                    PacketPlayerConnection playerData = new PacketPlayerConnection
-                    {
-                        playerID = id,
-                        playerIsLocal = false
-                    };
-                    ServerSend.ReliableToOne(playerData, clientID);
-                }
-
-                //Send THIS clients data to this client so they are sync'd with the server
-                PacketPlayerConnection localClientData = new PacketPlayerConnection
-                {
-                    playerID = clientID,
-                    playerIsLocal = true
-                };
-                ServerSend.ReliableToOne(localClientData, clientID);
-
-                //TODO Send this clients data to all already connected players
-                localClientData.playerIsLocal = false;
-                ServerSend.ReliableToAll(localClientData, clientID);
-
-                return;
-            }
-
-            Debug.Log("A Player Failed To Connect To The Server.");
+            ClientManager.Clear(true);
+            TCP.Stop();
         }
     }
 }

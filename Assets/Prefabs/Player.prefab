@@ -46,7 +46,7 @@ MonoBehaviour:
   ChainLength: 2
   Target: {fileID: 4525655281037555342}
   Pole: {fileID: 1029430183923751002}
-  Iterations: 10
+  Iterations: 8
   Delta: 0.001
   SnapBackStrength: 1
 --- !u!1 &312070810501643340
@@ -230,7 +230,7 @@ MonoBehaviour:
   ChainLength: 2
   Target: {fileID: 4525655281444700191}
   Pole: {fileID: 4525655281891648557}
-  Iterations: 10
+  Iterations: 8
   Delta: 0.001
   SnapBackStrength: 1
 --- !u!1 &1759124718803179750
@@ -826,7 +826,7 @@ MonoBehaviour:
   ChainLength: 2
   Target: {fileID: 4525655282147218611}
   Pole: {fileID: 2178259383572788869}
-  Iterations: 6
+  Iterations: 4
   Delta: 0.001
   SnapBackStrength: 1
 --- !u!1 &3209342257299623109
@@ -2148,28 +2148,34 @@ MonoBehaviour:
     - identifier: crouch
       localPoints:
       - position: {x: 0, y: 0.5, z: -0.1}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 8
       persistent: 1
       target: 3
     - identifier: jump
       localPoints:
       - position: {x: 0, y: 0.45, z: -0.05}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 8
       - position: {x: 0, y: 1, z: 0}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 15
       persistent: 0
       target: 3
     - identifier: land
       localPoints:
       - position: {x: 0, y: 0.55, z: 0}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 7
       persistent: 0
       target: 3
     - identifier: punch
       localPoints:
       - position: {x: 0.2, y: 1.5, z: -0.2}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 5
       - position: {x: 0.1, y: 1.8, z: 0.3}
+        rotation: {x: 0, y: 0, z: 0}
         speed: 10
       persistent: 0
       target: 4
@@ -2179,36 +2185,42 @@ MonoBehaviour:
       target: {fileID: 828304476539723590}
       obj: {fileID: 0}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     head:
       target: {fileID: 4525655282531119726}
       obj: {fileID: 8682224545778571306}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     chest:
       target: {fileID: 4525655282147218611}
       obj: {fileID: 7642990346887490324}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     pelvis:
       target: {fileID: 4918069266706090086}
       obj: {fileID: 4918069266706090086}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     rightHip:
       target: {fileID: 1989448419606376763}
       obj: {fileID: 1989448419606376763}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     leftHip:
       target: {fileID: 7563851197581289004}
       obj: {fileID: 7563851197581289004}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     rightFoot:
@@ -2225,18 +2237,20 @@ MonoBehaviour:
       target: {fileID: 4525655281828083790}
       obj: {fileID: 7767414987213060671}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
     leftHand:
       target: {fileID: 4525655281037555342}
       obj: {fileID: 1702075050500153148}
       defaultPosition: {x: 0, y: 0, z: 0}
+      defaultRotation: {x: 0, y: 0, z: 0}
       defaultParent: {fileID: 0}
       animator: {fileID: 0}
   grounded: 0
-  inputDirX: 0
-  inputDirY: 0
+  inputDir: {x: 0, y: 0}
   moving: 0
+  timesToCheclPerSecond: 15
   handTargetPersistent: 0
   overrideNormalHandCondition: 0
   maxHandTargetDistFromHand: 0.1
@@ -2291,6 +2305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleKey: 9
   firstPersonCam: {fileID: 4525655281350843675}
+  listener: {fileID: 0}
   thirdPersonCam: {fileID: 1445468075385315467}
   headRenderer: {fileID: 7140081676571346528}
   debugAllowed: 1
@@ -2344,7 +2359,7 @@ MonoBehaviour:
   reach: 5
   interactionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   testItem: {fileID: 2248041352945663740, guid: 1004c6b9fc6b5fc459fcab88aade234a,
     type: 3}
 --- !u!114 &6209607702987267839
@@ -2760,7 +2775,7 @@ MonoBehaviour:
   ChainLength: 2
   Target: {fileID: 4525655282382020827}
   Pole: {fileID: 4525655282277907180}
-  Iterations: 10
+  Iterations: 8
   Delta: 0.001
   SnapBackStrength: 1
 --- !u!1 &7337308004653217778
@@ -2998,7 +3013,7 @@ MonoBehaviour:
   ChainLength: 2
   Target: {fileID: 4525655281828083790}
   Pole: {fileID: 5838656092010955143}
-  Iterations: 10
+  Iterations: 8
   Delta: 0.001
   SnapBackStrength: 1
 --- !u!1 &8741618298153042160

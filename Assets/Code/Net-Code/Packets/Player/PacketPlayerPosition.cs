@@ -10,9 +10,12 @@ public struct PacketPlayerPosition : IPacketData
     public void Deserialize(PacketBuffer buffer)
     {
         playerID = buffer.ReadInt();
+        playerPosition = buffer.ReadVector3();
+        /*
         playerPosition.x = buffer.ReadFloat();
         playerPosition.y = buffer.ReadFloat();
         playerPosition.z = buffer.ReadFloat();
+        */
     }
 
     public PacketBuffer Serialize()
@@ -20,9 +23,12 @@ public struct PacketPlayerPosition : IPacketData
         PacketBuffer buffer = new PacketBuffer(PacketID);
 
         buffer.Write(playerID);
+        buffer.Write(playerPosition);
+        /*
         buffer.Write(playerPosition.x);
         buffer.Write(playerPosition.y);
         buffer.Write(playerPosition.z);
+        */
         buffer.WriteLength();
 
         return buffer;

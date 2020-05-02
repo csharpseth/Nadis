@@ -8,7 +8,15 @@ public enum SharedPacket
 {
     PlayerPosition = 1,
     PlayerRotation,
+    PlayerDisconnected,
     PlayerAnimatorData,
+    PlayerAnimatorTargetSet,
+    PlayerAnimatorTargetEnd,
+    PlayerAnimatorHeadData,
+    ItemPosition,
+    ItemPickup,
+    ItemDrop,
+    ItemVisibility,
 }
 
 
@@ -20,7 +28,9 @@ public enum SharedPacket
 public enum ServerPacket
 {
     PlayerConnection = 250,
-
+    PlayerInventoryData,
+    SpawnItem,
+    DestroyItem,
 }
 
 //Starts at 500
@@ -30,5 +40,7 @@ public enum ServerPacket
 /// </summary>
 public enum ClientPacket
 {
-
+    PlayerUDPStart = 500,
+    SpawnItemRequest,
+    DestroyItemRequest,
 }

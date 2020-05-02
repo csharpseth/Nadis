@@ -282,6 +282,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
 
     //Hand IK Interaction Functions ( Use to override the boiler plate for a specific or both hands
     // and move it however specified)
+    /*
     public void SetHandTargetPosition(int netID, Vector3 position, Side side, float speed = 0f, AnimatorTarget target = AnimatorTarget.None, bool persistent = false)
     {
         if (NetID != netID || lerpDatas.IsNull) return;
@@ -314,6 +315,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
             }
         }
     }
+    */
     public void SetHandTargetPositions(Vector3[] positions, Side side, float speed = 0f, Transform parent = null, bool local = true)
     {
         if (side == Side.Right || side == Side.Both && targets.rightHand.lerp == null)
@@ -356,6 +358,29 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
 
         targets.rightHand.Reset();
         targets.leftHand.Reset();
+    }
+
+    public void SetTarget(Vector3 newPosition, Vector3 newRotation, AnimatorTarget target, float speed, Space lerpSpace = Space.Local, bool persistent = false, AnimatorTarget parentTarget = AnimatorTarget.None, Side side = Side.Right, Action doneCallback = null)
+    {
+        IKTarget ikTarget = TargetFrom(target, side);
+        if (ikTarget == IKTarget.Empty) return;
+
+        Transform parent = ikTarget.defaultParent;
+        if (parentTarget != AnimatorTarget.None && lerpSpace == Space.Local)
+            parent = TargetFrom(parentTarget).target;
+
+        ikTarget.SetParent(parent);
+        bool local = lerpSpace == Space.Local;
+
+        ikTarget.lerp = lerpDatas.GetInstance();
+        ikTarget.lerp.Init(ikTarget, newPosition, newRotation, speed, local, persistent, doneCallback);
+    }
+    public void EndTarget(AnimatorTarget target, Side side = Side.Right)
+    {
+        IKTarget ikTarget = TargetFrom(target, side);
+        if (ikTarget == IKTarget.Empty) return;
+
+        ikTarget.Reset();
     }
 
     //This is where predefined points will be sought out by whatever the predetermined Target is.
@@ -441,11 +466,11 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         {
             case AnimatorTarget.None:
                 return IKTarget.Empty;
-            case AnimatorTarget.head:
+            case AnimatorTarget.Head:
                 return targets.head;
-            case AnimatorTarget.chest:
+            case AnimatorTarget.Chest:
                 return targets.chest;
-            case AnimatorTarget.pelvis:
+            case AnimatorTarget.Pelvis:
                 return targets.pelvis;
             case AnimatorTarget.Hands:
                 if (side == Side.Right)
@@ -475,13 +500,21 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         return temp;
     }
 
+    private void GetAnimator(int playerID, ref BipedProceduralAnimator animator)
+    {
+        if (playerID != NetID) return;
+        animator = this;
+    }
+
     //IEventAccessor
     public void Subscribe()
     {
-        Events.BipedAnimator.SetHandTargetPosition += SetHandTargetPosition;
+        //Events.BipedAnimator.SetHandTargetPosition += SetHandTargetPosition;
         Events.BipedAnimator.EndCurrentHandTarget += EndCurrentHandTarget;
         Events.BipedAnimator.ExecuteAnimation += ExecuteAnimation;
         Events.BipedAnimator.EndAnimation += EndAnimation;
+
+        Events.Player.GetPlayerAnimator += GetAnimator;
 
         Nadis.Net.Client.ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorData, SetMoveData);
 
@@ -491,10 +524,13 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
     {
         if (NetID != netID) return;
 
-        Events.BipedAnimator.SetHandTargetPosition -= SetHandTargetPosition;
+        //Events.BipedAnimator.SetHandTargetPosition -= SetHandTargetPosition;
         Events.BipedAnimator.EndCurrentHandTarget -= EndCurrentHandTarget;
         Events.BipedAnimator.ExecuteAnimation -= ExecuteAnimation;
         Events.BipedAnimator.EndAnimation -= EndAnimation;
+
+        Events.Player.GetPlayerAnimator -= GetAnimator;
+
         Events.Player.UnSubscribe -= UnSubscribe;
     }
 
@@ -515,7 +551,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
                     playerInputDir = inputDir,
                     playerGrounded = grounded
                 };
-                Events.Net.SendAsClient(NetID, packet);
+                Events.Net.SendAsClientUnreliable(NetID, packet);
 
                 lastInputDir = inputDir;
                 lastGrounded = grounded;

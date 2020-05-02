@@ -5,6 +5,7 @@ public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
     public static PerspectiveController ins;
     public KeyCode toggleKey = KeyCode.Tab;
     public Camera firstPersonCam;
+    public AudioListener listener;
     public Camera thirdPersonCam;
     public SkinnedMeshRenderer headRenderer;
     private bool firstPerson = false;
@@ -30,6 +31,8 @@ public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
             debugObject = GameObject.FindGameObjectWithTag("Debug View");
             debugObject.SetActive(false);
         }
+
+        listener = firstPersonCam.GetComponent<AudioListener>();
 
         if (noDisplay)
         {
@@ -81,8 +84,15 @@ public class PerspectiveController : MonoBehaviour, IDisableIfRemotePlayer
 
     public void Disable(bool disabled)
     {
-        firstPersonCam.gameObject.SetActive(!disabled);
-        thirdPersonCam.gameObject.SetActive(!disabled);
+        headRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+
+        firstPersonCam.enabled = !disabled;
+        thirdPersonCam.enabled = !disabled;
+        if (listener == null) listener = firstPersonCam.GetComponent<AudioListener>();
+        if (listener == null) listener = thirdPersonCam.GetComponent<AudioListener>();
+        
+        listener.enabled = !disabled;
+
         noDisplay = disabled;
     }
 }

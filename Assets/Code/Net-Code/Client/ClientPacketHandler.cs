@@ -51,11 +51,51 @@ namespace Nadis.Net.Client
         private static void PopulateHandlers()
         {
             CreateHandler((int)ServerPacket.PlayerConnection, new PacketPlayerConnection(), (IPacketData packet) => {
-                PlayerPopulatorSystem.SpawnPlayer((PacketPlayerConnection)packet);
+                PacketPlayerConnection data = (PacketPlayerConnection)packet;
+
+                PlayerPopulatorSystem.SpawnPlayer(data);
+                if(data.playerIsLocal)
+                {
+                    UnityEngine.Debug.Log("CLIENT :: Attempting To Establish UDP Connection");
+                    Client.Local.UDP.Connect(Client.Local.TCP.LocalPort, data.playerID);
+                }
             });
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), null);
             CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), null);
             CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), null);
+
+            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), null);
+            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), null);
+            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), null);
+            CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), null);
+            CreateHandler((int)ServerPacket.PlayerInventoryData, new PacketPlayerInventoryData(), (IPacketData packet) =>
+            {
+                PacketPlayerInventoryData data = (PacketPlayerInventoryData)packet;
+                Inventory.CreateInventory(data.playerID, data.size);
+            });
+
+            CreateHandler((int)ServerPacket.SpawnItem, new PacketItemSpawn(), (IPacketData packet) =>
+            {
+                Inventory.instance.ServerSpawnItem(packet);
+            });
+            CreateHandler((int)SharedPacket.ItemPosition, new PacketItemPosition(), null);
+            CreateHandler((int)SharedPacket.ItemPickup, new PacketItemPickup(), (IPacketData packet) =>
+            {
+                PacketItemPickup data = (PacketItemPickup)packet;
+                Inventory.MoveItemToInventory(data.NetworkID, data.PlayerID);
+            });
+            CreateHandler((int)ServerPacket.DestroyItem, new PacketItemDestroy(), (IPacketData packet) => 
+            {
+                Inventory.instance.ServerDestroyItem(packet);
+            });
+            CreateHandler((int)SharedPacket.ItemVisibility, new PacketItemVisibility(), (IPacketData packet) =>
+            {
+                Inventory.instance.ServerHideItem(packet);
+            });
+            CreateHandler((int)SharedPacket.ItemDrop, new PacketItemDrop(), (IPacketData packet) =>
+            {
+                Inventory.instance.ServerDropItem(packet);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

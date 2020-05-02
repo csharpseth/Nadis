@@ -62,6 +62,7 @@ public class PlayerUIController : MonoBehaviour
     }
     public void OnItemAddedToInventory(Item ent, int index)
     {
+        return;
         slots[index].content = ent;
         slots[index].Update();
     }

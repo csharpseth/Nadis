@@ -1,5 +1,5 @@
 ﻿public interface IUsable
 {
-    void ActiveUpdate();
+    void ActiveUpdate(int ownerID);
     void Update();
 }

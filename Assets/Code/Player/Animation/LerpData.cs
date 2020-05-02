@@ -179,6 +179,7 @@ public class LerpData
             return;
 
         target.localPosition = Vector3.Lerp(target.localPosition, nextPos.position, nextPos.speed * Time.deltaTime);
+        target.localEulerAngles = nextPos.rotation;
         dist = (nextPos.position - target.localPosition).sqrMagnitude;
 
         if (dist <= FinishThreshold)
@@ -193,6 +194,7 @@ public class LerpData
             return;
 
         target.position = Vector3.Lerp(target.position, nextPos.position, nextPos.speed * Time.deltaTime);
+        target.eulerAngles = nextPos.rotation;
         float dist = (nextPos.position - target.position).sqrMagnitude;
         if (dist <= FinishThreshold)
         {
@@ -200,10 +202,11 @@ public class LerpData
         }
     }
 
-    public void Init(IKTarget tar, Vector3 pos, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
+    public void Init(IKTarget tar, Vector3 pos, Vector3 rot, float speed, bool local = true, bool persistent = false, Action doneCallback = null)
     {
         target = tar;
         nextPos.position = pos;
+        nextPos.rotation = rot;
         nextPos.speed = speed;
         finalDestination.position = pos;
         this.local = local;

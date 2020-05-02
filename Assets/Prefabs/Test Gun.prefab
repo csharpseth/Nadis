@@ -12,12 +12,10 @@ GameObject:
   - component: {fileID: 8806304162571016803}
   - component: {fileID: 2957404327785604762}
   - component: {fileID: 7029116137689217868}
-  - component: {fileID: 2737811486879539029}
-  - component: {fileID: 8591079604412610770}
   - component: {fileID: -7657243224234270585}
   - component: {fileID: 6697769632939838649}
   - component: {fileID: -881396984027143802}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Test Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +99,7 @@ MonoBehaviour:
   _damage: 10
   _range: 100
   _aimPosition: {x: 0.2, y: -0.2, z: 0.5}
-  _aimRotation: {x: 0, y: 0, z: 0}
+  _aimRotation: {x: -90, y: 0, z: 180}
   _aimHandPosition: {x: 0, y: 0, z: 0}
   _aimHandRotation: {x: 0, y: 0, z: 180}
   _holdRotation: {x: 0, y: 180, z: 0}
@@ -111,71 +109,6 @@ MonoBehaviour:
   _fireType: 3
   _toggleAim: 1
   fireSound: {fileID: 8300000, guid: 22e0dc8ab1d1dfe4cba9ca20afad3977, type: 3}
---- !u!114 &2737811486879539029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546049921307054662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 209037615, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkedInstanceId: 0
-  PrefabHash: 11032729822346889531
-  PrefabHashGenerator: Test Gun
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
---- !u!114 &8591079604412610770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546049921307054662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -410691123, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FixedSendsPerSecond: 20
-  AssumeSyncedSends: 1
-  InterpolatePosition: 1
-  SnapDistance: 10
-  InterpolateServer: 1
-  MinMeters: 0.15
-  MinDegrees: 1.5
-  ExtrapolatePosition: 0
-  MaxSendsToExtrapolate: 5
-  Channel: 
-  EnableRange: 0
-  EnableNonProvokedResendChecks: 0
-  DistanceSendrate:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 20
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 500
-      value: 20
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!54 &-7657243224234270585
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -36,8 +36,12 @@ namespace Nadis.Net
             for (int i = 0; i < amount; i++)
             {
                 PacketPlayerConnection temp = playersToSpawn.Dequeue();
-                GameObject ply = Instantiate(playerPrefab); //Add support for a specific position from the packet
-                if(temp.playerIsLocal == false)
+                GameObject ply = Instantiate(playerPrefab, temp.playerPosition, Quaternion.identity);
+                Vector3 tempRot = ply.transform.eulerAngles;
+                tempRot.y = temp.playerRotation;
+                ply.transform.eulerAngles = tempRot;
+
+                if (temp.playerIsLocal == false)
                 {
                     IDisableIfRemotePlayer[] disable = ply.GetComponentsInChildren<IDisableIfRemotePlayer>();
                     for (int j = 0; j < disable.Length; j++)

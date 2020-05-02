@@ -19,7 +19,7 @@ namespace Nadis.Net.Server
         {
             if (handlers.ContainsKey(packetID) == false)
             {
-                UnityEngine.Debug.LogErrorFormat("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
+                Log.Err("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
                 return;
             }
             
@@ -57,19 +57,100 @@ namespace Nadis.Net.Server
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), (IPacketData data) =>
             {
                 PacketPlayerPosition plyPos = (PacketPlayerPosition)data;
-                ServerSend.ReliableToAll(plyPos, plyPos.playerID);
+                ServerSend.UnReliableToAll(plyPos, plyPos.playerID);
             });
 
             CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), (IPacketData data) =>
             {
                 PacketPlayerRotation plyRot = (PacketPlayerRotation)data;
-                ServerSend.ReliableToAll(plyRot, plyRot.playerID);
+                ServerSend.UnReliableToAll(plyRot, plyRot.playerID);
             });
 
             CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), (IPacketData data) =>
             {
                 PacketPlayerAnimatorData plyAnimData = (PacketPlayerAnimatorData)data;
-                ServerSend.ReliableToAll(plyAnimData, plyAnimData.playerID);
+                ServerSend.UnReliableToAll(plyAnimData, plyAnimData.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorTargetSet plyAnimTargetSet = (PacketPlayerAnimatorTargetSet)data;
+                ServerSend.ReliableToAll(plyAnimTargetSet, plyAnimTargetSet.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorTargetEnd plyAnimTargetEnd = (PacketPlayerAnimatorTargetEnd)data;
+                ServerSend.ReliableToAll(plyAnimTargetEnd, plyAnimTargetEnd.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorHeadData plyAnimHeadData = (PacketPlayerAnimatorHeadData)data;
+                ServerSend.UnReliableToAll(plyAnimHeadData, plyAnimHeadData.playerID);
+            });
+
+            CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), (IPacketData data) => 
+            {
+                PacketDisconnectPlayer packet = (PacketDisconnectPlayer)data;
+                ClientManager.DisconnectClient(packet.playerID);
+                ServerSend.ReliableToAll(packet, packet.playerID);
+            });
+
+            CreateHandler((int)ClientPacket.SpawnItemRequest, new PacketItemSpawnRequest(), (IPacketData data) =>
+            {
+                PacketItemSpawnRequest req = (PacketItemSpawnRequest)data;
+                int netID = ItemManager.AddItem(req.ItemID, req.ItemPosition);
+                PacketItemSpawn cmd = new PacketItemSpawn
+                {
+                    ItemID = req.ItemID,
+                    NetworkID = netID,
+                    ItemPosition = req.ItemPosition
+                };
+                ServerSend.ReliableToAll(cmd);
+            });
+
+            CreateHandler((int)SharedPacket.ItemPosition, new PacketItemPosition(), (IPacketData data) =>
+            {
+                PacketItemPosition req = (PacketItemPosition)data;
+                ItemManager.UpdateItemPosition(req.NetworkID, req.ItemPosition);
+                ServerSend.UnReliableToAll(req);
+            });
+
+            CreateHandler((int)SharedPacket.ItemPickup, new PacketItemPickup(), (IPacketData data) =>
+            {
+                PacketItemPickup req = (PacketItemPickup)data;
+                if(ItemManager.MoveItemToInventory(req.NetworkID, req.PlayerID))
+                    ServerSend.ReliableToAll(req);
+                else
+                    Log.Err("SERVER :: Failed To Move Item({0}) To Player({1})'s Inventory!", req.NetworkID, req.PlayerID);
+            });
+            CreateHandler((int)ClientPacket.DestroyItemRequest, new PacketItemDestroyRequest(), (IPacketData data) =>
+            {
+                PacketItemDestroyRequest req = (PacketItemDestroyRequest)data;
+                if(ItemManager.RemoveItem(req.NetworkID))
+                {
+                    PacketItemDestroy cmd = new PacketItemDestroy
+                    {
+                        NetworkID = req.NetworkID
+                    };
+                    ServerSend.ReliableToAll(cmd);
+                }
+            });
+            CreateHandler((int)SharedPacket.ItemVisibility, new PacketItemVisibility(), (IPacketData data) =>
+            {
+                ServerSend.ReliableToAll(data);
+            });
+            CreateHandler((int)SharedPacket.ItemDrop, new PacketItemDrop(), (IPacketData data) =>
+            {
+                PacketItemDrop req = (PacketItemDrop)data;
+                if (ItemManager.MoveItemToWorld(req.NetworkID, req.PlayerID))
+                {
+                    Log.Txt("SERVER :: Moved Item From Inventory to World!");
+                    ServerSend.ReliableToAll(data);
+                }
+                else
+                    Log.Err("SERVER :: Failed To Move Item({0}) From Inventory({1}) To World", req.NetworkID, req.PlayerID);
             });
         }
 

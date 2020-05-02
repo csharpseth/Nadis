@@ -32,8 +32,31 @@ namespace Nadis.Net.Server
 
         public static ServerClientData GetClient(int clientID)
         {
-            if (ClientExists(clientID) == false) return default;
+            if (ClientExists(clientID) == false) return null;
             return _clientDictionary[clientID];
+        }
+        public static void DisconnectClient(int clientID, bool send = false)
+        {
+            if (ClientExists(clientID) == false) return;
+            ServerClientData client = GetClient(clientID);
+            client.Disconnect();
+            int index = -1;
+            for (int i = 0; i < _clients.Count; i++)
+            {
+                if (_clients[i] == clientID) index = i;
+            }
+            //Send a Disconnect Command to all Clients
+            if(send)
+            {
+                PacketDisconnectPlayer packet = new PacketDisconnectPlayer
+                {
+                    playerID = clientID
+                };
+                ServerSend.ReliableToAll(packet, clientID);
+            }
+
+            _clients.RemoveAt(index);
+            _clientDictionary.Remove(clientID);
         }
 
         private static int NextID()
@@ -57,6 +80,7 @@ namespace Nadis.Net.Server
                 ServerClientData cd = new ServerClientData(socket, clientID);
                 _clientDictionary.Add(clientID, cd);
                 _clients.Add(clientID);
+                ItemManager.CreateInventory(clientID);
             }
             catch (Exception e)
             {
@@ -80,6 +104,7 @@ namespace Nadis.Net.Server
                 for (int i = 0; i < _clients.Count; i++)
                 {
                     if (_clients[i] != clientID) continue;
+
                     _clients.Remove(_clients[i]);
                 }
             }
@@ -88,6 +113,14 @@ namespace Nadis.Net.Server
                 Debug.LogError(e);
             }
         }
-
+        
+        public static void Clear(bool send)
+        {
+            for (int i = 0; i < _clients.Count; i++)
+            {
+                int id = _clients[i];
+                DisconnectClient(id, send);
+            }
+        }
     }
 }

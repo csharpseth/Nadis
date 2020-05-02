@@ -88,6 +88,7 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
     public void Disable(bool disabled)
     {
         this.disabled = disabled;
+        rb.isKinematic = disabled;
     }
 }
 
@@ -123,5 +124,6 @@ public struct MovementData
 public struct SpeedProfile
 {
     public PlayerMoveState moveState;
+    [Range(0f, 1.5f)]
     public float speedPercent;
 }

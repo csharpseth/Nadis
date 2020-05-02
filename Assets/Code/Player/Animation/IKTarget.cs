@@ -10,6 +10,8 @@ public class IKTarget
     [HideInInspector]
     public Vector3 defaultPosition;
     [HideInInspector]
+    public Vector3 defaultRotation;
+    [HideInInspector]
     public Transform defaultParent;
     [HideInInspector]
     public LerpData lerp = null;
@@ -37,6 +39,7 @@ public class IKTarget
     public Quaternion localRotation { get { return target.localRotation; } set { target.localRotation = value; } }
 
     public Vector3 localEulerAngles { get { return target.localEulerAngles; } set { target.localEulerAngles = value; } }
+    public Vector3 eulerAngles { get { return target.eulerAngles; } set { target.eulerAngles = value; } }
     public void SetParent(Transform t) { target.SetParent(t); }
 
     public static IKTarget Empty { get { return default(IKTarget); } }
@@ -44,6 +47,7 @@ public class IKTarget
     public void Init(BipedProceduralAnimator anim)
     {
         defaultPosition = target.localPosition;
+        defaultRotation = target.localEulerAngles;
         defaultParent = target.parent;
         animator = anim;
     }
@@ -54,6 +58,6 @@ public class IKTarget
         reset = true;
         SetParent(defaultParent);
         lerp = animator.lerpDatas.GetInstance();
-        lerp.Init(this, defaultPosition, ReturnSpeed, true, false, Reset); ;
+        lerp.Init(this, defaultPosition, defaultRotation, ReturnSpeed, true, false, Reset); ;
     }
 }

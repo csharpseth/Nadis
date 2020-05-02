@@ -62,7 +62,7 @@ public class EntityContainer<T> where T : Item
 
         return index;
     }
-    public T GetItem(int index)
+    public T GetItemAt(int index)
     {
         T item = null;
 
@@ -76,13 +76,13 @@ public class EntityContainer<T> where T : Item
 
         return item;
     }
-    public T GetItem(ulong networkID)
+    public T GetItem(int networkID)
     {
         T item = null;
 
         for (int i = 0; i < _size; i++)
         {
-            if(_content[i].NetworkID == networkID)
+            if(_content[i] != null && _content[i].NetID == networkID)
             {
                 item = _content[i];
                 break;

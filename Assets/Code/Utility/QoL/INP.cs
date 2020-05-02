@@ -259,5 +259,24 @@ public struct InputInteract
             return board || pad;
         }
     }
+    public bool DropDown
+    {
+        get
+        {
+            bool board = false;
+            bool pad = false;
+
+            if (UseBoard)
+            {
+                board = ActiveBoard.gKey.wasPressedThisFrame;
+            }
+            if (UsePad)
+            {
+                pad = ActivePad.yButton.wasPressedThisFrame;
+            }
+
+            return board || pad;
+        }
+    }
 
 }
