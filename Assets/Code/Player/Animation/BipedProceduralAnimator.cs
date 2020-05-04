@@ -7,6 +7,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
     public ProceduralAnimationData data;
     public AnimationConfig animations;
     [Space(10)]
+    public Transform root;
     public BipedIKTargetGroup targets;
 
     #region Player Move Data
@@ -89,11 +90,12 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         lerpDatas = new Pool<LerpData>(100, true);
         footLerpDatas = new Pool<FootLerpData>(500, true);
 
-
+        targets.PopulateFrom(root, this);
 
         nextRight =  targets.rightFoot.position;
         nextLeft =  targets.leftFoot.position;
 
+        /*
         targets.rightFoot.Init(this);
         targets.leftFoot.Init(this);
         targets.head.Init(this);
@@ -101,6 +103,7 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         targets.pelvis.Init(this);
         targets.rightHand.Init(this);
         targets.leftHand.Init(this);
+        */
         Subscribe();
         initialized = true;
     }
@@ -152,30 +155,34 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
             }
         }
 
-        if(grounded.Equals(true))
+        if(targets.chest != null && targets.pelvis != null && targets.pelvis.lerp != null)
         {
-            float leftY = (targets.leftFoot.localPosition.y - targets.leftFoot.defaultPosition.y);
-            float rightY = (targets.rightFoot.localPosition.y - targets.rightFoot.defaultPosition.y);
-            float avgY = (leftY + rightY) / 2f;
-            if (targets.pelvis.lerp == null || targets.pelvis.lerp.Done == true)
+            if (grounded.Equals(true))
             {
-                Vector3 tempPelvis = targets.pelvis.defaultPosition;
-                float plyY = 0.9f + avgY;
-                tempPelvis.y = plyY;
-                targets.pelvis.localPosition = Vector3.Lerp(targets.pelvis.localPosition, tempPelvis, 8f * Time.deltaTime);
-            }
+                float leftY = (targets.leftFoot.localPosition.y - targets.leftFoot.defaultPosition.y);
+                float rightY = (targets.rightFoot.localPosition.y - targets.rightFoot.defaultPosition.y);
+                float avgY = (leftY + rightY) / 2f;
+                if (targets.pelvis.lerp == null || targets.pelvis.lerp.Done == true)
+                {
+                    Vector3 tempPelvis = targets.pelvis.defaultPosition;
+                    float plyY = 0.9f + avgY;
+                    tempPelvis.y = plyY;
+                    targets.pelvis.localPosition = Vector3.Lerp(targets.pelvis.localPosition, tempPelvis, 8f * Time.deltaTime);
+                }
 
-            if (targets.chest.lerp == null || targets.pelvis.lerp.Done == true)
-            {
-                Vector3 tempChest = targets.chest.defaultPosition;
-                float chestY = 1.7f + avgY;
-                tempChest.y = chestY;
-                targets.chest.localPosition = Vector3.Lerp(targets.chest.localPosition, tempChest, 2f * Time.deltaTime);
+                if (targets.chest.lerp == null || targets.pelvis.lerp.Done == true)
+                {
+                    Vector3 tempChest = targets.chest.defaultPosition;
+                    float chestY = 1.7f + avgY;
+                    tempChest.y = chestY;
+                    targets.chest.localPosition = Vector3.Lerp(targets.chest.localPosition, tempChest, 2f * Time.deltaTime);
+                }
             }
-        }else
-        {
-            targets.pelvis.Reset();
-            targets.chest.Reset();
+            else
+            {
+                targets.pelvis.Reset();
+                targets.chest.Reset();
+            }
         }
 
     }
@@ -566,6 +573,8 @@ public class BipedProceduralAnimator : MonoBehaviour, IEventAccessor, INetworkIn
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(targets.pelvis.position, 0.2f);
         */
+
+        if (targets.rightFoot == null || targets.leftFoot == null) return;
 
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(targets.rightFoot.position, 0.05f);

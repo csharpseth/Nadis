@@ -41,7 +41,7 @@ public class NetTester : MonoBehaviour
     private void OnApplicationQuit()
     {
         if (client != null)
-            Events.Net.DisconnectClient();
+            client.Disconnect();
         if (server != null)
             server.Stop();
     }

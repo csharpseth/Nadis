@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8950735639069482777}
   - component: {fileID: 2370893334081483664}
   - component: {fileID: 5116804943674462739}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 6426147768381815798}
   - component: {fileID: 7698025849440058940}
   - component: {fileID: 1764873915519064265}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_TriggerGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,13 +167,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2984193767908576495}
-  - component: {fileID: 7787648055313541107}
   - component: {fileID: 7787648055313541104}
   - component: {fileID: 7787648055313541105}
   - component: {fileID: 7787648055313541110}
   - component: {fileID: 7787648055313541111}
   - component: {fileID: -2808870770576390117}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Handgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,23 +200,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7787648055313541107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2248041352945663740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 209037615, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkedInstanceId: 0
-  PrefabHash: 14142226870338832508
-  PrefabHashGenerator: Blitz_Handgun
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
 --- !u!114 &7787648055313541104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,20 +212,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b25119049a18443893697ac659f6a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesToCheckPerSecond: 2
+  distanceSendThreshold: 0.5
   _name: Blitz
-  _damage: 10
+  _damage: 25
   _range: 100
-  _aimPosition: {x: 0.2, y: -0.2, z: 0.5}
-  _aimRotation: {x: 0, y: 0, z: 0}
+  _aimPosition: {x: 0.05, y: -0.2, z: 0.5}
+  _aimRotation: {x: -90, y: 0, z: 180}
   _aimHandPosition: {x: 0, y: 0, z: 0}
   _aimHandRotation: {x: 0, y: 0, z: 180}
   _holdRotation: {x: 0, y: 180, z: 0}
-  fireDelay: 0.07
+  fireDelay: 0.1
   _reqoil: 0.07
+  _reqoilDuration: 0.03
   _timeToAim: 1
-  _fireType: 2
+  _fireType: 3
   _toggleAim: 1
-  fireSound: {fileID: 8300000, guid: 68d267a1622e14547aac0d2c51f59cb0, type: 3}
+  fireSound: {fileID: 8300000, guid: 766a45843ac33754794bf186f8b65fe3, type: 3}
 --- !u!54 &7787648055313541105
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -456,7 +441,7 @@ GameObject:
   - component: {fileID: 7032080230950567269}
   - component: {fileID: 5913800517249169585}
   - component: {fileID: 1491771246386186810}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +520,7 @@ GameObject:
   - component: {fileID: 6261725879370672389}
   - component: {fileID: 6255355109311374123}
   - component: {fileID: 7442148778910869215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Grips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +599,7 @@ GameObject:
   - component: {fileID: 2576593706201541861}
   - component: {fileID: 1425046008503025412}
   - component: {fileID: 6125949727582356719}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +678,7 @@ GameObject:
   - component: {fileID: 2452593352415435271}
   - component: {fileID: 4562837154921119533}
   - component: {fileID: 5313443119756087290}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +757,7 @@ GameObject:
   - component: {fileID: 1529879955903219419}
   - component: {fileID: 3111240280362987160}
   - component: {fileID: 1958085915661031557}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blitz_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,13 +20,9 @@ public struct PacketPlayerAnimatorTargetSet : IPacketData
     {
         playerID = buffer.ReadInt();
 
-        targetsNewPosition.x = buffer.ReadFloat();
-        targetsNewPosition.y = buffer.ReadFloat();
-        targetsNewPosition.z = buffer.ReadFloat();
+        targetsNewPosition = buffer.ReadVector3();
 
-        targetsNewRotation.x = buffer.ReadFloat();
-        targetsNewRotation.y = buffer.ReadFloat();
-        targetsNewRotation.z = buffer.ReadFloat();
+        targetsNewRotation = buffer.ReadVector3();
 
         target = (AnimatorTarget)buffer.ReadInt();
         speed = buffer.ReadFloat();
@@ -42,17 +38,13 @@ public struct PacketPlayerAnimatorTargetSet : IPacketData
 
         buffer.Write(playerID);
 
-        buffer.Write(targetsNewPosition.x);
-        buffer.Write(targetsNewPosition.y);
-        buffer.Write(targetsNewPosition.z);
+        buffer.Write(targetsNewPosition);
 
-        buffer.Write(targetsNewRotation.x);
-        buffer.Write(targetsNewRotation.y);
-        buffer.Write(targetsNewRotation.z);
+        buffer.Write(targetsNewRotation);
 
         buffer.Write((int)target);
         buffer.Write(speed);
-        buffer.Write((int)side);
+        buffer.Write((int)space);
         buffer.Write(persistent);
         buffer.Write((int)targetParent);
         buffer.Write((int)side);

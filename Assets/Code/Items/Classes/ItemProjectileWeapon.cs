@@ -19,7 +19,9 @@ public class ItemProjectileWeapon : ItemWeapon
     [Range(0f, 1f)]
     [SerializeField]
     internal float _reqoil;
-    internal float _reqoilDuration { get { return (fireDelay - 0.02f); } }
+    [SerializeField]
+    [Range(0.001f, 0.2f)]
+    internal float _reqoilDuration;
     [SerializeField]
     internal float _timeToAim;
     [SerializeField]
@@ -63,7 +65,16 @@ public class ItemProjectileWeapon : ItemWeapon
             else if (_fireType == WeaponFireType.Semi && Inp.Interact.PrimaryDown)
             {
                 canFire = false;
+                Debug.Log("Fire");
                 Fire(ownerID);
+            }
+        }else
+        {
+            fireTime += Time.deltaTime;
+            if (fireTime >= fireDelay)
+            {
+                canFire = true;
+                fireTime = 0f;
             }
         }
     }
@@ -145,6 +156,22 @@ public class ItemProjectileWeapon : ItemWeapon
         if(Source != null && fireSound != null)
             Source.PlayOneShot(fireSound);
 
+        Vector3 pos = anim.targets.rightHand.localPosition;
+        pos -= (Vector3.forward * _reqoil);
+        Tween.FromToPosition(anim.targets.rightHand.target, pos, _reqoilDuration, Space.Local, true, null, null);
+
+        RaycastHit hit;
+        if(Physics.Raycast(PlayerInteractionController.instance.CenterScreenRay, out hit, _range))
+        {
+            FXController.HitAt(hit.point);
+            NetworkedPlayer player = hit.transform.GetComponent<NetworkedPlayer>();
+            if(player != null)
+            {
+                player.RequestDamageThisPlayer(Damage);
+            }
+        }
+
+        /*
         Vector3 recoilOffset = (Vector3.back * _reqoil);
         recoilOffset += _aimPosition;
         Tween.FromToPosition(transform, recoilOffset, _reqoilDuration, Space.Local, true, null, (Transform t) =>
@@ -152,6 +179,7 @@ public class ItemProjectileWeapon : ItemWeapon
             canFire = true;
             transform.localPosition = _aimPosition;
         });
+        */
     }
 
     public override void Update()

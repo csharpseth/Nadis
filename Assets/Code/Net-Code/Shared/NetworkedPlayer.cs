@@ -125,7 +125,6 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
     {
         PacketPlayerAnimatorTargetSet data = (PacketPlayerAnimatorTargetSet)packet;
         if (NetID != data.playerID) return;
-        
         animator.SetTarget(data.targetsNewPosition, data.targetsNewRotation, data.target, data.speed, data.space, data.persistent, data.targetParent, data.side, null);
     }
     private void ReceivePlayerAnimatorEndTarget(IPacketData packet)
@@ -181,9 +180,9 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
             side = side
         };
 
-        Events.Net.SendAsClient(NetID, packet);
+        Events.Net.SendAsClientUnreliable(NetID, packet);
 
-        animator.SetTarget(pos, rot, target, speed, space, persistent, parent, side, null);
+        //animator.SetTarget(pos, rot, target, speed, space, persistent, parent, side, null);
     }
     public void SendPlayerAnimatorTargetEnd(AnimatorTarget target, Side side)
     {
@@ -193,9 +192,19 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
             target = target,
             side = side
         };
-        Events.Net.SendAsClient(NetID, packet);
+        Events.Net.SendAsClientUnreliable(NetID, packet);
 
-        animator.EndTarget(target, side);
+        //animator.EndTarget(target, side);
+    }
+
+    public void RequestDamageThisPlayer(int amount)
+    {
+        PacketRequestDamagePlayer packet = new PacketRequestDamagePlayer
+        {
+            playerID = NetID,
+            alterAmount = amount
+        };
+        Events.Net.SendAsClient(NetData.LocalPlayerID, packet);
     }
 
     public void Subscribe()
@@ -231,11 +240,5 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
 
         Events.Player.UnSubscribe -= UnSubscribe;
     }
-
-    private void OnApplicationQuit()
-    {
-        if (NetID != Client.Local.NetID) return;
-
-        Events.Net.DisconnectClient?.Invoke();
-    }
+    
 }

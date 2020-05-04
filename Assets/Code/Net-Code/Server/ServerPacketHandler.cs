@@ -75,13 +75,13 @@ namespace Nadis.Net.Server
             CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), (IPacketData data) =>
             {
                 PacketPlayerAnimatorTargetSet plyAnimTargetSet = (PacketPlayerAnimatorTargetSet)data;
-                ServerSend.ReliableToAll(plyAnimTargetSet, plyAnimTargetSet.playerID);
+                ServerSend.UnReliableToAll(plyAnimTargetSet);
             });
 
             CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), (IPacketData data) =>
             {
                 PacketPlayerAnimatorTargetEnd plyAnimTargetEnd = (PacketPlayerAnimatorTargetEnd)data;
-                ServerSend.ReliableToAll(plyAnimTargetEnd, plyAnimTargetEnd.playerID);
+                ServerSend.UnReliableToAll(plyAnimTargetEnd);
             });
 
             CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), (IPacketData data) =>
@@ -151,6 +151,20 @@ namespace Nadis.Net.Server
                 }
                 else
                     Log.Err("SERVER :: Failed To Move Item({0}) From Inventory({1}) To World", req.NetworkID, req.PlayerID);
+            });
+            CreateHandler((int)ClientPacket.DamagePlayerRequest, new PacketRequestDamagePlayer(), (IPacketData data) =>
+            {
+                PacketRequestDamagePlayer packet = (PacketRequestDamagePlayer)data;
+                if(ClientManager.TryDamagePlayer(packet.playerID, packet.alterAmount))
+                {
+                    PacketDamagePlayer cmd = new PacketDamagePlayer
+                    {
+                        playerID = packet.playerID,
+                        alterAmount = packet.alterAmount
+                    };
+
+                    ServerSend.ReliableToAll(cmd);
+                }
             });
         }
 

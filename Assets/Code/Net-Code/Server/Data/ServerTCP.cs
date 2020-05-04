@@ -52,14 +52,16 @@ namespace Nadis.Net.Server
 
                     Vector3 position = ClientManager.GetClient(id).position;
                     float rotation = ClientManager.GetClient(clients[i]).rotation;
-
+                    HealthData playerHealth = ClientManager.CreateOrGetClientHealthData(id, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth);
                     //Se
                     PacketPlayerConnection playerData = new PacketPlayerConnection
                     {
                         playerID = id,
                         playerIsLocal = false,
                         playerPosition = position,
-                        playerRotation = rotation
+                        playerRotation = rotation,
+                        currentHealth = playerHealth.Value,
+                        maxHealth = playerHealth.MaxValue
                     };
                     ServerSend.ReliableToOne(playerData, clientID);
 
@@ -72,14 +74,16 @@ namespace Nadis.Net.Server
                     ServerSend.ReliableToOne(remInventoryData, clientID);
 
                 }
-
+                HealthData localHealth = ClientManager.CreateOrGetClientHealthData(clientID, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth);
                 //Send THIS clients data to this client so they are sync'd with the server
                 PacketPlayerConnection localClientData = new PacketPlayerConnection
                 {
                     playerID = clientID,
                     playerIsLocal = true,
                     playerPosition = Vector3.zero,
-                    playerRotation = 0f
+                    playerRotation = 0f,
+                    currentHealth = localHealth.Value,
+                    maxHealth = localHealth.MaxValue
                 };
                 ServerSend.ReliableToOne(localClientData, clientID);
                 localClientData.playerIsLocal = false;

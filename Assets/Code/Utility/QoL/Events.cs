@@ -91,8 +91,6 @@ public struct PlayerStatEvents
 
     public OnStatEvent OnAlterHealth;
     public OnStatEvent OnAlterPower;
-
-    public Action<PlayerStats> SetDefaults;
 }
 public struct MapGeneratorEvents
 {

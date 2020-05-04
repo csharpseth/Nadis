@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b25119049a18443893697ac659f6a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesToCheckPerSecond: 2
+  distanceSendThreshold: 0.5
   _name: Test Gun
   _damage: 10
   _range: 100

@@ -96,6 +96,12 @@ namespace Nadis.Net.Client
             {
                 Inventory.instance.ServerDropItem(packet);
             });
+
+            CreateHandler((int)ServerPacket.DamagePlayer, new PacketDamagePlayer(), (IPacketData packet) =>
+            {
+                PlayerManager.DamagePlayer((PacketDamagePlayer)packet);
+                Log.Txt("CLIENT :: Player Damage Packet Received");
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

@@ -10,6 +10,7 @@ namespace Nadis.Net.Server
         public static List<int> Clients { get { return _clients; } }
 
         private static Dictionary<int, ServerClientData> _clientDictionary;
+        private static Dictionary<int, HealthData> _clientHealthDictionary;
         private static List<int> _clients;
         private static int _maxClients;
         private static int _currentID = 0;
@@ -21,6 +22,7 @@ namespace Nadis.Net.Server
 
             _maxClients = maxClients;
             _clientDictionary = new Dictionary<int, ServerClientData>();
+            _clientHealthDictionary = new Dictionary<int, HealthData>();
             _clients = new List<int>();
             initialized = true;
         }
@@ -57,6 +59,7 @@ namespace Nadis.Net.Server
 
             _clients.RemoveAt(index);
             _clientDictionary.Remove(clientID);
+            _clientHealthDictionary.Remove(clientID);
         }
 
         private static int NextID()
@@ -90,6 +93,32 @@ namespace Nadis.Net.Server
             
             return clientID;
         }
+        public static HealthData CreateOrGetClientHealthData(int clientID, int startHealth, int maxHealth)
+        {
+            if (_clientHealthDictionary.ContainsKey(clientID) == true) return _clientHealthDictionary[clientID];
+            if (_clientDictionary.ContainsKey(clientID) == false) return default; 
+
+            HealthData health = new HealthData(clientID, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth);
+            _clientHealthDictionary.Add(clientID, health);
+
+            return health;
+        }
+        public static bool TryDamagePlayer(int playerID, int amount)
+        {
+            if (_clientDictionary.ContainsKey(playerID) == false) return false;
+            if (_clientHealthDictionary.ContainsKey(playerID) == false) return false;
+
+            int damage = -amount;
+            HealthData health = _clientHealthDictionary[playerID];
+            health.AlterValue(damage);
+
+            if (health.Value <= 1)
+                Log.Txt("Player:{0} is Dead.", playerID);
+
+            _clientHealthDictionary[playerID] = health;
+            return true;
+        }
+
         public static void RemoveClient(int clientID)
         {
             if (ClientExists(clientID) == false)

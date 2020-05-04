@@ -5,7 +5,7 @@ public static class Log
     public static bool LogText = true;
     public static bool LogWarnings = true;
     public static bool LogErrors = true;
-    public static bool LogNotifications = false;
+    public static bool LogNotifications = true;
 
     public static void Not(object input, params object[] args)
     {

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, IDisableIfRemotePlayer
 {
+    public static PlayerInteractionController instance;
+
     private int ActiveIndex { get { return _activeIndex; } set { _activeIndex = Mathf.Clamp(value, 0, Inventory.GetSize(0) - 1); Inventory.DisableAllExcept(0, _activeIndex); } }
     private Item ActiveItem { get { return Inventory.GetItemAt(NetID, ActiveIndex); } }
 
@@ -18,12 +20,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
     private Camera cam;
     private int _activeIndex = 0;
     private bool disabled = false;
-
-    private void Awake()
-    {
-        cam = GetComponent<PerspectiveController>().firstPersonCam;
-    }
-
+    
     private void Update()
     {
         if (disabled) return;
@@ -94,11 +91,18 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
 
     public void InitFromNetwork(int netID)
     {
+        if (disabled) return;
+
         NetID = netID;
+        if (instance != null) return;
+        instance = this;
+
+        cam = GetComponent<PerspectiveController>().firstPersonCam;
     }
 
     public void Disable(bool disabled)
     {
         this.disabled = disabled;
+        Debug.Log(gameObject.name);
     }
 }

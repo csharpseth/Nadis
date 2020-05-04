@@ -48,12 +48,12 @@ namespace Nadis.Net.Client
             {
                 playerID = NetID
             };
-            SendDataReliabe(NetID, packet);
+            SendDataUnReliable(NetID, packet);
             TCP.Disconnect();
             TCP = null;
             UDP.Disconnect();
             UDP = null;
-            Events.Player.UnSubscribe(NetID);
+            Events.Player.UnSubscribe?.Invoke(NetID);
         }
 
         public void SendDataReliabe(int clientToSendOn, IPacketData data)

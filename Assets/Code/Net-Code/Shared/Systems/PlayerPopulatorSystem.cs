@@ -40,6 +40,9 @@ namespace Nadis.Net
                 Vector3 tempRot = ply.transform.eulerAngles;
                 tempRot.y = temp.playerRotation;
                 ply.transform.eulerAngles = tempRot;
+                ply.name = "Ply_" + temp.playerID;
+
+                Log.Txt("Player({0}) isLocal:{1}", temp.playerID, temp.playerIsLocal);
 
                 if (temp.playerIsLocal == false)
                 {
@@ -52,12 +55,20 @@ namespace Nadis.Net
                 {
                     NetData.LocalPlayerID = temp.playerID;
                     Client.Client.Local.SetID(temp.playerID);
+                    Debug.Log(NetData.LocalPlayerID);
                 }
                 INetworkInitialized[] netInit = ply.GetComponentsInChildren<INetworkInitialized>();
+                NetworkedPlayer netPly = ply.GetComponent<NetworkedPlayer>();
                 for (int y = 0; y < netInit.Length; y++)
                 {
                     netInit[y].InitFromNetwork(temp.playerID);
                 }
+                if(netPly != null)
+                {
+                    PlayerManager.CreatePlayersStatData(netPly, temp.currentHealth, temp.maxHealth);
+                }
+
+
             }
         }
 

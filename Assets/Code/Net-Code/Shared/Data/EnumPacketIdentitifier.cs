@@ -31,6 +31,7 @@ public enum ServerPacket
     PlayerInventoryData,
     SpawnItem,
     DestroyItem,
+    DamagePlayer,
 }
 
 //Starts at 500
@@ -43,4 +44,5 @@ public enum ClientPacket
     PlayerUDPStart = 500,
     SpawnItemRequest,
     DestroyItemRequest,
+    DamagePlayerRequest,
 }
