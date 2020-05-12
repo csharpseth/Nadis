@@ -82,7 +82,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4716436359317713050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Hand Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367967558880594259}
   - component: {fileID: 3367967558880594260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3367967558947837232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Leg Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 3367967559000551682}
   - component: {fileID: 3367967559000551683}
   - component: {fileID: 3367967559000551684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 3367967559514860549}
   - component: {fileID: 3367967559514860548}
   - component: {fileID: 3367967559514860547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FP Cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3367967559589826473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367967559670859667}
   - component: {fileID: 3367967559670859668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367967560053457779}
   - component: {fileID: 3367967560053457780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3367967560441973745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Leg Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 3367967560479117766}
   - component: {fileID: 3367967560479117767}
   - component: {fileID: 3367967560479117816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3367967560655414003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Poles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -905,7 +905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367967560848172462}
   - component: {fileID: 3367967560848172463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1029508440640309144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chest Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,7 +1231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2178179173186709831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Hand Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 3015025802079168481}
   - component: {fileID: 323241750928282006}
   - component: {fileID: 4722242449113879346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TP Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,7 +1437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004675971169886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1470,7 +1470,7 @@ GameObject:
   - component: {fileID: 6250004675985931726}
   - component: {fileID: 6250004675985931712}
   - component: {fileID: 6250004675985931727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forearm_Left_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1534,7 +1534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676020862426}
   - component: {fileID: 6250004676020862427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Heel_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1584,7 +1584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676026545935}
   - component: {fileID: 3857884436073578087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hip_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1713,7 @@ GameObject:
   - component: {fileID: 6250004676034138540}
   - component: {fileID: 6250004676034138542}
   - component: {fileID: 6250004676034138541}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forearm_Right_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,7 +1777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676058814336}
   - component: {fileID: 3698531038971719664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hip_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1905,7 +1905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676128735216}
   - component: {fileID: 6250004676128735231}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Robot_Mk3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2004,7 +2004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676225627518}
   - component: {fileID: 6250004676225627517}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Robot_Mk3_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,7 +2103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004676421193381}
   - component: {fileID: 6250004676421193382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2153,7 +2153,7 @@ GameObject:
   - component: {fileID: 6250004676502082561}
   - component: {fileID: 6250004676502082563}
   - component: {fileID: 6250004676502082562}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2216,7 +2216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004676734676893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forearm_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2247,7 +2247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004676743566423}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2278,7 +2278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004676834997478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forearm_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2309,7 +2309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004676837831961}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2340,7 +2340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677092888028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toes_Left_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2372,7 +2372,7 @@ GameObject:
   - component: {fileID: 6250004677305296699}
   - component: {fileID: 6250004677305296701}
   - component: {fileID: 6250004677305296700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2437,7 +2437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004677359386219}
   - component: {fileID: 6250004677359386220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Heel_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677388653414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677473992481}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig_Mk3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2548,7 +2548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677571374271}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toes_Right_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2579,7 +2579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250004677592882305}
   - component: {fileID: 6250004677592882306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2630,7 +2630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677595387602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lower Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2661,7 +2661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677690742496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2692,7 +2692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677812229485}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toes_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2723,7 +2723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6250004677850736740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toes_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2761,12 +2761,12 @@ GameObject:
   - component: {fileID: 3367967559250784193}
   - component: {fileID: 3367967559250784192}
   - component: {fileID: 3367967559250784206}
-  - component: {fileID: 2326747238082466394}
   - component: {fileID: 7627177062279785436}
   - component: {fileID: 6222737397687705279}
   - component: {fileID: 5070985461136125922}
   - component: {fileID: 6745408938266719965}
-  m_Layer: 0
+  - component: {fileID: 417397760314909098}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2847,6 +2847,7 @@ MonoBehaviour:
       speedPercent: 0
     - moveState: 5
       speedPercent: 0.3
+  canMove: 1
 --- !u!114 &3367967559250784196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,18 +2976,6 @@ MonoBehaviour:
   headRenderer: {fileID: 6250004676225627517}
   debugAllowed: 0
   noDisplay: 0
---- !u!114 &2326747238082466394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6745408938266719967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d256ee9cdbe63b4d875302dffff9185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7627177062279785436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3058,6 +3047,24 @@ MonoBehaviour:
   timeToCheckPerSecond: 10
   maxMoveDistanceBeforeSending: 0.05
   maxRotBeforeSending: 1
+--- !u!114 &417397760314909098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745408938266719967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10460482e17dd9749969f104bb8d34fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 450
+  downForce: 200
+  groundCheckRadius: 0.25
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1591
 --- !u!1 &7165139631908036774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,7 +3075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830406832581083378}
   - component: {fileID: 4295753872056415150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TP Cam Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,12 +9,15 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
     private bool runToggle = false;
     private bool crouch = false;
     public int NetID { get; private set; }
-    private bool initialized = false;
 
     //Setup Stuffs
     private Rigidbody rb;
     private BipedProceduralAnimator anim;
-    private bool disabled = false;
+    public bool disabled = false;
+    private Vector3 dir;
+
+    public bool canMove = true;
+    public Vector3 Dir { get { return dir; } }
 
     private void Awake()
     {
@@ -25,13 +28,12 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
     public void InitFromNetwork(int netID)
     {
         NetID = netID;
-        initialized = true;
     }
 
     //Actual Movement Logic & State Determination
     private void Update()
     {
-        if (initialized == false || disabled == true) return;
+        if (disabled == true || canMove == false) return;
 
         if(Inp.Move.SprintDown)
         {
@@ -41,48 +43,53 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
         {
             crouch = !crouch;
         }
-
+        
         if (Inp.Move.InputDir != Vector2.zero)
         {
             if (runToggle)
-                data.state = PlayerMoveState.Running;
+                AlterDataState(PlayerMoveState.Running);
             else
-                data.state = PlayerMoveState.Walking;
+                AlterDataState(PlayerMoveState.Walking);
 
             if (crouch)
-                data.state = PlayerMoveState.CrouchWalking;
+                AlterDataState(PlayerMoveState.CrouchWalking);
             
-            //InvokeClientRpcOnEveryone(anim.SetMoveData, true, Inp.Move.InputDir, (int)data.state);
-            //InvokeClientRpcOnEveryone(anim.RPCSetMoveData, true, Inp.Move.InputDir.x, Inp.Move.InputDir.y, (int)data.state);
             anim.SetMoveData(true, (int)Inp.Move.InputDir.x, (int)Inp.Move.InputDir.y, (int)data.state);
         }
         else
         {
             if (crouch == false)
-                data.state = PlayerMoveState.None;
+                AlterDataState(PlayerMoveState.None);
             else
-                data.state = PlayerMoveState.Crouching;
-
-            //InvokeClientRpcOnEveryone(anim.SetMoveData, true, Vector2.zero, (int)data.state);
-            //InvokeClientRpcOnEveryone(anim.RPCSetMoveData, true, 0f, 0f, (int)data.state);
+                AlterDataState(PlayerMoveState.Crouching);
+            
             anim.SetMoveData(true, 0, 0, (int)data.state);
         }
 
     }
+
+    public void AlterDataState(PlayerMoveState state)
+    {
+        MovementData d = data;
+        d.state = state;
+        data = d;
+    }
+
     private void FixedUpdate()
     {
-        if (disabled == true) return;
+        if (disabled == true || canMove == false) return;
 
         float speed = data.GetSpeed;
-        Vector3 dir = InputToWorld(Inp.Move.InputDir) * speed;
+        dir = InputToWorld(Inp.Move.InputDir) * speed;
+        Debug.Log(speed);
         rb.MovePosition(rb.position + (dir * Time.fixedDeltaTime));
     }
     private Vector3 InputToWorld(Vector2 input)
     {
-        Vector3 dir = Vector3.zero;
-        dir += transform.forward * input.y;
-        dir += transform.right * input.x;
-        return dir;
+        Vector3 newDir = Vector3.zero;
+        newDir += transform.forward * input.y;
+        newDir += transform.right * input.x;
+        return newDir;
     }
 
     public void Disable(bool disabled)

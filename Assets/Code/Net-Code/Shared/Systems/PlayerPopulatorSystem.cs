@@ -61,6 +61,7 @@ namespace Nadis.Net
                 NetworkedPlayer netPly = ply.GetComponent<NetworkedPlayer>();
                 for (int y = 0; y < netInit.Length; y++)
                 {
+                    Debug.Log("Net Init");
                     netInit[y].InitFromNetwork(temp.playerID);
                 }
                 if(netPly != null)

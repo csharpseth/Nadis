@@ -52,7 +52,7 @@ namespace Nadis.Net.Client
         {
             CreateHandler((int)ServerPacket.PlayerConnection, new PacketPlayerConnection(), (IPacketData packet) => {
                 PacketPlayerConnection data = (PacketPlayerConnection)packet;
-
+                
                 PlayerPopulatorSystem.SpawnPlayer(data);
                 if(data.playerIsLocal)
                 {
