@@ -5,6 +5,7 @@ public class Inp
 {
     public static InputMovement Move;
     public static InputInteract Interact;
+    public static InputInterface Interface;
 }
 
 
@@ -279,4 +280,35 @@ public struct InputInteract
         }
     }
 
+}
+
+public struct InputInterface
+{
+    public Keyboard ActiveBoard { get { return Keyboard.current; } }
+    public Mouse ActiveMouse { get { return Mouse.current; } }
+    public Gamepad ActivePad { get { return Gamepad.current; } }
+
+    public bool UseBoard { get { return (ActiveBoard != null); } }
+    public bool UsePad { get { return (ActivePad != null); } }
+    public bool UseMouse { get { return (ActiveMouse != null); } }
+
+    public bool Pause
+    {
+        get
+        {
+            bool board = false;
+            bool pad = false;
+
+            if (UseBoard)
+            {
+                board = ActiveBoard.escapeKey.wasPressedThisFrame;
+            }
+            if (UsePad)
+            {
+                pad = ActivePad.startButton.wasPressedThisFrame;
+            }
+
+            return board || pad;
+        }
+    }
 }

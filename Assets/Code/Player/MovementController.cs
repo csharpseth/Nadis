@@ -12,17 +12,16 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
 
     //Setup Stuffs
     private Rigidbody rb;
-    private BipedProceduralAnimator anim;
     public bool disabled = false;
     private Vector3 dir;
 
     public bool canMove = true;
     public Vector3 Dir { get { return dir; } }
+    public Vector2 InputSpeed;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<BipedProceduralAnimator>();
     }
 
     public void InitFromNetwork(int netID)
@@ -53,8 +52,6 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
 
             if (crouch)
                 AlterDataState(PlayerMoveState.CrouchWalking);
-            
-            anim.SetMoveData(true, (int)Inp.Move.InputDir.x, (int)Inp.Move.InputDir.y, (int)data.state);
         }
         else
         {
@@ -62,8 +59,6 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
                 AlterDataState(PlayerMoveState.None);
             else
                 AlterDataState(PlayerMoveState.Crouching);
-            
-            anim.SetMoveData(true, 0, 0, (int)data.state);
         }
 
     }
@@ -80,6 +75,7 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
         if (disabled == true || canMove == false) return;
 
         float speed = data.GetSpeed;
+        InputSpeed = Inp.Move.InputDir * data.GetSpeedPercent;
         dir = InputToWorld(Inp.Move.InputDir) * speed;
         Debug.Log(speed);
         rb.MovePosition(rb.position + (dir * Time.fixedDeltaTime));
@@ -103,8 +99,6 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
 public struct MovementData
 {
     public float maxSpeed; //This is the maximum speed the player can move
-    [HideInInspector]
-    public float speed; //This is a value from 0.0 - 1.0
 
     [HideInInspector]
     public PlayerMoveState state;
@@ -123,6 +117,20 @@ public struct MovementData
             }
 
             return speed * maxSpeed;
+        }
+    }
+
+    public float GetSpeedPercent
+    {
+        get
+        {
+            float percent = 0f;
+            for (int i = 0; i < speedProfiles.Length; i++)
+            {
+                if(speedProfiles[i].moveState == state) { percent = speedProfiles[i].speedPercent; break; }
+            }
+
+            return percent;
         }
     }
 }

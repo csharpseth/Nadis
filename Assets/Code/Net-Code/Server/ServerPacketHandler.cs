@@ -65,31 +65,7 @@ namespace Nadis.Net.Server
                 PacketPlayerRotation plyRot = (PacketPlayerRotation)data;
                 ServerSend.UnReliableToAll(plyRot, plyRot.playerID);
             });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorData plyAnimData = (PacketPlayerAnimatorData)data;
-                ServerSend.UnReliableToAll(plyAnimData, plyAnimData.playerID);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorTargetSet plyAnimTargetSet = (PacketPlayerAnimatorTargetSet)data;
-                ServerSend.UnReliableToAll(plyAnimTargetSet);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorTargetEnd plyAnimTargetEnd = (PacketPlayerAnimatorTargetEnd)data;
-                ServerSend.UnReliableToAll(plyAnimTargetEnd);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorHeadData plyAnimHeadData = (PacketPlayerAnimatorHeadData)data;
-                ServerSend.UnReliableToAll(plyAnimHeadData, plyAnimHeadData.playerID);
-            });
-
+            
             CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), (IPacketData data) => 
             {
                 PacketDisconnectPlayer packet = (PacketDisconnectPlayer)data;
@@ -165,6 +141,11 @@ namespace Nadis.Net.Server
 
                     ServerSend.ReliableToAll(cmd);
                 }
+            });
+            CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorMoveData packet = (PacketPlayerAnimatorMoveData)data;
+                ServerSend.UnReliableToAll(packet, packet.playerID);
             });
         }
 

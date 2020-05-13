@@ -25,6 +25,9 @@ public abstract class Item : MonoBehaviour, IItem, IUsable, INetworkID, INetwork
     internal Rigidbody _rigidbody;
     internal Collider _collider;
     internal int ownerID = -1;
+    [Header("Interaction Data:")]
+    public Vector3 holdPosition;
+    public Vector3 holdRotation;
 
     public virtual void InitFromNetwork(int netID)
     {
@@ -37,17 +40,16 @@ public abstract class Item : MonoBehaviour, IItem, IUsable, INetworkID, INetwork
     
     public virtual void Interact(int playerID)
     {
-        BipedProceduralAnimator anim = null;
-        Events.Player.GetPlayerAnimator?.Invoke(playerID, ref anim);
-        if (anim == null) { Debug.LogError("Anim is Null"); return; }
+        Events.Player.Pickup?.Invoke(playerID, this);
+        if (transform.parent == null)
+            return;
 
         if(Inventory.AddItem(playerID, this))
         {
-            transform.SetParent(anim.TargetFrom(AnimatorTarget.Hands, Side.Right).obj);
             _rigidbody.isKinematic = true;
             _collider.enabled = false;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+            transform.localPosition = holdPosition;
+            transform.localEulerAngles = holdRotation;
             ownerID = playerID;
             Hide(true);
         }

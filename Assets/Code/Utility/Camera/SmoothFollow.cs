@@ -20,7 +20,12 @@ public class SmoothFollow : MonoBehaviour
     void LateUpdate()
     {
         // Early out if we don't have a target
-        if (!target) return;
+        if (!target)
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("Player");
+            if (go == null) return;
+            target = go.transform;
+        }
 
         // Calculate the current rotation angles
         float wantedRotationAngle = target.eulerAngles.y;

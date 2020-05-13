@@ -62,11 +62,6 @@ namespace Nadis.Net.Client
             });
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), null);
             CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), null);
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), null);
             CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), null);
             CreateHandler((int)ServerPacket.PlayerInventoryData, new PacketPlayerInventoryData(), (IPacketData packet) =>
             {
@@ -102,6 +97,7 @@ namespace Nadis.Net.Client
                 PlayerManager.DamagePlayer((PacketDamagePlayer)packet);
                 Log.Txt("CLIENT :: Player Damage Packet Received");
             });
+            CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

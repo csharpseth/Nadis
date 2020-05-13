@@ -215,19 +215,15 @@ MonoBehaviour:
   timesToCheckPerSecond: 2
   distanceSendThreshold: 0.5
   _name: Blitz
+  holdPosition: {x: 0, y: 0.1, z: 0.02}
+  holdRotation: {x: -76.25, y: -168.8, z: -5}
   _damage: 25
   _range: 100
-  _aimPosition: {x: 0.05, y: -0.2, z: 0.5}
-  _aimRotation: {x: -90, y: 0, z: 180}
-  _aimHandPosition: {x: 0, y: 0, z: 0}
-  _aimHandRotation: {x: 0, y: 0, z: 180}
-  _holdRotation: {x: 0, y: 180, z: 0}
+  _aimOffset: 0.5
+  _fireOrigin: {x: 0, y: 0.05, z: 0.12}
   fireDelay: 0.1
-  _reqoil: 0.07
-  _reqoilDuration: 0.03
-  _timeToAim: 1
   _fireType: 3
-  _toggleAim: 1
+  _toggleAim: 0
   fireSound: {fileID: 8300000, guid: 766a45843ac33754794bf186f8b65fe3, type: 3}
 --- !u!54 &7787648055313541105
 Rigidbody:
@@ -256,8 +252,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.049593426, y: 0.17431778, z: 0.110482216}
-  m_Center: {x: 0, y: 0.0070608854, z: 0}
+  m_Size: {x: 0.025442071, y: 0.10562152, z: 0.11047911}
+  m_Center: {x: 0, y: 0.0044187307, z: 0.016605657}
 --- !u!65 &7787648055313541111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,8 +265,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.049593426, y: 0.05132246, z: 0.25671315}
-  m_Center: {x: 0, y: 0.07022062, z: 0.07311547}
+  m_Size: {x: 0.025441993, y: 0.03169495, z: 0.13744162}
+  m_Center: {x: 0, y: 0.040779352, z: 0.04140789}
 --- !u!82 &-2808870770576390117
 AudioSource:
   m_ObjectHideFlags: 0
@@ -283,7 +279,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0

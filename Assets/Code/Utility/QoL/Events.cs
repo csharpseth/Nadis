@@ -72,9 +72,18 @@ public struct BipedAnimatorEvents
 }
 public struct PlayerEvents
 {
-    public delegate void OnGetPlayerAnimator(int playerID, ref BipedProceduralAnimator animator);
     public delegate void OnGetPlayer(int playerID, ref NetworkedPlayer netPlayer);
-    public OnGetPlayerAnimator GetPlayerAnimator;
+    public delegate void PlayerPickupItem(int playerID, Item item);
+    public delegate void OnSetPlayerAnimatorBool(int playerID, string id, bool value);
+    public delegate void OnSetPlayerAnimatorFloat(int playerID, string id, float value);
+    public delegate void OnSetPlayerAnimatorTrigger(int playerID, string id);
+
+    public OnSetPlayerAnimatorBool SetAnimatorBool;
+    public OnSetPlayerAnimatorFloat SetAnimatorFloat;
+    public OnSetPlayerAnimatorTrigger SetAnimatorTrigger;
+    public Action<int, float> SetAimOffset;
+
+    public PlayerPickupItem Pickup;
     public OnGetPlayer GetPlayer;
     public Action<int> UnSubscribe;
 }

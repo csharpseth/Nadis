@@ -7,17 +7,13 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
 
     private int ActiveIndex { get { return _activeIndex; } set { _activeIndex = Mathf.Clamp(value, 0, Inventory.GetSize(0) - 1); Inventory.DisableAllExcept(0, _activeIndex); } }
     private Item ActiveItem { get { return Inventory.GetItemAt(NetID, ActiveIndex); } }
-
-    public Vector2 CenterScreen { get { return new Vector2(Screen.width / 2f, Screen.height / 2f); } }
-    public Ray CenterScreenRay { get { return cam.ScreenPointToRay(CenterScreen); } }
-
+    
     public int NetID { get; private set; }
 
     public float reach = 5f;
     public LayerMask interactionMask;
     public GameObject testItem = null;
     
-    private Camera cam;
     private int _activeIndex = 0;
     private bool disabled = false;
     
@@ -61,7 +57,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
             if(Inp.Interact.PrimaryDown)
             {
                 RaycastHit hit;
-                if(Physics.Raycast(CenterScreenRay, out hit, reach))
+                if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach))
                 {
                     //TesterMenu.SpawnObject(testItem, hit.point);
                     Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.1f));
@@ -78,7 +74,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
     private void Interact()
     {
         RaycastHit hit;
-        if(Physics.Raycast(CenterScreenRay, out hit, reach, interactionMask))
+        if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, interactionMask))
         {
             Item item = hit.transform.GetComponent<Item>();
             if(item != null)
@@ -96,8 +92,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
         NetID = netID;
         if (instance != null) return;
         instance = this;
-
-        cam = GetComponent<PerspectiveController>().firstPersonCam;
+        
     }
 
     public void Disable(bool disabled)
