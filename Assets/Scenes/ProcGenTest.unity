@@ -228,17 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212b54d299f6f674ab7a484668375990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapData: {fileID: 11400000, guid: 989f521834241674093946a99d1dab12, type: 2}
-  spawnPointsData:
-    name: Spawn Points
-    enabled: 0
-    minHeight: 0.1
-    maxHeight: 0.3
-    density: 0.5
-    maxNormalAngle: 40
-    maxPrefabAngle: 0
-    maximumPoints: 200
-    prefabs: []
+  mapData: {fileID: 0}
   useTerraform: 0
   terraformData:
     towns: 10
@@ -275,8 +265,6 @@ MonoBehaviour:
   procDebug: {fileID: 0}
   debug: 0
   terrain: {fileID: 985793403}
-  beachHeight: 0.05
-  beachBlend: 0.02
   applyDecorations: 1
   decorationLayers:
   - name: Grass
@@ -286,9 +274,11 @@ MonoBehaviour:
     density: 0.5
     maxNormalAngle: 50
     maxPrefabAngle: 10
+    minScale: {x: 0, y: 0, z: 0}
+    maxScale: {x: 0, y: 0, z: 0}
     maximumPoints: 6000
-    prefabs:
-    - {fileID: 8002321573796704496, guid: 268a834495812a8478be4a10cdde8c72, type: 3}
+    prefabOffset: {x: 0, y: 0, z: 0}
+    prefab: {fileID: 0}
   - name: Trees
     enabled: 1
     minHeight: 0.3
@@ -296,9 +286,11 @@ MonoBehaviour:
     density: 0.258
     maxNormalAngle: 30
     maxPrefabAngle: 30
+    minScale: {x: 0, y: 0, z: 0}
+    maxScale: {x: 0, y: 0, z: 0}
     maximumPoints: 1000
-    prefabs:
-    - {fileID: 7597075192158233104, guid: 93d33696ed4b0d940880b8ed4b0c6e10, type: 3}
+    prefabOffset: {x: 0, y: 0, z: 0}
+    prefab: {fileID: 0}
   networked: 0
 --- !u!4 &261822083
 Transform:
@@ -312,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &261822084
 MonoBehaviour:
@@ -329,6 +321,13 @@ MonoBehaviour:
   regionSize: {x: 600, y: 150, z: 600}
   stepSize: 0.05
   offset: 0.2
+  minHeight: 0
+  maxHeight: 0
+  threshold: 0
+  noiseScale: 0
+  chance: 0.2
+  maxGizmos: 5000
+  spawn: 0
 --- !u!114 &261822085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1769147650
 GameObject:
@@ -513,7 +512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!1 &2147254233
 GameObject:
@@ -630,7 +629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2147254238
 MonoBehaviour:

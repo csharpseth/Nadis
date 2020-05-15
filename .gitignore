@@ -64,3 +64,6 @@ crashlytics-build.properties
 *Logs/
 Library/LastBuild.buildreport
 Library/LastBuild.buildreport
+Darwin_Server/
+Library/ArtifactDB
+Library/ArtifactDB

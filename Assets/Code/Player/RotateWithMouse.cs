@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RotateWithMouse : MonoBehaviour
+public class RotateWithMouse : MonoBehaviour, IDisableIfRemotePlayer
 {
     public RotateAxis axis;
     public float lookSpeed = 300f;
     public float maxAngle = 50f;
+    private bool disabled = false;
+
+    public void Disable(bool disabled)
+    {
+        this.disabled = disabled;
+    }
 
     private void Awake()
     {
@@ -16,40 +20,28 @@ public class RotateWithMouse : MonoBehaviour
 
     private void Update()
     {
+        if (disabled) return;
 
-
-        float h = lookSpeed * Input.GetAxisRaw("Mouse X");
-        float v = -lookSpeed * Input.GetAxisRaw("Mouse Y");
+        float h = lookSpeed * Inp.Move.LookDir.x;
+        float v = -lookSpeed * Inp.Move.LookDir.y;
         Vector3 rot = transform.eulerAngles;
 
         if (axis == RotateAxis.X || axis == RotateAxis.XandY)
         {
             rot.x += v;
 
-            if (rot.x > 0f && rot.x < 180f && rot.x > maxAngle)
+            if (rot.x > 0f && rot.x < 180f && rot.x > Settings.player.MinHorizontalAngle)
             {
-                rot.x = maxAngle;
+                rot.x = Settings.player.MinHorizontalAngle;
             }
-            if (rot.x > 0f && rot.x > 180f && rot.x < (360f - maxAngle))
-                rot.x = (360f - maxAngle);
+            if (rot.x > 0f && rot.x > 180f && rot.x < (360f - Settings.player.MaxHorizontalAngle))
+                rot.x = (360f - Settings.player.MaxHorizontalAngle);
         }
         if (axis == RotateAxis.Y || axis == RotateAxis.XandY)
         {
             rot.y += h;
-            if (maxAngle != 0f)
-            {
-                if (rot.y > maxAngle)
-                    rot.y = maxAngle;
-
-                /*
-                if (rot.y < -maxAngle)
-                    rot.y = -maxAngle;
-                    */
-            }
         }
-
-
-
+        
         transform.eulerAngles = rot;
     }
 
