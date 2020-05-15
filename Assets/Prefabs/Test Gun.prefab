@@ -97,20 +97,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timesToCheckPerSecond: 2
   distanceSendThreshold: 0.5
-  _name: Test Gun
-  _damage: 10
+  _name: Coil Gun
+  holdPosition: {x: 0, y: 0.1, z: 0.02}
+  holdRotation: {x: -76.25, y: -168.8, z: -5}
+  _damage: 25
   _range: 100
-  _aimPosition: {x: 0.2, y: -0.2, z: 0.5}
-  _aimRotation: {x: -90, y: 0, z: 180}
-  _aimHandPosition: {x: 0, y: 0, z: 0}
-  _aimHandRotation: {x: 0, y: 0, z: 180}
-  _holdRotation: {x: 0, y: 180, z: 0}
-  fireDelay: 0.025
-  _reqoil: 0.07
-  _timeToAim: 1
-  _fireType: 3
-  _toggleAim: 1
-  fireSound: {fileID: 8300000, guid: 22e0dc8ab1d1dfe4cba9ca20afad3977, type: 3}
+  _aimOffset: 0.5
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 1591
+  fireDelay: 0.25
+  _fireType: 2
+  _toggleAim: 0
+  pitchModAmount: 0.05
+  fireHeardDistance: 150
+  fireSound: {fileID: 8300000, guid: 0abeabbd2f119234f8b31d299ec209e8, type: 3}
 --- !u!54 &-7657243224234270585
 Rigidbody:
   m_ObjectHideFlags: 0

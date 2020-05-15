@@ -147,6 +147,11 @@ namespace Nadis.Net.Server
                 PacketPlayerAnimatorMoveData packet = (PacketPlayerAnimatorMoveData)data;
                 ServerSend.UnReliableToAll(packet, packet.playerID);
             });
+            CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorEvent packet = (PacketPlayerAnimatorEvent)data;
+                ServerSend.UnReliableToAll(packet, packet.playerID);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

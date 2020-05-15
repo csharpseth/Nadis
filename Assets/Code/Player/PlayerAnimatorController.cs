@@ -12,7 +12,7 @@ public class PlayerAnimatorController : MonoBehaviour, INetworkInitialized, IEve
     [HideInInspector] public float forwardBlend;
     [HideInInspector] public float sideBlend;
     [HideInInspector] public float aimPercent;
-    [HideInInspector] public bool aimed;
+    [HideInInspector] public bool crouched;
 
     public int NetID { get; private set; }
 
@@ -29,33 +29,34 @@ public class PlayerAnimatorController : MonoBehaviour, INetworkInitialized, IEve
         {
             forwardBlend = move.InputSpeed.y;
             sideBlend = move.InputSpeed.x;
-            aimPercent = mouse.HorizontalAnglePercent() + aimOffset;
-            aimed = anim.GetBool("aim");
+            crouched = move.data.state == PlayerMoveState.Crouching || move.data.state == PlayerMoveState.CrouchWalking;
         }
         
         anim.SetFloat("forward_blend", forwardBlend);
         anim.SetFloat("side_blend", sideBlend);
-        anim.SetFloat("aim_angle", aimPercent);
+        //anim.SetBool("crouch", crouched);
     }
 
-    private void SetBool(int playerID, string id, bool value)
+    public void SetBool(int playerID, string id, bool value)
     {
         if (playerID != NetID) return;
 
         anim.SetBool(id, value);
     }
-    private void SetFloat(int playerID, string id, float value)
+    public void SetFloat(int playerID, string id, float value)
     {
         if (playerID != NetID) return;
 
         anim.SetFloat(id, value);
     }
-    private void SetTrigger(int playerID, string id)
+    public void SetTrigger(int playerID, string id)
     {
         if (playerID != NetID) return;
 
         anim.SetTrigger(id);
     }
+
+
     private void SetAimOffset(int playerID, float offset)
     {
         if (playerID != NetID) return;

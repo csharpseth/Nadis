@@ -53,22 +53,7 @@ public struct ItemEvents
 }
 public struct BipedAnimatorEvents
 {
-    public Action<int> OnRightFootBeginStep;
-    public Action<int> OnLeftFootBeginStep;
-
-    public Action<int> OnRightFootStepping;
-    public Action<int> OnLeftFootStepping;
-
-    public Action<int> OnRightFootFinishStep;
-    public Action<int> OnLeftFootFinishStep;
-
-    public Action<int, Vector3, Side, float, AnimatorTarget, bool> SetHandTargetPosition;
-    public Action<int> EndCurrentHandTarget;
-
-    public Action<int, bool, float, float, int> OnAnimatorDataSet;
-
-    public Action<int, string, Action> ExecuteAnimation;
-    public Action<int, string> EndAnimation;
+    
 }
 public struct PlayerEvents
 {

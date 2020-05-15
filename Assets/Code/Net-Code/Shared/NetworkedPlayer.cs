@@ -84,6 +84,48 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
             animTimer = 0f;
         }
     }
+    private void SendSetTrigger(int playerID, string triggerID)
+    {
+        if (playerID != NetID) return;
+        if (playerID != NetData.LocalPlayerID) return;
+
+        PacketPlayerAnimatorEvent packet = new PacketPlayerAnimatorEvent
+        {
+            playerID = NetID,
+            id = triggerID,
+            eventType = PlayerAnimatorEventType.SetTrigger
+        };
+        Events.Net.SendAsClientUnreliable(NetID, packet);
+    }
+    private void SendSetBool(int playerID, string boolID, bool value)
+    {
+        if (playerID != NetID) return;
+        if (playerID != NetData.LocalPlayerID) return;
+
+        PacketPlayerAnimatorEvent packet = new PacketPlayerAnimatorEvent
+        {
+            playerID = NetID,
+            id = boolID,
+            eventType = PlayerAnimatorEventType.SetBool,
+            bValue = value
+        };
+        Events.Net.SendAsClientUnreliable(NetID, packet);
+    }
+    private void SendSetFloat(int playerID, string boolID, float value)
+    {
+        if (playerID != NetID) return;
+        if (playerID != NetData.LocalPlayerID) return;
+
+        PacketPlayerAnimatorEvent packet = new PacketPlayerAnimatorEvent
+        {
+            playerID = NetID,
+            id = boolID,
+            eventType = PlayerAnimatorEventType.SetBool,
+            fValue = value
+        };
+        Events.Net.SendAsClientUnreliable(NetID, packet);
+    }
+
     private void ReceivePlayerPosition(IPacketData packet)
     {
         PacketPlayerPosition data = (PacketPlayerPosition)packet;
@@ -109,6 +151,23 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         anim.sideBlend = data.sideBlend;
     }
     
+    private void ReceivePlayerAnimatorEventData(IPacketData packet)
+    {
+        PacketPlayerAnimatorEvent data = (PacketPlayerAnimatorEvent)packet;
+        if (NetID != data.playerID) return;
+
+        if(data.eventType == PlayerAnimatorEventType.SetTrigger)
+        {
+            anim.SetTrigger(NetID, data.id);
+        }else
+        {
+            if (data.eventType == PlayerAnimatorEventType.SetBool)
+                anim.SetBool(NetID, data.id, data.bValue);
+            else if (data.eventType == PlayerAnimatorEventType.SetFloat)
+                anim.SetFloat(NetID, data.id, data.fValue);
+        }
+    }
+
     private void PlayerDisconnected(IPacketData packet)
     {
         PacketDisconnectPlayer data = (PacketDisconnectPlayer)packet;
@@ -147,6 +206,10 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
         ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorMoveData, ReceivePlayerAnimatorMoveData);
 
+        Events.Player.SetAnimatorTrigger += SendSetTrigger;
+        Events.Player.SetAnimatorFloat += SendSetFloat;
+        Events.Player.SetAnimatorBool += SendSetBool;
+
         Events.Net.DisconnectClient += DisconnectLocalPlayer;
         Events.Player.GetPlayer += GetPlayer;
 
@@ -160,6 +223,10 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         
         ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
         ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorMoveData, ReceivePlayerAnimatorMoveData);
+
+        Events.Player.SetAnimatorTrigger -= SendSetTrigger;
+        Events.Player.SetAnimatorFloat -= SendSetFloat;
+        Events.Player.SetAnimatorBool -= SendSetBool;
 
         Events.Net.DisconnectClient -= DisconnectLocalPlayer;
         Events.Player.GetPlayer -= GetPlayer;

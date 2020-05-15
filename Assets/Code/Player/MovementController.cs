@@ -34,13 +34,10 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
     {
         if (disabled == true || canMove == false) return;
 
-        if(Inp.Move.SprintDown)
+        runToggle = Inp.Move.Sprint;
+        if (runToggle == false)
         {
-            runToggle = !runToggle;
-        }
-        if(Inp.Move.CrouchDown && runToggle == false)
-        {
-            crouch = !crouch;
+            crouch = Inp.Move.Crouch;
         }
         
         if (Inp.Move.InputDir != Vector2.zero)

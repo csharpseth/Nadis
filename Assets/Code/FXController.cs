@@ -6,30 +6,45 @@ public class FXController : MonoBehaviour
 {
     private static FXController instance;
 
-    public int poolSize = 300;
-    public bool autoEnque = true;
-    public GameObject[] hitEffectPrefabs;
-    public GameObject[] muzzleFlashPrefabs;
-
-    private GameObjectPool hitEffectPool;
-    private GameObjectPool muzzleFlashPool;
-
-    private void Start()
+    public int maxPrefabs = 500;
+    public ImpactData[] impacts;
+    private Dictionary<MaterialProperty, GameObjectPool> impactPools;
+    private void Awake()
     {
         if (instance != null) Destroy(this);
-
         instance = this;
-        hitEffectPool = new GameObjectPool(hitEffectPrefabs, poolSize, autoEnque);
-        //muzzleFlashPool = new GameObjectPool(muzzleFlashPrefabs, poolSize, autoEnque);
+        impactPools = new Dictionary<MaterialProperty, GameObjectPool>();
+        PopulateImpactPools();
     }
 
-    public static void HitAt(Vector3 pos, Vector3 rot = default)
+    private void PopulateImpactPools()
     {
-        instance.hitEffectPool.SpawnAt(pos, rot);
+        int individualPoolSize = maxPrefabs / impacts.Length;
+        for (int i = 0; i < impacts.Length; i++)
+        {
+            if (impactPools.ContainsKey(impacts[i].material)) continue;
+
+            GameObjectPool pool = new GameObjectPool(impacts[i].particlePrefab, individualPoolSize, true);
+            impactPools.Add(impacts[i].material, pool);
+        }
     }
 
-    public static void MuzzleAt(Vector3 pos, Vector3 rot = default)
+
+    public static void HitAt(Vector3 position, IMaterialProperty properties)
     {
-        instance.muzzleFlashPool.SpawnAt(pos, rot);
+        if (properties == null || instance.impactPools.ContainsKey(properties.Material) == false) return;
+
+        instance.impactPools[properties.Material].SpawnAt(position);
     }
+
+
+
+    [System.Serializable]
+    public struct ImpactData
+    {
+        public GameObject particlePrefab;
+        public MaterialProperty material;
+    }
+    
+
 }

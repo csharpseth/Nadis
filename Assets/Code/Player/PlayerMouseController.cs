@@ -39,7 +39,15 @@ public class PlayerMouseController : MonoBehaviour, IDisableIfRemotePlayer, INet
     public int NetID { get; private set; }
 
     public float HorizontalLookPercent = 0f;
-    
+
+    private void Awake()
+    {
+        playerBody = transform;
+        if (playerCamera == null)
+            playerCamera = GetComponentInChildren<Camera>();
+        playerCameraTransform = playerCamera.transform;
+    }
+
     private void Update()
     {
         if (disabled) return;

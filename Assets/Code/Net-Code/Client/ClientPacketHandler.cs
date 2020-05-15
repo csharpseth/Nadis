@@ -95,9 +95,9 @@ namespace Nadis.Net.Client
             CreateHandler((int)ServerPacket.DamagePlayer, new PacketDamagePlayer(), (IPacketData packet) =>
             {
                 PlayerManager.DamagePlayer((PacketDamagePlayer)packet);
-                Log.Txt("CLIENT :: Player Damage Packet Received");
             });
             CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), null);
+            CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

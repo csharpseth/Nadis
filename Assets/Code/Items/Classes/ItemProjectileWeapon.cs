@@ -6,7 +6,7 @@ public class ItemProjectileWeapon : ItemWeapon
     [SerializeField]
     internal float _aimOffset;
     [SerializeField]
-    internal Vector3 _fireOrigin;
+    internal LayerMask _hitMask;
     [Space(20)]
     [SerializeField]
     internal float fireDelay;
@@ -18,6 +18,12 @@ public class ItemProjectileWeapon : ItemWeapon
     [SerializeField]
     internal bool _toggleAim;
     [Header("Audio:")]
+    [Tooltip("The amount the pitch can be randomly adjusted on all sounds played by this weapon.")]
+    [Range(0f, 0.3f)]
+    public float pitchModAmount = 0.05f;
+    [Tooltip("The maximum distance the fire sound can be heard from.")]
+    [Range(25f, 500f)]
+    public float fireHeardDistance = 150f;
     public AudioClip fireSound;
 
 
@@ -74,7 +80,7 @@ public class ItemProjectileWeapon : ItemWeapon
                 Aim(ownerID);
             }
         }
-        else
+        else if(Inp.Interact.Secondary != _aimed)
         {
             _aimed = Inp.Interact.Secondary;
             Aim(ownerID);
@@ -89,19 +95,16 @@ public class ItemProjectileWeapon : ItemWeapon
 
     public void Fire(int playerID)
     {
-        if(Source != null && fireSound != null)
-            Source.PlayOneShot(fireSound);
+        if (_aimed == false) return;
 
-        /*
-        Vector3 pos = anim.targets.rightHand.localPosition;
-        pos -= (Vector3.forward * _reqoil);
-        Tween.FromToPosition(anim.targets.rightHand.target, pos, _reqoilDuration, Space.Local, true, null, null);
-        */
+        SFX.PlayAt(fireSound, transform.position, transform, fireHeardDistance, pitchModAmount);
 
+        Events.Player.SetAnimatorTrigger(playerID, "recoil_medium");
+        
         RaycastHit hit;
-        if(Physics.Raycast(LocalToGlobal(_fireOrigin), transform.forward, out hit, _range))
+        if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, _range, _hitMask))
         {
-            FXController.HitAt(hit.point);
+            FXController.HitAt(hit.point, hit.transform.GetComponent<IMaterialProperty>());
             NetworkedPlayer player = hit.transform.GetComponent<NetworkedPlayer>();
             if(player != null)
             {
@@ -114,23 +117,5 @@ public class ItemProjectileWeapon : ItemWeapon
     {
         
     }
-
-    private Vector3 LocalToGlobal(Vector3 input)
-    {
-        Vector3 origin = transform.position;
-        origin += transform.right * input.x;
-        origin += transform.up * input.y;
-        origin += transform.forward * input.z;
-        return origin;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Vector3 origin = LocalToGlobal(_fireOrigin);
-
-        Gizmos.DrawSphere(origin, 0.01f);
-        Gizmos.DrawLine(origin, origin + transform.forward);
-        Gizmos.DrawSphere(origin + transform.forward, 0.01f);
-    }
+    
 }

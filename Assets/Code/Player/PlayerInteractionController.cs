@@ -12,6 +12,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
 
     public float reach = 5f;
     public LayerMask interactionMask;
+    public LayerMask ignorePlayerMask;
     public GameObject testItem = null;
     
     private int _activeIndex = 0;
@@ -57,7 +58,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
             if(Inp.Interact.PrimaryDown)
             {
                 RaycastHit hit;
-                if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach))
+                if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, ignorePlayerMask))
                 {
                     //TesterMenu.SpawnObject(testItem, hit.point);
                     Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.1f));

@@ -82,7 +82,7 @@ public struct InputMovement
             return (board || pad);
         }
     }
-    public bool CrouchDown
+    public bool Crouch
     {
         get
         {
@@ -90,17 +90,17 @@ public struct InputMovement
             bool pad = false;
             if (UseBoard)
             {
-                board = ActiveBoard.leftCtrlKey.wasPressedThisFrame;
+                board = ActiveBoard.leftCtrlKey.isPressed;
             }
             if (UsePad)
             {
-                pad = ActivePad.bButton.wasPressedThisFrame;
+                pad = ActivePad.bButton.isPressed;
             }
 
             return (board || pad);
         }
     }
-    public bool SprintDown
+    public bool Sprint
     {
         get
         {
@@ -108,11 +108,11 @@ public struct InputMovement
             bool pad = false;
             if (UseBoard)
             {
-                board = ActiveBoard.leftShiftKey.wasPressedThisFrame;
+                board = ActiveBoard.leftShiftKey.isPressed;
             }
             if (UsePad)
             {
-                pad = ActivePad.leftStickButton.wasPressedThisFrame;
+                pad = ActivePad.leftStickButton.isPressed;
             }
 
             return (board || pad);

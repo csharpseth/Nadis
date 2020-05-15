@@ -32,13 +32,6 @@ public enum Direction
     Right
 }
 
-//Decorations
-public enum LogicType
-{
-    None,
-    Tree,
-    Ore
-}
 
 //Entities
 public enum WeaponFireType
@@ -48,25 +41,14 @@ public enum WeaponFireType
     Full
 }
 
-//Procedural Animator
-public enum Side
+//FX
+public enum MaterialProperty
 {
-    Both = 1,
-    Right,
-    Left,
+    Dirt,
+    Wood,
+    Metal,
+    Flesh,
+    Plastic
 }
-public enum AnimatorTargetType
-{
-    Target,
-    Bone
-}
-public enum AnimatorTarget
-{
-    None = 1,
-    Head,
-    Chest,
-    Pelvis,
-    Hands,
-    Feet,
-}
+
 
