@@ -68,6 +68,8 @@ public struct PlayerEvents
     public OnSetPlayerAnimatorTrigger SetAnimatorTrigger;
     public Action<int, float> SetAimOffset;
 
+    public Action<int> Respawn;
+
     public PlayerPickupItem Pickup;
     public OnGetPlayer GetPlayer;
     public Action<int> UnSubscribe;

@@ -30,6 +30,7 @@ public enum ServerPacket
     SpawnItem,
     DestroyItem,
     DamagePlayer,
+    KillPlayer,
 }
 
 //Starts at 500

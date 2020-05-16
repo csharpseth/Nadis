@@ -13,7 +13,6 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
     public float reach = 5f;
     public LayerMask interactionMask;
     public LayerMask ignorePlayerMask;
-    public GameObject testItem = null;
     
     private int _activeIndex = 0;
     private bool disabled = false;

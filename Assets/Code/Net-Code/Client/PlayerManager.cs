@@ -39,4 +39,16 @@ public static class PlayerManager
         Events.PlayerStats.OnAlterHealth(packet.playerID, temp.health.Percent, false);
     }
 
+    public static void KillPlayer(PacketKillPlayer packet)
+    {
+        if(playerStats.ContainsKey(packet.playerID) == false) return;
+
+        PlayerStatsData temp = playerStats[packet.playerID];
+        temp.Reset();
+        playerStats[packet.playerID] = temp;
+
+        Events.Player.Respawn(packet.playerID);
+        Log.Not("Player:{0} Has Been Killed.", packet.playerID);
+    }
+
 }

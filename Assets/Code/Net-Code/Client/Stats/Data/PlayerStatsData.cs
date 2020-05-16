@@ -12,5 +12,9 @@
             this.target = target;
             health = initialHealth;
         }
+
+        public void Reset() {
+            health.Reset();
+        }
     }
 }

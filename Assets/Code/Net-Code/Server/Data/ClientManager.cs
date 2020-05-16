@@ -112,8 +112,18 @@ namespace Nadis.Net.Server
             HealthData health = _clientHealthDictionary[playerID];
             health.AlterValue(damage);
 
-            if (health.Value <= 1)
-                Log.Txt("Player:{0} is Dead.", playerID);
+            if (health.Dead)
+            {
+                ItemManager.PlayerDropAllItems(playerID);
+                PacketKillPlayer packet = new PacketKillPlayer{
+                    playerID = playerID,
+                    respawn = true
+                };
+                ServerSend.ReliableToAll(packet);
+                health.Reset();
+                 _clientHealthDictionary[playerID] = health;
+                return false;
+            }
 
             _clientHealthDictionary[playerID] = health;
             return true;

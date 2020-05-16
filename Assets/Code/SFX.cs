@@ -64,6 +64,8 @@ public class SFX : MonoBehaviour
 
     public static void PlayAt(AudioClip clip, Vector3 location, float maxHeardDistance, float pitchMod = 0f)
     {
+        if(clip == null) return;
+
         AudioSource src = _instance.srcQueue.Dequeue();
         src.Stop();
         src.clip = null;

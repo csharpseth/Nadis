@@ -8,25 +8,39 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Grass
-  m_Shader: {fileID: -6465566751694194690, guid: 29c397f060fe8334cb0a14cc4e90f35f,
+  m_Shader: {fileID: -6465566751694194690, guid: c69b563256b1d17458e9bdfcf56f0935,
     type: 3}
   m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _RECEIVE_SHADOWS_OFF _SPECULARHIGHLIGHTS_OFF
     _SPECULAR_SETUP
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_790BC8DA:
+        m_Texture: {fileID: 2800000, guid: 106dd80a2cb7724479c0325b81b0c2b3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_883ADF84:
+        m_Texture: {fileID: 2800000, guid: 1a94add757ebda240a4e613eb9142dde, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_ABC5B92A:
         m_Texture: {fileID: 2800000, guid: 52077b1d52a25a34eb71e3bb415b6d56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_C895C73D:
         m_Texture: {fileID: 2800000, guid: 33c2e0ff983bdcf4eaeb977e515441ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_D7AECD08:
+        m_Texture: {fileID: 2800000, guid: 2ba4e8c43009d0445aa8c5b9fb4214df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -74,6 +88,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_302B9EDC: 1
+    - Vector1_8D192E20: 1
+    - Vector1_A981EBFE: 5
+    - Vector1_BC1895D4: 1
     - Vector1_D7669585: 0.5
     - _AlphaClip: 0
     - _Blend: 0

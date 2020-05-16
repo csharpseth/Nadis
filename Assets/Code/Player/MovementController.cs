@@ -32,7 +32,10 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
     //Actual Movement Logic & State Determination
     private void Update()
     {
+        Debug.Log("Move Update Before Early Out");
         if (disabled == true || canMove == false) return;
+        Debug.Log("Move Update After Early Out");
+
 
         runToggle = Inp.Move.Sprint;
         if (runToggle == false)
@@ -62,6 +65,7 @@ public class MovementController : MonoBehaviour, INetworkInitialized, IDisableIf
 
     public void AlterDataState(PlayerMoveState state)
     {
+        Debug.Log("Alter Move Data");
         MovementData d = data;
         d.state = state;
         data = d;

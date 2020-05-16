@@ -98,6 +98,11 @@ namespace Nadis.Net.Client
             });
             CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), null);
             CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), null);
+
+            CreateHandler((int)ServerPacket.KillPlayer, new PacketKillPlayer(), (IPacketData packet) => 
+            {
+                PlayerManager.KillPlayer((PacketKillPlayer)packet);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

@@ -4,5 +4,6 @@
     {
         public static int PlayerStartHealth = 100;
         public static int PlayerMaxHealth = 100;
+        public static int PlayerMinHealthBeforeDeath = 2;
     }
 }

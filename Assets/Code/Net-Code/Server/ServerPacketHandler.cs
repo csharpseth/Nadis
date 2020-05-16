@@ -25,18 +25,6 @@ namespace Nadis.Net.Server
             
             handlers[packetID].Invoke(buffer);
         }
-        /*
-        public static void Handle(int packetID, JobPacketBuffer buffer)
-        {
-            if (handlers.ContainsKey(packetID) == false)
-            {
-                UnityEngine.Debug.LogErrorFormat("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
-                return;
-            }
-
-            handlers[packetID].Invoke(buffer);
-        }
-        */
         public static void SubscribeTo(int packetID, PacketHandlerData.ReceiveCallback callback)
         {
             if (handlers.ContainsKey(packetID) == false) return;

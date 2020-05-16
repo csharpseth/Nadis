@@ -8,12 +8,14 @@ namespace Nadis.Net.Server
         private static Dictionary<int, ItemData> _sceneItems;
         //                       PlayerID - List of Items
         private static Dictionary<int, Dictionary<int, ItemData>> _playerInventories;
+        private static Dictionary<int, List<int>> _iterativePlayerInventories;
         private static int _itemCount;
 
         public static void Init()
         {
             _sceneItems = new Dictionary<int, ItemData>();
             _playerInventories = new Dictionary<int, Dictionary<int, ItemData>>();
+            _iterativePlayerInventories = new Dictionary<int, List<int>>();
             _itemCount = 0;
         }
 
@@ -47,6 +49,7 @@ namespace Nadis.Net.Server
                 if(_playerInventories[id].ContainsKey(networkID))
                 {
                     _playerInventories[id].Remove(networkID);
+                    _iterativePlayerInventories[id].Remove(networkID);
                     return true;
                 }
             }
@@ -69,6 +72,7 @@ namespace Nadis.Net.Server
             
             Dictionary<int, ItemData> newInventory = new Dictionary<int, ItemData>();
             _playerInventories.Add(playerID, newInventory);
+            _iterativePlayerInventories.Add(playerID, new List<int>());
         }
         public static void FindInInventory(int itemNetID, out int playerID)
         {
@@ -105,13 +109,16 @@ namespace Nadis.Net.Server
             {
                 ItemData item = _sceneItems[networkID];
                 _playerInventories[playerID].Add(networkID, item);
+                _iterativePlayerInventories[playerID].Add(networkID);
                 _sceneItems.Remove(networkID);
                 return true;
             }else
             {
                 ItemData item = _playerInventories[otherPlayerID][networkID];
                 _playerInventories[otherPlayerID].Remove(networkID);
+                _iterativePlayerInventories[otherPlayerID].Remove(networkID);
                 _playerInventories[playerID].Add(networkID, item);
+                _iterativePlayerInventories[otherPlayerID].Add(networkID);
                 return true;
             }
 
@@ -123,10 +130,29 @@ namespace Nadis.Net.Server
 
             ItemData item = _playerInventories[playerID][networkID];
             _playerInventories[playerID].Remove(networkID);
+            _iterativePlayerInventories[playerID].Remove(networkID);
             _sceneItems.Add(networkID, item);
             return true;
         }
 
+        public static void PlayerDropAllItems(int playerID)
+        {
+            if(_playerInventories.ContainsKey(playerID) == false) return;
+
+            while(_iterativePlayerInventories[playerID].Count > 0)
+            {
+                int netID = _iterativePlayerInventories[playerID][0];
+                if(MoveItemToWorld(netID, playerID))
+                {
+                    PacketItemDrop packet = new PacketItemDrop
+                    {
+                        NetworkID = netID,
+                        PlayerID = playerID
+                    };
+                    ServerSend.ReliableToAll(packet);
+                }
+            }
+        }
         public static void SendSceneItemsToPlayer(int playerID)
         {
             foreach (var id in _sceneItems.Keys)

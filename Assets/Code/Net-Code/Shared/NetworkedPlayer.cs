@@ -37,7 +37,6 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
 
     float timer = 0f;
     float animTimer;
-
     private void Sending()
     {
         timer += Time.deltaTime;
@@ -131,7 +130,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         PacketPlayerPosition data = (PacketPlayerPosition)packet;
         if (NetID != data.playerID) return;
 
-        Tween.FromToPosition(transform, data.playerPosition, MoveCheckInterval, Space.World, false);
+        transform.position = data.playerPosition;
     }
     private void ReceivePlayerRotation(IPacketData packet)
     {
@@ -166,6 +165,13 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
             else if (data.eventType == PlayerAnimatorEventType.SetFloat)
                 anim.SetFloat(NetID, data.id, data.fValue);
         }
+    }
+
+    private void PlayerRespawn(int playerID)
+    {
+        if(NetID != playerID) return;
+
+        transform.position = Vector3.zero;
     }
 
     private void PlayerDisconnected(IPacketData packet)
@@ -210,6 +216,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         Events.Player.SetAnimatorFloat += SendSetFloat;
         Events.Player.SetAnimatorBool += SendSetBool;
 
+        Events.Player.Respawn += PlayerRespawn;
         Events.Net.DisconnectClient += DisconnectLocalPlayer;
         Events.Player.GetPlayer += GetPlayer;
 
