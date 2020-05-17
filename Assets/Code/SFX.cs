@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
 
 public class SFX : MonoBehaviour
 {
@@ -62,7 +65,7 @@ public class SFX : MonoBehaviour
         }
     }
 
-    public static void PlayAt(AudioClip clip, Vector3 location, float maxHeardDistance, float pitchMod = 0f)
+    public static void PlayAt(AudioClip clip, Vector3 location, float maxHeardDistance, float pitchMod = 0f, float volume = 1f)
     {
         if(clip == null) return;
 
@@ -70,8 +73,9 @@ public class SFX : MonoBehaviour
         src.Stop();
         src.clip = null;
         src.transform.position = location;
-        src.pitch = Random.Range(1f - pitchMod, 1f + pitchMod);
+        src.pitch = UnityEngine.Random.Range(1f - pitchMod, 1f + pitchMod);
         src.maxDistance = maxHeardDistance;
+        src.volume = volume;
         src.PlayOneShot(clip);
         _instance.srcQueue.Enqueue(src);
     }
@@ -88,10 +92,71 @@ public class SFX : MonoBehaviour
             srcTransform = src.transform,
             time = 0f
         });
-        src.pitch = Random.Range(1f - pitchMod, 1f + pitchMod);
+        src.volume = 1f;
+        src.pitch = UnityEngine.Random.Range(1f - pitchMod, 1f + pitchMod);
         src.maxDistance = maxHeardDistance;
         src.PlayOneShot(clip);
         _instance.srcQueue.Enqueue(src);
+    }
+
+    public static void Experimental_PlayAt(AudioClip clip, Vector3 location, float pitch, float volume, float maxHeardDistance)
+    {
+        AudioSource src = _instance.srcQueue.Dequeue();
+        src.Stop();
+        src.clip = null;
+        src.transform.position = location;
+        src.volume = volume;
+        src.pitch = pitch;
+        src.maxDistance = maxHeardDistance;
+        src.PlayOneShot(clip);
+        _instance.srcQueue.Enqueue(src);
+    }
+
+    public static void Experimental_PlayAtDynamicReverb(AudioClip clip, Vector3 location, Transform parent)
+    {
+        float rayAngleIncrement = 90f;
+        int numRays = (int)math.pow(360f / rayAngleIncrement, 3);
+        NativeArray<RaycastCommand> cmds = new NativeArray<RaycastCommand>(numRays, Allocator.TempJob);
+        NativeArray<RaycastHit> results = new NativeArray<RaycastHit>(numRays, Allocator.TempJob);
+
+        PlayAt(clip, location, parent, 100f, 0.05f);
+
+        Transform origin = new GameObject("temp").transform;
+        origin.position = location;
+        Vector3 angle = Vector3.zero;
+
+        int index = 0;
+        for(float x = -180f; x < 180f; x += rayAngleIncrement)
+        {
+            for(float y = -180f; y < 180f; y += rayAngleIncrement)
+            {
+                for(float z = -180f; z < 180f; z += rayAngleIncrement)
+                {
+                    angle.x = x;
+                    angle.y = y;
+                    angle.z = z;
+                    origin.eulerAngles = angle;
+                    RaycastCommand cmd = new RaycastCommand(origin.position, origin.forward);
+                    cmds[index] = cmd;
+                    index++;
+                }
+            }
+        }
+
+        JobHandle raycastHandle = RaycastCommand.ScheduleBatch(cmds, results, numRays);
+        raycastHandle.Complete();
+
+        for(int i = 0; i < results.Length; i++)
+        {
+            RaycastHit hit = results[i];
+            if(hit.transform == null) continue;
+
+            Experimental_PlayAt(clip, hit.point, 0.5f, 0.005f, hit.distance + 5f);
+        }
+
+        cmds.Dispose();
+        results.Dispose();
+        Destroy(origin.gameObject);
     }
 
 

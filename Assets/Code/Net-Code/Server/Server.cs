@@ -31,6 +31,8 @@ namespace Nadis.Net.Server
             ClientManager.Init(MaxPlayers);
             ItemManager.Init();
             ServerPacketHandler.Initialize();
+            ServerData.chargingStationLocations = ServerScenePrescence.GetAllChargingStationLocations();
+            Debug.Log(ServerData.chargingStationLocations.Length + " Charging Stations");
 
             TCP.Start();
             UDP.Start();

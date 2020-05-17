@@ -95,20 +95,27 @@ public class ItemRangedWeapon : ItemWeapon
 
     public void Fire(int playerID)
     {
-        if (_aimed == false) return;
+        if (_aimed == false || PlayerManager.RequestUsePower(playerID, powerConsumptionPerUse) == false) return;
 
+        //Everyone
         SFX.PlayAt(fireSound, transform.position, transform, fireHeardDistance, pitchModAmount);
-
         Events.Player.SetAnimatorTrigger(playerID, "recoil_medium");
         
+        //Local Client Only
         RaycastHit hit;
-        if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, _range, _hitMask))
+        if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, ballistics.range, _hitMask))
         {
+            Debug.Log("Hit");
             FXController.HitAt(hit.point, hit.transform.GetComponent<IMaterialProperty>());
-            NetworkedPlayer player = hit.transform.GetComponent<NetworkedPlayer>();
+
+            PlayerLimb limb = hit.transform.GetComponent<PlayerLimb>();
+            if(limb == null) return;
+
+            NetworkedPlayer player = hit.transform.root.GetComponent<NetworkedPlayer>();
+            Debug.Log(hit.transform.root);
             if(player != null)
             {
-                player.RequestDamageThisPlayer(Damage);
+                player.RequestDamageThisPlayer(playerID, ballistics.damage, ballistics.range, limb.appendage);
             }
         }
     }

@@ -12,6 +12,7 @@ namespace Nadis.Net.Server
         public bool Invalid { get { return _socket == null; } }
 
         public UnityEngine.Vector3 position;
+        public UnityEngine.Vector3 lastCheckedPosition;
         public float rotation;
 
         //Private
@@ -153,6 +154,13 @@ namespace Nadis.Net.Server
         {
             PacketPlayerPosition data = (PacketPlayerPosition)packet;
             if (data.playerID != NetID) return;
+            if(Util.CustomDistanceScore(lastCheckedPosition, data.playerPosition) >= ServerData.PlayerUnitsToMoveBeforeChargingPower)
+            {
+                ClientManager.MoveLosePower(NetID, lastCheckedPosition, data.playerPosition);
+                lastCheckedPosition = data.playerPosition;
+            }
+            ServerChargingController.EvaluatePlayer(data.playerID, data.playerPosition);
+
             position = data.playerPosition;
         }
         private void SetRotation(IPacketData packet)

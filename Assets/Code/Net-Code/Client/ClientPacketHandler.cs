@@ -103,6 +103,11 @@ namespace Nadis.Net.Client
             {
                 PlayerManager.KillPlayer((PacketKillPlayer)packet);
             });
+
+            CreateHandler((int)ServerPacket.AlterPowerLevel, new PacketAlterPlayerPower(), (IPacketData packet) => 
+            {
+                PlayerManager.AlterPlayerPowerLevel((PacketAlterPlayerPower)packet);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

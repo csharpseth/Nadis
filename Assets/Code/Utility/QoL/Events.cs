@@ -76,17 +76,7 @@ public struct PlayerEvents
 }
 public struct PlayerStatEvents
 {
-    public delegate void StatEvent(int playerID, int amount, bool send);
-    public delegate void OnStatEvent(int playerID, float percent, bool send);
-    public StatEvent Heal;
-    public StatEvent Damage;
-    public OnStatEvent SetHealth;
-    public StatEvent AlterPower;
-    public OnStatEvent SetPower;
-    public Action<int> Die;
-
-    public OnStatEvent OnAlterHealth;
-    public OnStatEvent OnAlterPower;
+    
 }
 public struct MapGeneratorEvents
 {

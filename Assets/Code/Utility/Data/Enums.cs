@@ -9,6 +9,17 @@ public enum PlayerMoveState
     CrouchWalking
 }
 
+public enum PlayerAppendage
+{
+    Head = 1,
+    Chest,
+    Pelvis,
+    Leg,
+    Foot,
+    Arms,
+    Hands
+}
+
 //Tween
 public enum TweenType
 {

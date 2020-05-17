@@ -12,4 +12,28 @@
         return value * sign;
     }
 
+    public static float FastMax(float a, float b)
+    {
+        return (a > b) ? a : b;
+    }
+
+    public static float CustomDistanceScore(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+    {
+        float diffX = FastAbs(a.x - b.x);
+        float diffZ = FastAbs(a.z - b.z);
+        return FastMax(diffX, diffZ);
+    }
+
+    public static float FastAndRoughDistance(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+    {
+        float diffX = FastAbs(a.x - b.x);
+        float diffZ = FastAbs(a.z - b.z);
+        return (diffX + diffZ) / 2f;
+    }
+
+    public static int EnsureNegative(int value)
+    {
+        return -FastAbs(value);
+    }
+
 }

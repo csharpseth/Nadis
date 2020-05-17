@@ -194,12 +194,16 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         netPlayer = this;
     }
     
-    public void RequestDamageThisPlayer(int amount)
+    public void RequestDamageThisPlayer(int damagerPlayerID, int weaponDamage, int weaponRange, PlayerAppendage limbHit)
     {
+        Debug.Log("Req Dmg Ply");
         PacketRequestDamagePlayer packet = new PacketRequestDamagePlayer
         {
             playerID = NetID,
-            alterAmount = amount
+            damagerPlayerID = damagerPlayerID,
+            weaponDamage = weaponDamage,
+            limbHit = limbHit,
+            weaponRange = weaponRange
         };
         Events.Net.SendAsClient(NetData.LocalPlayerID, packet);
     }

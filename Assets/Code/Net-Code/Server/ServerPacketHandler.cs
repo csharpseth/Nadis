@@ -119,12 +119,14 @@ namespace Nadis.Net.Server
             CreateHandler((int)ClientPacket.DamagePlayerRequest, new PacketRequestDamagePlayer(), (IPacketData data) =>
             {
                 PacketRequestDamagePlayer packet = (PacketRequestDamagePlayer)data;
-                if(ClientManager.TryDamagePlayer(packet.playerID, packet.alterAmount))
+                int dmg = ClientManager.TryDamagePlayer(packet);
+                UnityEngine.Debug.Log("Damage Player Request");
+                if(dmg != -1)
                 {
                     PacketDamagePlayer cmd = new PacketDamagePlayer
                     {
                         playerID = packet.playerID,
-                        alterAmount = packet.alterAmount
+                        alterAmount = dmg
                     };
 
                     ServerSend.ReliableToAll(cmd);
@@ -139,6 +141,11 @@ namespace Nadis.Net.Server
             {
                 PacketPlayerAnimatorEvent packet = (PacketPlayerAnimatorEvent)data;
                 ServerSend.UnReliableToAll(packet, packet.playerID);
+            });
+            CreateHandler((int)ClientPacket.RequestUsePower, new PacketRequestUsePower(), (IPacketData data) => 
+            {
+                PacketRequestUsePower packet = (PacketRequestUsePower)data;
+                ClientManager.AlterPlayerPower(packet.playerID, Util.EnsureNegative(packet.useAmount));
             });
         }
 

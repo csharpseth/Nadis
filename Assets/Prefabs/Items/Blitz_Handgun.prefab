@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092196175765011641}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.0474, z: -0.0272}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4636974848524905181}
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -295,7 +295,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -453,7 +453,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -532,7 +532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4e307bfa38f2404baaf377564d09b2d, type: 2}
+  - {fileID: 2100000, guid: de0dc9c345007944ca3e054b5a2615ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -653,12 +653,12 @@ MonoBehaviour:
   _name: Blitz
   holdPosition: {x: 0, y: 0.1, z: 0}
   holdRotation: {x: -5, y: 190, z: 2}
-  _damage: 25
-  _range: 300
+  ballistics: {fileID: 11400000, guid: a86be8a4362621343babc1178c601705, type: 2}
+  powerConsumptionPerUse: 5
   _aimOffset: 0
   _hitMask:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   fireDelay: 0.2
   _fireType: 2
   _toggleAim: 0

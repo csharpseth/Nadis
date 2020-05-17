@@ -1,0 +1,16 @@
+[5-16-20]
+-Added Player Hitboxes & Damage Multipliers
+-Added Player Damage Security Checking:
+   -Very basic, just checks if the hit player is within
+     range, and applies damage with multiplier based
+     on appendage hit
+-Implemented player power stat, sync'd across network
+-Implemented power loss from: moving & shooting
+-Implemented a rough system for charging stations
+    and their functionality
+
+Issues:
+-Non-Movement related animation events aren't syncd
+-Charging station "Over Charging" damages player but doesn't kill them
+-Newly connected players don't place already spawned/equiped
+    items in the inventories of those who have the items

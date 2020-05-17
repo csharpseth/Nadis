@@ -61,7 +61,7 @@ namespace Nadis.Net
             {
                 netInit[y].InitFromNetwork(data.playerID);
             }
-            PlayerManager.CreatePlayersStatData(netPly, data.currentHealth, data.maxHealth);
+            PlayerManager.CreatePlayerStatData(netPly, data.currentHealth, data.maxHealth, data.currentPower, data.maxPower);
         }
 
         private void SpawnRemotePlayer(PacketPlayerConnection data)
@@ -86,7 +86,7 @@ namespace Nadis.Net
             }
             if (netPly != null)
             {
-                PlayerManager.CreatePlayersStatData(netPly, data.currentHealth, data.maxHealth);
+                PlayerManager.CreatePlayerStatData(netPly, data.currentHealth, data.maxHealth, data.currentPower, data.maxPower);
             }
         }
 

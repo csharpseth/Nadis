@@ -5,16 +5,19 @@
         public int TargetID => target.NetID;
 
         public NetworkedPlayer target;
-        public HealthData health;
+        public StatData health;
+        public StatData power;
 
-        public PlayerStatsData(NetworkedPlayer target, HealthData initialHealth)
+        public PlayerStatsData(NetworkedPlayer target, StatData initialHealth, StatData initialPower)
         {
             this.target = target;
             health = initialHealth;
+            power = initialPower;
         }
 
         public void Reset() {
             health.Reset();
+            power.Reset();
         }
     }
 }

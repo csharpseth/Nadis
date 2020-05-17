@@ -31,6 +31,7 @@ public enum ServerPacket
     DestroyItem,
     DamagePlayer,
     KillPlayer,
+    AlterPowerLevel,
 }
 
 //Starts at 500
@@ -44,4 +45,5 @@ public enum ClientPacket
     SpawnItemRequest,
     DestroyItemRequest,
     DamagePlayerRequest,
+    RequestUsePower,
 }
