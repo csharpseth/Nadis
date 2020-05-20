@@ -21,6 +21,7 @@ namespace Nadis.Net
 
 
         public GameObject playerPrefab;
+        public GameObject remotePlayerPrefab;
         private Queue<PacketPlayerConnection> playersToSpawn;
 
         private void Init()
@@ -36,28 +37,56 @@ namespace Nadis.Net
             for (int i = 0; i < amount; i++)
             {
                 PacketPlayerConnection temp = playersToSpawn.Dequeue();
-                GameObject ply = Instantiate(playerPrefab, temp.playerPosition, Quaternion.identity);
-                Vector3 tempRot = ply.transform.eulerAngles;
-                tempRot.y = temp.playerRotation;
-                ply.transform.eulerAngles = tempRot;
+                if (temp.playerIsLocal)
+                    SpawnLocalPlayer(temp);
+                else
+                    SpawnRemotePlayer(temp);
+            }
+        }
 
-                if (temp.playerIsLocal == false)
-                {
-                    IDisableIfRemotePlayer[] disable = ply.GetComponentsInChildren<IDisableIfRemotePlayer>();
-                    for (int j = 0; j < disable.Length; j++)
-                    {
-                        disable[j].Disable(true);
-                    }
-                }else
-                {
-                    NetData.LocalPlayerID = temp.playerID;
-                    Client.Client.Local.SetID(temp.playerID);
-                }
-                INetworkInitialized[] netInit = ply.GetComponentsInChildren<INetworkInitialized>();
-                for (int y = 0; y < netInit.Length; y++)
-                {
-                    netInit[y].InitFromNetwork(temp.playerID);
-                }
+        private void SpawnLocalPlayer(PacketPlayerConnection data)
+        {
+            GameObject ply = Instantiate(playerPrefab, data.playerPosition, Quaternion.identity);
+            Vector3 tempRot = ply.transform.eulerAngles;
+            tempRot.y = data.playerRotation;
+            ply.transform.eulerAngles = tempRot;
+            ply.name = "Ply_" + data.playerID;
+            
+            NetData.LocalPlayerID = data.playerID;
+            Client.Client.Local.SetID(data.playerID);
+
+            INetworkInitialized[] netInit = ply.GetComponentsInChildren<INetworkInitialized>();
+            NetworkedPlayer netPly = ply.GetComponent<NetworkedPlayer>();
+            for (int y = 0; y < netInit.Length; y++)
+            {
+                netInit[y].InitFromNetwork(data.playerID);
+            }
+            PlayerManager.CreatePlayerStatData(netPly, data.currentHealth, data.maxHealth, data.currentPower, data.maxPower);
+        }
+
+        private void SpawnRemotePlayer(PacketPlayerConnection data)
+        {
+            GameObject ply = Instantiate(remotePlayerPrefab, data.playerPosition, Quaternion.identity);
+            Vector3 tempRot = ply.transform.eulerAngles;
+            tempRot.y = data.playerRotation;
+            ply.transform.eulerAngles = tempRot;
+            ply.name = "Remote_Ply_" + data.playerID;
+            
+            IDisableIfRemotePlayer[] disable = ply.GetComponentsInChildren<IDisableIfRemotePlayer>();
+            for (int i = 0; i < disable.Length; i++)
+            {
+                disable[i].Disable(true);
+            }
+
+            INetworkInitialized[] netInit = ply.GetComponentsInChildren<INetworkInitialized>();
+            NetworkedPlayer netPly = ply.GetComponent<NetworkedPlayer>();
+            for (int y = 0; y < netInit.Length; y++)
+            {
+                netInit[y].InitFromNetwork(data.playerID);
+            }
+            if (netPly != null)
+            {
+                PlayerManager.CreatePlayerStatData(netPly, data.currentHealth, data.maxHealth, data.currentPower, data.maxPower);
             }
         }
 

@@ -1,47 +1,4 @@
-﻿namespace Nadis.Net
-{
-    public enum DataRequestType
-    {
-        IslandPosition = 1,
-    }
-
-    public enum ServerPackets
-    {
-        SWelcomeMSG = 1,
-        SPlayerPos,
-        SPlayerRot,
-        SPlayerConnected,
-        SPlayerDisconnected,
-        SConnectionSuccessful,
-        SPlayerMoveData,
-        SInventoryEvent,
-        SSpawnItem,
-        SDestroyItem,
-        SItemEvent,
-        SPlayerSetHandPosition,
-        SPlayerEndCurrentHandPosition,
-        SPlayerStatEvent,
-        SDataRequest
-    }
-
-    public enum ClientPackets
-    {
-        CPing = 1,
-        CPlayerPos,
-        CPlayerRot,
-        CPlayerMoveData,
-        CRequestSpawnItem,
-        CRequestDestroyItem,
-        CItemEvent,
-        CInventoryEvent,
-        CPlayerSetHandTarget,
-        CPlayerEndCurrentHandTarget,
-        CPlayerStatsEvent,
-        CPlayerSpawnedSuccessfully,
-        CSendServerRequestedData
-    }
-}
-
+﻿
 //Player
 public enum PlayerMoveState
 {
@@ -50,6 +7,17 @@ public enum PlayerMoveState
     Running,
     Crouching,
     CrouchWalking
+}
+
+public enum PlayerAppendage
+{
+    Head = 1,
+    Chest,
+    Pelvis,
+    Leg,
+    Foot,
+    Arms,
+    Hands
 }
 
 //Tween
@@ -75,13 +43,6 @@ public enum Direction
     Right
 }
 
-//Decorations
-public enum LogicType
-{
-    None,
-    Tree,
-    Ore
-}
 
 //Entities
 public enum WeaponFireType
@@ -91,19 +52,14 @@ public enum WeaponFireType
     Full
 }
 
-//Procedural Animator
-public enum Side
+//FX
+public enum MaterialProperty
 {
-    Right = 1,
-    Left = 2,
-    Both = 3
+    Dirt,
+    Wood,
+    Metal,
+    Flesh,
+    Plastic
 }
-public enum AnimatorTarget
-{
-    None = 1,
-    Head,
-    Chest,
-    Pelvis,
-    Hands
-}
+
 

@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Debug View
+  - ChargingStation
   layers:
   - Default
   - TransparentFX
@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - Local Player
-  - Player Ignored
   - Interactable
+  - HitBoxes
   - 
   - 
   - 

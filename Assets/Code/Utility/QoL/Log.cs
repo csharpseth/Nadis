@@ -5,7 +5,8 @@ public static class Log
     public static bool LogText = true;
     public static bool LogWarnings = true;
     public static bool LogErrors = true;
-    public static bool LogNotifications = false;
+    public static bool LogNotifications = true;
+    public static bool LogEvents = true;
 
     public static void Not(object input, params object[] args)
     {
@@ -43,5 +44,15 @@ public static class Log
             Debug.LogError(input);
         else if (args != null && args.Length > 0)
             Debug.LogErrorFormat(input.ToString(), args);
+    }
+
+    public static void Event(object input, params object[] args)
+    {
+        if(LogEvents == false) return;
+
+        if(args == null || args.Length == 0)
+            Debug.Log("EVENT::" + input);
+        else
+            Debug.LogFormat("EVENT::" + input, args);
     }
 }

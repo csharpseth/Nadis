@@ -1,31 +1,39 @@
-﻿using LibNoise.Generator;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public static class Util
+﻿public static class Util
 {
-    private static Perlin constPerlin = new Perlin(1f, 0.5f, 1.8f, 1, System.DateTime.Now.Millisecond, LibNoise.QualityMode.Medium);
-    private static Perlin perlin = new Perlin(1f, 0.5f, 1.8f, 1, System.DateTime.Now.Millisecond, LibNoise.QualityMode.Medium);
+    public static int FastAbs(int value)
+    {
+        int sign = (value >= 0) ? 1 : -1;
+        return value * sign;
+    }
 
-    public static float Perlin
+    public static float FastAbs(float value)
     {
-        get
-        {
-            return (float)constPerlin.GetValue(Random.Range(float.MinValue, float.MaxValue), Random.Range(float.MinValue, float.MaxValue), Random.Range(float.MinValue, float.MaxValue));
-        }
+        float sign = (value >= 0) ? 1f : -1f;
+        return value * sign;
     }
-    public static float GetPerlin(float frequency)
+
+    public static float FastMax(float a, float b)
     {
-        perlin.Frequency = frequency;
-        return (float)perlin.GetValue(Random.Range(0f, 100f), Random.Range(100f, 200f), Random.Range(200f, 300f));
+        return (a > b) ? a : b;
     }
-    public static float GetPerlin(float frequency, Vector3 pos)
+
+    public static float CustomDistanceScore(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
     {
-        perlin.Frequency = frequency;
-        return (float)perlin.GetValue(pos);
+        float diffX = FastAbs(a.x - b.x);
+        float diffZ = FastAbs(a.z - b.z);
+        return FastMax(diffX, diffZ);
+    }
+
+    public static float FastAndRoughDistance(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+    {
+        float diffX = FastAbs(a.x - b.x);
+        float diffZ = FastAbs(a.z - b.z);
+        return (diffX + diffZ) / 2f;
+    }
+
+    public static int EnsureNegative(int value)
+    {
+        return -FastAbs(value);
     }
 
 }

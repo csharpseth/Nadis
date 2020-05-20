@@ -53,46 +53,30 @@ public struct ItemEvents
 }
 public struct BipedAnimatorEvents
 {
-    public Action<int> OnRightFootBeginStep;
-    public Action<int> OnLeftFootBeginStep;
-
-    public Action<int> OnRightFootStepping;
-    public Action<int> OnLeftFootStepping;
-
-    public Action<int> OnRightFootFinishStep;
-    public Action<int> OnLeftFootFinishStep;
-
-    public Action<int, Vector3, Side, float, AnimatorTarget, bool> SetHandTargetPosition;
-    public Action<int> EndCurrentHandTarget;
-
-    public Action<int, bool, float, float, int> OnAnimatorDataSet;
-
-    public Action<int, string, Action> ExecuteAnimation;
-    public Action<int, string> EndAnimation;
+    
 }
 public struct PlayerEvents
 {
-    public delegate void OnGetPlayerAnimator(int playerID, ref BipedProceduralAnimator animator);
     public delegate void OnGetPlayer(int playerID, ref NetworkedPlayer netPlayer);
-    public OnGetPlayerAnimator GetPlayerAnimator;
+    public delegate void PlayerPickupItem(int playerID, Item item);
+    public delegate void OnSetPlayerAnimatorBool(int playerID, string id, bool value);
+    public delegate void OnSetPlayerAnimatorFloat(int playerID, string id, float value);
+    public delegate void OnSetPlayerAnimatorTrigger(int playerID, string id);
+
+    public OnSetPlayerAnimatorBool SetAnimatorBool;
+    public OnSetPlayerAnimatorFloat SetAnimatorFloat;
+    public OnSetPlayerAnimatorTrigger SetAnimatorTrigger;
+    public Action<int, float> SetAimOffset;
+
+    public Action<int> Respawn;
+
+    public PlayerPickupItem Pickup;
     public OnGetPlayer GetPlayer;
     public Action<int> UnSubscribe;
 }
 public struct PlayerStatEvents
 {
-    public delegate void StatEvent(int playerID, int amount, bool send);
-    public delegate void OnStatEvent(int playerID, float percent, bool send);
-    public StatEvent Heal;
-    public StatEvent Damage;
-    public OnStatEvent SetHealth;
-    public StatEvent AlterPower;
-    public OnStatEvent SetPower;
-    public Action<int> Die;
-
-    public OnStatEvent OnAlterHealth;
-    public OnStatEvent OnAlterPower;
-
-    public Action<PlayerStats> SetDefaults;
+    
 }
 public struct MapGeneratorEvents
 {

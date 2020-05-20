@@ -9,12 +9,23 @@ public struct PacketPlayerConnection : IPacketData
     public UnityEngine.Vector3 playerPosition;
     public float playerRotation;
 
+    public int currentHealth;
+    public int maxHealth;
+    public int currentPower;
+    public int maxPower;
+
     public void Deserialize(PacketBuffer buffer)
     {
         playerID = buffer.ReadInt();
         playerIsLocal = buffer.ReadBool();
         playerPosition = buffer.ReadVector3();
         playerRotation = buffer.ReadFloat();
+
+        currentHealth = buffer.ReadInt();
+        maxHealth = buffer.ReadInt();
+
+        currentPower = buffer.ReadInt();
+        maxPower = buffer.ReadInt();
     }
 
     public PacketBuffer Serialize()
@@ -25,6 +36,12 @@ public struct PacketPlayerConnection : IPacketData
         buffer.Write(playerIsLocal);
         buffer.Write(playerPosition);
         buffer.Write(playerRotation);
+
+        buffer.Write(currentHealth);
+        buffer.Write(maxHealth);
+
+        buffer.Write(currentPower);
+        buffer.Write(maxPower);
 
         buffer.WriteLength();
         return buffer;

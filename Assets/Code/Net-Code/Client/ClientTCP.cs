@@ -59,38 +59,33 @@ namespace Nadis.Net.Client
 
         private void ReceiveCallback(IAsyncResult ar)
         {
-            if(_stream == null || socket == null)
+            if (_stream == null || socket == null)
             {
-                if(_stream != null)
+                if (_stream != null)
                     _stream.EndRead(ar);
                 Debug.LogFormat("Client {0}'s Network Stream Was Safely Terminated.");
                 return;
             }
 
-            try
+            if (_receiveBuffer == null) { Client.Local?.Disconnect(); return; }
+
+            int size = _stream.EndRead(ar);
+            if (size <= 0)
             {
-                int size = _stream.EndRead(ar);
-                if (size <= 0)
-                {
-                    //Disconnect
-                    return;
-                }
-
-                byte[] data = new byte[size];
-                Array.Copy(_receiveBuffer, data, size);
-
-                //Handle Data
-                _packetBuffer.Reset(HandleData(data));
-
-                BeginRead();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
                 //Disconnect
+                Client.Local?.Disconnect();
+                return;
             }
+
+            byte[] data = new byte[size];
+            Array.Copy(_receiveBuffer, data, size);
+
+            //Handle Data
+            _packetBuffer.Reset(HandleData(data));
+
+            BeginRead();
         }
-        
+
         private bool HandleData(byte[] data)
         {
             int packetLength = 0;

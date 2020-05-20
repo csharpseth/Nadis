@@ -52,14 +52,18 @@ namespace Nadis.Net.Server
 
                     Vector3 position = ClientManager.GetClient(id).position;
                     float rotation = ClientManager.GetClient(clients[i]).rotation;
-
+                    ClientStatData playerStats = ClientManager.CreateOrGetClientStatData(id, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
                     //Se
                     PacketPlayerConnection playerData = new PacketPlayerConnection
                     {
                         playerID = id,
                         playerIsLocal = false,
                         playerPosition = position,
-                        playerRotation = rotation
+                        playerRotation = rotation,
+                        currentHealth = playerStats.health.Value,
+                        maxHealth = playerStats.health.MaxValue,
+                        currentPower = playerStats.power.Value,
+                        maxPower = playerStats.power.MaxValue
                     };
                     ServerSend.ReliableToOne(playerData, clientID);
 
@@ -72,14 +76,18 @@ namespace Nadis.Net.Server
                     ServerSend.ReliableToOne(remInventoryData, clientID);
 
                 }
-
+                ClientStatData localPlayerStats = ClientManager.CreateOrGetClientStatData(clientID, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
                 //Send THIS clients data to this client so they are sync'd with the server
                 PacketPlayerConnection localClientData = new PacketPlayerConnection
                 {
                     playerID = clientID,
                     playerIsLocal = true,
                     playerPosition = Vector3.zero,
-                    playerRotation = 0f
+                    playerRotation = 0f,
+                    currentHealth = localPlayerStats.health.Value,
+                    maxHealth = localPlayerStats.health.MaxValue,
+                    currentPower = localPlayerStats.power.Value,
+                    maxPower = localPlayerStats.power.MaxValue
                 };
                 ServerSend.ReliableToOne(localClientData, clientID);
                 localClientData.playerIsLocal = false;

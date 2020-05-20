@@ -9,10 +9,8 @@ public enum SharedPacket
     PlayerPosition = 1,
     PlayerRotation,
     PlayerDisconnected,
-    PlayerAnimatorData,
-    PlayerAnimatorTargetSet,
-    PlayerAnimatorTargetEnd,
-    PlayerAnimatorHeadData,
+    PlayerAnimatorMoveData,
+    PlayerAnimatorEventData,
     ItemPosition,
     ItemPickup,
     ItemDrop,
@@ -31,6 +29,9 @@ public enum ServerPacket
     PlayerInventoryData,
     SpawnItem,
     DestroyItem,
+    DamagePlayer,
+    KillPlayer,
+    AlterPowerLevel,
 }
 
 //Starts at 500
@@ -43,4 +44,6 @@ public enum ClientPacket
     PlayerUDPStart = 500,
     SpawnItemRequest,
     DestroyItemRequest,
+    DamagePlayerRequest,
+    RequestUsePower,
 }

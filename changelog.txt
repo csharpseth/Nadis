@@ -1,25 +1,16 @@
-[Week: 4/27/20 - 5/1/20]
-Implemented:
--Player Instantiation Sync
--Created Server-Side Packet Handler
--Player Position & Rotation Sync
--Player Animation Data Sync
--Player Target Sync( Set & End Target Seek )
--Remote Clients Smoothly move to match
-   Received Positions
--Player's Head Look Angle Sync
--Disconnect: Needs Rework, Throws Errors
--Implemented UDP protocol on top of TCP protocol
--Converted Player Transform & Animation Data
-   packets to UDP
--Basic Inventory Syncing
--Item interaction Sync
--Item Visibility Sync
--Item Dropping Sync
--Initial Item Sync: Giving the connecting player, all of
-   the already existent items in the scene & in inventories
+[5-16-20]
+-Added Player Hitboxes & Damage Multipliers
+-Added Player Damage Security Checking:
+   -Very basic, just checks if the hit player is within
+     range, and applies damage with multiplier based
+     on appendage hit
+-Implemented player power stat, sync'd across network
+-Implemented power loss from: moving & shooting
+-Implemented a rough system for charging stations
+    and their functionality
 
-Bug Fixes:
--Player target Syncing was always set to global space
--Host Client's head was not visible to any other connected players
--Fixed Disconnect Throwing Errors on Client & Server
+Issues:
+-Non-Movement related animation events aren't syncd
+-Charging station "Over Charging" damages player but doesn't kill them
+-Newly connected players don't place already spawned/equiped
+    items in the inventories of those who have the items

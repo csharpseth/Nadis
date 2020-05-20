@@ -52,7 +52,7 @@ namespace Nadis.Net.Client
         {
             CreateHandler((int)ServerPacket.PlayerConnection, new PacketPlayerConnection(), (IPacketData packet) => {
                 PacketPlayerConnection data = (PacketPlayerConnection)packet;
-
+                
                 PlayerPopulatorSystem.SpawnPlayer(data);
                 if(data.playerIsLocal)
                 {
@@ -62,11 +62,6 @@ namespace Nadis.Net.Client
             });
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), null);
             CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), null);
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), null);
-            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), null);
             CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), null);
             CreateHandler((int)ServerPacket.PlayerInventoryData, new PacketPlayerInventoryData(), (IPacketData packet) =>
             {
@@ -95,6 +90,23 @@ namespace Nadis.Net.Client
             CreateHandler((int)SharedPacket.ItemDrop, new PacketItemDrop(), (IPacketData packet) =>
             {
                 Inventory.instance.ServerDropItem(packet);
+            });
+
+            CreateHandler((int)ServerPacket.DamagePlayer, new PacketDamagePlayer(), (IPacketData packet) =>
+            {
+                PlayerManager.DamagePlayer((PacketDamagePlayer)packet);
+            });
+            CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), null);
+            CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), null);
+
+            CreateHandler((int)ServerPacket.KillPlayer, new PacketKillPlayer(), (IPacketData packet) => 
+            {
+                PlayerManager.KillPlayer((PacketKillPlayer)packet);
+            });
+
+            CreateHandler((int)ServerPacket.AlterPowerLevel, new PacketAlterPlayerPower(), (IPacketData packet) => 
+            {
+                PlayerManager.AlterPlayerPowerLevel((PacketAlterPlayerPower)packet);
             });
         }
 

@@ -25,18 +25,6 @@ namespace Nadis.Net.Server
             
             handlers[packetID].Invoke(buffer);
         }
-        /*
-        public static void Handle(int packetID, JobPacketBuffer buffer)
-        {
-            if (handlers.ContainsKey(packetID) == false)
-            {
-                UnityEngine.Debug.LogErrorFormat("Failed to Handle Packet With ID of '{0}', No Handler Exists.", packetID);
-                return;
-            }
-
-            handlers[packetID].Invoke(buffer);
-        }
-        */
         public static void SubscribeTo(int packetID, PacketHandlerData.ReceiveCallback callback)
         {
             if (handlers.ContainsKey(packetID) == false) return;
@@ -65,31 +53,7 @@ namespace Nadis.Net.Server
                 PacketPlayerRotation plyRot = (PacketPlayerRotation)data;
                 ServerSend.UnReliableToAll(plyRot, plyRot.playerID);
             });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorData, new PacketPlayerAnimatorData(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorData plyAnimData = (PacketPlayerAnimatorData)data;
-                ServerSend.UnReliableToAll(plyAnimData, plyAnimData.playerID);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetSet, new PacketPlayerAnimatorTargetSet(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorTargetSet plyAnimTargetSet = (PacketPlayerAnimatorTargetSet)data;
-                ServerSend.ReliableToAll(plyAnimTargetSet, plyAnimTargetSet.playerID);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorTargetEnd, new PacketPlayerAnimatorTargetEnd(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorTargetEnd plyAnimTargetEnd = (PacketPlayerAnimatorTargetEnd)data;
-                ServerSend.ReliableToAll(plyAnimTargetEnd, plyAnimTargetEnd.playerID);
-            });
-
-            CreateHandler((int)SharedPacket.PlayerAnimatorHeadData, new PacketPlayerAnimatorHeadData(), (IPacketData data) =>
-            {
-                PacketPlayerAnimatorHeadData plyAnimHeadData = (PacketPlayerAnimatorHeadData)data;
-                ServerSend.UnReliableToAll(plyAnimHeadData, plyAnimHeadData.playerID);
-            });
-
+            
             CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), (IPacketData data) => 
             {
                 PacketDisconnectPlayer packet = (PacketDisconnectPlayer)data;
@@ -151,6 +115,37 @@ namespace Nadis.Net.Server
                 }
                 else
                     Log.Err("SERVER :: Failed To Move Item({0}) From Inventory({1}) To World", req.NetworkID, req.PlayerID);
+            });
+            CreateHandler((int)ClientPacket.DamagePlayerRequest, new PacketRequestDamagePlayer(), (IPacketData data) =>
+            {
+                PacketRequestDamagePlayer packet = (PacketRequestDamagePlayer)data;
+                int dmg = ClientManager.TryDamagePlayer(packet);
+                UnityEngine.Debug.Log("Damage Player Request");
+                if(dmg != -1)
+                {
+                    PacketDamagePlayer cmd = new PacketDamagePlayer
+                    {
+                        playerID = packet.playerID,
+                        alterAmount = dmg
+                    };
+
+                    ServerSend.ReliableToAll(cmd);
+                }
+            });
+            CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorMoveData packet = (PacketPlayerAnimatorMoveData)data;
+                ServerSend.UnReliableToAll(packet, packet.playerID);
+            });
+            CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), (IPacketData data) =>
+            {
+                PacketPlayerAnimatorEvent packet = (PacketPlayerAnimatorEvent)data;
+                ServerSend.UnReliableToAll(packet, packet.playerID);
+            });
+            CreateHandler((int)ClientPacket.RequestUsePower, new PacketRequestUsePower(), (IPacketData data) => 
+            {
+                PacketRequestUsePower packet = (PacketRequestUsePower)data;
+                ClientManager.AlterPlayerPower(packet.playerID, Util.EnsureNegative(packet.useAmount));
             });
         }
 
