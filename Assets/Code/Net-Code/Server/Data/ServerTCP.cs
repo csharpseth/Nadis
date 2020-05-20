@@ -43,71 +43,102 @@ namespace Nadis.Net.Server
             int clientID = ClientManager.TryAddClient(client);
             if (clientID != -1)
             {
-                //Send all ALREADY connected players to the Client
-                int[] clients = ClientManager.Clients.ToArray();
-                for (int i = 0; i < clients.Length; i++)
-                {
-                    int id = clients[i];
-                    if (id == clientID) continue;
-
-                    Vector3 position = ClientManager.GetClient(id).position;
-                    float rotation = ClientManager.GetClient(clients[i]).rotation;
-                    ClientStatData playerStats = ClientManager.CreateOrGetClientStatData(id, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
-                    //Se
-                    PacketPlayerConnection playerData = new PacketPlayerConnection
-                    {
-                        playerID = id,
-                        playerIsLocal = false,
-                        playerPosition = position,
-                        playerRotation = rotation,
-                        currentHealth = playerStats.health.Value,
-                        maxHealth = playerStats.health.MaxValue,
-                        currentPower = playerStats.power.Value,
-                        maxPower = playerStats.power.MaxValue
-                    };
-                    ServerSend.ReliableToOne(playerData, clientID);
-
-                    //Send Connecting Client other players Inventory
-                    PacketPlayerInventoryData remInventoryData = new PacketPlayerInventoryData
-                    {
-                        playerID = id,
-                        size = 7
-                    };
-                    ServerSend.ReliableToOne(remInventoryData, clientID);
-
-                }
-                ClientStatData localPlayerStats = ClientManager.CreateOrGetClientStatData(clientID, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
-                //Send THIS clients data to this client so they are sync'd with the server
-                PacketPlayerConnection localClientData = new PacketPlayerConnection
-                {
-                    playerID = clientID,
-                    playerIsLocal = true,
-                    playerPosition = Vector3.zero,
-                    playerRotation = 0f,
-                    currentHealth = localPlayerStats.health.Value,
-                    maxHealth = localPlayerStats.health.MaxValue,
-                    currentPower = localPlayerStats.power.Value,
-                    maxPower = localPlayerStats.power.MaxValue
-                };
-                ServerSend.ReliableToOne(localClientData, clientID);
-                localClientData.playerIsLocal = false;
-                ServerSend.ReliableToAll(localClientData, clientID);
-
-                PacketPlayerInventoryData inventoryData = new PacketPlayerInventoryData
-                {
-                    playerID = clientID,
-                    size = 7
-                };
-                ServerSend.ReliableToOne(inventoryData, clientID);
-                ServerSend.ReliableToAll(inventoryData, clientID);
-
-                ItemManager.SendSceneItemsToPlayer(clientID);
-                ItemManager.SendInventoryItemsToPlayer(clientID);
-
+                SendClientExistingPlayersPrescence(clientID);
+                SendClientExistingPlayersAdditionalData(clientID);
+                SendClientConnectionDataToClient(clientID);
+                InitialSyncClientInventory(clientID);
                 return;
             }
+        }
 
-            Log.Txt("A Player Failed To Connect To The Server.");
+        private void SendClientExistingPlayersPrescence(int clientID)
+        {
+            int[] clients = ClientManager.Clients.ToArray();
+            for (int i = 0; i < clients.Length; i++)
+            {
+                int id = clients[i];
+                if (id == clientID) continue;
+
+                Vector3 position = ClientManager.GetClient(id).position;
+                float rotation = ClientManager.GetClient(clients[i]).rotation;
+                ClientStatData playerStats = ClientManager.CreateOrGetClientStatData(id, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
+                //Se
+                PacketPlayerConnection playerData = new PacketPlayerConnection
+                {
+                    playerID = id,
+                    playerIsLocal = false,
+                    playerPosition = position,
+                    playerRotation = rotation,
+                    currentHealth = playerStats.health,
+                    maxHealth = playerStats.maxHealth,
+                    currentPower = playerStats.power,
+                    maxPower = playerStats.maxPower
+                };
+                ServerSend.ReliableToOne(playerData, clientID);
+
+                //Send Connecting Client other players Inventory
+                PacketPlayerInventoryData remInventoryData = new PacketPlayerInventoryData
+                {
+                    playerID = id,
+                    size = 7
+                };
+                ServerSend.ReliableToOne(remInventoryData, clientID);
+
+            }
+        }
+
+        private void SendClientExistingPlayersAdditionalData(int clientID)
+        {
+            int[] clients = ClientManager.Clients.ToArray();
+            for (int i = 0; i < clients.Length; i++)
+            {
+                int id = clients[i];
+                if (id == clientID) continue;
+                //Send Connecting Client other players Inventory
+                PacketPlayerInventoryData remInventoryData = new PacketPlayerInventoryData
+                {
+                    playerID = id,
+                    size = 7
+                };
+                ServerSend.ReliableToOne(remInventoryData, clientID);
+
+            }
+        }
+
+        private void SendClientConnectionDataToClient(int clientID)
+        {
+            ClientStatData localPlayerStats = ClientManager.CreateOrGetClientStatData(clientID, ServerData.PlayerStartHealth, ServerData.PlayerMaxHealth, ServerData.PlayerStartPower, ServerData.PlayerMaxPower);
+            //Send THIS clients data to this client so they are sync'd with the server
+            PacketPlayerConnection localClientData = new PacketPlayerConnection
+            {
+                playerID = clientID,
+                playerIsLocal = true,
+                playerPosition = Vector3.zero,
+                playerRotation = 0f,
+                currentHealth = localPlayerStats.health,
+                maxHealth = localPlayerStats.maxHealth,
+                currentPower = localPlayerStats.power,
+                maxPower = localPlayerStats.maxPower
+            };
+            ServerSend.ReliableToOne(localClientData, clientID);
+
+            //Send THIS client to all other players
+            localClientData.playerIsLocal = false;
+            ServerSend.ReliableToAll(localClientData, clientID);
+        }
+
+        private void InitialSyncClientInventory(int clientID, int inventorySize = 7)
+        {
+            PacketPlayerInventoryData inventoryData = new PacketPlayerInventoryData
+            {
+                playerID = clientID,
+                size = inventorySize
+            };
+            ServerSend.ReliableToOne(inventoryData, clientID);
+            ServerSend.ReliableToAll(inventoryData, clientID);
+
+            ItemManager.SendSceneItemsToPlayer(clientID);
+            ItemManager.SendInventoryItemsToPlayer(clientID);
         }
     }
 }

@@ -5,19 +5,33 @@
         public int TargetID => target.NetID;
 
         public NetworkedPlayer target;
-        public StatData health;
-        public StatData power;
+        public int health;
+        public int power;
+        public int maxHealth;
+        public int maxPower;
 
-        public PlayerStatsData(NetworkedPlayer target, StatData initialHealth, StatData initialPower)
+        private int startHealth;
+        private int startPower;
+
+
+        public PlayerStatsData(NetworkedPlayer target, int startHealth, int startPower, int maxHealth, int maxPower)
         {
             this.target = target;
-            health = initialHealth;
-            power = initialPower;
+            health = startHealth;
+            power = startPower;
+            this.maxHealth = maxHealth;
+            this.maxPower = maxPower;
+
+            this.startHealth = startHealth;
+            this.startPower = startPower;
         }
 
         public void Reset() {
-            health.Reset();
-            power.Reset();
+            health = startHealth;
+            power = startPower;
         }
+
+        public float HealthPercent => ((float)health / maxHealth);
+        public float PowerPercent => ((float)power / maxPower);
     }
 }

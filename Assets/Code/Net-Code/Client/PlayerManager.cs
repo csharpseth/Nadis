@@ -12,16 +12,8 @@ public static class PlayerManager
     {
         if (playerStats.ContainsKey(player.NetID)) return;
 
-        StatData health = new StatData(player.NetID, initialHealth, maxHealth);
-        StatData power = new StatData(player.NetID, initialPower, maxPower);
-        PlayerStatsData stats = new PlayerStatsData(player, health, power);
+        PlayerStatsData stats = new PlayerStatsData(player, initialHealth, initialPower, maxHealth, maxPower);
         playerStats.Add(player.NetID, stats);
-        Log.Event(" Created Stats :: Health:{0}, Power:{1}", health.Value, power.Value);
-            
-        /*Events.PlayerStats.OnAlterHealth = (int playerID, float percent, bool send) =>
-        {
-            Log.Not("Player({0})'s Health was Altered. Current Health: %{1}", playerID, (100f * percent));
-        };*/
     }
     public static void DestroyPlayerStatData(int playerID)
     {
@@ -29,15 +21,16 @@ public static class PlayerManager
         //Could potentially return PlayerStatsData to a pool if needed
         playerStats.Remove(playerID);
     }
-    public static void DamagePlayer(PacketDamagePlayer packet)
+    public static void DamagePlayer(PacketAlterPlayerHealth packet)
     {
         if (playerStats.ContainsKey(packet.playerID) == false) return;
 
         PlayerStatsData temp = playerStats[packet.playerID];
-        temp.health.AlterValue(-packet.alterAmount);
+        temp.health = packet.health;
         playerStats[packet.playerID] = temp;
-        //Events.PlayerStats.OnAlterHealth(packet.playerID, temp.health.Percent, false);
-        Debug.Log("Player Damaged, New Health: " + temp.health.Value);
+
+        //Debug.Log("Player Health: " + temp.health);
+        Events.PlayerStats.OnAlterHealth?.Invoke(temp.HealthPercent);
     }
 
     public static void KillPlayer(PacketKillPlayer packet)
@@ -48,6 +41,9 @@ public static class PlayerManager
         temp.Reset();
         playerStats[packet.playerID] = temp;
 
+        Events.PlayerStats.OnAlterHealth?.Invoke(temp.HealthPercent);
+        Events.PlayerStats.OnAlterPower?.Invoke(temp.PowerPercent);
+
         Events.Player.Respawn(packet.playerID);
         Log.Not("Player:{0} Has Been Killed.", packet.playerID);
     }
@@ -57,16 +53,14 @@ public static class PlayerManager
         if(playerStats.ContainsKey(packet.playerID) == false) return;
 
         PlayerStatsData temp = playerStats[packet.playerID];
-        StatData stat = temp.power;
-        stat.SetValue(packet.powerLevel);
-        Debug.Log(packet.powerLevel);
+        temp.power = packet.powerLevel;
+        Events.PlayerStats.OnAlterPower?.Invoke(temp.PowerPercent);
     }
 
     public static int GetPlayerPowerLevel(int playerID)
     {
-        //LOL
         if(playerStats.ContainsKey(playerID) == false) return -1;
-        return playerStats[playerID].power.Value;
+        return playerStats[playerID].power;
     }
 
     public static bool RequestUsePower(int playerID, int amount)

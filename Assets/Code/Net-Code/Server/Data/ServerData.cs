@@ -11,12 +11,12 @@
 
         public static float PlayerUnitsToMoveBeforeChargingPower = 3f;
         public static int PlayerPowerToLose = 2;
-        public static float PlayerChargeDelay = 1f;
+        public static float PlayerChargeDelay = 0.5f;
         public static int PlayerChargeAmountPerDelay = 10;
-        public static int PlayerOverChargeDamageAmount = 10;
+        public static int PlayerOverChargeDamageAmount = 5;
 
         public static UnityEngine.Vector3[] chargingStationLocations;
-        public static float ChargeDistance = 10f;
+        public static float ChargeDistance = 5f;
 
         public static float DamageMultiplierFrom(PlayerAppendage appendage)
         {

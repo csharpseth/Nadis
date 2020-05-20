@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Small Caliber
   m_EditorClassIdentifier: 
   range: 300
-  damage: 10
+  damage: 15

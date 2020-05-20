@@ -18,8 +18,8 @@ public class NotificationSystem : MonoBehaviour
         notes = new Dictionary<NotificationType, Image>();
         waitToDestroy = new Dictionary<NotificationType, float>();
 
-        Events.Notification.New = Notify;
-        Events.Notification.Remove = RemoveNotification;
+        //Events.Notification.New = Notify;
+        //Events.Notification.Remove = RemoveNotification;
     }
 
     private void Update()

@@ -24,6 +24,8 @@ namespace Nadis.Net
         public GameObject remotePlayerPrefab;
         private Queue<PacketPlayerConnection> playersToSpawn;
 
+        public Vector3 spawnLocation;
+
         private void Init()
         {
             playersToSpawn = new Queue<PacketPlayerConnection>();
@@ -46,7 +48,7 @@ namespace Nadis.Net
 
         private void SpawnLocalPlayer(PacketPlayerConnection data)
         {
-            GameObject ply = Instantiate(playerPrefab, data.playerPosition, Quaternion.identity);
+            GameObject ply = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
             Vector3 tempRot = ply.transform.eulerAngles;
             tempRot.y = data.playerRotation;
             ply.transform.eulerAngles = tempRot;

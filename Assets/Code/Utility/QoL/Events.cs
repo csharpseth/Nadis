@@ -25,12 +25,8 @@ public enum PlayerStatsEventType
 public static class Events
 {
     public static InventoryEvents Inventory;
-    public static ItemEvents Item;
-    public static BipedAnimatorEvents BipedAnimator;
     public static PlayerEvents Player;
     public static PlayerStatEvents PlayerStats;
-    public static MapGeneratorEvents MapGenerator;
-    public static Notifications Notification;
     public static Networking Net;
     public static AdministratorEvents admin;
 }
@@ -47,14 +43,7 @@ public struct InventoryEvents
     public Action<Item, int> OnItemAddedToInventory;
     public Action<int> OnItemRemovedFromInventory;
 }
-public struct ItemEvents
-{
-    
-}
-public struct BipedAnimatorEvents
-{
-    
-}
+
 public struct PlayerEvents
 {
     public delegate void OnGetPlayer(int playerID, ref NetworkedPlayer netPlayer);
@@ -76,7 +65,9 @@ public struct PlayerEvents
 }
 public struct PlayerStatEvents
 {
-    
+    public delegate void OnAlter(float percent);
+    public OnAlter OnAlterHealth;
+    public OnAlter OnAlterPower;
 }
 public struct MapGeneratorEvents
 {

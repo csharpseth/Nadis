@@ -8,6 +8,7 @@ namespace Nadis.Net.Server
     public static class ClientManager
     {
         public static List<int> Clients { get { return _clients; } }
+        public static bool ClientSlotsOpen => (_clients.Count < _maxClients);
 
         private static Dictionary<int, ServerClientData> _clientDictionary;
         private static Dictionary<int, ClientStatData> _clientStatsDictionary;
@@ -105,13 +106,9 @@ namespace Nadis.Net.Server
         public static ClientStatData CreateOrGetClientStatData(int clientID, int startHealth, int maxHealth, int startPower, int maxPower)
         {
             if (_clientStatsDictionary.ContainsKey(clientID) == true) return _clientStatsDictionary[clientID];
-            if (_clientDictionary.ContainsKey(clientID) == false) return default; 
+            if (_clientDictionary.ContainsKey(clientID) == false) return default;
 
-            ClientStatData stats = new ClientStatData
-            {
-                health = new StatData(clientID, startHealth, maxHealth),
-                power = new StatData(clientID, startPower, maxPower)
-            };
+            ClientStatData stats = new ClientStatData(startHealth, startPower, maxHealth, maxPower);
             _clientStatsDictionary.Add(clientID, stats);
 
             return stats;
@@ -126,13 +123,12 @@ namespace Nadis.Net.Server
 
             int range = data.weaponRange;
             float dmgMultiplier = ServerData.DamageMultiplierFrom(data.limbHit);
-            int damage = (int)(-data.weaponDamage * dmgMultiplier);
+            int damage = (int)(data.weaponDamage * dmgMultiplier);
             
             ClientStatData stat = _clientStatsDictionary[playerID];
-            StatData health = stat.health;
-            health.AlterValue(damage);
+            stat.health -= damage;
 
-            if (health.Dead)
+            if (stat.health <= 0)
             {
                 ItemManager.PlayerDropAllItems(playerID);
                 PacketKillPlayer packet = new PacketKillPlayer{
@@ -140,46 +136,47 @@ namespace Nadis.Net.Server
                     respawn = true
                 };
                 ServerSend.ReliableToAll(packet);
-                health.Reset();
-                stat.health = health;
+                stat.Reset();
                  _clientStatsDictionary[playerID] = stat;
                 return -1;
             }
 
             _clientStatsDictionary[playerID] = stat;
-            return damage;
+            Debug.Log(_clientStatsDictionary[playerID].health);
+            return _clientStatsDictionary[playerID].health;
         }
 
         public static void DamagePlayer(int playerID, int damage)
         {
-            if(_clientStatsDictionary.ContainsKey(playerID) == false) return;
-
             ClientStatData stat = _clientStatsDictionary[playerID];
-            StatData health = stat.health;
-            health.AlterValue(Util.EnsureNegative(damage));
+            Debug.Log(stat.health);
+            stat.health = stat.health - Util.FastAbs(damage);
 
-            if (health.Dead)
+            //Debug.Log(stat.health);
+
+            if (stat.health <= 0)
             {
+                Debug.Log("Kill Player");
                 ItemManager.PlayerDropAllItems(playerID);
-                PacketKillPlayer packet = new PacketKillPlayer{
+                PacketKillPlayer packet = new PacketKillPlayer
+                {
                     playerID = playerID,
                     respawn = true
                 };
                 ServerSend.ReliableToAll(packet);
-                health.Reset();
-                stat.health = health;
-                 _clientStatsDictionary[playerID] = stat;
+                stat.Reset();
+                _clientStatsDictionary[playerID] = stat;
                 return;
             }
 
-            stat.health = health;
             _clientStatsDictionary[playerID] = stat;
-            PacketDamagePlayer cmd = new PacketDamagePlayer
+            Debug.Log(_clientStatsDictionary[playerID].health);
+            PacketAlterPlayerHealth cmd = new PacketAlterPlayerHealth
             {
                 playerID = playerID,
-                alterAmount = damage
+                health = stat.health
             };
-
+            //Debug.Log(_clientStatsDictionary[playerID].health);
             ServerSend.ReliableToAll(cmd);
 
         }
@@ -190,26 +187,26 @@ namespace Nadis.Net.Server
 
             //Apply the information to the server-side data
             ClientStatData stat = _clientStatsDictionary[playerID];
-            StatData power = stat.power;
-
-            power.AlterValue(amount);
+            stat.power += amount;
 
             //Over Charge Check
-            if(power.Value > ServerData.PlayerMaxPower)
+            if(stat.power > ServerData.PlayerMaxPower)
             {
                 //Damage The Player
                 DamagePlayer(playerID, ServerData.PlayerOverChargeDamageAmount);
-                power.SetValue(ServerData.PlayerMaxPower);
+                stat = _clientStatsDictionary[playerID];
+                stat.power = ServerData.PlayerMaxPower;
+                _clientStatsDictionary[playerID] = stat;
+                return;
             }
 
-            stat.power = power;
             _clientStatsDictionary[playerID] = stat;
 
             //Send the updated level to clients
             PacketAlterPlayerPower packet = new PacketAlterPlayerPower
             {
                 playerID = playerID,
-                powerLevel = power.Value
+                powerLevel = stat.power
             };
             ServerSend.ReliableToAll(packet);
         }
@@ -264,7 +261,30 @@ namespace Nadis.Net.Server
 
     public struct ClientStatData
     {
-        public StatData health;
-        public StatData power;
+        public int health;
+        public int power;
+
+        public int maxPower;
+        public int maxHealth;
+
+        public int startHealth;
+        public int startPower;
+
+        public ClientStatData(int startHealth, int startPower, int maxHealth, int maxPower)
+        {
+            this.startHealth = startHealth;
+            this.startPower = startPower;
+            health = startHealth;
+            power = startPower;
+
+            this.maxPower = maxPower;
+            this.maxHealth = maxHealth;
+        }
+
+        public void Reset()
+        {
+            power = startPower;
+            health = startHealth;
+        }
     }
 }

@@ -59,7 +59,8 @@ public enum MaterialProperty
     Wood,
     Metal,
     Flesh,
-    Plastic
+    Plastic,
+    Rock
 }
 
 

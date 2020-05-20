@@ -92,9 +92,9 @@ namespace Nadis.Net.Client
                 Inventory.instance.ServerDropItem(packet);
             });
 
-            CreateHandler((int)ServerPacket.DamagePlayer, new PacketDamagePlayer(), (IPacketData packet) =>
+            CreateHandler((int)ServerPacket.DamagePlayer, new PacketAlterPlayerHealth(), (IPacketData packet) =>
             {
-                PlayerManager.DamagePlayer((PacketDamagePlayer)packet);
+                PlayerManager.DamagePlayer((PacketAlterPlayerHealth)packet);
             });
             CreateHandler((int)SharedPacket.PlayerAnimatorMoveData, new PacketPlayerAnimatorMoveData(), null);
             CreateHandler((int)SharedPacket.PlayerAnimatorEventData, new PacketPlayerAnimatorEvent(), null);

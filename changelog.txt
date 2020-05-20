@@ -1,3 +1,10 @@
+[5-19-20]
+-Fixed Charging station damging, when over charged,
+   but not killing you
+-Started work on Nadis Island( The map for PVP testing )
+-Fixed Shadergraph Shaders
+-Modeled, Textured, & Implemented a new Coil Gun
+
 [5-16-20]
 -Added Player Hitboxes & Damage Multipliers
 -Added Player Damage Security Checking:

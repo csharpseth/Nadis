@@ -119,14 +119,14 @@ namespace Nadis.Net.Server
             CreateHandler((int)ClientPacket.DamagePlayerRequest, new PacketRequestDamagePlayer(), (IPacketData data) =>
             {
                 PacketRequestDamagePlayer packet = (PacketRequestDamagePlayer)data;
-                int dmg = ClientManager.TryDamagePlayer(packet);
+                int health = ClientManager.TryDamagePlayer(packet);
                 UnityEngine.Debug.Log("Damage Player Request");
-                if(dmg != -1)
+                if(health != -1)
                 {
-                    PacketDamagePlayer cmd = new PacketDamagePlayer
+                    PacketAlterPlayerHealth cmd = new PacketAlterPlayerHealth
                     {
                         playerID = packet.playerID,
-                        alterAmount = dmg
+                        health = health
                     };
 
                     ServerSend.ReliableToAll(cmd);
