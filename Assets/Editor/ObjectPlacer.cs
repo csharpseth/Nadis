@@ -12,13 +12,13 @@ public class ObjectPlacer : EditorWindow
     float stepSize = 1f;
     bool destroyPreviouslyPlaced;
     LayerMask hitMask;
+    private string ignoreTag;
     public GameObject prefab;
     int maxPlaced = 500;
     float placementChance;
 
-    float minScale = 0.2f;
-    float maxScale = 1f;
-    bool randomOnIndependentAxis = false;
+    Vector3 minScale;
+    Vector3 maxScale;
 
     float minHeight = 5f;
     float maxHeight = 100f;
@@ -26,9 +26,14 @@ public class ObjectPlacer : EditorWindow
     float minAngle = -1f;
     float maxAngle = 1f;
 
+    float positionOffset = 0.5f;
+
     bool alignToNormal = true;
 
     private List<GameObject> placed;
+
+    private string layerName = "_PlacedObjects";
+    private Transform layerTransform;
 
 
     [MenuItem("Tools/Object Placer")]
@@ -41,24 +46,25 @@ public class ObjectPlacer : EditorWindow
 
     private void OnGUI()
     {
+        layerName = EditorGUILayout.TextField("Layer Name", layerName);
         region = EditorGUILayout.Vector3IntField("Region", region);
         hitMask = EditorGUILayout.LayerField("Mask", hitMask);
+        ignoreTag = EditorGUILayout.TagField("Ignore Tag", ignoreTag);
         EditorGUILayout.Space(10f);
         stepSize = EditorGUILayout.Slider("Step Size", stepSize, 0.1f, 5f);
         destroyPreviouslyPlaced = EditorGUILayout.Toggle("Destroy Previously Placed Prefabs", destroyPreviouslyPlaced);
         maxPlaced = EditorGUILayout.IntField("Maximum To Place", maxPlaced);
 
-        EditorGUILayout.LabelField("Min Scale: " + minScale + "  Max Scale: " + maxScale);
-        EditorGUILayout.MinMaxSlider("Scale", ref minScale, ref maxScale, 0.1f, 5f);
-        randomOnIndependentAxis = EditorGUILayout.Toggle("Scale On Independent Axis", randomOnIndependentAxis);
-
-
-        EditorGUILayout.LabelField("Min Height: " + minHeight + "  Max Height: " + maxHeight);
-        EditorGUILayout.MinMaxSlider("Height", ref minHeight, ref maxHeight, 0f, region.y);
+        minScale = EditorGUILayout.Vector3Field("Min Scale", minScale);
+        maxScale = EditorGUILayout.Vector3Field("Max Scale", maxScale);
+        SideBySide("Height(min, max)", ref minHeight, ref maxHeight);
 
         alignToNormal = EditorGUILayout.Toggle("Align To Normal", alignToNormal);
         EditorGUILayout.LabelField("Min Angle: " + minAngle + "  Max Angle: " + maxAngle);
         EditorGUILayout.MinMaxSlider(ref minAngle, ref maxAngle, -1f, 1f);
+
+        positionOffset = EditorGUILayout.Slider("Position Offset", positionOffset, 0f, 5f);
+
 
         prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), null);
 
@@ -73,6 +79,15 @@ public class ObjectPlacer : EditorWindow
             DeleteReferenced();
     }
 
+    private void SideBySide(string label, ref float a, ref float b)
+    {
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel(label);
+        a = EditorGUILayout.FloatField(a);
+        b = EditorGUILayout.FloatField(b);
+        EditorGUILayout.EndHorizontal();
+    }
+
     private void Generate()
     {
         if (prefab == null) return;
@@ -83,7 +98,18 @@ public class ObjectPlacer : EditorWindow
         if (placed == null)
             placed = new List<GameObject>();
 
+        if (layerTransform == null)
+        {
+            GameObject temp = GameObject.Find(layerName);
+            if(temp == null)
+            {
+                temp = new GameObject(layerName);
+            }
+            layerTransform = temp.transform;
+        }
+
         Transform container = new GameObject(prefab.name + "_" + placed.Count).transform;
+        container.SetParent(layerTransform);
 
         int xCount = (int)math.round(region.x / stepSize);
         int yCount = (int)math.round(region.z / stepSize);
@@ -122,6 +148,8 @@ public class ObjectPlacer : EditorWindow
         {
             if (hits[i].transform == null) continue;
 
+            if (hits[i].transform.tag == ignoreTag) continue;
+
             if (hits[i].point.y < minHeight || hits[i].point.y > maxHeight) continue;
 
             if (hits[i].transform.gameObject == prefab) continue;
@@ -131,7 +159,10 @@ public class ObjectPlacer : EditorWindow
             float sample = UnityEngine.Random.value;
             if (sample > placementChance) continue;
 
-            GameObject go = Instantiate(prefab, hits[i].point, Quaternion.identity, container);
+
+            GameObject go = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+            go.transform.position = hits[i].point;
+            go.transform.SetParent(container);
             if(alignToNormal)
             {
                 go.transform.rotation = Quaternion.FromToRotation(Vector3.up, hits[i].normal);
@@ -154,24 +185,21 @@ public class ObjectPlacer : EditorWindow
     private void Randomize(Transform t)
     {
         Vector3 newScale = Vector3.one;
-        if (randomOnIndependentAxis)
-        {
-            newScale.x *= UnityEngine.Random.Range(minScale, maxScale);
-            newScale.y *= UnityEngine.Random.Range(minScale, maxScale);
-            newScale.z *= UnityEngine.Random.Range(minScale, maxScale);
-        }
-        else
-        {
-            newScale *= UnityEngine.Random.Range(minScale, maxScale);
-        }
+        newScale.x *= UnityEngine.Random.Range(minScale.x, maxScale.x);
+        newScale.y *= UnityEngine.Random.Range(minScale.y, maxScale.y);
+        newScale.z *= UnityEngine.Random.Range(minScale.z, maxScale.z);
 
         t.localScale = newScale;
 
+        Vector3 pos = t.position;
+        pos.x += UnityEngine.Random.Range(-positionOffset, positionOffset);
+        pos.z += UnityEngine.Random.Range(-positionOffset, positionOffset);
+        t.position = pos;
 
 
-        //Vector3 newRot = t.eulerAngles;
-        //newRot += (t.up * UnityEngine.Random.Range(-180f, 180f));
-        //t.eulerAngles = newRot;
+        Vector3 newRot = t.eulerAngles;
+        newRot += (t.up * UnityEngine.Random.Range(-180f, 180f));
+        t.eulerAngles = newRot;
 
     }
 
@@ -183,13 +211,13 @@ public class ObjectPlacer : EditorWindow
         {
             DestroyImmediate(placed[i]);
         }
-
-        placed = new List<GameObject>();
+        Clear();
     }
 
     private void Clear()
     {
         placed = new List<GameObject>();
+        layerTransform = null;
         Debug.Log("Cleared Object Placer's Referenced Objects");
     }
 

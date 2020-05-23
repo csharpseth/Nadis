@@ -7,6 +7,8 @@ public class MeshCombiner : EditorWindow
 {
     public const int MaxVertsPerMesh = 65535;
     Transform target;
+    bool destroyChildren = false;
+    bool removeMeshDataWhenDone = true;
 
     [MenuItem("Tools/Mesh Combiner")]
     static void Init()
@@ -18,7 +20,13 @@ public class MeshCombiner : EditorWindow
 
     private void OnGUI()
     {
-        target = (Transform)EditorGUILayout.ObjectField(target, typeof(Transform));
+        target = Selection.activeTransform;
+        EditorGUILayout.LabelField("Target: " + target);
+        destroyChildren = EditorGUILayout.Toggle("Destroy Children", destroyChildren);
+        if(destroyChildren == false)
+            removeMeshDataWhenDone = EditorGUILayout.Toggle("Remove Child Mesh", removeMeshDataWhenDone);
+
+
         if (GUILayout.Button("Combine Children"))
             CreateSingleMesh();
     }
@@ -33,6 +41,8 @@ public class MeshCombiner : EditorWindow
 
         int batchIndex = 0;
         int offset = 0;
+        string batchName = meshFilters[0].name;
+
         while (batchIndex < numBatches)
         {
             GameObject batch = new GameObject("Batch_" + batchIndex);
@@ -42,7 +52,7 @@ public class MeshCombiner : EditorWindow
             mr.sharedMaterial = mat;
 
             Mesh m = new Mesh();
-            m.name = meshFilters[0].name + "_Batch_" + batchIndex;
+            m.name = batchName + "_Batch_" + batchIndex;
             CombineInstance[] combine = new CombineInstance[numObjectsPerBatch];
 
             for (int i = 0; i < numObjectsPerBatch; i++)
@@ -50,7 +60,19 @@ public class MeshCombiner : EditorWindow
                 int mfIndex = offset + i;
                 combine[i].mesh = meshFilters[mfIndex].sharedMesh;
                 combine[i].transform = meshFilters[mfIndex].transform.localToWorldMatrix;
-                meshFilters[mfIndex].gameObject.SetActive(false);
+                if(destroyChildren)
+                {
+                    DestroyImmediate(meshFilters[mfIndex].gameObject);
+                }else if(removeMeshDataWhenDone)
+                {
+                    MeshFilter tempMf = meshFilters[mfIndex];
+                    MeshRenderer tempMr = mf.GetComponent<MeshRenderer>();
+                    if (mf != null)
+                        DestroyImmediate(tempMf);
+                    if(mr != null)
+                        DestroyImmediate(tempMr);
+                }
+
             }
             offset += numObjectsPerBatch;
 
