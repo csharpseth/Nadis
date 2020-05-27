@@ -54,7 +54,22 @@ public static class PlayerManager
 
         PlayerStatsData temp = playerStats[packet.playerID];
         temp.power = packet.powerLevel;
-        Events.PlayerStats.OnAlterPower?.Invoke(temp.PowerPercent);
+        if(packet.playerID == NetData.LocalPlayerID)
+        {
+            Events.PlayerStats.OnAlterPower?.Invoke(temp.PowerPercent);
+            if(temp.PowerPercent <= 0.005f)
+            {
+                Events.Player.SetAnimatorTrigger?.Invoke(packet.playerID, "power_down");
+                temp.isShutdown = true;
+            }
+
+            if(temp.isShutdown && temp.PowerPercent >= 1f)
+            {
+                Events.Player.SetAnimatorTrigger?.Invoke(packet.playerID, "power_up");
+                temp.isShutdown = false;
+            }
+        }
+        playerStats[packet.playerID] = temp;
     }
 
     public static int GetPlayerPowerLevel(int playerID)

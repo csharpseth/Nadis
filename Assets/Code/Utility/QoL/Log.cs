@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public static class Log
 {
@@ -8,9 +9,17 @@ public static class Log
     public static bool LogNotifications = true;
     public static bool LogEvents = true;
 
+    public static bool UseUnityConsole = false;
+
+    public static Action<object, object[]> OnLog;
+
     public static void Not(object input, params object[] args)
     {
         if (LogNotifications == false) return;
+
+        OnLog?.Invoke(input, args);
+
+        if (UseUnityConsole == false) return;
 
         if (args == null || args.Length == 0)
             Debug.Log(input);
@@ -22,6 +31,10 @@ public static class Log
     {
         if (LogText == false) return;
 
+        OnLog?.Invoke(input, args);
+
+        if (UseUnityConsole == false) return;
+
         if (args == null || args.Length == 0)
             Debug.Log(input);
         else if (args != null && args.Length > 0)
@@ -31,6 +44,10 @@ public static class Log
     {
         if (LogWarnings == false) return;
 
+        OnLog?.Invoke(input, args);
+
+        if (UseUnityConsole == false) return;
+
         if (args == null || args.Length == 0)
             Debug.LogWarning(input);
         else if (args != null && args.Length > 0)
@@ -39,6 +56,10 @@ public static class Log
     public static void Err(object input, params object[] args)
     {
         if (LogErrors == false) return;
+
+        OnLog?.Invoke(input, args);
+
+        if (UseUnityConsole == false) return;
 
         if (args == null || args.Length == 0)
             Debug.LogError(input);
@@ -50,7 +71,11 @@ public static class Log
     {
         if(LogEvents == false) return;
 
-        if(args == null || args.Length == 0)
+        OnLog?.Invoke(input, args);
+
+        if (UseUnityConsole == false) return;
+
+        if (args == null || args.Length == 0)
             Debug.Log("EVENT::" + input);
         else
             Debug.LogFormat("EVENT::" + input, args);

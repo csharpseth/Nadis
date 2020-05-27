@@ -18,6 +18,9 @@
         public static UnityEngine.Vector3[] chargingStationLocations;
         public static float ChargeDistance = 5f;
 
+        public static UnityEngine.Vector3[] playerSpawnLocations;
+        public static float spawnRadius = 2f;
+
         public static float DamageMultiplierFrom(PlayerAppendage appendage)
         {
             switch(appendage)

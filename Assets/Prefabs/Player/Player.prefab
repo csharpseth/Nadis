@@ -674,7 +674,7 @@ MonoBehaviour:
   groundCheckRadius: 0.25
   groundMask:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 4663
 --- !u!114 &9191317384944511355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,8 +687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27847788123870b4cbd1e27b98990fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSpeed: 5
-  maxHorizontalAngle: 40
+  lookSpeed: 3
+  maxHorizontalAngle: 55
   playerCamera: {fileID: 3500740775207373308}
   meshRenderer: {fileID: 0}
   HorizontalLookPercent: 0
@@ -708,9 +708,13 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 512
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   ignorePlayerMask:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 4663
+  disabled: 0
 --- !u!114 &6667605569837636523
 MonoBehaviour:
   m_ObjectHideFlags: 0

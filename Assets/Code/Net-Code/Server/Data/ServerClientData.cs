@@ -49,15 +49,21 @@ namespace Nadis.Net.Server
         public void Disconnect()
         {
             _socket.Close();
-            _stream.Dispose();
-            _stream = null;
+            if(_stream != null)
+            {
+                _stream.Dispose();
+                _stream = null;
+            }
             _receiveBuffer = null;
-            _packetBuffer.Dispose();
-            _packetBuffer = null;
+            if(_packetBuffer != null)
+            {
+                _packetBuffer.Dispose();
+                _packetBuffer = null;
+            }
 
             UDP.Disconnect();
 
-            Log.Txt("Player({0}) has Disconnected.", NetID);
+            Log.Not("Player({0}) has Disconnected.", NetID);
         }
 
         //Functions
@@ -129,9 +135,8 @@ namespace Nadis.Net.Server
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogError(e);
+                Log.Err(e);
                 ClientManager.DisconnectClient(NetID);
-                //Disconnect Client
             }
         }
 

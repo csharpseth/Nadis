@@ -8,6 +8,7 @@ public class ClientUDP
 {
     public UdpClient socket;
     public IPEndPoint endPoint;
+    public bool connected;
 
     public ClientUDP(string ip, int port)
     {
@@ -26,11 +27,22 @@ public class ClientUDP
             playerID = netID
         };
         SendData(packet.Serialize().ToArray());
+        Log.Event("Attempting To Connect UDP");
+        Timeout.Create("clientudp", NetData.ClientTimeoutTimeInSeconds, () =>
+        {
+            if (connected == true) return;
+            Log.Event("Failed To Establish UDP Connection, Reason: Timed Out");
+            Events.Net.DisconnectClient();
+
+        }, false);
     }
     public void Disconnect()
     {
-        socket.Close();
-        socket = null;
+        if(socket != null)
+        {
+            socket.Close();
+            socket = null;
+        }
         endPoint = null;
     }
 

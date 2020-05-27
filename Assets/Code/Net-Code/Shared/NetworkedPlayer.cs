@@ -215,6 +215,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         
         ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
         ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorMoveData, ReceivePlayerAnimatorMoveData);
+        ClientPacketHandler.SubscribeTo((int)SharedPacket.PlayerAnimatorEventData, ReceivePlayerAnimatorEventData);
 
         Events.Player.SetAnimatorTrigger += SendSetTrigger;
         Events.Player.SetAnimatorFloat += SendSetFloat;
@@ -234,6 +235,7 @@ public class NetworkedPlayer : MonoBehaviour, INetworkInitialized, IEventAccesso
         
         ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerDisconnected, PlayerDisconnected);
         ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorMoveData, ReceivePlayerAnimatorMoveData);
+        ClientPacketHandler.UnSubscribeFrom((int)SharedPacket.PlayerAnimatorEventData, ReceivePlayerAnimatorEventData);
 
         Events.Player.SetAnimatorTrigger -= SendSetTrigger;
         Events.Player.SetAnimatorFloat -= SendSetFloat;

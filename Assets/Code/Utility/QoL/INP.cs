@@ -19,25 +19,36 @@ public struct InputMovement
     public bool UsePad { get { return (ActivePad != null); } }
     public bool UseMouse { get { return (ActiveMouse != null); } }
 
+    public bool overrideInput;
+
+    public Vector2 overrideInputDirection;
+    public Vector2 overrideLookDirection;
+
     public Vector2 InputDir
     {
         get
         {
             Vector2 dir = Vector2.zero;
-            if (UseBoard)
+            if(overrideInput == false)
             {
-                if (ActiveBoard.wKey.isPressed) dir.y = 1f;
-                else if (ActiveBoard.sKey.isPressed) dir.y = -1f;
-                else dir.y = 0f;
+                if (UseBoard)
+                {
+                    if (ActiveBoard.wKey.isPressed) dir.y = 1f;
+                    else if (ActiveBoard.sKey.isPressed) dir.y = -1f;
+                    else dir.y = 0f;
 
-                if (ActiveBoard.dKey.isPressed) dir.x = 1f;
-                else if (ActiveBoard.aKey.isPressed) dir.x = -1f;
-                else dir.x = 0f;
-            }
+                    if (ActiveBoard.dKey.isPressed) dir.x = 1f;
+                    else if (ActiveBoard.aKey.isPressed) dir.x = -1f;
+                    else dir.x = 0f;
+                }
 
-            if (UsePad)
+                if (UsePad)
+                {
+                    dir += ActivePad.leftStick.ReadValue();
+                }
+            }else
             {
-                dir += ActivePad.leftStick.ReadValue();
+                dir = overrideInputDirection;
             }
 
             return dir;
@@ -48,16 +59,22 @@ public struct InputMovement
         get
         {
             Vector2 dir = Vector2.zero;
-            if (UseMouse)
+            if(overrideInput == false)
             {
-                dir.x = Input.GetAxisRaw("Mouse X");
-                dir.y = Input.GetAxisRaw("Mouse Y");
+                if (UseMouse)
+                {
+                    dir.x = Input.GetAxisRaw("Mouse X");
+                    dir.y = Input.GetAxisRaw("Mouse Y");
 
-            }
+                }
 
-            if(UsePad)
+                if (UsePad)
+                {
+                    dir += ActivePad.rightStick.ReadValue();
+                }
+            }else
             {
-                dir += ActivePad.rightStick.ReadValue();
+                dir = overrideLookDirection;
             }
 
             return dir;

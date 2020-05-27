@@ -16,5 +16,6 @@ public static class NetData
     }
 
     public static int LocalPlayerID = -1;
+    public static float ClientTimeoutTimeInSeconds = 10f;
     
 }

@@ -32,7 +32,8 @@ namespace Nadis.Net.Server
             ItemManager.Init();
             ServerPacketHandler.Initialize();
             ServerData.chargingStationLocations = ServerScenePrescence.GetAllChargingStationLocations();
-            Debug.Log(ServerData.chargingStationLocations.Length + " Charging Stations");
+            ServerData.playerSpawnLocations = ServerScenePrescence.GetAllPlayerSpawnPoints();
+            ServerUnitController.Initialize(25);
 
             TCP.Start();
             UDP.Start();

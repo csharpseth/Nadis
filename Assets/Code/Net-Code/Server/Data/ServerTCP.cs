@@ -47,7 +47,7 @@ namespace Nadis.Net.Server
                 SendClientExistingPlayersAdditionalData(clientID);
                 SendClientConnectionDataToClient(clientID);
                 InitialSyncClientInventory(clientID);
-                return;
+                ServerUnitController.SendPlayerUnits(clientID);
             }
         }
 
@@ -134,8 +134,7 @@ namespace Nadis.Net.Server
                 playerID = clientID,
                 size = inventorySize
             };
-            ServerSend.ReliableToOne(inventoryData, clientID);
-            ServerSend.ReliableToAll(inventoryData, clientID);
+            ServerSend.ReliableToAll(inventoryData);
 
             ItemManager.SendSceneItemsToPlayer(clientID);
             ItemManager.SendInventoryItemsToPlayer(clientID);

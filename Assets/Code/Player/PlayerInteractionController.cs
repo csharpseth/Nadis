@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Nadis.Net;
 
 public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, IDisableIfRemotePlayer
 {
@@ -12,10 +13,11 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
 
     public float reach = 5f;
     public LayerMask interactionMask;
+    public LayerMask playerMask;
     public LayerMask ignorePlayerMask;
     
     private int _activeIndex = 0;
-    private bool disabled = false;
+    public bool disabled = false;
     
     private void Update()
     {
@@ -59,6 +61,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
                 RaycastHit hit;
                 if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, ignorePlayerMask))
                 {
+                    Debug.Log("Request Spawn Item");
                     //TesterMenu.SpawnObject(testItem, hit.point);
                     Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.1f));
                 }
@@ -81,6 +84,22 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
             {
                 //ent.Interact(NetworkedPlayer.LocalID);
                 Inventory.RequestPickupItem(item.NetID, NetID);
+            }
+        }
+
+        if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, playerMask))
+        {
+            NetworkedPlayer ply = null;
+            hit.transform.gameObject.TryGetComponent(out ply);
+            if (ply != null)
+            {
+                Debug.Log("CLIENT::Try Revive Player");
+                PacketRequestRevivePlayer packet = new PacketRequestRevivePlayer
+                {
+                    playerID = NetID,
+                    playerToReviveID = ply.NetID
+                };
+                Events.Net.SendAsClientUnreliable(NetID, packet);
             }
         }
     }

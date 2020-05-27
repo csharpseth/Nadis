@@ -22,20 +22,36 @@ public class NetTester : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.H) && server == null)
         {
             //Start Server
-            server = new Server();
-            server.Start();
+            Host();
         }
 
         if(Input.GetKeyDown(KeyCode.C) && client == null)
         {
             //Start Connection
-            client = new Client();
-            client.ConnectToServer();
+            Connect();
         }
 
         Log.LogText = LogText;
         Log.LogWarnings = LogWarn;
         Log.LogErrors = LogError;
+    }
+
+    public void Host()
+    {
+        server = new Server();
+        server.Start();
+    }
+
+    public void Connect()
+    {
+        client = new Client();
+        client.ConnectToServer();
+    }
+
+    public void Connect(string ip)
+    {
+        client = new Client();
+        client.ConnectToServer(ip);
     }
 
     private void OnApplicationQuit()

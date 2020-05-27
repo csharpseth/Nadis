@@ -52,7 +52,7 @@ public class PlayerMouseController : MonoBehaviour, IDisableIfRemotePlayer, INet
     {
         if (disabled) return;
 
-        if (Inp.Interface.Pause) execute = !execute;
+        if (Inp.Interface.Pause && Inp.Move.overrideInput == false) execute = !execute;
 
         if(execute)
         {
@@ -64,6 +64,12 @@ public class PlayerMouseController : MonoBehaviour, IDisableIfRemotePlayer, INet
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             return;
+        }
+
+        if(Inp.Move.overrideInput)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         
         float h = lookSpeed * Inp.Move.LookDir.x;

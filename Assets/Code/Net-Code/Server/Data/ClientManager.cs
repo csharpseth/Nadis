@@ -193,12 +193,20 @@ namespace Nadis.Net.Server
             if(stat.power > ServerData.PlayerMaxPower)
             {
                 //Damage The Player
+                stat.numTimesOverCharged += 1;
+            }
+
+            if(stat.numTimesOverCharged >= 2)
+            {
                 DamagePlayer(playerID, ServerData.PlayerOverChargeDamageAmount);
                 stat = _clientStatsDictionary[playerID];
                 stat.power = ServerData.PlayerMaxPower;
                 _clientStatsDictionary[playerID] = stat;
                 return;
             }
+
+            if (stat.power / (float)stat.maxPower <= 0.99f)
+                stat.numTimesOverCharged = 0;
 
             _clientStatsDictionary[playerID] = stat;
 
@@ -209,6 +217,21 @@ namespace Nadis.Net.Server
                 powerLevel = stat.power
             };
             ServerSend.ReliableToAll(packet);
+            Debug.Log("SERVER::Sent ALter Power For Player: " + playerID);
+        }
+
+        public static void TransferPower(int playerID, int receiveID)
+        {
+            if (_clientStatsDictionary.ContainsKey(playerID) == false) return;
+            if (_clientStatsDictionary.ContainsKey(receiveID) == false) return;
+
+            ClientStatData ply = _clientStatsDictionary[playerID];
+
+            if (ply.power < 15) return;
+
+            AlterPlayerPower(playerID, -10);
+            AlterPlayerPower(receiveID, 10);
+            Debug.Log("SERVER::Try Revive Player");
         }
 
         /*
@@ -270,6 +293,8 @@ namespace Nadis.Net.Server
         public int startHealth;
         public int startPower;
 
+        public int numTimesOverCharged;
+
         public ClientStatData(int startHealth, int startPower, int maxHealth, int maxPower)
         {
             this.startHealth = startHealth;
@@ -279,12 +304,14 @@ namespace Nadis.Net.Server
 
             this.maxPower = maxPower;
             this.maxHealth = maxHealth;
+            numTimesOverCharged = 0;
         }
 
         public void Reset()
         {
             power = startPower;
             health = startHealth;
+            numTimesOverCharged = 0;
         }
     }
 }

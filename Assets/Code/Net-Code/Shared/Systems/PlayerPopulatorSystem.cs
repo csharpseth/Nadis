@@ -22,17 +22,33 @@ namespace Nadis.Net
 
         public GameObject playerPrefab;
         public GameObject remotePlayerPrefab;
+        public GameObject unitPrefab;
+
         private Queue<PacketPlayerConnection> playersToSpawn;
+        private Queue<PacketUnitData> unitsToSpawn;
 
         public Vector3 spawnLocation;
 
         private void Init()
         {
             playersToSpawn = new Queue<PacketPlayerConnection>();
+            unitsToSpawn = new Queue<PacketUnitData>();
         }
 
         private void Update()
         {
+            if(unitsToSpawn != null && unitsToSpawn.Count > 0)
+            {
+                PacketUnitData data = unitsToSpawn.Dequeue();
+                GameObject go = Instantiate(instance.unitPrefab, data.location, Quaternion.identity);
+                INetworkInitialized[] init = go.GetComponentsInChildren<INetworkInitialized>();
+                for (int i = 0; i < init.Length; i++)
+                {
+                    init[i].InitFromNetwork(data.unitID);
+                }
+            }
+
+
             if (playersToSpawn == null || playersToSpawn.Count == 0) return;
 
             int amount = playersToSpawn.Count;
@@ -95,6 +111,11 @@ namespace Nadis.Net
         public static void SpawnPlayer(PacketPlayerConnection playerToSpawn)
         {
             instance.playersToSpawn.Enqueue(playerToSpawn);
+        }
+
+        public static void SpawnUnit(PacketUnitData unitToSpawn)
+        {
+            instance.unitsToSpawn.Enqueue(unitToSpawn);
         }
     }
 }

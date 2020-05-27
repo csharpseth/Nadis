@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace Nadis.Net.Server
         //You should never need to use ClientPacketID here.
         private static void PopulateHandlers()
         {
+
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), (IPacketData data) =>
             {
                 PacketPlayerPosition plyPos = (PacketPlayerPosition)data;
@@ -84,8 +86,11 @@ namespace Nadis.Net.Server
             CreateHandler((int)SharedPacket.ItemPickup, new PacketItemPickup(), (IPacketData data) =>
             {
                 PacketItemPickup req = (PacketItemPickup)data;
-                if(ItemManager.MoveItemToInventory(req.NetworkID, req.PlayerID))
+                UnityEngine.Debug.Log("Server Picked Up Item");
+                if (ItemManager.MoveItemToInventory(req.NetworkID, req.PlayerID))
+                {
                     ServerSend.ReliableToAll(req);
+                }
                 else
                     Log.Err("SERVER :: Failed To Move Item({0}) To Player({1})'s Inventory!", req.NetworkID, req.PlayerID);
             });
@@ -146,6 +151,11 @@ namespace Nadis.Net.Server
             {
                 PacketRequestUsePower packet = (PacketRequestUsePower)data;
                 ClientManager.AlterPlayerPower(packet.playerID, Util.EnsureNegative(packet.useAmount));
+            });
+            CreateHandler((int)ClientPacket.RequestRevivePlayer, new PacketRequestRevivePlayer(), (IPacketData data) =>
+            {
+                PacketRequestRevivePlayer packet = (PacketRequestRevivePlayer)data;
+                ClientManager.TransferPower(packet.playerID, packet.playerToReviveID);
             });
         }
 

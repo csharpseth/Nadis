@@ -10,6 +10,8 @@
         public int maxHealth;
         public int maxPower;
 
+        public bool isShutdown;
+
         private int startHealth;
         private int startPower;
 
@@ -24,6 +26,7 @@
 
             this.startHealth = startHealth;
             this.startPower = startPower;
+            isShutdown = false;
         }
 
         public void Reset() {

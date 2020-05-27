@@ -33,6 +33,12 @@ namespace Nadis.Net.Client
             TCP.Connect(_ip, _port);
         }
 
+        public void ConnectToServer(string ip)
+        {
+            _ip = ip;
+            ConnectToServer();
+        }
+
         public void Disconnect(IPacketData packet)
         {
             PacketDisconnectPlayer data = (PacketDisconnectPlayer)packet;

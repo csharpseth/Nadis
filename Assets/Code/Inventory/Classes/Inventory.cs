@@ -250,6 +250,7 @@ public class Inventory : MonoBehaviour
         if (item == null) item = _inventories[playerID].GetItem(networkID);
         if (item == null) { Log.Err("Failed To Find ITem W/ Specificed NetID"); return; }
 
+        Debug.Log("Pickup Item");
         item.Interact(playerID);
     }
     public static void MoveItemToWorld(int networkID, int playerID)
@@ -260,6 +261,65 @@ public class Inventory : MonoBehaviour
         Debug.Log("Dropping Item");
         _inventories[playerID].Remove(item);
         item.Drop();
+    }
+
+    struct ItemWaiter
+    {
+        public int playerID;
+        public Item item;
+        public int failures;
+    }
+
+    private static List<ItemWaiter> waitList = new List<ItemWaiter>();
+    public static void WaitAddItem(int playerID, Item item)
+    {
+        for (int i = 0; i < waitList.Count; i++)
+        {
+            if (waitList[i].item.NetID == item.NetID && waitList[i].playerID == playerID)
+                return;
+            else if(waitList[i].item.NetID == item.NetID && waitList[i].playerID != playerID)
+            {
+                ItemWaiter tempWait = waitList[i];
+                tempWait.playerID = playerID;
+                waitList[i] = tempWait;
+            }
+        }
+
+
+
+        ItemWaiter waiter = new ItemWaiter
+        {
+            playerID = playerID,
+            item = item,
+            failures = 0
+        };
+
+        waitList.Add(waiter);
+    }
+    int maxFailures = 50;
+
+    private void Update()
+    {
+        for (int i = 0; i < waitList.Count; i++)
+        {
+            ItemWaiter wait = waitList[i];
+            wait.item.Interact(wait.playerID);
+            if(wait.item.transform.parent == null)
+            {
+                wait.failures += 1;
+                waitList[i] = wait;
+            }else
+            {
+                waitList.RemoveAt(i);
+                break;
+            }
+
+            if(wait.failures >= maxFailures)
+            {
+                waitList.RemoveAt(i);
+                break;
+            }
+        }
     }
 
 }

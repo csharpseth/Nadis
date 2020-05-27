@@ -78,6 +78,7 @@ namespace Nadis.Net.Server
                         if (client.UDP.endPoint == null)
                         {
                             client.UDP.Connect(endPoint);
+                            SendData(new PacketUDPConnected().Serialize().ToArray(), endPoint);
                             Log.Not("SERVER :: UDP Client Established.");
                             return;
                         }

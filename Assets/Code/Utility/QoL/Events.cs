@@ -59,6 +59,9 @@ public struct PlayerEvents
 
     public Action<int> Respawn;
 
+    public Action<int> Shutdown;
+    public Action<int> Startup;
+
     public PlayerPickupItem Pickup;
     public OnGetPlayer GetPlayer;
     public Action<int> UnSubscribe;

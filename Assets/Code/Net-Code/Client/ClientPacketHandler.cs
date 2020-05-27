@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Nadis.Net.Client
 {
@@ -60,6 +61,12 @@ namespace Nadis.Net.Client
                     Client.Local.UDP.Connect(Client.Local.TCP.LocalPort, data.playerID);
                 }
             });
+
+            CreateHandler((int)ServerPacket.PlayerUDPConnected, new PacketUDPConnected(), (IPacketData packet) =>
+            {
+                Client.Local.UDP.connected = true;
+            });
+
             CreateHandler((int)SharedPacket.PlayerPosition, new PacketPlayerPosition(), null);
             CreateHandler((int)SharedPacket.PlayerRotation, new PacketPlayerRotation(), null);
             CreateHandler((int)SharedPacket.PlayerDisconnected, new PacketDisconnectPlayer(), null);
@@ -108,6 +115,14 @@ namespace Nadis.Net.Client
             {
                 PlayerManager.AlterPlayerPowerLevel((PacketAlterPlayerPower)packet);
             });
+
+            CreateHandler((int)ServerPacket.UnitData, new PacketUnitData(), (IPacketData packet) =>
+            {
+                Log.Txt("Spawn Unit");
+                PlayerPopulatorSystem.SpawnUnit((PacketUnitData)packet);
+            });
+
+            CreateHandler((int)ServerPacket.UnitPosition, new PacketUnitPosition(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

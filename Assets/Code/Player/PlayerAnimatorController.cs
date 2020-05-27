@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour, INetworkInitialized, IEventAccessor
 {
@@ -57,6 +58,7 @@ public class PlayerAnimatorController : MonoBehaviour, INetworkInitialized, IEve
     }
 
 
+    [Obsolete]
     private void SetAimOffset(int playerID, float offset)
     {
         if (playerID != NetID) return;

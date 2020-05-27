@@ -26,12 +26,16 @@ public enum SharedPacket
 public enum ServerPacket
 {
     PlayerConnection = 250,
+    PlayerUDPConnected,
     PlayerInventoryData,
     SpawnItem,
     DestroyItem,
     DamagePlayer,
     KillPlayer,
     AlterPowerLevel,
+    UnitData,
+    UnitPosition,
+    UnitRotation
 }
 
 //Starts at 500
@@ -46,4 +50,5 @@ public enum ClientPacket
     DestroyItemRequest,
     DamagePlayerRequest,
     RequestUsePower,
+    RequestRevivePlayer
 }

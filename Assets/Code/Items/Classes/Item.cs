@@ -42,7 +42,12 @@ public abstract class Item : MonoBehaviour, IItem, IUsable, INetworkID, INetwork
     {
         Events.Player.Pickup?.Invoke(playerID, this);
         if (transform.parent == null)
+        {
+            //Enque the item into a list
+            Inventory.WaitAddItem(playerID, this);
+
             return;
+        }
 
         if(Inventory.AddItem(playerID, this))
         {
@@ -51,7 +56,6 @@ public abstract class Item : MonoBehaviour, IItem, IUsable, INetworkID, INetwork
             transform.localPosition = holdPosition;
             transform.localEulerAngles = holdRotation;
             ownerID = playerID;
-            Hide(true);
         }
     }
 

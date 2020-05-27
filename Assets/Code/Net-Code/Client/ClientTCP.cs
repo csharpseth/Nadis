@@ -26,6 +26,7 @@ namespace Nadis.Net.Client
             _receiveBuffer = new byte[NetData.Default.BufferSize];
             _packetBuffer = new PacketBuffer();
             socket.BeginConnect(ip, port, ConnectionCallback, null);
+            Log.Event("Connecting To Server");
         }
 
         private void ConnectionCallback(IAsyncResult ar)
@@ -33,13 +34,13 @@ namespace Nadis.Net.Client
             socket.EndConnect(ar);
             if(socket.Connected == false)
             {
-                Debug.Log("Failed To Connect To Server!");
+                Log.Err("Failed To Connect To Server");
                 return;
             }
             
             _stream = socket.GetStream();
             BeginRead();
-            Debug.Log("Connection To Server was Successfull");
+            Log.Event("Connection To Server was Successfull");
         }
 
         public void Disconnect()
@@ -63,7 +64,6 @@ namespace Nadis.Net.Client
             {
                 if (_stream != null)
                     _stream.EndRead(ar);
-                Debug.LogFormat("Client {0}'s Network Stream Was Safely Terminated.");
                 return;
             }
 

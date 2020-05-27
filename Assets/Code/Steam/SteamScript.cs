@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+/*
 using Steamworks;
 
 public static class SteamData
@@ -22,3 +23,4 @@ public static class SteamData
         }
     }
 }
+*/
