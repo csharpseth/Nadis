@@ -57,7 +57,7 @@ namespace Nadis.Net.Client
                 PlayerPopulatorSystem.SpawnPlayer(data);
                 if(data.playerIsLocal)
                 {
-                    UnityEngine.Debug.Log("CLIENT :: Attempting To Establish UDP Connection");
+                    Log.Txt("CLIENT :: Attempting To Establish UDP Connection");
                     Client.Local.UDP.Connect(Client.Local.TCP.LocalPort, data.playerID);
                 }
             });
@@ -123,6 +123,8 @@ namespace Nadis.Net.Client
             });
 
             CreateHandler((int)ServerPacket.UnitPosition, new PacketUnitPosition(), null);
+            CreateHandler((int)ServerPacket.UnitRotation, new PacketUnitRotation(), null);
+            CreateHandler((int)ServerPacket.UnitAnimationState, new PacketUnitAnimationState(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

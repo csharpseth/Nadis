@@ -86,7 +86,6 @@ namespace Nadis.Net.Server
             CreateHandler((int)SharedPacket.ItemPickup, new PacketItemPickup(), (IPacketData data) =>
             {
                 PacketItemPickup req = (PacketItemPickup)data;
-                UnityEngine.Debug.Log("Server Picked Up Item");
                 if (ItemManager.MoveItemToInventory(req.NetworkID, req.PlayerID))
                 {
                     ServerSend.ReliableToAll(req);
@@ -115,7 +114,6 @@ namespace Nadis.Net.Server
                 PacketItemDrop req = (PacketItemDrop)data;
                 if (ItemManager.MoveItemToWorld(req.NetworkID, req.PlayerID))
                 {
-                    Log.Txt("SERVER :: Moved Item From Inventory to World!");
                     ServerSend.ReliableToAll(data);
                 }
                 else
@@ -125,7 +123,6 @@ namespace Nadis.Net.Server
             {
                 PacketRequestDamagePlayer packet = (PacketRequestDamagePlayer)data;
                 int health = ClientManager.TryDamagePlayer(packet);
-                UnityEngine.Debug.Log("Damage Player Request");
                 if(health != -1)
                 {
                     PacketAlterPlayerHealth cmd = new PacketAlterPlayerHealth

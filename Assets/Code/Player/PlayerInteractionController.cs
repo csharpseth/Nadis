@@ -52,7 +52,6 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
             if(Inp.Interact.DropDown)
             {
                 Inventory.RequestDropItem(ActiveItem.NetID, NetID);
-                Log.Txt("Requesting Drop Item");
             }
         }else
         {
@@ -61,7 +60,6 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
                 RaycastHit hit;
                 if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, ignorePlayerMask))
                 {
-                    Debug.Log("Request Spawn Item");
                     //TesterMenu.SpawnObject(testItem, hit.point);
                     Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.1f));
                 }

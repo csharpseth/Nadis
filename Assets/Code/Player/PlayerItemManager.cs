@@ -16,7 +16,6 @@ public class PlayerItemManager : MonoBehaviour, INetworkInitialized, IEventAcces
 
     public void PickupItem(int netID, Item item)
     {
-        Debug.Log("Set Parent");
         if (netID != NetID) return;
         
         item.transform.SetParent(hand);

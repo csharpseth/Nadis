@@ -9,6 +9,8 @@ public class ClientNetworkedUnit : MonoBehaviour, INetworkInitialized
     public float speedBuffer = 1f;
     public float lagCompensationDirectionAdvancementAmount = 1f;
 
+    private Animator anim;
+
     Vector3 destination;
     Vector3 dir;
     float speed;
@@ -18,6 +20,7 @@ public class ClientNetworkedUnit : MonoBehaviour, INetworkInitialized
         NetID = netID;
         UnitID = netID;
         Subscribe();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void SetPosition(IPacketData packet)
@@ -30,9 +33,30 @@ public class ClientNetworkedUnit : MonoBehaviour, INetworkInitialized
         destination = data.location + dir;
     }
 
+    Vector3 rotBuffer = Vector3.zero;
+    private void SetRotation(IPacketData packet)
+    {
+        PacketUnitRotation data = (PacketUnitRotation)packet;
+        if (data.unitID != NetID) return;
+        rotBuffer = transform.eulerAngles;
+        rotBuffer.y = data.rot;
+        transform.eulerAngles = rotBuffer;
+    }
+
+    private void SetAnimationState(IPacketData packet)
+    {
+        PacketUnitAnimationState data = (PacketUnitAnimationState)packet;
+        if (data.unitID != NetID || anim == null) return;
+
+        anim.SetFloat("forward_blend", data.moveDir.y);
+        anim.SetFloat("side_blend", data.moveDir.x);
+    }
+
     private void Subscribe()
     {
         ClientPacketHandler.SubscribeTo((int)ServerPacket.UnitPosition, SetPosition);
+        ClientPacketHandler.SubscribeTo((int)ServerPacket.UnitRotation, SetRotation);
+        ClientPacketHandler.SubscribeTo((int)ServerPacket.UnitAnimationState, SetAnimationState);
     }
 
     private void Update()

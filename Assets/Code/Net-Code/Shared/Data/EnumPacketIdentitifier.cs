@@ -35,7 +35,8 @@ public enum ServerPacket
     AlterPowerLevel,
     UnitData,
     UnitPosition,
-    UnitRotation
+    UnitRotation,
+    UnitAnimationState
 }
 
 //Starts at 500

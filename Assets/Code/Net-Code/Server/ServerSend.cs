@@ -16,8 +16,12 @@ namespace Nadis.Net.Server
         {
             ServerClientData client = ClientManager.GetClient(clientID);
             if (client.Invalid) return;
-            
-            client.SendDataReliable(data.Serialize().ToArray());
+
+            PacketBuffer buffer = data.Serialize();
+
+            client.SendDataReliable(buffer.ToArray());
+
+            buffer.Dispose();
         }
 
         //Hopefully improve with C# Jobs :D
@@ -50,7 +54,11 @@ namespace Nadis.Net.Server
             ServerClientData client = ClientManager.GetClient(clientID);
             if (client.Invalid) return;
 
-            Server.instance.UDP.SendData(data.Serialize().ToArray(), client.UDP.endPoint);
+            PacketBuffer buffer = data.Serialize();
+
+            Server.instance.UDP.SendData(buffer.ToArray(), client.UDP.endPoint);
+
+            buffer.Dispose();
         }
 
         public static void UnReliableToAll(IPacketData data, int exceptionID = -1)

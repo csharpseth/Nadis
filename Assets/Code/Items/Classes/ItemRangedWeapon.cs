@@ -56,7 +56,6 @@ public class ItemRangedWeapon : ItemWeapon
             else if (_fireType == WeaponFireType.Semi && Inp.Interact.PrimaryDown)
             {
                 canFire = false;
-                Debug.Log("Fire");
                 Fire(ownerID);
             }
         }else
@@ -105,14 +104,12 @@ public class ItemRangedWeapon : ItemWeapon
         RaycastHit hit;
         if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, ballistics.range, _hitMask))
         {
-            Debug.Log("Hit");
             FXController.HitAt(hit.point, hit.transform.GetComponent<IMaterialProperty>());
 
             PlayerLimb limb = hit.transform.GetComponent<PlayerLimb>();
             if(limb == null) return;
 
             NetworkedPlayer player = hit.transform.root.GetComponent<NetworkedPlayer>();
-            Debug.Log(hit.transform.root);
             if(player != null)
             {
                 player.RequestDamageThisPlayer(playerID, ballistics.damage, ballistics.range, limb.appendage);

@@ -80,7 +80,7 @@ namespace Nadis.Net
 
         /// <summary>Resets the packet instance to allow it to be reused.</summary>
         /// <param name="shouldReset">Whether or not to reset the packet.</param>
-        public void Reset(bool shouldReset = true)
+        public PacketBuffer Reset(bool shouldReset = true)
         {
             if (shouldReset)
             {
@@ -92,6 +92,8 @@ namespace Nadis.Net
             {
                 readPos -= 4; // "Unread" the last read int
             }
+
+            return this;
         }
         #endregion
 
@@ -151,6 +153,12 @@ namespace Nadis.Net
             Write(value.x);
             Write(value.y);
             Write(value.z);
+        }
+
+        public void Write(UnityEngine.Vector2Int value)
+        {
+            Write(value.x);
+            Write(value.y);
         }
         #endregion
 
@@ -328,12 +336,23 @@ namespace Nadis.Net
         {
             try
             {
-                UnityEngine.Vector3 value = new UnityEngine.Vector3(ReadFloat(), ReadFloat(), ReadFloat());
-                return value;
+                return new UnityEngine.Vector3(ReadFloat(), ReadFloat(), ReadFloat());
             }
             catch
             {
                 throw new Exception("Could not read value of type 'Vector3'!");
+            }
+        }
+
+        public UnityEngine.Vector2Int ReadVector2Int()
+        {
+            try
+            {
+                return new UnityEngine.Vector2Int(ReadInt(), ReadInt());
+            }
+            catch
+            {
+                throw new Exception("Could not read value of type 'Vector2Int'!");
             }
         }
         #endregion

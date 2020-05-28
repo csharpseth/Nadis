@@ -7,12 +7,11 @@ namespace Nadis.Net.Server
 {
     public static class ClientManager
     {
-        public static List<int> Clients { get { return _clients; } }
-        public static bool ClientSlotsOpen => (_clients.Count < _maxClients);
+        public static List<int> Clients { get; private set; }
+        public static bool ClientSlotsOpen => (Clients.Count < _maxClients);
 
         private static Dictionary<int, ServerClientData> _clientDictionary;
         private static Dictionary<int, ClientStatData> _clientStatsDictionary;
-        private static List<int> _clients;
         private static int _maxClients;
         private static int _currentID = 0;
         private static bool initialized = false;
@@ -24,7 +23,7 @@ namespace Nadis.Net.Server
             _maxClients = maxClients;
             _clientDictionary = new Dictionary<int, ServerClientData>();
             _clientStatsDictionary = new Dictionary<int, ClientStatData>();
-            _clients = new List<int>();
+            Clients = new List<int>();
             initialized = true;
         }
 
@@ -44,9 +43,9 @@ namespace Nadis.Net.Server
             ServerClientData client = GetClient(clientID);
             client.Disconnect();
             int index = -1;
-            for (int i = 0; i < _clients.Count; i++)
+            for (int i = 0; i < Clients.Count; i++)
             {
-                if (_clients[i] == clientID) index = i;
+                if (Clients[i] == clientID) index = i;
             }
             //Send a Disconnect Command to all Clients
             if(send)
@@ -58,7 +57,7 @@ namespace Nadis.Net.Server
                 ServerSend.ReliableToAll(packet, clientID);
             }
 
-            _clients.RemoveAt(index);
+            Clients.RemoveAt(index);
             _clientDictionary.Remove(clientID);
             _clientStatsDictionary.Remove(clientID);
         }
@@ -84,7 +83,7 @@ namespace Nadis.Net.Server
 
             if (ClientExists(clientID))
             {
-                Debug.LogErrorFormat("Failed To Add Client: ID:{0} is Already In Use", clientID);
+                Log.Err("Failed To Add Client, ID:{0} is Already In Use", clientID);
                 return -1;
             }
 
@@ -92,7 +91,7 @@ namespace Nadis.Net.Server
             {
                 ServerClientData cd = new ServerClientData(socket, clientID);
                 _clientDictionary.Add(clientID, cd);
-                _clients.Add(clientID);
+                Clients.Add(clientID);
                 ItemManager.CreateInventory(clientID);
             }
             catch (Exception e)
@@ -142,7 +141,6 @@ namespace Nadis.Net.Server
             }
 
             _clientStatsDictionary[playerID] = stat;
-            Debug.Log(_clientStatsDictionary[playerID].health);
             return _clientStatsDictionary[playerID].health;
         }
 
@@ -156,7 +154,6 @@ namespace Nadis.Net.Server
 
             if (stat.health <= 0)
             {
-                Debug.Log("Kill Player");
                 ItemManager.PlayerDropAllItems(playerID);
                 PacketKillPlayer packet = new PacketKillPlayer
                 {
@@ -166,6 +163,7 @@ namespace Nadis.Net.Server
                 ServerSend.ReliableToAll(packet);
                 stat.Reset();
                 _clientStatsDictionary[playerID] = stat;
+                Log.Not("SERVER::Killed Player: {0}", playerID);
                 return;
             }
 
@@ -217,7 +215,6 @@ namespace Nadis.Net.Server
                 powerLevel = stat.power
             };
             ServerSend.ReliableToAll(packet);
-            Debug.Log("SERVER::Sent ALter Power For Player: " + playerID);
         }
 
         public static void TransferPower(int playerID, int receiveID)
@@ -231,7 +228,6 @@ namespace Nadis.Net.Server
 
             AlterPlayerPower(playerID, -10);
             AlterPlayerPower(receiveID, 10);
-            Debug.Log("SERVER::Try Revive Player");
         }
 
         /*
@@ -259,11 +255,11 @@ namespace Nadis.Net.Server
             try
             {
                 _clientDictionary.Remove(clientID);
-                for (int i = 0; i < _clients.Count; i++)
+                for (int i = 0; i < Clients.Count; i++)
                 {
-                    if (_clients[i] != clientID) continue;
+                    if (Clients[i] != clientID) continue;
 
-                    _clients.Remove(_clients[i]);
+                    Clients.Remove(Clients[i]);
                 }
             }
             catch (Exception e)
@@ -274,9 +270,9 @@ namespace Nadis.Net.Server
         
         public static void Clear(bool send)
         {
-            for (int i = 0; i < _clients.Count; i++)
+            for (int i = 0; i < Clients.Count; i++)
             {
-                int id = _clients[i];
+                int id = Clients[i];
                 DisconnectClient(id, send);
             }
         }

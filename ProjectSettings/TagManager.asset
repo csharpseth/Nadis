@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ChargingStation
   - PlayerSpawnPoint
+  - AI Unit
   layers:
   - Default
   - TransparentFX

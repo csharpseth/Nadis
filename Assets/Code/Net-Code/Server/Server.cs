@@ -1,11 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Net;
-using System.Net.Sockets;
-using System;
-
-namespace Nadis.Net.Server
+﻿namespace Nadis.Net.Server
 {
     public class Server
     {
@@ -33,7 +26,7 @@ namespace Nadis.Net.Server
             ServerPacketHandler.Initialize();
             ServerData.chargingStationLocations = ServerScenePrescence.GetAllChargingStationLocations();
             ServerData.playerSpawnLocations = ServerScenePrescence.GetAllPlayerSpawnPoints();
-            ServerUnitController.Initialize(25);
+            ServerUnitController.Initialize(10);
 
             TCP.Start();
             UDP.Start();

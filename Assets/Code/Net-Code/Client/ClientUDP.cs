@@ -69,7 +69,7 @@ public class ClientUDP
 
     private void ReceiveCallback(IAsyncResult ar)
     {
-        if (socket == null || endPoint == null) return;
+        if (socket == null || endPoint == null || ar == null) return;
 
         try
         {
@@ -79,6 +79,7 @@ public class ClientUDP
             if(data.Length < 4)
             {
                 //Disconnect
+                Events.Net.DisconnectClient();
                 return;
             }
 

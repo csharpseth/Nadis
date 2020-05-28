@@ -2,7 +2,7 @@
 {
     public struct PacketUnitRotation : IPacketData
     {
-        public int PacketID => (int)ServerPacket.UnitData;
+        public int PacketID => (int)ServerPacket.UnitRotation;
 
         public int unitID;
         public float rot;

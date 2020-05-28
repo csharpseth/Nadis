@@ -36,6 +36,30 @@ public static class Util
         return (diffX + diffZ) / 2f;
     }
 
+    public static Vector3 FastNormalize(Vector3 input)
+    {
+        float maxXY = math.max(math.abs(input.x), math.abs(input.y));
+        float maxYZ = math.max(math.abs(input.y), math.abs(input.z));
+        float max = math.max(maxXY, maxYZ);
+
+        return new Vector3(input.x / max, input.y / max, input.z / max);
+    }
+
+    public static Vector3 FastNormalizeAbs(Vector3 input)
+    {
+        float maxXY = math.max(math.abs(input.x), math.abs(input.y));
+        float maxYZ = math.max(math.abs(input.y), math.abs(input.z));
+        float max = math.max(maxXY, maxYZ);
+
+        return new Vector3(math.abs(input.x) / max, math.abs(input.y) / max, math.abs(input.z) / max);
+    }
+
+    public static Vector3 FastNormalizeTo(Vector3 input, Vector3 localDir)
+    {
+        Vector3 inpDir = FastNormalize(input);
+        return new Vector3(input.x * localDir.x, input.y * localDir.y, input.z * localDir.z);
+    }
+
     public static int EnsureNegative(int value)
     {
         return -FastAbs(value);

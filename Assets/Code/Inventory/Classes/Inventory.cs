@@ -250,7 +250,6 @@ public class Inventory : MonoBehaviour
         if (item == null) item = _inventories[playerID].GetItem(networkID);
         if (item == null) { Log.Err("Failed To Find ITem W/ Specificed NetID"); return; }
 
-        Debug.Log("Pickup Item");
         item.Interact(playerID);
     }
     public static void MoveItemToWorld(int networkID, int playerID)
@@ -258,7 +257,6 @@ public class Inventory : MonoBehaviour
         if (_inventories.ContainsKey(playerID) == false) { Log.Err("Failed To Find Inventory W/ Specified PlayerID"); }
         Item item = GetItem(playerID, networkID);
         if (item == null) { Log.Err("CLIENT :: Failed To Find Item({0}) in Inventory({1})!", networkID, playerID); return; }
-        Debug.Log("Dropping Item");
         _inventories[playerID].Remove(item);
         item.Drop();
     }
