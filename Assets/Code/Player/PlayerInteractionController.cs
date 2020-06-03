@@ -28,17 +28,6 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
         else if (Inp.Interact.Previous)
             ActiveIndex--;
 
-        if(Input.GetKeyDown(KeyCode.Y) && ActiveItem != null)
-        {
-            Inventory.HideItem(ActiveItem, ActiveItem.Active);
-        }
-
-        if(Input.GetKeyDown(KeyCode.L) && ActiveItem != null)
-        {
-            Inventory.RequestDestroyItem(ActiveItem.NetID);
-        }
-
-
         if(ActiveItem != null)
         {
             if (ActiveItem.Active == false)
@@ -61,7 +50,7 @@ public class PlayerInteractionController : MonoBehaviour, INetworkInitialized, I
                 if(Physics.Raycast(PlayerMouseController.Instance.CenterScreenRay, out hit, reach, ignorePlayerMask))
                 {
                     //TesterMenu.SpawnObject(testItem, hit.point);
-                    Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.1f));
+                    Inventory.RequestSpawnItem(0, hit.point + (Vector3.up * 0.5f));
                 }
             }
 

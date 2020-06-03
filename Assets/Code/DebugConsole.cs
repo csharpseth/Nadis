@@ -15,16 +15,7 @@ public class DebugConsole : MonoBehaviour
 
     public void OnLog(object input, object[] args)
     {
-        string inputString = input.ToString();
-
-        if(args != null && args.Length > 0)
-        {
-            for (int i = 0; i < args.Length; i++)
-            {
-                string replace = "{" + i + "}";
-                inputString = inputString.Replace(replace, args[i].ToString());
-            }
-        }
+        string inputString = string.Format(input.ToString(), args);
 
         inputString += "\n";
         consoleText.text += inputString;

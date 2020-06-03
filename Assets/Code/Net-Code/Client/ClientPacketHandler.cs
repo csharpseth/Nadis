@@ -125,6 +125,7 @@ namespace Nadis.Net.Client
             CreateHandler((int)ServerPacket.UnitPosition, new PacketUnitPosition(), null);
             CreateHandler((int)ServerPacket.UnitRotation, new PacketUnitRotation(), null);
             CreateHandler((int)ServerPacket.UnitAnimationState, new PacketUnitAnimationState(), null);
+            CreateHandler((int)ServerPacket.UnitAction, new PacketUnitAction(), null);
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

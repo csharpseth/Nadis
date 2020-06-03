@@ -1,310 +1,486 @@
-﻿using Nadis.Net;
-using Nadis.Net.Client;
-using Nadis.Net.Server;
-using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
-using UnityEngine;
+using Unity.Burst;
+using Random = UnityEngine.Random;
 
-public class ServerUnitController : MonoBehaviour
+namespace Nadis.Net.Server
 {
-    private static ServerUnitController instance;
-    public GameObject unitPrefab;
-    public LayerMask spawnableRegionLayer;
-    public float distanceToFindNextDestination = 3f;
-    public bool drawGizmos = true;
-    public float attackDistance = 3f;
-    public float attackDelay = 2f;
-    public int damage = 10;
+	public class ServerUnitController : MonoBehaviour
+	{
+		#region Singleton
+		private static ServerUnitController instance;
+		private void Awake()
+		{
+			if (instance != null) Destroy(this);
 
-    private static List<ServerUnitData> units;
-    private static NativeList<float3> unitPositions;
-    private static float[] timesLastAttacked;
+			instance = this;
+		}
+		#endregion
 
-    private static int numberOfUnits;
+		private void Start()
+		{
+			//ServerData.playerSpawnLocations = ServerScenePrescence.GetAllPlayerSpawnPoints();
+			//Initialize(200);
+		}
 
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(this);
+		public int numUnits = 10;
+		public GameObject unitPrefab;
+		public Transform target;
+		public float unitStopDistance = 5f;
+		public float unitFireDelay = 1f;
+		public int unitHitDamage = 10;
+		public float unitAgroDistance = 15f;
+		public float unitLoseAgroDistance = 25f;
+		public AnimationCurve dmgHitChanceFalloffCurve;
+		[Range(0f, 1f)]
+		public float hitChance = 0.5f;
+		public int maxUnitsToUpdateRequestFor = 5;
+		public LayerMask hitMask;
 
-        instance = this;
-    }
+		public float updatePathDelay = 0.5f;
+		public float unitMoveDistToSend = 0.5f;
+		public float unitRotDiffToSend = 10f;
+		public float sendDirDelay = 0.25f;
 
-    private void Update()
-    {
-        if (units == null || units.Count == 0) return;
+		private PacketUnitData dataPacket;
+		private PacketUnitPosition posPacket;
+		private PacketUnitRotation rotPacket;
+		private PacketUnitAnimationState animPacket;
 
-        #region Updating Unit Positions
-        //Getting up to date unit positions;
-        for (int i = 0; i < units.Count; i++)
-        {
-            unitPositions[i] = units[i].Location;
-        }
-        #endregion
+		private static ServerUnitData[] unitDatas;
+		private static float3[] unitPositions;
+		private static ServerUnitSyncData[] unitSyncDatas;
+		private static Queue<FireRequestData> unitFireRequestQueue;
+		private static List<int> disabledUnitIDs;
 
-        NativeList<float3> playerPositions = new NativeList<float3>(Allocator.TempJob);
-        #region Player Position Fetching
-        List<int> clientIDs = ClientManager.Clients;
-        for (int i = 0; i < clientIDs.Count; i++)
-        {
-            ServerClientData client = ClientManager.GetClient(clientIDs[i]);
-            if (client == null) continue;
+		public static void Initialize()
+		{
+			unitDatas = new ServerUnitData[instance.numUnits];
+			unitPositions = new float3[instance.numUnits];
+			unitSyncDatas = new ServerUnitSyncData[instance.numUnits];
+			unitFireRequestQueue = new Queue<FireRequestData>();
+			disabledUnitIDs = new List<int>();
 
-            playerPositions.Add(client.position);
-        }
-        #endregion
+			for (int i = 0; i < instance.numUnits; i++)
+			{
+				GameObject unit = Instantiate(instance.unitPrefab, ServerData.GetRandomPlayerSpawnLocation(), Quaternion.identity, instance.transform);
+				unitDatas[i] = new ServerUnitData(unit, i, 100);
+				unitSyncDatas[i] = new ServerUnitSyncData(unit.transform);
+				unitPositions[i] = unit.transform.position;
+			}
 
-        NativeArray<DistanceData> distances = new NativeArray<DistanceData>(unitPositions.Length, Allocator.TempJob);
-        #region Distance Job
-        LowestPlayerToUnitDistanceJob distJob = new LowestPlayerToUnitDistanceJob
-        {
-            unitPositions = unitPositions,
-            playerPositions = playerPositions,
-            sqrDistances = distances
-        };
-        JobHandle distHandle = distJob.Schedule(unitPositions.Length, 10);
-        distHandle.Complete();
-        #endregion
+			instance.dataPacket = new PacketUnitData();
+			instance.posPacket = new PacketUnitPosition();
+			instance.rotPacket = new PacketUnitRotation();
+		}
+		public static void SendPlayerUnits(int playerID)
+		{
+			for (int i = 0; i < unitDatas.Length; i++)
+			{
+				ServerUnitData unit = unitDatas[i];
+				Vector3 pos = unitPositions[i];
 
-
-        distances = distJob.sqrDistances;
-        for (int i = 0; i < distances.Length; i++)
-        {
-            float timeSinceAttack = Time.realtimeSinceStartup - timesLastAttacked[i];
-            if (timeSinceAttack < attackDelay) continue;
-
-            if (distances[i].sqrDistance <= 0f || distances[i].sqrDistance > (attackDistance * attackDistance)) continue;
-
-            ClientManager.DamagePlayer(clientIDs[i], damage);
-            timesLastAttacked[i] = Time.realtimeSinceStartup;
-        }
-
-        NativeArray<TargetData> unitTargets = new NativeArray<TargetData>(unitPositions.Length, Allocator.TempJob);
-        #region Targeting Job
-        FindTargetJob job = new FindTargetJob
-        {
-            unitPositions = unitPositions,
-            playerTargetPositions = playerPositions,
-            output = unitTargets
-        };
-        JobHandle handle = job.Schedule(unitPositions.Length, 10);
-        handle.Complete();
-        #endregion
-
-        #region Applying Targeting Job To Units
-        unitTargets = job.output;
-        for (int i = 0; i < unitTargets.Length; i++)
-        {
-            if (unitTargets[i].targetFound == false) continue;
-
-            units[i].SetDestination(unitTargets[i].targetLocation);
-        }
-        #endregion
-
-        
-
-
-        #region Disposal
-        playerPositions.Dispose();
-        unitTargets.Dispose();
-        distances.Dispose();
-        #endregion
-    }
-
-    private void Wander()
-    {
-        float distToFindNext = (distanceToFindNextDestination * distanceToFindNextDestination);
-
-        for (int i = 0; i < units.Count; i++)
-        {
-            ServerUnitData data = units[i];
-            Vector3 pos = data.Location;
-            float dist = (data.Destination - pos).sqrMagnitude;
-            if (dist <= distanceToFindNextDestination)
+				instance.dataPacket.unitID = unit.unitID;
+				instance.dataPacket.location = pos;
+				ServerSend.ReliableToOne(instance.dataPacket, playerID);
+			}
+		}
+		public static void DamageUnit(int unitID, int damage)
+		{
+			int dmg = Util.EnsureNegative(damage);
+			for (int i = 0; i < unitDatas.Length; i++)
             {
-                //Find next destination
-                data.needsDestination = true;
-            }
+				if (unitDatas[i].unitID != unitID || disabledUnitIDs.Contains(i)) continue;
 
-            units[i] = data;
-        }
-
-        for (int i = 0; i < units.Count; i++)
-        {
-            if (units[i].needsDestination)
-            {
-                units[i].SetDestination(FindDestination(units[i].Location, units[i].wanderRadius, instance.spawnableRegionLayer));
-                units[i].needsDestination = false;
-            }
-        }
-    }
-
-    [BurstCompile]
-    struct FindTargetJob : IJobParallelFor
-    {
-        [ReadOnly]
-        public NativeList<float3> unitPositions;
-        [ReadOnly]
-        public NativeList<float3> playerTargetPositions;
-
-        public NativeArray<TargetData> output;
-
-        public void Execute(int index)
-        {
-            Vector3 pos = unitPositions[index];
-
-            float lowestDist = 10000f;
-            int closestPlayerIndex = -1;
-
-            for (int i = 0; i < playerTargetPositions.Length; i++)
-            {
-                float dist = math.distancesq(playerTargetPositions[i], pos);
-                if (dist >= lowestDist) continue;
-
-                lowestDist = dist;
-                closestPlayerIndex = i;
-            }
-
-            TargetData data = output[index];
-
-            data.targetFound = (closestPlayerIndex != -1);
-            if(data.targetFound)
-                data.targetLocation = playerTargetPositions[closestPlayerIndex];
-
-            output[index] = new TargetData();
-            output[index] = data;
-        }
-    }
-
-    [BurstCompile]
-    struct TargetData
-    {
-        public bool targetFound;
-        public float3 targetLocation;
-    }
-
-    [BurstCompile]
-    struct LowestPlayerToUnitDistanceJob : IJobParallelFor
-    {
-        [ReadOnly]
-        public NativeList<float3> unitPositions;
-        [ReadOnly]
-        public NativeArray<float3> playerPositions;
-        public NativeArray<DistanceData> sqrDistances;
-
-        public void Execute(int index)
-        {
-            float3 unitPos = unitPositions[index];
-            int lowestPlyIndex = -1;
-            float lowestDistance = 100000f;
-            for (int i = 0; i < playerPositions.Length; i++)
-            {
-                float3 plyPos = playerPositions[i];
-                float dist = math.distancesq(plyPos, unitPos);
-                if (dist < lowestDistance)
+				Debug.Log("SERVER::Damage Unit");
+				ServerUnitData data = unitDatas[i];
+				data.health += dmg;
+				if(data.health <= 0)
                 {
-                    lowestPlyIndex = i;
-                    lowestDistance = dist;
+					data.disabled = true;
+					disabledUnitIDs.Add(i);
                 }
+				unitDatas[i] = data;
+				return;
             }
+        }
 
-            DistanceData data = new DistanceData
+		private void Update()
+		{
+			if (unitDatas == null || unitDatas.Length == 0) return;
+
+
+			for (int i = 0; i < unitSyncDatas.Length; i++)
+			{
+				unitPositions[i] = unitDatas[i].transform.position;
+
+
+				ServerUnitSyncData data = unitSyncDatas[i];
+				data.Check(unitMoveDistToSend, unitRotDiffToSend, sendDirDelay, Time.realtimeSinceStartup);
+				if(data.sendDir)
+				{
+					animPacket.unitID = i;
+					animPacket.moveDir = data.moveDir;
+					animPacket.isDead = unitDatas[i].disabled;
+
+					ServerSend.UnReliableToAll(animPacket);
+				}
+
+				if(data.sendPos)
+				{
+					posPacket.unitID = i;
+					posPacket.speed = unitDatas[i].agent.speed;
+					posPacket.location = data.lastPos;
+
+					ServerSend.UnReliableToAll(posPacket);
+				}
+
+				if(data.sendRot)
+				{
+					rotPacket.unitID = i;
+					rotPacket.rot = data.lastRot;
+
+					ServerSend.UnReliableToAll(rotPacket);
+				}
+
+				unitSyncDatas[i] = data;
+
+			}
+
+			int requestsToProcess = math.clamp(maxUnitsToUpdateRequestFor, 0, unitFireRequestQueue.Count);
+			NativeArray<RaycastHit> hits = new NativeArray<RaycastHit>(requestsToProcess, Allocator.TempJob);
+			NativeArray<RaycastCommand> cmds = new NativeArray<RaycastCommand>(requestsToProcess, Allocator.TempJob);
+			NativeArray<FireRequestData> fireRequests = new NativeArray<FireRequestData>(requestsToProcess, Allocator.Temp);
+
+			for (int i = 0; i < requestsToProcess; i++)
+			{
+				FireRequestData data = unitFireRequestQueue.Dequeue();
+				fireRequests[i] = data;
+
+				PacketUnitAction actionPacket = new PacketUnitAction
+				{
+					unitID = data.unitID,
+					action = UnitActionType.Fire_BigGun
+				};
+				ServerSend.UnReliableToAll(actionPacket);
+
+				float3 origin = unitPositions[data.unitID] + (float3)Vector3.up;
+				float3 destination = data.targetPlayerPos + (float3)Vector3.up;
+				float3 dir = math.normalize(destination - origin);
+
+				RaycastCommand cmd = new RaycastCommand(origin, dir, 200f, hitMask);
+				cmds[i] = cmd;
+			}
+
+			JobHandle raycastHandle = RaycastCommand.ScheduleBatch(cmds, hits, 1);
+			raycastHandle.Complete();
+
+
+			for (int i = 0; i < hits.Length; i++)
+			{
+				RaycastHit hit = hits[i];
+				if (hit.transform == null || (hit.distance * hit.distance) >= fireRequests[i].distanceToPlayer + 1f)
+				{
+					int dmg = (int)math.round(unitHitDamage * ServerData.DamageMultiplierFrom((PlayerAppendage)Random.Range(1, 8)));
+					ClientManager.DamagePlayer(fireRequests[i].targetPlayerID, dmg);
+					//Successfull, nothing was blocking the view of the player
+				}
+				else
+				{
+					//unsuccessfull, something was blocking the view from the unit to the player
+					
+					//Create an sfx impact effect at hit point on clients
+				}
+			}
+			hits.Dispose();
+			cmds.Dispose();
+			fireRequests.Dispose();
+
+		}
+
+		private void FixedUpdate()
+		{
+			if (ClientManager.Clients == null || ClientManager.Clients.Count <= 0) return;
+
+			if (unitDatas != null && unitDatas.Length > 0)
             {
-                sqrDistance = lowestDistance,
-                plyIndex = lowestPlyIndex
-            };
-            sqrDistances[index] = data;
-        }
-    }
+				List<int> clientIDs = ClientManager.Clients;
+				NativeArray<float3> clientPositions = new NativeArray<float3>(clientIDs.Count, Allocator.TempJob);
+				for (int i = 0; i < clientIDs.Count; i++)
+				{
+					clientPositions[i] = ClientManager.GetClient(clientIDs[i]).position;
+				}
 
-    private static Vector3 FindDestination(Vector3 origin, float range, LayerMask groundMask)
+				NativeArray<float3> unitPositions = new NativeArray<float3>(unitDatas.Length, Allocator.TempJob);
+				for (int i = 0; i < unitDatas.Length; i++)
+				{
+					unitPositions[i] = unitDatas[i].transform.position;
+				}
+
+				NativeArray<int> targetIndexes = new NativeArray<int>(unitDatas.Length, Allocator.TempJob);
+				NativeArray<float> playerDistances = new NativeArray<float>(unitDatas.Length, Allocator.TempJob);
+
+				ServerUnitDistanceJob distJob = new ServerUnitDistanceJob
+				{
+					unitPositions = unitPositions,
+					playerPositions = clientPositions,
+					closestPlayerToUnitIndex = targetIndexes,
+					playertoUnitDistance = playerDistances
+				};
+				JobHandle distJobHandle = distJob.Schedule(unitPositions.Length, 5);
+				distJobHandle.Complete();
+
+				targetIndexes = distJob.closestPlayerToUnitIndex;
+				playerDistances = distJob.playertoUnitDistance;
+
+				NativeArray<RaycastHit> hits = new NativeArray<RaycastHit>(unitDatas.Length, Allocator.TempJob);
+				NativeArray<RaycastCommand> cmds = new NativeArray<RaycastCommand>(unitDatas.Length, Allocator.TempJob);
+
+				for (int i = 0; i < cmds.Length; i++)
+				{
+					Vector3 dir = (targetIndexes[i] != -1) ? (clientPositions[targetIndexes[i]] - unitPositions[i]) : new float3(0f, 1f, 0f);
+					cmds[i] = new RaycastCommand(unitPositions[i] + (float3)Vector3.up, dir, 200f, hitMask, 1);
+				}
+
+				JobHandle sightRayHandle = RaycastCommand.ScheduleBatch(cmds, hits, 1);
+				sightRayHandle.Complete();
+
+				NativeArray<bool> playerVisibleToUnits = new NativeArray<bool>(unitDatas.Length, Allocator.TempJob);
+				ServerUnitSightToPlayerJob sightJob = new ServerUnitSightToPlayerJob
+				{
+					hits = hits,
+					playerDistances = playerDistances,
+					playerVisibleToUnits = playerVisibleToUnits
+				};
+				JobHandle sightJobHandle = sightJob.Schedule(unitDatas.Length, 1);
+				sightJobHandle.Complete();
+
+				for (int i = 0; i < unitDatas.Length; i++)
+				{
+					ServerUnitData unit = unitDatas[i];
+					if (unit.disabled) continue;
+
+					int unitID = unit.unitID;
+					float playerDistance = playerDistances[i];
+					float3 plyPos = clientPositions[targetIndexes[i]];
+					int plyID = clientIDs[targetIndexes[i]];
+					float3 unitPos = unitPositions[i];
+
+					bool playerWithinAgroRange = (playerDistance <= (unitAgroDistance * unitAgroDistance));
+					bool unitTooClose = (playerDistance <= (unitStopDistance * unitStopDistance));
+					bool playerVisibleToUnit = playerVisibleToUnits[i];
+
+					if(unit.agro)
+                    {
+						if(unitTooClose && playerVisibleToUnit)
+                        {
+							unit.Stop();
+                        }
+                        else
+                        {
+							//Player is out of range of unit's Agro
+							if (playerDistance > (unitLoseAgroDistance * unitLoseAgroDistance))
+							{
+								unit.Stop();
+								unit.agro = false;
+                            }
+                            else
+                            {
+								unit.SetDestination(plyPos);
+							}
+						}
+                    }else
+                    {
+						if(playerWithinAgroRange)
+                        {
+							if(playerVisibleToUnit)
+                            {
+								unit.agro = true;
+								unit.SetDestination(plyPos);
+							}
+							else
+                            {
+								unit.SetDestination(unitPos);
+							}
+                        }
+                    }
+
+					if(unit.attack)
+                    {
+						if(Time.realtimeSinceStartup - unit.fireTimer >= unitFireDelay)
+                        {
+							PacketUnitAction packet = new PacketUnitAction
+							{
+								unitID = unit.unitID,
+								action = UnitActionType.Fire_BigGun
+							};
+							ServerSend.UnReliableToAll(packet);
+
+							float roll = Random.value;
+							if (roll <= dmgHitChanceFalloffCurve.Evaluate(playerDistance / unitLoseAgroDistance))
+							{
+								FireRequestData fireRequest = new FireRequestData
+								{
+									unitID = unitID,
+									distanceToPlayer = playerDistance,
+									targetPlayerID = plyID,
+									targetPlayerPos = plyPos
+								};
+								unitFireRequestQueue.Enqueue(fireRequest);
+							}
+							unit.fireTimer = Time.realtimeSinceStartup;
+							unit.attack = false;
+						}
+                    }
+                    else
+                    {
+						if(unit.agro && playerVisibleToUnit)
+                        {
+							unit.attack = true;
+                        }
+                    }
+
+					unitDatas[i] = unit;
+				}
+
+
+				clientPositions.Dispose();
+				unitPositions.Dispose();
+				targetIndexes.Dispose();
+				playerDistances.Dispose();
+
+				hits.Dispose();
+				cmds.Dispose();
+				playerVisibleToUnits.Dispose();
+			}
+		}
+
+		private void OnDrawGizmos()
+		{
+			if (unitDatas == null || unitDatas.Length == 0) return;
+
+			Gizmos.color = Color.red;
+			for (int i = 0; i < unitDatas.Length; i++)
+			{
+				Gizmos.DrawSphere(unitDatas[i].transform.position, 0.5f);
+			}
+		}
+
+		private void OnDestroy()
+		{
+			unitDatas = null;
+		}
+
+	}
+
+	[BurstCompile]
+	public struct ServerUnitDistanceJob : IJobParallelFor
+	{
+		[ReadOnly]
+		public NativeArray<float3> unitPositions;
+		[ReadOnly]
+		public NativeArray<float3> playerPositions;
+		public NativeArray<int> closestPlayerToUnitIndex;
+		public NativeArray<float> playertoUnitDistance;
+
+		public void Execute(int index)
+		{
+			float3 unitPos = unitPositions[index];
+
+			int closestIndex = -1;
+			float closestDist = 10000f;
+
+			for (int i = 0; i < playerPositions.Length; i++)
+			{
+				float3 plyPos = playerPositions[i];
+				
+
+				float dist = math.distancesq(unitPos, plyPos);
+				if(dist < closestDist)
+				{
+					closestDist = dist;
+					closestIndex = i;
+				}
+			}
+
+			closestPlayerToUnitIndex[index] = closestIndex;
+			playertoUnitDistance[index] = closestDist;
+		}
+	}
+
+	[BurstCompile]
+    public struct ServerUnitSightToPlayerJob : IJobParallelFor
     {
-        Vector3 randPoint = (UnityEngine.Random.insideUnitSphere * range) + origin + Vector3.up * 100f;
-        Vector3 destination = origin;
-        RaycastHit hit;
-        if(Physics.Raycast(randPoint, Vector3.down, out hit, groundMask))
-            destination = hit.point;
+		[ReadOnly]
+		public NativeArray<RaycastHit> hits;
+		[ReadOnly]
+		public NativeArray<float> playerDistances;
+		public NativeArray<bool> playerVisibleToUnits;
 
-        return destination;
-    }
-
-    public static void Initialize(int numUnits)
-    {
-        units = new List<ServerUnitData>();
-        unitPositions = new NativeList<float3>(Allocator.Persistent);
-        timesLastAttacked = new float[numUnits];
-
-        numberOfUnits = numUnits;
-        for (int i = 0; i < numberOfUnits; i++)
+        public void Execute(int index)
         {
-            Vector3 spawnPoint = ServerData.playerSpawnLocations[UnityEngine.Random.Range(0, ServerData.playerSpawnLocations.Length)];
-            Vector3 origin = spawnPoint + (Vector3.up * ServerData.spawnRadius) + UnityEngine.Random.insideUnitSphere * ServerData.spawnRadius;
-
-            RaycastHit[] hits = null;
-            Physics.RaycastNonAlloc(origin, Vector3.down, hits, 10f, instance.spawnableRegionLayer);
-
-            if(hits != null)
-                spawnPoint = hits[0].point;
-            ServerUnitData data = null;
-            GameObject go = Instantiate(instance.unitPrefab, spawnPoint, Quaternion.identity, instance.transform);
-            go.TryGetComponent(out data);
-            if (data == null) { Destroy(go); continue; }
-            INetworkInitialized[] init = go.GetComponentsInChildren<INetworkInitialized>();
-            foreach (INetworkInitialized item in init)
-                item.InitFromNetwork(i);
-
-            units.Add(data);
-            unitPositions.Add(spawnPoint);
-            timesLastAttacked[i] = 0f;
-        }
-
-
-    }
-
-    public static void SendPlayerUnits(int playerID)
-    {
-        for (int i = 0; i < units.Count; i++)
-        {
-            Vector3 location = units[i].Location;
-
-            PacketUnitData packet = new PacketUnitData
-            {
-                unitID = i,
-                location = location
-            };
-            ServerSend.ReliableToOne(packet, playerID);
+			RaycastHit hit = hits[index];
+			float hitSqrDistance = hit.distance * hit.distance;
+			playerVisibleToUnits[index] = (hitSqrDistance > playerDistances[index]);
         }
     }
 
-    Vector3 bounds = new Vector3(0.5f, 1.5f, 0.5f);
-    private void OnDrawGizmos()
-    {
-        if (units == null || units.Count == 0 || drawGizmos == false) return;
+    public struct ServerUnitSyncData
+	{
+		public bool sendPos;
+		public bool sendRot;
+		public bool sendDir;
 
-        for (int i = 0; i < units.Count; i++)
-        {
-            if (units[i] == null) continue;
+		public float3 lastPos;
+		public float lastRot;
 
-            Vector3 position = new Vector3(0f, 0.75f, 0f);
-            position += units[i].Location;
+		public int2 moveDir;
 
-            Gizmos.DrawWireCube(position, bounds);
-        }
-    }
+		private Transform transform;
+		private float lastTimeDirSent;
 
-    private void OnDestroy()
-    {
-        unitPositions.Dispose();
-    }
+		public ServerUnitSyncData(Transform t)
+		{
+			transform = t;
+			sendPos = false;
+			sendRot = false;
+			sendDir = false;
+			lastPos = float3.zero;
+			lastRot = 0f;
+			moveDir = int2.zero;
+			lastTimeDirSent = 0f;
+		}
 
-}
+		public void Check(float distToSend, float rotToSend, float sendDirDelay, float currentTime)
+		{
+			float sqrDist = math.distancesq(lastPos, transform.position);
+			float rotDiff = math.distance(lastRot, transform.eulerAngles.y);
+			float timeDiff = (currentTime - lastTimeDirSent);
+			sendPos = sqrDist >= (distToSend * distToSend);
+			sendRot = rotDiff >= rotToSend;
+			sendDir = timeDiff >= sendDirDelay;
 
-public struct DistanceData
-{
-    public float sqrDistance;
-    public int plyIndex;
+			if (sendDir)
+				lastTimeDirSent = currentTime;
+
+			if (sendPos == true)
+				lastPos = transform.position;
+
+			if (sendRot == true)
+				lastRot = transform.eulerAngles.y;
+		}
+	}
+
+	[BurstCompile]
+	public struct FireRequestData
+	{
+		public int unitID;
+		public float3 targetPlayerPos;
+		public int targetPlayerID;
+		public float distanceToPlayer;
+	}
+
 }

@@ -48,8 +48,22 @@ public class ClientNetworkedUnit : MonoBehaviour, INetworkInitialized
         PacketUnitAnimationState data = (PacketUnitAnimationState)packet;
         if (data.unitID != NetID || anim == null) return;
 
-        anim.SetFloat("forward_blend", data.moveDir.y);
-        anim.SetFloat("side_blend", data.moveDir.x);
+        anim.SetFloat("forward", data.moveDir.y);
+        anim.SetFloat("side", data.moveDir.x);
+
+        anim.SetBool("dead", data.isDead);
+    }
+
+
+    public void Damage(int amount)
+    {
+        PacketRequestDamageUnit packet = new PacketRequestDamageUnit
+        {
+            unitID = NetID,
+            damage = amount
+        };
+        Events.Net.SendAsClient(NetData.LocalPlayerID, packet);
+        Debug.Log("Sent Damage Unit: " + NetID + " Amount: " + amount);
     }
 
     private void Subscribe()
@@ -64,10 +78,4 @@ public class ClientNetworkedUnit : MonoBehaviour, INetworkInitialized
         transform.position = Vector3.Lerp(transform.position, destination, speed * Time.deltaTime);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(destination, 0.5f);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + (Vector3.up * 1.5f), dir);
-    }
 }

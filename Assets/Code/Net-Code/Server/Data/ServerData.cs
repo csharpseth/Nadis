@@ -1,4 +1,6 @@
-﻿namespace Nadis.Net.Server
+﻿using UnityEngine;
+
+namespace Nadis.Net.Server
 {
     public static class ServerData
     {
@@ -15,11 +17,16 @@
         public static int PlayerChargeAmountPerDelay = 10;
         public static int PlayerOverChargeDamageAmount = 5;
 
-        public static UnityEngine.Vector3[] chargingStationLocations;
+        public static Vector3[] chargingStationLocations;
         public static float ChargeDistance = 5f;
 
-        public static UnityEngine.Vector3[] playerSpawnLocations;
+        public static Vector3[] playerSpawnLocations;
         public static float spawnRadius = 2f;
+        public static Vector3 GetRandomPlayerSpawnLocation()
+        {
+            return playerSpawnLocations[Random.Range(0, playerSpawnLocations.Length)];
+        }
+
 
         public static float DamageMultiplierFrom(PlayerAppendage appendage)
         {

@@ -54,9 +54,6 @@ public class AgilityController : MonoBehaviour, INetworkInitialized, IDisableIfR
             else
                 groundCheckSkippedFrames++;
         }
-
-        
-        move.canMove = grounded;
     }
 
     float lastY = 0f;

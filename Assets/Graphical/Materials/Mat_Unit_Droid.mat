@@ -8,19 +8,31 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Unit_Droid
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c69b563256b1d17458e9bdfcf56f0935,
+    type: 3}
   m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_790BC8DA:
+        m_Texture: {fileID: 2800000, guid: 71c6703e8a041534cbba9a189f25e1f2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_883ADF84:
+        m_Texture: {fileID: 2800000, guid: b22f9c3a6256ecf498bca993de688245, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_D7AECD08:
+        m_Texture: {fileID: 2800000, guid: 614bfcbe03c7dcc45bf8f7657a078b3d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: d3a3e2e25941ba145aa12fc28f3d2804, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -50,6 +62,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_302B9EDC: 1
+    - Vector1_8D192E20: 1
+    - Vector1_A981EBFE: 1
+    - Vector1_BC1895D4: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 0.2

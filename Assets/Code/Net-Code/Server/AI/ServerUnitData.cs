@@ -1,36 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class ServerUnitData : MonoBehaviour, INetworkInitialized
+public struct ServerUnitData
 {
-    public float wanderRadius = 5f;
-    public bool needsDestination = true;
+    public int unitID;
+    public Transform transform;
+    public NavMeshAgent agent;
+    public float updateTimer;
+    public bool stopped;
+    public float fireTimer;
+    public bool agro;
+    public bool attack;
+    public bool disabled;
+    public int health;
+    public int startHealth;
 
-    private NavMeshAgent agent;
-
-    private void Awake()
+    public ServerUnitData(GameObject go, int unitID, int startHealth)
     {
-        TryGetComponent(out agent);
+        transform = go.transform;
+        agent = transform.GetComponent<NavMeshAgent>();
+        this.unitID = unitID;
+        updateTimer = 0f;
+        stopped = false;
+        fireTimer = Random.Range(-5f, 5f);
+        agro = false;
+        attack = false;
+        disabled = false;
+        health = startHealth;
+        this.startHealth = startHealth;
     }
 
-    private void Update()
+
+    public void SetDestination(Vector3 destination)
     {
-        Location = transform.position;
+        agent.isStopped = false;
+        stopped = false;
+        agent.SetDestination(destination);
     }
 
-    public void SetDestination(Vector3 destination) => agent.SetDestination(destination);
-
-    public void InitFromNetwork(int netID)
+    public void Stop()
     {
-        NetID = netID;
+        agent.isStopped = true;
+        stopped = true;
     }
 
-    public Vector3 Location { get; private set; }
-    public Vector3 LookDir => transform.forward;
-    public Vector3 Destination => agent.destination;
+    public void Reset()
+    {
+        updateTimer = 0f;
+        stopped = false;
+        fireTimer = Random.Range(-5f, 5f);
+        agro = false;
+        attack = false;
+        disabled = false;
+        health = startHealth;
+    }
 
-    public float Speed => agent.speed;
-    public int NetID { get; private set; }
 }

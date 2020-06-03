@@ -1,18 +1,19 @@
-﻿using UnityEngine;
-
-namespace Nadis.Net
+﻿namespace Nadis.Net
 {
     public struct PacketUnitAnimationState : IPacketData
     {
         public int PacketID => (int)ServerPacket.UnitAnimationState;
 
         public int unitID;
-        public Vector2Int moveDir;
+        public Unity.Mathematics.int2 moveDir;
+        public bool isDead;
 
         public void Deserialize(PacketBuffer buffer)
         {
             unitID = buffer.ReadInt();
-            moveDir = buffer.ReadVector2Int();
+            moveDir.y = buffer.ReadInt();
+            moveDir.x = buffer.ReadInt();
+            isDead = buffer.ReadBool();
         }
 
         public PacketBuffer Serialize()
@@ -20,7 +21,9 @@ namespace Nadis.Net
             PacketBuffer buffer = new PacketBuffer(PacketID);
 
             buffer.Write(unitID);
-            buffer.Write(moveDir);
+            buffer.Write(moveDir.y);
+            buffer.Write(moveDir.x);
+            buffer.Write(isDead);
             buffer.WriteLength();
 
             return buffer;

@@ -154,6 +154,12 @@ namespace Nadis.Net.Server
                 PacketRequestRevivePlayer packet = (PacketRequestRevivePlayer)data;
                 ClientManager.TransferPower(packet.playerID, packet.playerToReviveID);
             });
+
+            CreateHandler((int)ClientPacket.RequestDamageUnit, new PacketRequestDamageUnit(), (IPacketData data) =>
+            {
+                PacketRequestDamageUnit packet = (PacketRequestDamageUnit)data;
+                ServerUnitController.DamageUnit(packet.unitID, packet.damage);
+            });
         }
 
         private static void CreateHandler(int packetID, IPacketData packetType,

@@ -36,7 +36,8 @@ public enum ServerPacket
     UnitData,
     UnitPosition,
     UnitRotation,
-    UnitAnimationState
+    UnitAnimationState,
+    UnitAction
 }
 
 //Starts at 500
@@ -51,5 +52,6 @@ public enum ClientPacket
     DestroyItemRequest,
     DamagePlayerRequest,
     RequestUsePower,
-    RequestRevivePlayer
+    RequestRevivePlayer,
+    RequestDamageUnit
 }

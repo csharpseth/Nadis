@@ -17,6 +17,9 @@ public class ItemRangedWeapon : ItemWeapon
 
     [SerializeField]
     internal bool _toggleAim;
+    [Header("FX:")]
+    [SerializeField]
+    internal MuzzleFlash muzzleFlash;
     [Header("Audio:")]
     [Tooltip("The amount the pitch can be randomly adjusted on all sounds played by this weapon.")]
     [Range(0f, 0.3f)]
@@ -99,6 +102,8 @@ public class ItemRangedWeapon : ItemWeapon
         //Everyone
         SFX.PlayAt(fireSound, transform.position, transform, fireHeardDistance, pitchModAmount);
         Events.Player.SetAnimatorTrigger(playerID, "recoil_medium");
+        if (muzzleFlash != null)
+            muzzleFlash.Trigger();
         
         //Local Client Only
         RaycastHit hit;
@@ -106,13 +111,20 @@ public class ItemRangedWeapon : ItemWeapon
         {
             FXController.HitAt(hit.point, hit.transform.GetComponent<IMaterialProperty>());
 
-            PlayerLimb limb = hit.transform.GetComponent<PlayerLimb>();
-            if(limb == null) return;
-
-            NetworkedPlayer player = hit.transform.root.GetComponent<NetworkedPlayer>();
-            if(player != null)
+            ClientNetworkedUnit unit = hit.transform.GetComponent<ClientNetworkedUnit>();
+            if(unit != null)
             {
-                player.RequestDamageThisPlayer(playerID, ballistics.damage, ballistics.range, limb.appendage);
+                unit.Damage(ballistics.damage);
+            }
+
+            PlayerLimb limb = hit.transform.GetComponent<PlayerLimb>();
+            if (limb != null) 
+            {
+                NetworkedPlayer player = hit.transform.root.GetComponent<NetworkedPlayer>();
+                if (player != null)
+                {
+                    player.RequestDamageThisPlayer(playerID, ballistics.damage, ballistics.range, limb.appendage);
+                }
             }
         }
     }
