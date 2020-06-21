@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: MainItemDB
   m_EditorClassIdentifier: 
   items:
+  - {fileID: 351914631024853130, guid: 76ffaf73ffd05a14fad49cffd0de3866, type: 3}
   - {fileID: 8503501804584671438, guid: 2ceee8aef9f06ca419978367a333e7a4, type: 3}

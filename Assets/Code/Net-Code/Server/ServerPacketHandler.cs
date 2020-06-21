@@ -158,7 +158,7 @@ namespace Nadis.Net.Server
             CreateHandler((int)ClientPacket.RequestDamageUnit, new PacketRequestDamageUnit(), (IPacketData data) =>
             {
                 PacketRequestDamageUnit packet = (PacketRequestDamageUnit)data;
-                ServerUnitController.DamageUnit(packet.unitID, packet.damage);
+                //ServerUnitController.DamageUnit(packet.unitID, packet.damage);
             });
         }
 

@@ -26,7 +26,7 @@
             ServerPacketHandler.Initialize();
             ServerData.chargingStationLocations = ServerScenePrescence.GetAllChargingStationLocations();
             ServerData.playerSpawnLocations = ServerScenePrescence.GetAllPlayerSpawnPoints();
-            ServerUnitController.Initialize();
+            ServerUnitController.Init();
 
             TCP.Start();
             UDP.Start();

@@ -47,7 +47,7 @@ namespace Nadis.Net.Server
                 SendClientExistingPlayersAdditionalData(clientID);
                 SendClientConnectionDataToClient(clientID);
                 InitialSyncClientInventory(clientID);
-                ServerUnitController.SendPlayerUnits(clientID);
+                //ServerUnitController.SendPlayerUnits(clientID);
             }
         }
 

@@ -1299,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &621717713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,6 +2299,7 @@ GameObject:
   - component: {fileID: 1044392269}
   - component: {fileID: 1044392268}
   - component: {fileID: 1044392267}
+  - component: {fileID: 1044392271}
   m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
@@ -2381,6 +2382,19 @@ Transform:
   m_Father: {fileID: 857850996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044392271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044392266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b09bbb264f97546bb07d936edb1bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: 0
 --- !u!114 &1087365441 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6080143288478713671, guid: 1574636e28e3e2b4d9c308acd3dfc41b,
@@ -3468,7 +3482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4162,6 +4176,11 @@ PrefabInstance:
       propertyPath: dmgHitChanceFalloffCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 443041308, guid: 1574636e28e3e2b4d9c308acd3dfc41b, type: 3}
+      propertyPath: unitPrefab
+      value: 
+      objectReference: {fileID: 5747916024842959826, guid: 5420fa03a2f7c8b4ba9df0ba6c90f36d,
+        type: 3}
     - target: {fileID: 6080143287860812265, guid: 1574636e28e3e2b4d9c308acd3dfc41b,
         type: 3}
       propertyPath: m_Name
