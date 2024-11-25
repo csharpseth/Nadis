@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Unit_Droid
-  m_Shader: {fileID: -6465566751694194690, guid: c69b563256b1d17458e9bdfcf56f0935,
+  m_Shader: {fileID: -6465566751694194690, guid: a6539736ba7b7d94fa7d26d5d5cc52fa,
     type: 3}
   m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULARHIGHLIGHTS_OFF

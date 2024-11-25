@@ -21,27 +21,35 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_20C40D80:
-        m_Texture: {fileID: 2800000, guid: 106dd80a2cb7724479c0325b81b0c2b3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 89ac2388dbc8b7041864cf98a7a4382e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_25CF154E:
-        m_Texture: {fileID: 2800000, guid: 1a94add757ebda240a4e613eb9142dde, type: 3}
+        m_Texture: {fileID: 2800000, guid: ef8bf3886ea578840b0ebc5bffa4e36f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_33480C35:
-        m_Texture: {fileID: 2800000, guid: c6d497a7dada30b458aa60e93850afbb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 89ac2388dbc8b7041864cf98a7a4382e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_35FDA7E2:
-        m_Texture: {fileID: 2800000, guid: 3fa5bd5243572b446a5810327befb406, type: 3}
+        m_Texture: {fileID: 2800000, guid: ef8bf3886ea578840b0ebc5bffa4e36f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8A2594FA:
-        m_Texture: {fileID: 2800000, guid: 3fa5bd5243572b446a5810327befb406, type: 3}
+        m_Texture: {fileID: 2800000, guid: ef8bf3886ea578840b0ebc5bffa4e36f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_ABC5B92A:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_C74BA445:
-        m_Texture: {fileID: 2800000, guid: c6d497a7dada30b458aa60e93850afbb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 89ac2388dbc8b7041864cf98a7a4382e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C895C73D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -72,8 +80,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texMaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2DF7D2D1: 0
+    - Vector1_2DF7D2D1: 1
     - Vector1_4C83676D: 1
     - Vector1_535D468: 0
     - Vector1_C0ACE5FC: 0
@@ -98,11 +110,17 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _aoStrength: 2
+    - _metallic: 1
+    - _smoothness: 1
+    - _windDensity: 5
+    - _windStrength: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _windMovement: {r: 6, g: 0, b: 0, a: 0}
 --- !u!114 &8405154036547896342
 MonoBehaviour:
   m_ObjectHideFlags: 11

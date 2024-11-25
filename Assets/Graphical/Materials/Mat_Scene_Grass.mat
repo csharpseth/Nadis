@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Scene_Grass
-  m_Shader: {fileID: -6465566751694194690, guid: 73e4ffbafcf5b284f826bc7dd2c8d053,
+  m_Shader: {fileID: -6465566751694194690, guid: 5f1b404284a5b374aab458e3d34a5974,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -25,7 +25,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_C895C73D:
-        m_Texture: {fileID: 2800000, guid: a4fbde7b6cee1784fa500e591f3a70da, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
